@@ -1,0 +1,3651 @@
+DEBUG 2022-01-08 17:42:23,770 - game_run
+
+DEBUG 2022-01-08 17:42:23,770 - run start
+
+DEBUG 2022-01-08 17:42:23,770 - the_draw_1
+
+DEBUG 2022-01-08 17:42:23,770 - player == P1
+DEBUG 2022-01-08 17:42:23,770 - the_draw_2
+DEBUG 2022-01-08 17:42:27,334 - draw_joker_check
+
+DEBUG 2022-01-08 17:42:27,334 - the_draw_2
+DEBUG 2022-01-08 17:42:30,915 - draw_joker_check
+
+DEBUG 2022-01-08 17:42:30,915 - the_draw_3
+
+DEBUG 2022-01-08 17:42:30,915 - return_draw_card
+
+DEBUG 2022-01-08 17:42:30,915 - the_deal
+
+DEBUG 2022-01-08 17:42:30,915 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:42:30,931 - red_3_check
+
+DEBUG 2022-01-08 17:42:30,931 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:42:30,931 - red_3_check
+
+DEBUG 2022-01-08 17:42:30,931 - play_1
+
+DEBUG 2022-01-08 17:42:38,749 - stock_draw
+
+DEBUG 2022-01-08 17:42:38,749 - red_3_check
+
+DEBUG 2022-01-08 17:42:38,749 - play_2
+
+DEBUG 2022-01-08 17:42:42,102 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:42:42,117 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:42:50,507 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:42:50,507 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:42:50,507 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:42:50,522 - play_2
+
+DEBUG 2022-01-08 17:45:05,420 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:45:05,420 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:45:10,244 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:45:10,244 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:45:10,244 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:45:10,260 - play_2
+
+DEBUG 2022-01-08 17:45:16,603 - discard
+
+DEBUG 2022-01-08 17:45:16,603 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:45:19,025 - play_1
+
+DEBUG 2022-01-08 17:45:23,467 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:45:23,467 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:45:23,467 - stock_draw
+
+DEBUG 2022-01-08 17:45:23,467 - red_3_check
+
+DEBUG 2022-01-08 17:45:23,467 - play_2
+
+DEBUG 2022-01-08 17:45:28,017 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:45:28,017 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:45:33,349 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:45:33,349 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:45:33,364 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:45:52,053 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:45:52,053 - play_2
+
+DEBUG 2022-01-08 17:46:03,848 - discard
+
+DEBUG 2022-01-08 17:46:03,848 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:46:05,521 - play_1
+
+DEBUG 2022-01-08 17:46:07,756 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:46:07,756 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:46:07,756 - stock_draw
+
+DEBUG 2022-01-08 17:46:07,756 - red_3_check
+
+DEBUG 2022-01-08 17:46:07,756 - play_2
+
+DEBUG 2022-01-08 17:48:07,727 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:48:07,743 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:48:16,746 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:48:16,746 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:48:16,746 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:48:16,746 - play_2
+
+DEBUG 2022-01-08 17:48:34,072 - discard
+
+DEBUG 2022-01-08 17:48:34,072 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:48:39,925 - play_1
+
+DEBUG 2022-01-08 17:48:43,240 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:48:43,240 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:48:43,240 - stock_draw
+
+DEBUG 2022-01-08 17:48:43,256 - red_3_check
+
+DEBUG 2022-01-08 17:48:43,256 - play_2
+
+DEBUG 2022-01-08 17:48:47,053 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:48:47,069 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:48:53,210 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:48:53,210 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:48:53,210 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:49:10,858 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:49:10,874 - play_2
+
+DEBUG 2022-01-08 17:49:22,426 - discard
+
+DEBUG 2022-01-08 17:49:22,426 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:49:24,932 - play_1
+
+DEBUG 2022-01-08 17:49:26,964 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:49:26,964 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:49:26,964 - stock_draw
+
+DEBUG 2022-01-08 17:49:26,964 - red_3_check
+
+DEBUG 2022-01-08 17:49:26,964 - play_2
+
+DEBUG 2022-01-08 17:50:03,457 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:03,457 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:50:08,064 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:50:08,064 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:50:08,080 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:12,463 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:12,463 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:12,463 - initial_played_cards != melds
+
+DEBUG 2022-01-08 17:50:12,463 - discard
+
+DEBUG 2022-01-08 17:50:12,479 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:26,533 - play_1
+
+DEBUG 2022-01-08 17:50:29,946 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:50:29,946 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:50:29,946 - stock_draw
+
+DEBUG 2022-01-08 17:50:29,946 - red_3_check
+
+DEBUG 2022-01-08 17:50:29,946 - play_2
+
+DEBUG 2022-01-08 17:50:32,493 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:32,508 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:50:37,136 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:50:37,137 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:50:37,139 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:43,504 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:43,504 - play_2
+
+DEBUG 2022-01-08 17:50:48,400 - discard
+
+DEBUG 2022-01-08 17:50:48,400 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:52,807 - play_1
+
+DEBUG 2022-01-08 17:50:54,276 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:50:54,276 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:50:54,276 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:50:54,276 - draw_discard_pile
+
+DEBUG 2022-01-08 17:50:54,276 - red_3_check
+
+DEBUG 2022-01-08 17:50:54,276 - play_2
+
+DEBUG 2022-01-08 17:50:54,276 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:52:02,499 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:52:02,515 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:52:24,565 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:52:24,565 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:52:34,754 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:52:34,769 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:52:34,769 - initial_played_cards != melds
+
+DEBUG 2022-01-08 17:52:34,769 - discard
+
+DEBUG 2022-01-08 17:52:34,769 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:52:37,364 - play_1
+
+DEBUG 2022-01-08 17:52:40,754 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:52:40,754 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:52:40,754 - stock_draw
+
+DEBUG 2022-01-08 17:52:40,754 - red_3_check
+
+DEBUG 2022-01-08 17:52:40,754 - play_2
+
+DEBUG 2022-01-08 17:53:12,955 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:53:12,971 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-08 17:53:18,158 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-08 17:53:18,158 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-08 17:53:18,158 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:53:21,554 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:53:21,570 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:53:21,570 - initial_played_cards != melds
+
+DEBUG 2022-01-08 17:53:21,570 - discard
+
+DEBUG 2022-01-08 17:53:21,570 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:53:34,716 - play_1
+
+DEBUG 2022-01-08 17:53:36,331 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-08 17:53:36,331 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-08 17:53:36,331 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-08 17:53:36,331 - draw_discard_pile
+
+DEBUG 2022-01-08 17:53:36,331 - red_3_check
+
+DEBUG 2022-01-08 17:53:36,331 - play_2
+
+DEBUG 2022-01-08 17:53:36,331 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:29:48,654 - game_run
+
+DEBUG 2022-01-11 17:29:48,654 - run start
+
+DEBUG 2022-01-11 17:29:48,654 - the_draw_1
+
+DEBUG 2022-01-11 17:29:48,654 - player == P1
+DEBUG 2022-01-11 17:29:48,654 - the_draw_2
+DEBUG 2022-01-11 17:30:16,353 - game_run
+
+DEBUG 2022-01-11 17:30:16,353 - run start
+
+DEBUG 2022-01-11 17:30:16,353 - the_draw_1
+
+DEBUG 2022-01-11 17:30:16,353 - player == P1
+DEBUG 2022-01-11 17:30:16,353 - the_draw_2
+DEBUG 2022-01-11 17:30:18,559 - draw_joker_check
+
+DEBUG 2022-01-11 17:30:18,559 - the_draw_2
+DEBUG 2022-01-11 17:30:20,748 - draw_joker_check
+
+DEBUG 2022-01-11 17:30:20,748 - the_draw_3
+
+DEBUG 2022-01-11 17:30:20,748 - return_draw_card
+
+DEBUG 2022-01-11 17:30:20,748 - the_deal
+
+DEBUG 2022-01-11 17:30:20,748 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:30:20,764 - red_3_check
+
+DEBUG 2022-01-11 17:30:20,764 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:30:20,779 - red_3_check
+
+DEBUG 2022-01-11 17:30:20,779 - play_1
+
+DEBUG 2022-01-11 17:30:22,484 - stock_draw
+
+DEBUG 2022-01-11 17:30:22,484 - red_3_check
+
+DEBUG 2022-01-11 17:30:22,484 - play_2
+
+DEBUG 2022-01-11 17:30:24,457 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:30:24,473 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:30:39,213 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:30:39,213 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-11 17:30:39,213 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:30:55,028 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:31:02,875 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:31:02,875 - wild_card_handler
+DEBUG 2022-01-11 17:31:02,875 - wild_card_meld_choice_prompt
+DEBUG 2022-01-11 17:31:02,875 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:31:41,872 - wild_card_meld_choice_prompt
+DEBUG 2022-01-11 17:31:41,872 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:31:49,544 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:31:49,560 - initial_played_cards != melds
+
+DEBUG 2022-01-11 17:31:49,560 - discard
+
+DEBUG 2022-01-11 17:31:49,560 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:32:07,852 - play_1
+
+DEBUG 2022-01-11 17:32:11,867 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-11 17:32:11,867 - stock_draw
+
+DEBUG 2022-01-11 17:32:11,867 - red_3_check
+
+DEBUG 2022-01-11 17:32:11,867 - play_2
+
+DEBUG 2022-01-11 17:32:39,047 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:32:39,057 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:32:44,863 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:32:44,863 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-11 17:32:44,863 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:32:52,597 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:32:52,612 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:32:52,612 - initial_played_cards != melds
+
+DEBUG 2022-01-11 17:32:52,612 - discard
+
+DEBUG 2022-01-11 17:32:52,612 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:33:02,675 - play_1
+
+DEBUG 2022-01-11 17:33:05,179 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:33:05,195 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-11 17:33:05,195 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-11 17:33:05,195 - replace_discard_pile_temp_meld
+DEBUG 2022-01-11 17:33:05,195 - stock_draw
+
+DEBUG 2022-01-11 17:33:05,195 - red_3_check
+
+DEBUG 2022-01-11 17:33:05,195 - play_2
+
+DEBUG 2022-01-11 17:33:05,195 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:33:23,842 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:33:23,858 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:33:32,298 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:33:32,298 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:33:32,298 - play_2
+
+DEBUG 2022-01-11 17:33:32,298 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:36,031 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:36,046 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:35:40,256 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:35:40,256 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:40,256 - play_2
+
+DEBUG 2022-01-11 17:35:40,256 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:45,288 - discard
+
+DEBUG 2022-01-11 17:35:45,288 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:46,522 - play_1
+
+DEBUG 2022-01-11 17:35:48,566 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:48,566 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-11 17:35:48,566 - stock_draw
+
+DEBUG 2022-01-11 17:35:48,582 - red_3_check
+
+DEBUG 2022-01-11 17:35:48,582 - play_2
+
+DEBUG 2022-01-11 17:35:48,582 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:54,570 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:54,570 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:35:56,867 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:35:56,883 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:35:56,883 - play_2
+
+DEBUG 2022-01-11 17:35:56,883 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:36:05,409 - discard
+
+DEBUG 2022-01-11 17:36:05,409 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:36:07,431 - play_1
+
+DEBUG 2022-01-11 17:36:09,243 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:36:09,243 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-11 17:36:09,243 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-11 17:36:09,243 - stock_draw
+
+DEBUG 2022-01-11 17:36:09,243 - red_3_check
+
+DEBUG 2022-01-11 17:36:09,243 - play_2
+
+DEBUG 2022-01-11 17:36:09,243 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:36:56,627 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:36:56,643 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:36:59,708 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:36:59,712 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:36:59,718 - play_2
+
+DEBUG 2022-01-11 17:36:59,724 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:19,095 - discard
+
+DEBUG 2022-01-11 17:37:19,095 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:20,720 - play_1
+
+DEBUG 2022-01-11 17:37:22,376 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:22,376 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-11 17:37:22,376 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-11 17:37:22,376 - stock_draw
+
+DEBUG 2022-01-11 17:37:22,376 - red_3_check
+
+DEBUG 2022-01-11 17:37:22,376 - play_2
+
+DEBUG 2022-01-11 17:37:22,392 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:28,222 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:28,237 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:37:30,534 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:37:30,534 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:30,534 - play_2
+
+DEBUG 2022-01-11 17:37:30,550 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:36,690 - discard
+
+DEBUG 2022-01-11 17:37:36,690 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:42,128 - play_1
+
+DEBUG 2022-01-11 17:37:48,598 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:37:48,598 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-11 17:37:48,598 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-11 17:37:48,598 - draw_discard_pile
+
+DEBUG 2022-01-11 17:37:48,598 - red_3_check
+
+DEBUG 2022-01-11 17:37:48,598 - play_2
+
+DEBUG 2022-01-11 17:37:48,598 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:39:12,369 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:39:12,369 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-11 17:39:20,824 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-11 17:39:20,824 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-11 17:39:20,824 - play_2
+
+DEBUG 2022-01-11 17:39:20,839 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:51:32,151 - game_run
+
+DEBUG 2022-01-12 15:51:32,167 - run start
+
+DEBUG 2022-01-12 15:51:32,167 - the_draw_1
+
+DEBUG 2022-01-12 15:51:32,167 - player == P1
+DEBUG 2022-01-12 15:51:32,167 - the_draw_2
+DEBUG 2022-01-12 15:51:34,036 - draw_joker_check
+
+DEBUG 2022-01-12 15:51:34,036 - the_draw_2
+DEBUG 2022-01-12 15:51:35,067 - draw_joker_check
+
+DEBUG 2022-01-12 15:51:35,067 - the_draw_3
+
+DEBUG 2022-01-12 15:51:35,067 - return_draw_card
+
+DEBUG 2022-01-12 15:51:35,067 - the_deal
+
+DEBUG 2022-01-12 15:51:35,067 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:51:35,067 - red_3_check
+
+DEBUG 2022-01-12 15:51:35,083 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:51:35,098 - red_3_check
+
+DEBUG 2022-01-12 15:51:35,098 - play_1
+
+DEBUG 2022-01-12 15:52:06,556 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:52:06,556 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-12 15:52:06,556 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-12 15:52:06,556 - stock_draw
+
+DEBUG 2022-01-12 15:52:06,556 - red_3_check
+
+DEBUG 2022-01-12 15:52:06,556 - play_2
+
+DEBUG 2022-01-12 15:52:24,022 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:52:24,022 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:52:46,789 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:52:46,789 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 15:52:46,789 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:52:46,789 - wild_card_handler
+DEBUG 2022-01-12 15:52:46,789 - wild_card_meld_choice_prompt
+DEBUG 2022-01-12 15:52:46,789 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:52:54,667 - wild_card_meld_choice_prompt
+DEBUG 2022-01-12 15:52:54,667 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:52:57,838 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:52:57,854 - initial_played_cards != melds
+
+DEBUG 2022-01-12 15:52:57,854 - discard
+
+DEBUG 2022-01-12 15:52:57,854 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:53:07,062 - play_1
+
+DEBUG 2022-01-12 15:53:11,818 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:53:11,818 - stock_draw
+
+DEBUG 2022-01-12 15:53:11,818 - red_3_check
+
+DEBUG 2022-01-12 15:53:11,818 - play_2
+
+DEBUG 2022-01-12 15:53:16,461 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:53:16,477 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:53:27,605 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:53:27,605 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 15:53:27,605 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:53:27,620 - play_2
+
+DEBUG 2022-01-12 15:53:45,289 - discard
+
+DEBUG 2022-01-12 15:53:45,289 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:53:47,361 - play_1
+
+DEBUG 2022-01-12 15:53:50,976 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:53:50,976 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:53:50,976 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 15:53:50,976 - stock_draw
+
+DEBUG 2022-01-12 15:53:50,976 - red_3_check
+
+DEBUG 2022-01-12 15:53:50,976 - play_2
+
+DEBUG 2022-01-12 15:53:50,976 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:55:58,730 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:55:58,730 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:56:03,076 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:56:03,076 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:03,076 - initial_played_cards != melds
+
+DEBUG 2022-01-12 15:56:03,076 - discard
+
+DEBUG 2022-01-12 15:56:03,091 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:17,550 - play_1
+
+DEBUG 2022-01-12 15:56:20,269 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:56:20,269 - stock_draw
+
+DEBUG 2022-01-12 15:56:20,269 - red_3_check
+
+DEBUG 2022-01-12 15:56:20,269 - play_2
+
+DEBUG 2022-01-12 15:56:22,196 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:22,196 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:56:28,621 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:56:28,621 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 15:56:28,621 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:28,637 - play_2
+
+DEBUG 2022-01-12 15:56:35,615 - discard
+
+DEBUG 2022-01-12 15:56:35,615 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:37,740 - play_1
+
+DEBUG 2022-01-12 15:56:40,179 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:40,179 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:56:40,179 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 15:56:40,179 - stock_draw
+
+DEBUG 2022-01-12 15:56:40,179 - red_3_check
+
+DEBUG 2022-01-12 15:56:40,179 - play_2
+
+DEBUG 2022-01-12 15:56:40,179 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:43,304 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:43,304 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:56:46,227 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:56:46,227 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:46,227 - initial_played_cards != melds
+
+DEBUG 2022-01-12 15:56:46,227 - discard
+
+DEBUG 2022-01-12 15:56:46,227 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:56:51,389 - play_1
+
+DEBUG 2022-01-12 15:56:53,686 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:56:53,686 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 15:56:53,686 - replace_discard_pile_temp_meld
+DEBUG 2022-01-12 15:56:53,686 - stock_draw
+
+DEBUG 2022-01-12 15:56:53,686 - red_3_check
+
+DEBUG 2022-01-12 15:56:53,686 - play_2
+
+DEBUG 2022-01-12 15:57:32,837 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:57:32,837 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:58:04,629 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:58:04,629 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 15:58:04,629 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:58:17,061 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:58:17,077 - play_2
+
+DEBUG 2022-01-12 15:58:51,861 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:58:51,861 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:58:56,971 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:58:56,971 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 15:58:56,971 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:01,175 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:01,175 - play_2
+
+DEBUG 2022-01-12 15:59:33,184 - discard
+
+DEBUG 2022-01-12 15:59:33,184 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:39,241 - play_1
+
+DEBUG 2022-01-12 15:59:41,117 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:41,117 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 15:59:41,117 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 15:59:41,117 - stock_draw
+
+DEBUG 2022-01-12 15:59:41,117 - red_3_check
+
+DEBUG 2022-01-12 15:59:41,117 - play_2
+
+DEBUG 2022-01-12 15:59:41,117 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:46,348 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:46,348 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 15:59:49,629 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 15:59:49,629 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 15:59:49,629 - initial_played_cards != melds
+
+DEBUG 2022-01-12 15:59:49,629 - discard
+
+DEBUG 2022-01-12 15:59:49,629 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:51:37,349 - play_1
+
+DEBUG 2022-01-12 16:51:39,873 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 16:51:39,873 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 16:51:39,873 - stock_draw
+
+DEBUG 2022-01-12 16:51:39,873 - red_3_check
+
+DEBUG 2022-01-12 16:51:39,873 - play_2
+
+DEBUG 2022-01-12 16:52:29,537 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:52:29,537 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 16:52:35,180 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 16:52:35,180 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 16:52:35,180 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:52:42,225 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:52:42,225 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:52:42,225 - initial_played_cards != melds
+
+DEBUG 2022-01-12 16:52:42,225 - discard
+
+DEBUG 2022-01-12 16:52:42,225 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:52:53,680 - play_1
+
+DEBUG 2022-01-12 16:52:55,690 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 16:52:55,690 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 16:52:55,705 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 16:52:55,705 - stock_draw
+
+DEBUG 2022-01-12 16:52:55,705 - red_3_check
+
+DEBUG 2022-01-12 16:52:55,705 - play_2
+
+DEBUG 2022-01-12 16:52:55,705 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:02:41,774 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:02:41,774 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 17:02:44,283 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 17:02:44,283 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:02:44,283 - initial_played_cards != melds
+
+DEBUG 2022-01-12 17:02:44,283 - discard
+
+DEBUG 2022-01-12 17:02:44,283 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:35:42,664 - play_1
+
+DEBUG 2022-01-12 17:35:48,015 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:35:48,015 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 17:35:48,015 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-12 17:35:48,015 - stock_draw
+
+DEBUG 2022-01-12 17:35:48,015 - red_3_check
+
+DEBUG 2022-01-12 17:35:48,015 - play_2
+
+DEBUG 2022-01-12 17:35:48,015 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:35:52,002 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:35:52,002 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 17:35:57,430 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 17:35:57,430 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:36:07,783 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:36:07,783 - wild_card_handler
+DEBUG 2022-01-12 17:36:07,783 - wild_card_meld_choice_prompt
+DEBUG 2022-01-12 17:36:07,783 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:36:10,220 - initial_played_cards != melds
+
+DEBUG 2022-01-12 17:36:10,220 - discard
+
+DEBUG 2022-01-12 17:36:10,220 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:23,645 - game_run
+
+DEBUG 2022-01-12 17:38:23,645 - run start
+
+DEBUG 2022-01-12 17:38:23,645 - the_draw_1
+
+DEBUG 2022-01-12 17:38:23,645 - player == P1
+DEBUG 2022-01-12 17:38:23,645 - the_draw_2
+DEBUG 2022-01-12 17:38:25,145 - draw_joker_check
+
+DEBUG 2022-01-12 17:38:25,145 - the_draw_2
+DEBUG 2022-01-12 17:38:27,075 - draw_joker_check
+
+DEBUG 2022-01-12 17:38:27,075 - the_draw_3
+
+DEBUG 2022-01-12 17:38:27,075 - return_draw_card
+
+DEBUG 2022-01-12 17:38:27,091 - the_deal
+
+DEBUG 2022-01-12 17:38:27,091 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:27,091 - red_3_check
+
+DEBUG 2022-01-12 17:38:27,091 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:27,091 - red_3_check
+
+DEBUG 2022-01-12 17:38:27,091 - play_1
+
+DEBUG 2022-01-12 17:38:30,166 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 17:38:30,166 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-12 17:38:30,166 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-12 17:38:30,166 - stock_draw
+
+DEBUG 2022-01-12 17:38:30,166 - red_3_check
+
+DEBUG 2022-01-12 17:38:30,166 - play_2
+
+DEBUG 2022-01-12 17:38:32,487 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:32,487 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 17:38:38,396 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 17:38:38,396 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 17:38:38,396 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:38,396 - play_2
+
+DEBUG 2022-01-12 17:38:42,146 - discard
+
+DEBUG 2022-01-12 17:38:42,162 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:43,162 - play_1
+
+DEBUG 2022-01-12 17:38:46,662 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 17:38:46,662 - stock_draw
+
+DEBUG 2022-01-12 17:38:46,662 - red_3_check
+
+DEBUG 2022-01-12 17:38:46,662 - play_2
+
+DEBUG 2022-01-12 17:38:49,381 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:38:49,381 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 17:39:06,257 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 17:39:06,257 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 17:39:06,257 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:39:29,161 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:39:29,161 - wild_card_handler
+DEBUG 2022-01-12 17:39:29,161 - play_2
+
+DEBUG 2022-01-12 17:40:05,383 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:05,383 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 17:40:09,961 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 17:40:09,961 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 17:40:09,961 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:11,273 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:14,387 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:14,387 - wild_card_handler
+DEBUG 2022-01-12 17:40:14,387 - wild_card_meld_choice_prompt
+DEBUG 2022-01-12 17:40:14,387 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:24,199 - wild_card_meld_choice_prompt
+DEBUG 2022-01-12 17:40:24,199 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:26,746 - wild_card_meld_choice_prompt
+DEBUG 2022-01-12 17:40:26,746 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:29,309 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 17:40:29,309 - initial_played_cards != melds
+
+DEBUG 2022-01-12 17:40:29,309 - discard
+
+DEBUG 2022-01-12 17:40:29,309 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:25,580 - game_run
+
+DEBUG 2022-01-12 18:14:25,581 - run start
+
+DEBUG 2022-01-12 18:14:25,581 - the_draw_1
+
+DEBUG 2022-01-12 18:14:25,581 - player == P1
+DEBUG 2022-01-12 18:14:25,581 - the_draw_2
+DEBUG 2022-01-12 18:14:27,196 - draw_joker_check
+
+DEBUG 2022-01-12 18:14:27,196 - the_draw_2
+DEBUG 2022-01-12 18:14:28,026 - draw_joker_check
+
+DEBUG 2022-01-12 18:14:28,026 - the_draw_3
+
+DEBUG 2022-01-12 18:14:28,026 - return_draw_card
+
+DEBUG 2022-01-12 18:14:28,026 - the_deal
+
+DEBUG 2022-01-12 18:14:28,028 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:28,030 - red_3_check
+
+DEBUG 2022-01-12 18:14:28,031 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:28,033 - red_3_check
+
+DEBUG 2022-01-12 18:14:28,033 - play_1
+
+DEBUG 2022-01-12 18:14:30,127 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 18:14:30,128 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-12 18:14:30,128 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-12 18:14:30,131 - stock_draw
+
+DEBUG 2022-01-12 18:14:30,131 - red_3_check
+
+DEBUG 2022-01-12 18:14:30,131 - play_2
+
+DEBUG 2022-01-12 18:14:34,157 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:34,160 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-12 18:14:39,831 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-12 18:14:39,832 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-12 18:14:39,835 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:41,682 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:41,684 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:41,685 - initial_played_cards != melds
+
+DEBUG 2022-01-12 18:14:41,685 - discard
+
+DEBUG 2022-01-12 18:14:41,686 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-12 18:14:48,464 - play_1
+
+DEBUG 2022-01-12 18:14:50,032 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-12 18:14:50,032 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-12 18:14:50,033 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-12 18:14:50,034 - stock_draw
+
+DEBUG 2022-01-12 18:14:50,035 - red_3_check
+
+DEBUG 2022-01-12 18:14:50,035 - play_2
+
+DEBUG 2022-01-13 09:21:11,870 - game_run
+
+DEBUG 2022-01-13 09:21:11,875 - run start
+
+DEBUG 2022-01-13 09:21:11,875 - the_draw_1
+
+DEBUG 2022-01-13 09:21:11,875 - player == P1
+DEBUG 2022-01-13 09:21:11,875 - the_draw_2
+DEBUG 2022-01-13 09:21:13,309 - draw_joker_check
+
+DEBUG 2022-01-13 09:21:13,309 - the_draw_2
+DEBUG 2022-01-13 09:21:14,372 - draw_joker_check
+
+DEBUG 2022-01-13 09:21:14,373 - the_draw_3
+
+DEBUG 2022-01-13 09:21:14,373 - return_draw_card
+
+DEBUG 2022-01-13 09:21:14,373 - the_deal
+
+DEBUG 2022-01-13 09:21:14,373 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 09:21:14,375 - red_3_check
+
+DEBUG 2022-01-13 09:21:14,375 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 09:21:14,379 - red_3_check
+
+DEBUG 2022-01-13 09:21:14,379 - play_1
+
+DEBUG 2022-01-13 09:21:16,599 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 09:21:16,599 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 09:21:16,599 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 09:21:16,602 - stock_draw
+
+DEBUG 2022-01-13 09:21:16,603 - red_3_check
+
+DEBUG 2022-01-13 09:21:16,603 - play_2
+
+DEBUG 2022-01-13 13:34:59,232 - game_run
+
+DEBUG 2022-01-13 13:34:59,232 - run start
+
+DEBUG 2022-01-13 13:34:59,232 - the_draw_1
+
+DEBUG 2022-01-13 13:34:59,232 - player == P1
+DEBUG 2022-01-13 13:34:59,232 - the_draw_2
+DEBUG 2022-01-13 13:35:01,347 - draw_joker_check
+
+DEBUG 2022-01-13 13:35:01,347 - the_draw_2
+DEBUG 2022-01-13 13:35:02,780 - draw_joker_check
+
+DEBUG 2022-01-13 13:35:02,780 - the_draw_3
+
+DEBUG 2022-01-13 13:35:02,780 - return_draw_card
+
+DEBUG 2022-01-13 13:35:02,780 - the_deal
+
+DEBUG 2022-01-13 13:35:02,780 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:35:02,780 - red_3_check
+
+DEBUG 2022-01-13 13:35:02,780 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:35:02,796 - red_3_check
+
+DEBUG 2022-01-13 13:35:02,796 - play_1
+
+DEBUG 2022-01-13 13:35:09,137 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 13:35:09,137 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 13:35:09,137 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 13:35:09,152 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 13:35:09,152 - stock_draw
+
+DEBUG 2022-01-13 13:35:09,152 - red_3_check
+
+DEBUG 2022-01-13 13:35:09,152 - play_2
+
+DEBUG 2022-01-13 13:39:31,423 - game_run
+
+DEBUG 2022-01-13 13:39:31,423 - run start
+
+DEBUG 2022-01-13 13:39:31,423 - the_draw_1
+
+DEBUG 2022-01-13 13:39:31,423 - player == P1
+DEBUG 2022-01-13 13:39:31,423 - the_draw_2
+DEBUG 2022-01-13 13:39:32,814 - draw_joker_check
+
+DEBUG 2022-01-13 13:39:32,814 - the_draw_2
+DEBUG 2022-01-13 13:39:33,798 - draw_joker_check
+
+DEBUG 2022-01-13 13:39:33,798 - the_draw_3
+
+DEBUG 2022-01-13 13:39:33,798 - return_draw_card
+
+DEBUG 2022-01-13 13:39:33,798 - the_deal
+
+DEBUG 2022-01-13 13:39:33,798 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:39:33,798 - red_3_check
+
+DEBUG 2022-01-13 13:39:33,814 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:39:33,814 - red_3_check
+
+DEBUG 2022-01-13 13:39:33,830 - play_1
+
+DEBUG 2022-01-13 13:39:37,752 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 13:39:37,752 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 13:39:37,752 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 13:39:37,752 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 13:39:37,752 - stock_draw
+
+DEBUG 2022-01-13 13:39:37,752 - red_3_check
+
+DEBUG 2022-01-13 13:39:37,752 - play_2
+
+DEBUG 2022-01-13 13:40:29,422 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:40:29,422 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 13:40:34,923 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 13:40:34,923 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 13:40:34,923 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:40:46,111 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:40:47,845 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:41:15,420 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:41:15,436 - wild_card_handler
+DEBUG 2022-01-13 13:41:15,436 - wild_card_meld_choice_prompt
+DEBUG 2022-01-13 13:41:15,436 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:41:17,279 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:41:17,279 - initial_played_cards != melds
+
+DEBUG 2022-01-13 13:41:17,279 - discard
+
+DEBUG 2022-01-13 13:41:17,279 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:41:22,358 - play_1
+
+DEBUG 2022-01-13 13:41:24,920 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 13:41:24,920 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 13:41:24,920 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 13:41:24,920 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 13:41:24,920 - stock_draw
+
+DEBUG 2022-01-13 13:41:24,936 - red_3_check
+
+DEBUG 2022-01-13 13:41:24,936 - play_2
+
+DEBUG 2022-01-13 13:42:03,849 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:42:03,865 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 13:42:10,742 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 13:42:10,742 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 13:42:10,742 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:42:29,542 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:42:29,557 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:42:29,557 - initial_played_cards != melds
+
+DEBUG 2022-01-13 13:42:29,557 - discard
+
+DEBUG 2022-01-13 13:42:29,557 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:04,929 - play_1
+
+DEBUG 2022-01-13 13:43:06,211 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:06,211 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 13:43:06,211 - stock_draw
+
+DEBUG 2022-01-13 13:43:06,211 - red_3_check
+
+DEBUG 2022-01-13 13:43:06,211 - play_2
+
+DEBUG 2022-01-13 13:43:06,211 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:11,899 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:11,914 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 13:43:15,602 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 13:43:15,602 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:21,527 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:21,527 - wild_card_handler
+DEBUG 2022-01-13 13:43:21,527 - wild_card_meld_choice_prompt
+DEBUG 2022-01-13 13:43:21,527 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:43:24,340 - initial_played_cards != melds
+
+DEBUG 2022-01-13 13:43:24,340 - discard
+
+DEBUG 2022-01-13 13:43:24,340 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:55:39,077 - play_1
+
+DEBUG 2022-01-13 13:55:52,577 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 13:55:52,580 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 13:55:52,580 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 13:55:52,581 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 13:55:52,583 - draw_discard_pile
+
+DEBUG 2022-01-13 13:55:52,587 - red_3_check
+
+DEBUG 2022-01-13 13:55:52,588 - play_2
+
+DEBUG 2022-01-13 13:55:52,591 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:00:23,027 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:00:23,029 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:01:08,305 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:01:08,307 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:08,310 - initial_played_cards != melds
+
+DEBUG 2022-01-13 14:01:08,311 - discard
+
+DEBUG 2022-01-13 14:01:08,312 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:14,188 - play_1
+
+DEBUG 2022-01-13 14:01:21,303 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:21,306 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:01:21,307 - stock_draw
+
+DEBUG 2022-01-13 14:01:21,309 - red_3_check
+
+DEBUG 2022-01-13 14:01:21,309 - play_2
+
+DEBUG 2022-01-13 14:01:21,312 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:28,527 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:28,534 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:01:31,927 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:01:31,930 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:31,935 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:31,937 - initial_played_cards != melds
+
+DEBUG 2022-01-13 14:01:31,937 - discard
+
+DEBUG 2022-01-13 14:01:31,938 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:41,361 - play_1
+
+DEBUG 2022-01-13 14:01:44,689 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:44,693 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:01:44,693 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 14:01:44,694 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 14:01:44,699 - stock_draw
+
+DEBUG 2022-01-13 14:01:44,701 - red_3_check
+
+DEBUG 2022-01-13 14:01:44,701 - play_2
+
+DEBUG 2022-01-13 14:01:44,704 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:53,843 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:53,848 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:01:56,784 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:01:56,787 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:01:56,792 - initial_played_cards != melds
+
+DEBUG 2022-01-13 14:01:56,792 - discard
+
+DEBUG 2022-01-13 14:01:56,793 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:14:18,407 - play_1
+
+DEBUG 2022-01-13 14:14:20,019 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:14:20,021 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:14:20,022 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 14:14:20,023 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 14:14:20,027 - stock_draw
+
+DEBUG 2022-01-13 14:14:20,028 - red_3_check
+
+DEBUG 2022-01-13 14:14:20,029 - play_2
+
+DEBUG 2022-01-13 14:14:20,032 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:16:06,465 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:16:06,470 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:16:08,927 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:16:08,930 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:16:13,733 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:16:13,736 - wild_card_handler
+DEBUG 2022-01-13 14:16:13,736 - wild_card_meld_choice_prompt
+DEBUG 2022-01-13 14:16:13,737 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:16:15,514 - initial_played_cards != melds
+
+DEBUG 2022-01-13 14:16:15,514 - discard
+
+DEBUG 2022-01-13 14:16:15,516 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:38:10,659 - game_run
+
+DEBUG 2022-01-13 14:38:10,660 - run start
+
+DEBUG 2022-01-13 14:38:10,660 - the_draw_1
+
+DEBUG 2022-01-13 14:38:10,660 - player == P1
+DEBUG 2022-01-13 14:38:10,660 - the_draw_2
+DEBUG 2022-01-13 14:38:11,901 - draw_joker_check
+
+DEBUG 2022-01-13 14:38:11,901 - the_draw_2
+DEBUG 2022-01-13 14:38:12,722 - draw_joker_check
+
+DEBUG 2022-01-13 14:38:12,722 - the_draw_3
+
+DEBUG 2022-01-13 14:38:12,723 - return_draw_card
+
+DEBUG 2022-01-13 14:38:12,723 - the_deal
+
+DEBUG 2022-01-13 14:38:12,724 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:38:12,736 - red_3_check
+
+DEBUG 2022-01-13 14:38:12,737 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:38:12,747 - red_3_check
+
+DEBUG 2022-01-13 14:38:12,749 - play_1
+
+DEBUG 2022-01-13 14:38:15,249 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:38:15,252 - stock_draw
+
+DEBUG 2022-01-13 14:38:15,253 - red_3_check
+
+DEBUG 2022-01-13 14:38:15,254 - play_2
+
+DEBUG 2022-01-13 14:38:18,859 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:38:18,870 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:38:23,396 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:38:23,397 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 14:38:23,399 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:38:23,408 - play_2
+
+DEBUG 2022-01-13 14:38:38,264 - discard
+
+DEBUG 2022-01-13 14:38:38,268 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:38:40,295 - play_1
+
+DEBUG 2022-01-13 14:38:43,088 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:38:43,089 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 14:38:43,091 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 14:38:43,094 - stock_draw
+
+DEBUG 2022-01-13 14:38:43,096 - red_3_check
+
+DEBUG 2022-01-13 14:38:43,096 - play_2
+
+DEBUG 2022-01-13 14:39:12,668 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:12,682 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:39:16,939 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:39:16,940 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 14:39:16,944 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:30,595 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:32,924 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:36,948 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:36,953 - wild_card_handler
+DEBUG 2022-01-13 14:39:36,953 - wild_card_meld_choice_prompt
+DEBUG 2022-01-13 14:39:36,954 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:38,080 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:38,082 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 14:39:38,082 - discard
+
+DEBUG 2022-01-13 14:39:38,083 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:39:41,022 - play_1
+
+DEBUG 2022-01-13 14:39:42,865 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:39:42,865 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 14:39:42,869 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 14:39:42,871 - replace_discard_pile_temp_meld
+DEBUG 2022-01-13 14:39:42,871 - stock_draw
+
+DEBUG 2022-01-13 14:39:42,872 - red_3_check
+
+DEBUG 2022-01-13 14:39:42,873 - play_2
+
+DEBUG 2022-01-13 14:41:29,084 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:41:29,096 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:41:34,486 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:41:34,487 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 14:41:34,489 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:41:34,496 - play_2
+
+DEBUG 2022-01-13 14:41:42,385 - discard
+
+DEBUG 2022-01-13 14:41:42,387 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:41:45,546 - play_1
+
+DEBUG 2022-01-13 14:41:47,093 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:41:47,095 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:41:47,095 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 14:41:47,096 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 14:41:47,100 - stock_draw
+
+DEBUG 2022-01-13 14:41:47,101 - red_3_check
+
+DEBUG 2022-01-13 14:41:47,102 - play_2
+
+DEBUG 2022-01-13 14:41:47,105 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:42:01,514 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:42:01,522 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:42:04,625 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:42:04,628 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:42:04,633 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 14:42:04,634 - discard
+
+DEBUG 2022-01-13 14:42:04,635 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:43:05,413 - play_1
+
+DEBUG 2022-01-13 14:45:36,357 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 14:45:36,357 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 14:45:36,360 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 14:45:36,362 - replace_discard_pile_temp_meld
+DEBUG 2022-01-13 14:45:36,363 - stock_draw
+
+DEBUG 2022-01-13 14:45:36,364 - red_3_check
+
+DEBUG 2022-01-13 14:45:36,365 - play_2
+
+DEBUG 2022-01-13 14:47:27,269 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:47:27,282 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 14:47:34,756 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 14:47:34,757 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 14:47:34,759 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 14:47:34,765 - play_2
+
+DEBUG 2022-01-13 15:19:02,812 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:02,824 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:19:07,394 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:19:07,394 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 15:19:07,396 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:07,402 - play_2
+
+DEBUG 2022-01-13 15:19:09,763 - discard
+
+DEBUG 2022-01-13 15:19:09,766 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:12,680 - play_1
+
+DEBUG 2022-01-13 15:19:14,143 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:14,145 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:19:14,145 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-13 15:19:14,147 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:19:14,149 - draw_discard_pile
+
+DEBUG 2022-01-13 15:19:14,150 - red_3_check
+
+DEBUG 2022-01-13 15:19:14,150 - play_2
+
+DEBUG 2022-01-13 15:19:14,156 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:25,705 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:25,713 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:19:29,529 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:19:29,533 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:34,403 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:34,408 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:34,410 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 15:19:34,410 - discard
+
+DEBUG 2022-01-13 15:19:34,411 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:37,090 - play_1
+
+DEBUG 2022-01-13 15:19:38,571 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:19:38,572 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:19:38,572 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:19:38,575 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:19:38,578 - stock_draw
+
+DEBUG 2022-01-13 15:19:38,579 - red_3_check
+
+DEBUG 2022-01-13 15:19:38,580 - play_2
+
+DEBUG 2022-01-13 15:19:43,014 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:43,025 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:19:49,037 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:19:49,038 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-13 15:19:49,040 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:55,361 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:55,365 - wild_card_handler
+DEBUG 2022-01-13 15:19:55,365 - wild_card_meld_choice_prompt
+DEBUG 2022-01-13 15:19:55,366 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:57,869 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:19:57,871 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 15:19:57,872 - discard
+
+DEBUG 2022-01-13 15:19:57,873 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:08,837 - play_1
+
+DEBUG 2022-01-13 15:20:10,406 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:10,410 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:20:10,411 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:20:10,411 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:20:10,412 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:20:10,413 - replace_discard_pile_temp_meld
+DEBUG 2022-01-13 15:20:10,414 - stock_draw
+
+DEBUG 2022-01-13 15:20:10,415 - red_3_check
+
+DEBUG 2022-01-13 15:20:10,415 - play_2
+
+DEBUG 2022-01-13 15:20:10,421 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:32,137 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:32,143 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:20:34,664 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:20:34,667 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:34,673 - play_2
+
+DEBUG 2022-01-13 15:20:34,676 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:42,412 - discard
+
+DEBUG 2022-01-13 15:20:42,416 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:45,393 - play_1
+
+DEBUG 2022-01-13 15:20:48,008 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:48,012 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:20:48,012 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:20:48,012 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:20:48,013 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:20:48,017 - stock_draw
+
+DEBUG 2022-01-13 15:20:48,018 - red_3_check
+
+DEBUG 2022-01-13 15:20:48,019 - play_2
+
+DEBUG 2022-01-13 15:20:48,021 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:54,093 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:54,098 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:20:56,043 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:20:56,046 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:20:56,051 - play_2
+
+DEBUG 2022-01-13 15:20:56,054 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:02,372 - discard
+
+DEBUG 2022-01-13 15:21:02,375 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:04,607 - play_1
+
+DEBUG 2022-01-13 15:21:05,835 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:05,838 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:21:05,838 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:21:05,838 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:21:05,840 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:21:05,843 - stock_draw
+
+DEBUG 2022-01-13 15:21:05,845 - red_3_check
+
+DEBUG 2022-01-13 15:21:05,846 - play_2
+
+DEBUG 2022-01-13 15:21:05,849 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:26,493 - discard
+
+DEBUG 2022-01-13 15:21:26,496 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:28,152 - play_1
+
+DEBUG 2022-01-13 15:21:29,261 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:29,264 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:21:29,264 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:21:29,264 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:21:29,264 - draw_discard_pile
+
+DEBUG 2022-01-13 15:21:29,265 - red_3_check
+
+DEBUG 2022-01-13 15:21:29,265 - play_2
+
+DEBUG 2022-01-13 15:21:29,269 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:58,007 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:21:58,015 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:22:02,552 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:22:02,555 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:02,563 - play_2
+
+DEBUG 2022-01-13 15:22:02,566 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:13,953 - discard
+
+DEBUG 2022-01-13 15:22:13,956 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:26,969 - play_1
+
+DEBUG 2022-01-13 15:22:28,764 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:28,767 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:22:28,768 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:22:28,768 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:22:28,768 - draw_discard_pile
+
+DEBUG 2022-01-13 15:22:28,769 - red_3_check
+
+DEBUG 2022-01-13 15:22:28,769 - play_2
+
+DEBUG 2022-01-13 15:22:28,773 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:32,361 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:32,366 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:22:34,524 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:22:34,527 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:34,533 - play_2
+
+DEBUG 2022-01-13 15:22:34,536 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:39,136 - discard
+
+DEBUG 2022-01-13 15:22:39,139 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:41,784 - play_1
+
+DEBUG 2022-01-13 15:22:43,879 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:43,881 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:22:43,881 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:22:43,881 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:22:43,881 - draw_discard_pile
+
+DEBUG 2022-01-13 15:22:43,882 - red_3_check
+
+DEBUG 2022-01-13 15:22:43,883 - play_2
+
+DEBUG 2022-01-13 15:22:43,886 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:49,385 - discard
+
+DEBUG 2022-01-13 15:22:49,388 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:52,226 - play_1
+
+DEBUG 2022-01-13 15:22:56,583 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:22:56,586 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:22:56,586 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:22:56,586 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:22:56,587 - draw_discard_pile
+
+DEBUG 2022-01-13 15:22:56,588 - red_3_check
+
+DEBUG 2022-01-13 15:22:56,588 - play_2
+
+DEBUG 2022-01-13 15:22:56,592 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:12,880 - discard
+
+DEBUG 2022-01-13 15:23:12,881 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:14,655 - play_1
+
+DEBUG 2022-01-13 15:23:15,703 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:15,705 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:23:15,706 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:23:15,706 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:23:15,707 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:23:15,711 - stock_draw
+
+DEBUG 2022-01-13 15:23:15,712 - red_3_check
+
+DEBUG 2022-01-13 15:23:15,713 - play_2
+
+DEBUG 2022-01-13 15:23:15,716 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:24,274 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:24,281 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:23:27,026 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:23:27,028 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:31,279 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:31,284 - wild_card_handler
+DEBUG 2022-01-13 15:23:31,284 - wild_card_meld_choice_prompt
+DEBUG 2022-01-13 15:23:31,286 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:37,063 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 15:23:37,063 - discard
+
+DEBUG 2022-01-13 15:23:37,065 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:43,169 - play_1
+
+DEBUG 2022-01-13 15:23:44,494 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:44,497 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:23:44,498 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:23:44,498 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:23:44,499 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:23:44,502 - stock_draw
+
+DEBUG 2022-01-13 15:23:44,504 - red_3_check
+
+DEBUG 2022-01-13 15:23:44,504 - play_2
+
+DEBUG 2022-01-13 15:23:44,507 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:48,636 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:48,640 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:23:50,489 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:23:50,492 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:23:50,497 - play_2
+
+DEBUG 2022-01-13 15:23:50,501 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:05,480 - discard
+
+DEBUG 2022-01-13 15:24:05,481 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:07,756 - play_1
+
+DEBUG 2022-01-13 15:24:08,706 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:08,709 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:24:08,709 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:24:08,709 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:24:08,710 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:24:08,713 - stock_draw
+
+DEBUG 2022-01-13 15:24:08,715 - red_3_check
+
+DEBUG 2022-01-13 15:24:08,715 - play_2
+
+DEBUG 2022-01-13 15:24:08,721 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:12,048 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:12,054 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:24:15,215 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:24:15,218 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:15,224 - play_2
+
+DEBUG 2022-01-13 15:24:15,226 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:17,937 - discard
+
+DEBUG 2022-01-13 15:24:17,940 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:19,200 - play_1
+
+DEBUG 2022-01-13 15:24:20,609 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:20,613 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:24:20,614 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:24:20,614 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:24:20,614 - draw_discard_pile
+
+DEBUG 2022-01-13 15:24:20,615 - red_3_check
+
+DEBUG 2022-01-13 15:24:20,616 - play_2
+
+DEBUG 2022-01-13 15:24:20,618 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:28,668 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:28,675 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:24:31,546 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:24:31,549 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:31,556 - play_2
+
+DEBUG 2022-01-13 15:24:31,560 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:34,204 - discard
+
+DEBUG 2022-01-13 15:24:34,208 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:36,524 - play_1
+
+DEBUG 2022-01-13 15:24:39,769 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:39,772 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:24:39,773 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:24:39,773 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:24:39,774 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:24:39,777 - stock_draw
+
+DEBUG 2022-01-13 15:24:39,779 - red_3_check
+
+DEBUG 2022-01-13 15:24:39,779 - play_2
+
+DEBUG 2022-01-13 15:24:39,782 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:50,733 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:50,739 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:24:53,003 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:24:53,006 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:53,013 - play_2
+
+DEBUG 2022-01-13 15:24:53,016 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:24:57,295 - discard
+
+DEBUG 2022-01-13 15:24:57,299 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:04,473 - play_1
+
+DEBUG 2022-01-13 15:25:05,647 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:05,650 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:25:05,650 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:25:05,650 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:25:05,652 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:25:05,655 - stock_draw
+
+DEBUG 2022-01-13 15:25:05,657 - red_3_check
+
+DEBUG 2022-01-13 15:25:05,658 - play_2
+
+DEBUG 2022-01-13 15:25:05,661 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:20,868 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:20,874 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:25:36,746 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:25:36,749 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:36,759 - play_2
+
+DEBUG 2022-01-13 15:25:36,762 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:38,411 - discard
+
+DEBUG 2022-01-13 15:25:38,414 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:40,817 - play_1
+
+DEBUG 2022-01-13 15:25:41,735 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:41,737 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:25:41,737 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:25:41,738 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:25:41,739 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:25:41,742 - stock_draw
+
+DEBUG 2022-01-13 15:25:41,744 - red_3_check
+
+DEBUG 2022-01-13 15:25:41,745 - play_2
+
+DEBUG 2022-01-13 15:25:41,750 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:45,802 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:45,808 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:25:50,036 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:25:50,039 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:50,044 - play_2
+
+DEBUG 2022-01-13 15:25:50,047 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:53,270 - discard
+
+DEBUG 2022-01-13 15:25:53,273 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:55,621 - play_1
+
+DEBUG 2022-01-13 15:25:56,762 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:25:56,766 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:25:56,766 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:25:56,766 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:25:56,767 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:25:56,769 - draw_discard_pile
+
+DEBUG 2022-01-13 15:25:56,771 - red_3_check
+
+DEBUG 2022-01-13 15:25:56,771 - play_2
+
+DEBUG 2022-01-13 15:25:56,774 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:00,319 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:00,324 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:26:02,781 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:26:02,784 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:02,790 - play_2
+
+DEBUG 2022-01-13 15:26:02,793 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:05,204 - discard
+
+DEBUG 2022-01-13 15:26:05,207 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:07,801 - play_1
+
+DEBUG 2022-01-13 15:26:09,082 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:09,085 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:26:09,085 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:26:09,085 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:26:09,087 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:26:09,090 - stock_draw
+
+DEBUG 2022-01-13 15:26:09,092 - red_3_check
+
+DEBUG 2022-01-13 15:26:09,092 - play_2
+
+DEBUG 2022-01-13 15:26:09,095 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:14,814 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:14,820 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:26:18,420 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:26:18,422 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:18,429 - play_2
+
+DEBUG 2022-01-13 15:26:18,432 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:19,433 - discard
+
+DEBUG 2022-01-13 15:26:19,436 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:23,460 - play_1
+
+DEBUG 2022-01-13 15:26:24,560 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:24,564 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:26:24,564 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:26:24,564 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:26:24,566 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:26:24,569 - stock_draw
+
+DEBUG 2022-01-13 15:26:24,574 - red_3_check
+
+DEBUG 2022-01-13 15:26:24,574 - play_2
+
+DEBUG 2022-01-13 15:26:24,577 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:27,859 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:27,865 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:26:32,436 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:26:32,439 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:32,444 - play_2
+
+DEBUG 2022-01-13 15:26:32,451 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:42,249 - discard
+
+DEBUG 2022-01-13 15:26:42,252 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:49,339 - play_1
+
+DEBUG 2022-01-13 15:26:51,985 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:51,986 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:26:51,986 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:26:51,986 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:26:51,987 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:26:51,988 - stock_draw
+
+DEBUG 2022-01-13 15:26:51,988 - red_3_check
+
+DEBUG 2022-01-13 15:26:51,988 - play_2
+
+DEBUG 2022-01-13 15:26:51,990 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:55,860 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:26:55,862 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:27:05,497 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:27:05,499 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:05,501 - play_2
+
+DEBUG 2022-01-13 15:27:05,502 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:08,592 - discard
+
+DEBUG 2022-01-13 15:27:08,594 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:14,274 - play_1
+
+DEBUG 2022-01-13 15:27:15,489 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:15,491 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:27:15,491 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:27:15,491 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:27:15,492 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:27:15,492 - stock_draw
+
+DEBUG 2022-01-13 15:27:15,493 - red_3_check
+
+DEBUG 2022-01-13 15:27:15,493 - play_2
+
+DEBUG 2022-01-13 15:27:15,494 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:18,831 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:18,833 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:27:22,853 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:27:22,855 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:22,857 - play_2
+
+DEBUG 2022-01-13 15:27:22,858 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:24,742 - discard
+
+DEBUG 2022-01-13 15:27:24,744 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:25,534 - play_1
+
+DEBUG 2022-01-13 15:27:27,264 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:27,265 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:27:27,265 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:27:27,265 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:27:27,265 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:27:27,267 - stock_draw
+
+DEBUG 2022-01-13 15:27:27,268 - red_3_check
+
+DEBUG 2022-01-13 15:27:27,268 - play_2
+
+DEBUG 2022-01-13 15:27:27,268 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:31,608 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:31,610 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:27:36,944 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:27:36,946 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:36,947 - play_2
+
+DEBUG 2022-01-13 15:27:36,948 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:38,427 - discard
+
+DEBUG 2022-01-13 15:27:38,429 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:44,781 - play_1
+
+DEBUG 2022-01-13 15:27:46,158 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:46,159 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:27:46,159 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:27:46,159 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:27:46,160 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:27:46,161 - draw_discard_pile
+
+DEBUG 2022-01-13 15:27:46,161 - red_3_check
+
+DEBUG 2022-01-13 15:27:46,161 - play_2
+
+DEBUG 2022-01-13 15:27:46,162 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:50,642 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:50,644 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:27:54,696 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:27:54,698 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:54,700 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:54,700 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 15:27:54,701 - discard
+
+DEBUG 2022-01-13 15:27:54,701 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:27:59,833 - play_1
+
+DEBUG 2022-01-13 15:28:01,957 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:01,958 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:28:01,958 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:28:01,958 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:28:01,958 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:28:01,959 - stock_draw
+
+DEBUG 2022-01-13 15:28:01,960 - red_3_check
+
+DEBUG 2022-01-13 15:28:01,960 - play_2
+
+DEBUG 2022-01-13 15:28:01,961 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:04,999 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:05,001 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:28:08,264 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:28:08,266 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:08,267 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:08,267 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-13 15:28:08,268 - discard
+
+DEBUG 2022-01-13 15:28:08,268 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:11,938 - play_1
+
+DEBUG 2022-01-13 15:28:13,069 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:13,072 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:28:13,072 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:28:13,072 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:28:13,072 - draw_discard_pile
+
+DEBUG 2022-01-13 15:28:13,073 - red_3_check
+
+DEBUG 2022-01-13 15:28:13,073 - play_2
+
+DEBUG 2022-01-13 15:28:13,074 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:18,696 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:18,697 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:28:20,423 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:28:20,425 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:20,427 - play_2
+
+DEBUG 2022-01-13 15:28:20,428 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:27,084 - discard
+
+DEBUG 2022-01-13 15:28:27,085 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:30,309 - play_1
+
+DEBUG 2022-01-13 15:28:31,569 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:31,571 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 15:28:31,571 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 15:28:31,571 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 15:28:31,572 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 15:28:31,572 - draw_discard_pile
+
+DEBUG 2022-01-13 15:28:31,573 - red_3_check
+
+DEBUG 2022-01-13 15:28:31,573 - play_2
+
+DEBUG 2022-01-13 15:28:31,574 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:44,966 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 15:28:44,966 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-13 15:28:52,228 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-13 15:28:52,230 - play_2
+
+DEBUG 2022-01-13 15:28:52,231 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 17:10:45,379 - game_run
+
+DEBUG 2022-01-13 17:10:45,380 - run start
+
+DEBUG 2022-01-13 17:10:45,380 - the_draw_1
+
+DEBUG 2022-01-13 17:10:45,380 - player == P1
+DEBUG 2022-01-13 17:10:45,380 - the_draw_2
+DEBUG 2022-01-13 17:10:47,228 - draw_joker_check
+
+DEBUG 2022-01-13 17:10:47,228 - the_draw_2
+DEBUG 2022-01-13 17:10:48,530 - draw_joker_check
+
+DEBUG 2022-01-13 17:10:48,530 - the_draw_3
+
+DEBUG 2022-01-13 17:10:48,530 - return_draw_card
+
+DEBUG 2022-01-13 17:10:48,530 - the_deal
+
+DEBUG 2022-01-13 17:10:48,531 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 17:10:48,533 - red_3_check
+
+DEBUG 2022-01-13 17:10:48,533 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-13 17:10:48,535 - red_3_check
+
+DEBUG 2022-01-13 17:10:48,535 - play_1
+
+DEBUG 2022-01-13 17:10:54,497 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-13 17:10:54,498 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-13 17:10:54,498 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-13 17:10:54,499 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-13 17:10:54,499 - draw_discard_pile_wild_card_prompt
+DEBUG 2022-01-14 07:48:41,960 - game_run
+
+DEBUG 2022-01-14 07:48:41,960 - run start
+
+DEBUG 2022-01-14 07:48:41,960 - the_draw_1
+
+DEBUG 2022-01-14 07:48:41,960 - player == P1
+DEBUG 2022-01-14 07:48:41,960 - the_draw_2
+DEBUG 2022-01-14 07:48:44,610 - draw_joker_check
+
+DEBUG 2022-01-14 07:48:44,610 - the_draw_2
+DEBUG 2022-01-14 07:48:46,689 - draw_joker_check
+
+DEBUG 2022-01-14 07:48:46,689 - the_draw_3
+
+DEBUG 2022-01-14 07:48:46,689 - return_draw_card
+
+DEBUG 2022-01-14 07:48:46,689 - the_deal
+
+DEBUG 2022-01-14 07:48:46,689 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:48:46,704 - red_3_check
+
+DEBUG 2022-01-14 07:48:46,704 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:48:46,704 - red_3_check
+
+DEBUG 2022-01-14 07:48:46,704 - play_1
+
+DEBUG 2022-01-14 07:56:37,113 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 07:56:37,114 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-14 07:56:37,114 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-14 07:56:37,114 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 07:56:37,122 - stock_draw
+
+DEBUG 2022-01-14 07:56:37,124 - red_3_check
+
+DEBUG 2022-01-14 07:56:37,124 - play_2
+
+DEBUG 2022-01-14 07:56:40,789 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:56:40,802 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 07:56:47,846 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 07:56:47,847 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-14 07:56:47,849 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:56:58,310 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:56:59,734 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:57:03,703 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:57:03,707 - wild_card_handler
+DEBUG 2022-01-14 07:57:03,707 - wild_card_meld_choice_prompt
+DEBUG 2022-01-14 07:57:03,708 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:57:53,345 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 07:57:53,347 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 07:57:53,347 - discard
+
+DEBUG 2022-01-14 07:57:53,349 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:26:47,297 - game_run
+
+DEBUG 2022-01-14 14:26:47,298 - run start
+
+DEBUG 2022-01-14 14:26:47,298 - the_draw_1
+
+DEBUG 2022-01-14 14:26:47,298 - player == P1
+DEBUG 2022-01-14 14:26:47,298 - the_draw_2
+DEBUG 2022-01-14 14:26:50,970 - draw_joker_check
+
+DEBUG 2022-01-14 14:26:50,970 - the_draw_2
+DEBUG 2022-01-14 14:26:54,417 - draw_joker_check
+
+DEBUG 2022-01-14 14:26:54,418 - the_draw_3
+
+DEBUG 2022-01-14 14:26:54,418 - return_draw_card
+
+DEBUG 2022-01-14 14:26:54,418 - the_deal
+
+DEBUG 2022-01-14 14:26:54,419 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:26:54,421 - red_3_check
+
+DEBUG 2022-01-14 14:26:54,421 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:26:54,422 - red_3_check
+
+DEBUG 2022-01-14 14:26:54,423 - play_1
+
+DEBUG 2022-01-14 14:26:56,882 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:26:56,883 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-14 14:26:56,883 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-14 14:26:56,883 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:26:56,883 - draw_discard_pile_wild_card_prompt
+DEBUG 2022-01-14 14:27:48,006 - draw_discard_pile_attempt_temp_meld_wild_card_addition
+DEBUG 2022-01-14 14:27:48,007 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:27:56,931 - draw_discard_pile_attempt_temp_meld_wild_card_addition
+DEBUG 2022-01-14 14:27:56,933 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:27:59,154 - draw_discard_pile
+
+DEBUG 2022-01-14 14:27:59,154 - red_3_check
+
+DEBUG 2022-01-14 14:27:59,154 - play_2
+
+DEBUG 2022-01-14 14:27:59,155 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:28:15,545 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:28:15,547 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:28:25,665 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:28:25,666 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:28:25,670 - play_2
+
+DEBUG 2022-01-14 14:28:25,670 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:07,518 - discard
+
+DEBUG 2022-01-14 14:39:07,520 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:09,207 - play_1
+
+DEBUG 2022-01-14 14:39:11,010 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:39:11,012 - stock_draw
+
+DEBUG 2022-01-14 14:39:11,012 - red_3_check
+
+DEBUG 2022-01-14 14:39:11,013 - play_2
+
+DEBUG 2022-01-14 14:39:18,241 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:18,243 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:39:23,840 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:39:23,841 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-14 14:39:23,842 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:23,844 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:23,844 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 14:39:23,844 - discard
+
+DEBUG 2022-01-14 14:39:23,845 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:44,942 - play_1
+
+DEBUG 2022-01-14 14:39:51,072 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:39:51,073 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:39:51,073 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:39:51,074 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:39:51,075 - stock_draw
+
+DEBUG 2022-01-14 14:39:51,075 - red_3_check
+
+DEBUG 2022-01-14 14:39:51,076 - play_2
+
+DEBUG 2022-01-14 14:39:51,076 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:15,398 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:15,400 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:40:18,578 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:40:18,580 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:18,582 - play_2
+
+DEBUG 2022-01-14 14:40:18,583 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:24,889 - discard
+
+DEBUG 2022-01-14 14:40:24,890 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:26,044 - play_1
+
+DEBUG 2022-01-14 14:40:27,561 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:27,562 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:40:27,563 - stock_draw
+
+DEBUG 2022-01-14 14:40:27,563 - red_3_check
+
+DEBUG 2022-01-14 14:40:27,563 - play_2
+
+DEBUG 2022-01-14 14:40:27,564 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:34,597 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:34,598 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:40:37,414 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:40:37,416 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:37,418 - play_2
+
+DEBUG 2022-01-14 14:40:37,418 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:43,212 - discard
+
+DEBUG 2022-01-14 14:40:43,214 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:44,783 - play_1
+
+DEBUG 2022-01-14 14:40:46,043 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:40:46,044 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:40:46,044 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:40:46,044 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:40:46,045 - replace_discard_pile_temp_meld
+DEBUG 2022-01-14 14:40:46,046 - stock_draw
+
+DEBUG 2022-01-14 14:40:46,046 - red_3_check
+
+DEBUG 2022-01-14 14:40:46,046 - play_2
+
+DEBUG 2022-01-14 14:40:46,047 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:03,210 - discard
+
+DEBUG 2022-01-14 14:41:03,211 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:06,810 - play_1
+
+DEBUG 2022-01-14 14:41:08,038 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:08,039 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:41:08,039 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:41:08,039 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:41:08,040 - stock_draw
+
+DEBUG 2022-01-14 14:41:08,040 - red_3_check
+
+DEBUG 2022-01-14 14:41:08,041 - play_2
+
+DEBUG 2022-01-14 14:41:08,042 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:14,668 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:14,670 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:41:17,699 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:41:17,701 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:17,702 - play_2
+
+DEBUG 2022-01-14 14:41:17,703 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:18,937 - discard
+
+DEBUG 2022-01-14 14:41:18,939 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:20,989 - play_1
+
+DEBUG 2022-01-14 14:41:22,761 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:22,761 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:41:22,761 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:41:22,762 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:41:22,763 - replace_discard_pile_temp_meld
+DEBUG 2022-01-14 14:41:22,764 - stock_draw
+
+DEBUG 2022-01-14 14:41:22,764 - red_3_check
+
+DEBUG 2022-01-14 14:41:22,764 - play_2
+
+DEBUG 2022-01-14 14:41:22,765 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:26,263 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:26,265 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:41:31,888 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:41:31,890 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:31,892 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:31,892 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 14:41:31,892 - discard
+
+DEBUG 2022-01-14 14:41:31,893 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:37,249 - play_1
+
+DEBUG 2022-01-14 14:41:38,145 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:38,146 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:41:38,147 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:41:38,147 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:41:38,148 - stock_draw
+
+DEBUG 2022-01-14 14:41:38,149 - red_3_check
+
+DEBUG 2022-01-14 14:41:38,149 - play_2
+
+DEBUG 2022-01-14 14:41:38,150 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:41,520 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:41,521 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:41:44,518 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:41:44,520 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:49,015 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:49,016 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:49,017 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 14:41:49,017 - discard
+
+DEBUG 2022-01-14 14:41:49,018 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:52,879 - play_1
+
+DEBUG 2022-01-14 14:41:53,732 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:41:53,733 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:41:53,733 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:41:53,734 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:41:53,734 - replace_discard_pile_temp_meld
+DEBUG 2022-01-14 14:41:53,735 - stock_draw
+
+DEBUG 2022-01-14 14:41:53,735 - red_3_check
+
+DEBUG 2022-01-14 14:41:53,736 - play_2
+
+DEBUG 2022-01-14 14:41:53,737 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:01,110 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:01,112 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:42:04,002 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:42:04,004 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:04,005 - play_2
+
+DEBUG 2022-01-14 14:42:04,007 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:08,529 - discard
+
+DEBUG 2022-01-14 14:42:08,530 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:12,589 - play_1
+
+DEBUG 2022-01-14 14:42:15,557 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:15,558 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:42:15,558 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:42:15,559 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:42:15,560 - stock_draw
+
+DEBUG 2022-01-14 14:42:15,560 - red_3_check
+
+DEBUG 2022-01-14 14:42:15,560 - play_2
+
+DEBUG 2022-01-14 14:42:15,561 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:19,230 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:19,231 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:42:20,669 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:42:20,671 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:20,673 - play_2
+
+DEBUG 2022-01-14 14:42:20,673 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:21,940 - discard
+
+DEBUG 2022-01-14 14:42:21,942 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:23,254 - play_1
+
+DEBUG 2022-01-14 14:42:24,398 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:24,399 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:42:24,399 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:42:24,399 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:42:24,400 - stock_draw
+
+DEBUG 2022-01-14 14:42:24,402 - red_3_check
+
+DEBUG 2022-01-14 14:42:24,402 - play_2
+
+DEBUG 2022-01-14 14:42:24,402 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:27,441 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:27,443 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:42:29,821 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:42:29,823 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:29,824 - play_2
+
+DEBUG 2022-01-14 14:42:29,825 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:32,704 - discard
+
+DEBUG 2022-01-14 14:42:32,706 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:34,842 - play_1
+
+DEBUG 2022-01-14 14:42:36,080 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:36,082 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:42:36,082 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:42:36,083 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:42:36,083 - stock_draw
+
+DEBUG 2022-01-14 14:42:36,084 - red_3_check
+
+DEBUG 2022-01-14 14:42:36,084 - play_2
+
+DEBUG 2022-01-14 14:42:36,084 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:39,081 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:39,082 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:42:40,693 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:42:40,695 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:47,346 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:42:47,347 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 14:42:47,347 - went out check
+
+DEBUG 2022-01-14 14:42:47,348 - went_out_check_replacement_card
+DEBUG 2022-01-14 14:42:47,348 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:44:59,462 - discard
+
+DEBUG 2022-01-14 14:44:59,463 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:07,247 - play_1
+
+DEBUG 2022-01-14 14:45:09,607 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:09,608 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:45:09,608 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:45:09,609 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:45:09,610 - stock_draw
+
+DEBUG 2022-01-14 14:45:09,610 - red_3_check
+
+DEBUG 2022-01-14 14:45:09,610 - play_2
+
+DEBUG 2022-01-14 14:45:09,611 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:15,574 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:15,575 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:45:18,145 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:45:18,147 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:18,149 - play_2
+
+DEBUG 2022-01-14 14:45:18,149 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:21,925 - discard
+
+DEBUG 2022-01-14 14:45:21,927 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:23,421 - play_1
+
+DEBUG 2022-01-14 14:45:24,511 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:24,512 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:45:24,513 - stock_draw
+
+DEBUG 2022-01-14 14:45:24,513 - red_3_check
+
+DEBUG 2022-01-14 14:45:24,513 - play_2
+
+DEBUG 2022-01-14 14:45:24,514 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:26,743 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:26,744 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:45:28,952 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:45:28,953 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:28,954 - wild_card_handler
+DEBUG 2022-01-14 14:45:28,954 - wild_card_meld_choice_prompt
+DEBUG 2022-01-14 14:45:28,955 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:34,559 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 14:45:34,559 - discard
+
+DEBUG 2022-01-14 14:45:34,560 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:40,273 - play_1
+
+DEBUG 2022-01-14 14:45:41,992 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:41,993 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:45:41,993 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:45:41,994 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:45:41,995 - stock_draw
+
+DEBUG 2022-01-14 14:45:41,995 - red_3_check
+
+DEBUG 2022-01-14 14:45:41,995 - play_2
+
+DEBUG 2022-01-14 14:45:41,996 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:53,183 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:53,184 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:45:56,459 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:45:56,461 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:56,462 - play_2
+
+DEBUG 2022-01-14 14:45:56,463 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:45:58,456 - discard
+
+DEBUG 2022-01-14 14:45:58,458 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:46:00,763 - play_1
+
+DEBUG 2022-01-14 14:46:01,756 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:46:01,758 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-14 14:46:01,758 - discard_pile_is_frozen == True
+
+DEBUG 2022-01-14 14:46:01,758 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-14 14:46:01,759 - replace_discard_pile_temp_meld
+DEBUG 2022-01-14 14:46:01,760 - stock_draw
+
+DEBUG 2022-01-14 14:46:01,760 - red_3_check
+
+DEBUG 2022-01-14 14:46:01,760 - play_2
+
+DEBUG 2022-01-14 14:46:01,760 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:46:04,661 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:46:04,661 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-14 14:46:06,368 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-14 14:46:06,370 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:46:06,370 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-14 14:46:06,370 - went out check
+
+DEBUG 2022-01-14 14:46:06,371 - went_out_check_replacement_card
+DEBUG 2022-01-14 14:46:06,371 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:46:24,233 - went_out_check_replacement_card
+DEBUG 2022-01-14 14:46:24,233 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:48:28,471 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:48:29,484 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:49:22,483 - game_run
+
+DEBUG 2022-01-14 14:49:22,483 - run start
+
+DEBUG 2022-01-14 14:49:22,483 - the_draw_1
+
+DEBUG 2022-01-14 14:49:22,483 - player == P1
+DEBUG 2022-01-14 14:49:22,484 - the_draw_2
+DEBUG 2022-01-14 14:49:23,964 - draw_joker_check
+
+DEBUG 2022-01-14 14:49:23,964 - the_draw_2
+DEBUG 2022-01-14 14:49:26,901 - draw_joker_check
+
+DEBUG 2022-01-14 14:49:26,901 - the_draw_3
+
+DEBUG 2022-01-14 14:49:26,902 - return_draw_card
+
+DEBUG 2022-01-14 14:49:26,902 - the_deal
+
+DEBUG 2022-01-14 14:49:26,902 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:49:26,905 - red_3_check
+
+DEBUG 2022-01-14 14:49:26,905 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-14 14:49:26,907 - red_3_check
+
+DEBUG 2022-01-14 14:49:26,907 - play_1
+
+DEBUG 2022-01-15 16:58:50,290 - game_run
+
+DEBUG 2022-01-15 16:58:50,295 - run start
+
+DEBUG 2022-01-15 16:58:50,295 - the_draw_1
+
+DEBUG 2022-01-15 16:58:50,295 - player == P1
+DEBUG 2022-01-15 16:58:50,296 - the_draw_2
+DEBUG 2022-01-15 16:58:51,840 - draw_joker_check
+
+DEBUG 2022-01-15 16:58:51,840 - the_draw_2
+DEBUG 2022-01-15 16:58:52,968 - draw_joker_check
+
+DEBUG 2022-01-15 16:58:52,969 - the_draw_3
+
+DEBUG 2022-01-15 16:58:52,969 - return_draw_card
+
+DEBUG 2022-01-15 16:58:52,969 - the_deal
+
+DEBUG 2022-01-15 16:58:52,969 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-15 16:58:52,978 - red_3_check
+
+DEBUG 2022-01-15 16:58:52,981 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-15 16:58:52,998 - red_3_check
+
+DEBUG 2022-01-15 16:58:53,000 - play_1
+
+DEBUG 2022-01-15 17:09:10,493 - game_run
+
+DEBUG 2022-01-15 17:09:10,494 - run start
+
+DEBUG 2022-01-15 17:09:10,494 - the_draw_1
+
+DEBUG 2022-01-15 17:09:10,494 - player == P1
+DEBUG 2022-01-15 17:09:10,494 - the_draw_2
+DEBUG 2022-01-15 17:09:12,145 - draw_joker_check
+
+DEBUG 2022-01-15 17:09:12,145 - the_draw_2
+DEBUG 2022-01-15 17:09:14,598 - draw_joker_check
+
+DEBUG 2022-01-15 17:09:14,598 - the_draw_3
+
+DEBUG 2022-01-15 17:09:14,598 - return_draw_card
+
+DEBUG 2022-01-15 17:09:14,598 - the_deal
+
+DEBUG 2022-01-15 17:09:14,600 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-15 17:09:14,611 - red_3_check
+
+DEBUG 2022-01-15 17:09:14,612 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-15 17:09:14,626 - red_3_check
+
+DEBUG 2022-01-15 17:09:14,626 - play_1
+
+DEBUG 2022-01-15 17:09:16,440 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-01-15 17:09:16,440 - discard_pile_is_frozen == False
+
+DEBUG 2022-01-15 17:09:16,440 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-01-15 17:09:16,440 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-01-15 17:09:16,445 - stock_draw
+
+DEBUG 2022-01-15 17:09:16,447 - red_3_check
+
+DEBUG 2022-01-15 17:09:16,447 - play_2
+
+DEBUG 2022-01-16 15:18:37,750 - game_run
+
+DEBUG 2022-01-16 15:18:37,756 - run start
+
+DEBUG 2022-01-16 15:18:37,756 - the_draw_1
+
+DEBUG 2022-01-16 15:18:37,756 - player == P1
+DEBUG 2022-01-16 15:18:37,756 - the_draw_2
+DEBUG 2022-01-16 15:36:47,528 - game_run
+
+DEBUG 2022-01-16 15:36:47,529 - run start
+
+DEBUG 2022-01-16 15:36:47,529 - the_draw_1
+
+DEBUG 2022-01-16 15:36:47,529 - player == P1
+DEBUG 2022-01-16 15:36:47,529 - the_draw_2
+DEBUG 2022-01-17 19:29:09,462 - game_run
+
+DEBUG 2022-01-17 19:29:09,467 - run start
+
+DEBUG 2022-01-17 19:29:09,467 - the_draw_1
+
+DEBUG 2022-01-17 19:29:09,467 - player == P1
+DEBUG 2022-01-17 19:29:09,467 - the_draw_2
+DEBUG 2022-01-17 19:29:10,999 - draw_joker_check
+
+DEBUG 2022-01-17 19:29:10,999 - the_draw_2
+DEBUG 2022-01-17 19:29:11,903 - draw_joker_check
+
+DEBUG 2022-01-17 19:29:11,904 - the_draw_3
+
+DEBUG 2022-01-17 19:29:11,904 - return_draw_card
+
+DEBUG 2022-01-17 19:29:11,904 - the_deal
+
+DEBUG 2022-01-17 19:29:11,905 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-17 19:29:11,916 - red_3_check
+
+DEBUG 2022-01-17 19:29:11,917 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-17 19:29:11,934 - red_3_check
+
+DEBUG 2022-01-17 19:29:11,935 - play_1
+
+DEBUG 2022-01-17 19:29:13,694 - stock_draw
+
+DEBUG 2022-01-17 19:29:13,698 - red_3_check
+
+DEBUG 2022-01-17 19:29:13,699 - play_2
+
+DEBUG 2022-01-17 19:29:14,494 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-17 19:29:14,505 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-17 19:29:16,686 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-17 19:29:16,686 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-17 19:29:16,689 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-17 19:29:16,691 - wild_card_handler
+DEBUG 2022-01-17 19:29:16,691 - wild_card_meld_choice_prompt
+DEBUG 2022-01-17 19:29:16,692 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-17 19:29:17,938 - play_2
+
+DEBUG 2022-01-17 19:29:19,873 - discard
+
+DEBUG 2022-01-17 19:29:19,876 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-17 19:29:34,191 - play_1
+
+DEBUG 2022-01-19 16:21:06,806 - game_run
+
+DEBUG 2022-01-19 16:21:06,811 - run start
+
+DEBUG 2022-01-19 16:21:06,811 - the_draw_1
+
+DEBUG 2022-01-19 16:21:06,811 - player == P1
+DEBUG 2022-01-19 16:21:06,811 - the_draw_2
+DEBUG 2022-01-19 16:21:08,754 - draw_joker_check
+
+DEBUG 2022-01-19 16:21:08,755 - the_draw_2
+DEBUG 2022-01-19 16:21:09,936 - draw_joker_check
+
+DEBUG 2022-01-19 16:21:09,937 - the_draw_3
+
+DEBUG 2022-01-19 16:21:09,937 - return_draw_card
+
+DEBUG 2022-01-19 16:21:09,937 - the_deal
+
+DEBUG 2022-01-19 16:21:09,938 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:09,948 - red_3_check
+
+DEBUG 2022-01-19 16:21:09,950 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:09,963 - red_3_check
+
+DEBUG 2022-01-19 16:21:09,965 - play_1
+
+DEBUG 2022-01-19 16:21:14,096 - stock_draw
+
+DEBUG 2022-01-19 16:21:14,099 - red_3_check
+
+DEBUG 2022-01-19 16:21:14,099 - play_2
+
+DEBUG 2022-01-19 16:21:15,431 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:15,442 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-19 16:21:20,230 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-19 16:21:20,231 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-19 16:21:20,233 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:20,242 - wild_card_handler
+DEBUG 2022-01-19 16:21:20,245 - play_2
+
+DEBUG 2022-01-19 16:21:22,984 - discard
+
+DEBUG 2022-01-19 16:21:22,987 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:25,175 - play_1
+
+DEBUG 2022-01-19 16:21:26,987 - stock_draw
+
+DEBUG 2022-01-19 16:21:26,990 - red_3_check
+
+DEBUG 2022-01-19 16:21:26,990 - play_2
+
+DEBUG 2022-01-19 16:21:28,174 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:28,185 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-19 16:21:32,110 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-19 16:21:32,111 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-19 16:21:32,113 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:32,123 - wild_card_handler
+DEBUG 2022-01-19 16:21:32,123 - wild_card_meld_choice_prompt
+DEBUG 2022-01-19 16:21:32,125 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:34,199 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:34,201 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-19 16:21:34,201 - discard
+
+DEBUG 2022-01-19 16:21:34,202 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 16:21:35,761 - play_1
+
+DEBUG 2022-01-19 17:27:26,626 - game_run
+
+DEBUG 2022-01-19 17:27:26,627 - run start
+
+DEBUG 2022-01-19 17:27:26,627 - the_draw_1
+
+DEBUG 2022-01-19 17:27:26,627 - player == P1
+DEBUG 2022-01-19 17:27:26,627 - the_draw_2
+DEBUG 2022-01-19 18:54:16,633 - game_run
+
+DEBUG 2022-01-19 18:54:16,634 - run start
+
+DEBUG 2022-01-19 18:54:16,634 - the_draw_1
+
+DEBUG 2022-01-19 18:54:16,634 - player == P1
+DEBUG 2022-01-19 18:54:16,634 - the_draw_2
+DEBUG 2022-01-19 18:59:40,990 - game_run
+
+DEBUG 2022-01-19 18:59:40,991 - run start
+
+DEBUG 2022-01-19 18:59:40,991 - the_draw_1
+
+DEBUG 2022-01-19 18:59:40,991 - player == P1
+DEBUG 2022-01-19 18:59:40,991 - the_draw_2
+DEBUG 2022-01-19 18:59:42,339 - draw_joker_check
+
+DEBUG 2022-01-19 18:59:42,340 - the_draw_2
+DEBUG 2022-01-19 18:59:45,019 - draw_joker_check
+
+DEBUG 2022-01-19 18:59:45,019 - the_draw_3
+
+DEBUG 2022-01-19 18:59:45,019 - return_draw_card
+
+DEBUG 2022-01-19 18:59:45,020 - the_deal
+
+DEBUG 2022-01-19 18:59:45,021 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:45,031 - red_3_check
+
+DEBUG 2022-01-19 18:59:45,034 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:45,047 - red_3_check
+
+DEBUG 2022-01-19 18:59:45,048 - play_1
+
+DEBUG 2022-01-19 18:59:46,592 - stock_draw
+
+DEBUG 2022-01-19 18:59:46,595 - red_3_check
+
+DEBUG 2022-01-19 18:59:46,595 - play_2
+
+DEBUG 2022-01-19 18:59:47,440 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:47,450 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-01-19 18:59:49,903 - 
+valid_play_check_and_sort
+
+DEBUG 2022-01-19 18:59:49,904 - player.round_score < player.meld_requirement
+
+DEBUG 2022-01-19 18:59:49,906 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:49,909 - wild_card_handler
+DEBUG 2022-01-19 18:59:49,909 - wild_card_meld_choice_prompt
+DEBUG 2022-01-19 18:59:49,911 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:51,371 - wild_card_meld_choice_prompt
+DEBUG 2022-01-19 18:59:51,372 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:52,363 - wild_card_meld_choice_prompt
+DEBUG 2022-01-19 18:59:52,365 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:53,007 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:53,009 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-01-19 18:59:53,009 - discard
+
+DEBUG 2022-01-19 18:59:53,010 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 18:59:57,201 - play_1
+
+DEBUG 2022-01-19 19:03:21,067 - game_run
+
+DEBUG 2022-01-19 19:03:21,068 - run start
+
+DEBUG 2022-01-19 19:03:21,068 - the_draw_1
+
+DEBUG 2022-01-19 19:03:21,068 - player == P1
+DEBUG 2022-01-19 19:03:21,068 - the_draw_2
+DEBUG 2022-01-19 19:03:29,838 - draw_joker_check
+
+DEBUG 2022-01-19 19:03:29,838 - the_draw_2
+DEBUG 2022-01-19 19:03:33,648 - draw_joker_check
+
+DEBUG 2022-01-19 19:03:33,648 - the_draw_3
+
+DEBUG 2022-01-19 19:03:33,649 - return_draw_card
+
+DEBUG 2022-01-19 19:03:33,649 - the_deal
+
+DEBUG 2022-01-19 19:03:33,650 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 19:03:33,660 - red_3_check
+
+DEBUG 2022-01-19 19:03:33,661 - sorted_and_numbered_list_printer
+
+DEBUG 2022-01-19 19:03:33,673 - red_3_check
+
+DEBUG 2022-01-19 19:03:33,675 - play_1
+
