@@ -1,0 +1,15 @@
+0000000000000000000000000000000000000000 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643836176 -0600	commit (initial): added canasta & canasta_old
+b003ae60a599b3316d4237a90d1b7f8a72655f40 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643836262 -0600	checkout: moving from master to 2d
+b003ae60a599b3316d4237a90d1b7f8a72655f40 0000000000000000000000000000000000000000 Josh <jczk7773@gmail.com> 1643836415 -0600	Branch: renamed refs/heads/2d to refs/heads/master
+0000000000000000000000000000000000000000 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643836415 -0600	Branch: renamed refs/heads/2d to refs/heads/master
+b003ae60a599b3316d4237a90d1b7f8a72655f40 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643836875 -0600	checkout: moving from master to 2d
+b003ae60a599b3316d4237a90d1b7f8a72655f40 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643836890 -0600	checkout: moving from 2d to master
+b003ae60a599b3316d4237a90d1b7f8a72655f40 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643915165 -0600	commit: cleaned up files
+18d0adc9c6fbb928623fe126bff2dba68ce80ca6 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643915276 -0600	checkout: moving from master to 2d
+b003ae60a599b3316d4237a90d1b7f8a72655f40 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643915306 -0600	checkout: moving from 2d to master
+18d0adc9c6fbb928623fe126bff2dba68ce80ca6 b003ae60a599b3316d4237a90d1b7f8a72655f40 Josh <jczk7773@gmail.com> 1643915374 -0600	checkout: moving from master to 2d
+b003ae60a599b3316d4237a90d1b7f8a72655f40 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643915420 -0600	pull origin master: Fast-forward
+18d0adc9c6fbb928623fe126bff2dba68ce80ca6 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643915477 -0600	checkout: moving from 2d to 2d
+18d0adc9c6fbb928623fe126bff2dba68ce80ca6 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643915483 -0600	checkout: moving from 2d to master
+18d0adc9c6fbb928623fe126bff2dba68ce80ca6 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643915485 -0600	checkout: moving from master to 2d
+18d0adc9c6fbb928623fe126bff2dba68ce80ca6 18d0adc9c6fbb928623fe126bff2dba68ce80ca6 Josh <jczk7773@gmail.com> 1643918677 -0600	checkout: moving from 2d to master

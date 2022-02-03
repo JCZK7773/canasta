@@ -80,30 +80,33 @@ class Card(pygame.sprite.Sprite): # ****
                             card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140))
                             card.rect = card.image.get_rect()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def funct_1():
+    print("1")
+
+func_dict = {'deck': funct_1(), 'discard_pile': pass, 'hand': pass, 'play_cards': pass, 'melds': pass, 'red_3_meld': pass,}
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+class CustomAppendList(list):
+    def __init__(self, name):
+        self.name = name
+
+    def append(self, item):
+        if self.name in func_dict:
+            func_dict[self.name]
+        super(CustomAppendList, self).append(item)
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
     def __init__(self): # ****
-        self._deck = [] # ****
+        self.deck = CustomAppendList('deck') # ****
         self.original_deck = [] # ****
         self.draw_ranks = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12, 'King':13, 'Ace':14}
         self.draw_suit_ranks = {'Joker': 0, 'Club': 1, 'Diamond': 2, 'Heart': 3, 'Spade': 4} # ****
         self.ranks = {'Joker':50, '2':20, '3':100, '4':5, '5':5, '6':5, '7':5, '8':10, '9':10, '10':10, 'Jack':10, 'Queen':10, 'King':10, 'Ace':20}
         self.suits = ['Club', 'Diamond', 'Heart', 'Spade'] # ****
         self.suits_symbols = {'Heart': '♥', 'Diamond': '♦', 'Spade': '♠', 'Club': '♣', 'Joker': '🃟'} # ****
-        self.discard_pile = [] # ****
+        self.discard_pile = CustomAppendList('discard_pile')
         self.red_3s = [('3', 'Diamond'), ('3', 'Heart')] # ****
         self.black_3s = [('3', 'Club'), ('3', 'Spade')] # ****
         self.wild_cards = [('2', 'Diamond'), ('2', 'Heart'), ('2', 'Spade'), ('2', 'Club'), ('Joker', 'Joker')] # ****
-    # -------------------------------------
-    @property
-    def deck(self):
-        return self._deck
-
-    @deck.setter(self, val):
-        self._deck = val
-
-    @deck.append(self, val):
-        self._deck = self._deck + [val]
-        return self._deck
     # -------------------------------------
     @property # ****
     def face_up_discard(self): # ****
@@ -156,9 +159,9 @@ class Player(): # ****
     def __init__(self, name): # ****
         self.name = name # ****
         self.the_draw = None # ****
-        self.hand = [] # ****
-        self.play_cards = [] # ****
-        self.play_cards_wild_cards = [] # ****
+        self.hand = CustomAppendList('p1_hand') # ****
+        self.play_cards = CustomAppendList('play_cards') # ****
+        self.play_cards_wild_cards = CustomAppendList('play_cards_wild_cards') # ****
         self.initial_played_cards = [] # ****
         self.final_played_cards = 0
         self.last_set_played_cards = [] # ****
