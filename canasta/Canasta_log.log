@@ -3649,3 +3649,79 @@ DEBUG 2022-01-19 19:03:33,673 - red_3_check
 
 DEBUG 2022-01-19 19:03:33,675 - play_1
 
+DEBUG 2022-02-03 12:24:23,283 - game_run
+
+DEBUG 2022-02-03 12:24:23,288 - run start
+
+DEBUG 2022-02-03 12:24:23,288 - the_draw_1
+
+DEBUG 2022-02-03 12:24:23,288 - player == P1
+DEBUG 2022-02-03 12:24:23,288 - the_draw_2
+DEBUG 2022-02-03 12:24:24,718 - draw_joker_check
+
+DEBUG 2022-02-03 12:24:24,719 - the_draw_2
+DEBUG 2022-02-03 12:24:25,935 - draw_joker_check
+
+DEBUG 2022-02-03 12:24:25,935 - the_draw_3
+
+DEBUG 2022-02-03 12:24:25,935 - return_draw_card
+
+DEBUG 2022-02-03 12:24:25,935 - the_deal
+
+DEBUG 2022-02-03 12:24:25,936 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:25,940 - red_3_check
+
+DEBUG 2022-02-03 12:24:25,944 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:25,962 - red_3_check
+
+DEBUG 2022-02-03 12:24:25,963 - play_1
+
+DEBUG 2022-02-03 12:24:27,772 - stock_draw
+
+DEBUG 2022-02-03 12:24:27,776 - red_3_check
+
+DEBUG 2022-02-03 12:24:27,776 - play_2
+
+DEBUG 2022-02-03 12:24:30,071 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:30,085 - multiple_choices_input_filter_and_transfer
+DEBUG 2022-02-03 12:24:35,324 - 
+valid_play_check_and_sort
+
+DEBUG 2022-02-03 12:24:35,325 - player.round_score < player.meld_requirement
+
+DEBUG 2022-02-03 12:24:35,328 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:37,773 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:37,783 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:37,785 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-02-03 12:24:37,785 - discard
+
+DEBUG 2022-02-03 12:24:37,786 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:24:41,166 - play_1
+
+DEBUG 2022-02-03 12:24:42,795 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-02-03 12:24:42,796 - discard_pile_is_frozen == False
+
+DEBUG 2022-02-03 12:24:42,796 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-02-03 12:24:42,796 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-02-03 12:24:42,796 - draw_discard_pile_wild_card_prompt
+DEBUG 2022-02-03 12:24:47,556 - draw_discard_pile_attempt_temp_meld_wild_card_addition
+DEBUG 2022-02-03 12:24:47,560 - sorted_and_numbered_list_printer
+
+DEBUG 2022-02-03 12:25:11,370 - replace_discard_pile_temp_meld
+DEBUG 2022-02-03 12:25:11,373 - stock_draw
+
+DEBUG 2022-02-03 12:25:11,375 - red_3_check
+
+DEBUG 2022-02-03 12:25:11,375 - play_2
+

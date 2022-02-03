@@ -1,110 +1,47 @@
 # D E B U G
     # Error code goes here in this section; for debugging.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# N O T E S #
-    # - NEW IDEA FOR ENTIRE MOVEMENT SYSTEM -
-    # 1 - Movements are to take place at the time that each card is relocated via calculated property. For instance, player.melds, when appended (via alteration to custom append method) to, will determine the card.ending_location (through external function that takes into account preexisting locations of other melds/cards).
-    # 2 - The card's x,y coordinates will be altered 1 pixel at a time toward the ending_location via a while loop that contains the updated coordinates and the draw_window() call.
-    # 3 - Whenever the ending_location is reached, the while loop is broken out of, and it will do this for each card being handled in the progression loops.
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#  T H I N G S  T O  D O  #
-    # 1) Post on web so others can check for bugs as well.
+# Things to do
+# 1) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
 import random # ****
 import copy
-import pygame
-import os
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Line - For the purpose of testing. Is used to store the cards passed through sorted_and_numbered_list_printer so that they can be tested to ensure they are in the proper ascending order according to card rank/suit combination value.
 testing_register_list = []
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Logger setup. # ****
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s" # ****
-logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta\\Canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
+logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta\\canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
 logger = logging.getLogger() # ****
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Card(pygame.sprite.Sprite): # ****
+class Card(): # ****
     def __init__(self, rank, suit): # ****
         self.rank = rank # ****
         self.suit = suit # ****
-        super().__init__()
-        # Below Line - Assigned via matching .png image file name with card.rank & card.suit via self. assign_card_images_and_rects.
-        self.image = None
-        # Below Line - The card's x-coordinate location (internal reference only as this ultimately becomes self.x via calculated property (for the purpose of updating self.rect.center when set)).
-        self._x = 50
-        # Below Line - The card's y-coordinate location.
-        self._y = 70
-        # Below Line - Assigned when self.image is assigned via self.assign_card_images_and_rects.
-        self.rect = None
-    # -------------------------------------
+
     def __str__(self): # ****
         return f"{self.rank}{Deck().suits_symbols.get(self.suit)}" # ****
 
     def __repr__(self): # ****
         return self.__str__() # ****
-    # -------------------------------------
-    # Below Section - x functions as the card's x-coordinate. Changed it to be this way so that self.rect.center is updated every time x or y coordinate is updated.
-    @property
-    def x(self):
-        return self._x
-
-    @x.setter
-    def x(self, val):
-        self._x = val
-        self.rect.center = [val, self._y]
-    # -------------------------------------
-    # Below Section - y functions as the card's y-coordinate. Changed it to be this way so that self.rect.center is updated every time x or y coordinate is updated.
-    @property
-    def y(self):
-        return self._y
-
-    @y.setter
-    def y(self, val):
-        self._y = val
-        self.rect.center = [self._x, val]
-    # -------------------------------------
-    # Below Function - Assigns each Card instance an image & associated card.rect based on c ard.name via comparison with image .png names. Assigns each card to its associated .png as the Card.image.
-    def assign_card_images_and_rects():
-        for card in MasterDeck.deck:
-            with os.scandir(os.path.join('Assets')) as asset_path:
-                for entry in asset_path:
-                    entry_str = (str(entry))
-                    if card.rank.lower() in entry_str:
-                        if card.rank != 'Joker':
-                            if card.suit.lower() in entry_str:
-                                card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140))
-                                card.rect = card.image.get_rect()
-                        else:
-                            card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140))
-                            card.rect = card.image.get_rect()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
     def __init__(self): # ****
-        self._deck = [] # ****
+        self.deck = [] # ****
         self.original_deck = [] # ****
-        self.draw_ranks = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12, 'King':13, 'Ace':14}
-        self.draw_suit_ranks = {'Joker': 0, 'Club': 1, 'Diamond': 2, 'Heart': 3, 'Spade': 4} # ****
-        self.ranks = {'Joker':50, '2':20, '3':100, '4':5, '5':5, '6':5, '7':5, '8':10, '9':10, '10':10, 'Jack':10, 'Queen':10, 'King':10, 'Ace':20}
-        self.suits = ['Club', 'Diamond', 'Heart', 'Spade'] # ****
-        self.suits_symbols = {'Heart': '♥', 'Diamond': '♦', 'Spade': '♠', 'Club': '♣', 'Joker': '🃟'} # ****
+        self.draw_ranks = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':11, 'Q':12, 'K':13, 'A':14}
+        self.draw_suit_ranks = {'Jo': 0, 'C': 1, 'D': 2, 'H': 3, 'S': 4} # ****
+        self.ranks = {'Jo':50, '2':20, '3':100, '4':5, '5':5, '6':5, '7':5, '8':10, '9':10, '10':10, 'J':10, 'Q':10, 'K':10, 'A':20}
+        self.suits = ['C', 'D', 'H', 'S'] # ****
+        self.suits_symbols = {'H': '♥', 'D': '♦', 'S': '♠', 'C': '♣', 'Jo': '🃟'} # ****
         self.discard_pile = [] # ****
-        self.red_3s = [('3', 'Diamond'), ('3', 'Heart')] # ****
-        self.black_3s = [('3', 'Club'), ('3', 'Spade')] # ****
-        self.wild_cards = [('2', 'Diamond'), ('2', 'Heart'), ('2', 'Spade'), ('2', 'Club'), ('Joker', 'Joker')] # ****
-    # -------------------------------------
-    @property
-    def deck(self):
-        return self._deck
-
-    @deck.setter(self, val):
-        self._deck = val
-
-    @deck.append(self, val):
-        self._deck = self._deck + [val]
-        return self._deck
-    # -------------------------------------
+        self.red_3s = [('3', 'D'), ('3', 'H')] # ****
+        self.black_3s = [('3', 'C'), ('3', 'S')] # ****
+        self.wild_cards = [('2', 'D'), ('2', 'H'), ('2', 'S'), ('2', 'C'), ('Jo', 'Jo')] # ****
+        # -------------------------------------
     @property # ****
     def face_up_discard(self): # ****
         return self.discard_pile[-1] # ****
@@ -119,38 +56,14 @@ class Deck(): # ****
     # -------------------------------------
     def create_deck(self): # ****
         for rank in self.ranks: # ****
-            if rank != 'Joker': # ****
+            if rank != 'Jo': # ****
                 for suit in self.suits: # ****
                     card = Card(rank, suit) # ****
                     self.deck.append(card) # ****
             else: # ****
                 for Joker in range(2): # ****
-                    card = Card(rank, 'Joker') # ****
+                    card = Card(rank, 'Jo') # ****
                     self.deck.append(card) # ****
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
-MasterDeck = Deck() # ****
-Deck2 = Deck() # ****
-# -------------------------------------
-# Below Section - Creates the actual decks via class method create_deck.
-MasterDeck.create_deck() # ****
-Deck2.create_deck() # ****
-# -------------------------------------
-# Below Section - Appends Deck2.deck to the MasterDeck.deck to create the required doubledeck.
-for card in Deck2.deck: # ****
-    MasterDeck.deck.append(card) # ****
-# -------------------------------------
-# Below Section - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
-random.shuffle(MasterDeck.deck) # ****
-MasterDeck.original_deck = copy.copy(MasterDeck.deck[:])
-# -------------------------------------
-# Below Line - Calls card.assign_card_images_and_rects to set up each card to have an associated sprite that is ready for display.
-Card.assign_card_images_and_rects()
-# -------------------------------------
-# Below Section - Creates the card_group Sprite Group and appends each card from the deck into the group so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
-card_group = pygame.sprite.Group()
-for card in MasterDeck.deck:
-    card_group.add(card)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
@@ -241,7 +154,7 @@ class Player(): # ****
                     wild_card_canasta_check_count = 0 # ****
                     if type(item) == list: # ****
                         for card in item: # ****
-                        # -------------------------------------
+                  	    # -------------------------------------
                             if (card.rank, card.suit) in Deck().wild_cards: # ****
                                 wild_card_canasta_check_count += 1 # ****
                             # -------------------------------------
@@ -254,7 +167,7 @@ class Player(): # ****
                                 round_score += 500 # ****
                             elif wild_card_canasta_check_count > 0: # ****
                                 round_score += 300 # ****
-                        # -------------------------------------
+                                # -------------------------------------
         if self.going_out == True: # ****
             round_score += 100 # ****
             if self.went_out_concealed == True: # ****
@@ -276,90 +189,33 @@ class Player(): # ****
             if len(self.hand) > 0: # ****
                 for card in self.hand: # ****
                     round_score -= Deck().ranks.get(card.rank) # ****
-                    # -------------------------------------
+                        # -------------------------------------
         return round_score # ****
     # -------------------------------------
     @property # ****
     def total_score(self): # ****
         return sum(self.finished_rounds_scores) # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
+MasterDeck = Deck() # ****
+Deck2 = Deck() # ****
+# -------------------------------------
+MasterDeck.create_deck() # ****
+Deck2.create_deck() # ****
+# -------------------------------------
+# Below Section - Appends Deck2.deck to the MasterDeck.deck.
+for card in Deck2.deck: # ****
+    MasterDeck.deck.append(card) # ****
+# -------------------------------------
+# Below Line - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
+random.shuffle(MasterDeck.deck) # ****
+MasterDeck.original_deck = MasterDeck.deck[:]
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Creates the players, and gives them placeholder names for identification at start of game. # ****
 P1 = Player('Player 1') # ****
 P2 = Player('Player 2') # ****
 players = [P1, P2] # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Locations():
-    def __init__(self):
-        self.deck_location = [910, 540]
-        self.discard_pile_location = [1010, 540]
-        self.p1_hand_start_location = [100, 420]
-        self.p2_hand_start_location = [1110, 420]
-        self.p1_melds_start_location = [100, 800]
-        self.p2_melds_start_location = [1110, 800]
-        self.p1_red_3_meld_start_location = [# As last meld to the right, maybe offset a bit.]
-        self.p2_red_3_meld_start_location = [# As last meld to the right, maybe offset a bit.]
-        self.p1_play_cards_location = [100, 610]
-        self.p2_play_cards_location = [1110, 610]
-        self.top_left_visible = [50, 70]
-        self.center = [1010, 610]
-        self.card_width_height = [100, 140]
-    # -------------------------------------
-    # Below Function - Called by... Assigns each meld & each card an individualized (card.x, card.y) coordinate location dependent on meld_num, card_num, and player value.
-    def meld_location_situate(self, val):
-        if type(val) == Card:
-            val
-        elif type(val) == list:
-
-        # Below Line - Changes meld's x-coordinate. For separation of each meld. Moves by card width + 20 (for empty space between).
-        meld_increase_x = self.card_width_height[0] + 20
-        # Below line - Changes card's y-coordinate. For separation of each card in a meld, for card information visibility. +20 for each card.
-        meld_increase_y = 20
-        for meld in player.melds:
-            card_num = 0
-            for card in meld:
-                # Below Line - Sets the card (meld[0]) x-coordinate to meld_location[0] (original x-coordinate) + (an increase value multiplied by the meld_num). Makes it so that each subsequent meld is resituated to a properly spaced location to the right of the previous meld.
-                card.x = self.p1_melds_location[0] + (meld_increase_x * meld_num)
-                # Below Line - Sets the card.y (y-coordinate) to meld_location[1] (original y-coordinate) + (an increase value multiplied by the card_num). Makes it so that each subsequent card is resituated to a properly spaced location below the previous card.
-                card.y = self.p1_melds_location[1] + (meld_increase_y * card_num)
-                card_num += 1
-                card_coordinates = [card.x, card.y]
-                yield
-            meld_num += 1
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Locate = Locations()
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Test section to verify proper movement of card-screen locations.
-P1.melds.append(MasterDeck.deck[0:7])
-P1.melds.append(MasterDeck.deck[8:15])
-P1.melds.append(MasterDeck.deck[16:19])
-P1.melds.append(MasterDeck.deck[19:23])
-# -------------------------------------
-# Below Section - Sets up the pygame window size and assigns a title caption for the game window.
-screen = pygame.display.set_mode((1920, 1020))
-pygame.display.set_caption("Canasta")
-# -------------------------------------
-# Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
-def draw_window():
-    screen.fill((0,40,0))
-    card_group.draw(screen)
-    # text_group / text_object.draw(screen) # This is going to contain all of the input prompts, etc.
-    pygame.display.update()
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS, pygame.event handling, and calls draw_window() for screen updating.
-def main():
-    clock = pygame.time.Clock()
-    run = True
-    while run:
-        clock.tick(60)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-        draw_window()
-    pygame.quit()
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-if __name__ == "__main__":
-    main()
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - First Function for run loop. Handles logic for sequencing of the_draw functions for when certain criteria require certain sections to be rerun. # ****
 def the_draw_1(player=P1, testing = False): # ****
     logger.debug("the_draw_1\n") # ****
@@ -405,15 +261,15 @@ def the_draw_2(player, testing = False): # ****
 # Below Function - Called by the_draw_2() for Game Loop. Checks a player's draw card to ensure it is not a Joker, and if it is, redirects the process back to the_draw_1, to be redone. # ****
 def draw_joker_check(player, testing = False): # ****
     logger.debug("draw_joker_check\n") # ****
-    if player.draw_card.rank == 'Joker': # ****
+    if player.draw_card.rank == 'Jo': # ****
         if testing == True:
-            return "player.draw_card.rank == \'Joker\'"
+            return "player.draw_card.rank == \'Jo\'"
         print(f"Sorry, {player.name}, you picked a Joker, which is not available for use during The Draw! You must choose another card!\n") # ****
         MasterDeck.deck.append(player.hand.pop(0)) # ****
         the_draw_1(player) # ****
     else:
         if testing == True:
-            return "player.draw_card.rank != \'Joker\'"
+            return "player.draw_card.rank != \'Jo\'"
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by the_draw_1() function. Checks whether or not the players have the same draw card, and if they do, redirects the process back to the_draw_1 and places player cards back into the MasterDeck. Also checks to see who wins the draw, and redirects to the_deal() after determination. # ****
 def the_draw_3(testing = False): # ****
@@ -476,7 +332,7 @@ def sorter_key_function(item): # ****
     # Below - If item is a Card (not a list or tuple). # ****
     if type(item) != list: # ****
         int_suit = MasterDeck.draw_suit_ranks.get(item.suit)
-        if item.rank != 'Joker': # ****
+        if item.rank != 'Jo': # ****
             int_rank = MasterDeck.draw_ranks.get(item.rank) # ****
             final_value = int(str(int_rank) + str(int_suit)) # ****
             return final_value # ****
@@ -485,7 +341,7 @@ def sorter_key_function(item): # ****
             return final_value # ****
     # Below - If item is a meld (list). # ****
     else: # ****
-        if item[0].rank != 'Joker': # ****
+        if item[0].rank != 'Jo': # ****
             int_rank = MasterDeck.draw_ranks.get(item[0].rank) # ****
             return int_rank # ****
         else: # ****
@@ -722,15 +578,19 @@ def draw_discard_pile(player): # ****
 # Below Function - Called by draw_discard_pile_wild_card_prompt() function. Prompts the player to choose which wild card they would like to use to add to their temp_meld for use in attempting to draw the discard pile. # ****
 def draw_discard_pile_attempt_temp_meld_wild_card_addition(player): # ****
     logger.debug("draw_discard_pile_attempt_temp_meld_wild_card_addition")
-    print(f"\n{player.name}, which wild card would you like to use? You have these wild cards:\n") # ****
-    sorted_and_numbered_list_printer(player.hand_wild_cards_reference_list) # ****
-    while True: # ****
-        try: # ****
-            wild_card_choice = int(input("> ")) # ****
-            player.melds[-1].append(player.hand.pop(player.hand.index(player.hand_wild_cards_reference_list[wild_card_choice - 1]))) # ****
-            break # ****
-        except (ValueError, IndexError): # ****
-            print("\nSorry, but there was a problem with your input. Please try again. Make sure that your input is one of the numbers preceding the card you would like to use.\n") # ****
+    if len(player.hand_wild_cards_reference_list) > 1:
+        print(f"\n{player.name}, which wild card would you like to use? You have these wild cards:\n") # ****
+        sorted_and_numbered_list_printer(player.hand_wild_cards_reference_list) # ****
+        while True: # ****
+            try: # ****
+                wild_card_choice = int(input("> ")) # ****
+                player.melds[-1].append(player.hand.pop(player.hand.index(player.hand_wild_cards_reference_list[wild_card_choice - 1]))) # ****
+                break # ****
+            except (ValueError, IndexError): # ****
+                print("\nSorry, but there was a problem with your input. Please try again. Make sure that your input is one of the numbers preceding the card you would like to use.\n") # ****
+    else:
+        print(f"You added the {player.hand_wild_cards_reference_list[0]} to your meld.")
+        player.melds[-1].append(player.hand.pop(player.hand.index(player.hand_wild_cards_reference_list[0])))
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by draw_discard_pile_attempt_check_meld_match(), draw_discard_pile_attempt_check_hand_match() functions. Prompts the player to choose which wild card they would like to use to help them in withdrawing the discard pile. # ****
 def draw_discard_pile_wild_card_prompt(player):
