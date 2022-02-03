@@ -1,7 +1,15 @@
-def funct_1():
-    print("1")
+class Locations():
+    def __init__(self):
+        pass
 
-func_dict = {'MasterDeck': funct_1()}
+    def funct_1(self):
+        print("1")
+
+
+Locate = Locations()
+
+
+func_dict = {'MasterDeck': Locate.funct_1}
 
 
 class OverrideAppendList(list):
@@ -10,19 +18,19 @@ class OverrideAppendList(list):
 
     def append(self, item):
         if self.name in func_dict:
-            func_dict[self.name]
-        super(OverrideAppendList, self).append(item)
+            func_dict[self.name]()
+            func_dict[self.name]()
+        super().append(item)
 
 
 class Deck():
     def __init__(self):
         self.MasterDeck = OverrideAppendList('MasterDeck')
 
+
 Deck_1 = Deck()
 
-print(Deck_1.MasterDeck)
-print(type(Deck_1.MasterDeck))
+
 Deck_1.MasterDeck.append(4)
-Deck_1.MasterDeck.append(5)
-print(Deck_1.MasterDeck)
-# print(Deck_1.MasterDeck)
+Deck_1.MasterDeck.pop(-1)
+Deck_1.MasterDeck.append(4)

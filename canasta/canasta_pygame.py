@@ -79,19 +79,86 @@ class Card(pygame.sprite.Sprite): # ****
                         else:
                             card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140))
                             card.rect = card.image.get_rect()
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-def funct_1():
-    print("1")
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+class Locations():
+    def __init__(self):
+        self.deck_location = [910, 540]
+        self.discard_pile_location = [1010, 540]
+        self.p1_hand_start_location = [100, 420]
+        self.p2_hand_start_location = [1110, 420]
+        self.p1_melds_start_location = [100, 800]
+        self.p2_melds_start_location = [1110, 800]
+        self.p1_red_3_meld_start_location = [] # As last meld to the right, maybe offset a bit.
+        self.p2_red_3_meld_start_location = [] # As last meld to the right, maybe offset a bit.
+        self.p1_play_cards_location = [100, 610]
+        self.p2_play_cards_location = [1110, 610]
+        self.top_left_visible = [50, 70]
+        self.center = [1010, 610]
+        self.card_width_height = [100, 140]
+    # -------------------------------------
+        def visual_deck_update():
+            pass
 
-func_dict = {'deck': funct_1(), 'discard_pile': pass, 'hand': pass, 'play_cards': pass, 'melds': pass, 'red_3_meld': pass,}
+        def visual_discard_pile_update():
+            pass
+
+        def visual_p1_hand_update():
+            pass
+
+        def visual_p2_hand_update():
+            pass
+
+        def visual_p1_play_cards_update():
+            pass
+
+        def visual_p2_play_cards_update():
+            pass
+
+        # Below Function - NEEDS TO BE UPDATED... Called by... Assigns each meld & each card an individualized (card.x, card.y) coordinate location dependent on meld_num, card_num, and player value.
+        def visual_p1_melds_update():
+            pass
+            # if type(val) == Card:
+            #     val
+            # elif type(val) == list:
+            #
+            # # Below Line - Changes meld's x-coordinate. For separation of each meld. Moves by card width + 20 (for empty space between).
+            # meld_increase_x = self.card_width_height[0] + 20
+            # # Below line - Changes card's y-coordinate. For separation of each card in a meld, for card information visibility. +20 for each card.
+            # meld_increase_y = 20
+            # for meld in player.melds:
+            #     card_num = 0
+            #     for card in meld:
+            #         # Below Line - Sets the card (meld[0]) x-coordinate to meld_location[0] (original x-coordinate) + (an increase value multiplied by the meld_num). Makes it so that each subsequent meld is resituated to a properly spaced location to the right of the previous meld.
+            #         card.x = self.p1_melds_location[0] + (meld_increase_x * meld_num)
+            #         # Below Line - Sets the card.y (y-coordinate) to meld_location[1] (original y-coordinate) + (an increase value multiplied by the card_num). Makes it so that each subsequent card is resituated to a properly spaced location below the previous card.
+            #         card.y = self.p1_melds_location[1] + (meld_increase_y * card_num)
+            #         card_num += 1
+            #         card_coordinates = [card.x, card.y]
+            #         yield
+            #     meld_num += 1
+
+
+        def visual_p2_melds_update():
+            pass
+
+        def visual_p1_red_3_meld_update():
+            pass
+
+        def visual_p2_red_3_meld_update():
+            pass
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Locate = Locations()
+# Below Line - ...
+Locate.func_dict = {'deck': visual_deck_update, 'discard_pile': visual_discard_pile_update, 'p1_hand': visual_p1_hand_update, 'p2_hand': visual_p2_hand_update, 'p1_play_cards': visual_p1_play_cards_update, 'p2_play_cards': visual_p2_play_cards_update, 'p1_melds': visual_p1_melds_update, 'p2_melds': visual_p2_melds_update, 'p1_red_3_meld': visual_p1_red_3_meld_update, 'p2_red_3_meld': visual_p2_red_3_meld_update}
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Class - Customized list class which is used to call a particular function whenever the sub-classed list .append method is called, for the purpose of visually updating card locations by updating the card coordinate via the function call.
 class CustomAppendList(list):
     def __init__(self, name):
         self.name = name
-
+    # -------------------------------------
     def append(self, item):
-        if self.name in func_dict:
-            func_dict[self.name]
+        if self.name in Locate.func_dict:
+            func_dict[self.name]()
         super(CustomAppendList, self).append(item)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
@@ -159,9 +226,9 @@ class Player(): # ****
     def __init__(self, name): # ****
         self.name = name # ****
         self.the_draw = None # ****
-        self.hand = CustomAppendList('p1_hand') # ****
-        self.play_cards = CustomAppendList('play_cards') # ****
-        self.play_cards_wild_cards = CustomAppendList('play_cards_wild_cards') # ****
+        self.hand = [] # ****
+        self.play_cards = [] # ****
+        self.play_cards_wild_cards = [] # ****
         self.initial_played_cards = [] # ****
         self.final_played_cards = 0
         self.last_set_played_cards = [] # ****
@@ -289,47 +356,18 @@ class Player(): # ****
 # Below Section - Creates the players, and gives them placeholder names for identification at start of game. # ****
 P1 = Player('Player 1') # ****
 P2 = Player('Player 2') # ****
+# -------------------------------------
+# Below Section - Assigns each player's card groups that will be visually displayed on the pygame screen to be an instance of CustomAppendList, giving each a name associated with the card group name to be used for when cards are appended to these card groups. The dictionary func_dict has the names as the keys , and a function name which updates the card coordinates of the appended card group is the dict value, so that whenever a card is appended to one of these groups, through a modified append method, the function is called before the card is appended to the card group, for the purpose of automation and simplicity.
+P1.hand = CustomAppendList('p1_hand') # ****
+P2.hand = CustomAppendList('p2_hand') # ****
+P1.play_cards = CustomAppendList('p1_play_cards') # ****
+P2.play_cards = CustomAppendList('p2_play_cards') # ****
+P1.red_3_meld = CustomAppendList('p1_red_3_meld') # ****
+P2.red_3_meld = CustomAppendList('p2_red_3_meld') # ****
+P1.melds = CustomAppendList('p1_melds') # ***
+P2.melds = CustomAppendList('p2_melds') # ***
+# -------------------------------------
 players = [P1, P2] # ****
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Locations():
-    def __init__(self):
-        self.deck_location = [910, 540]
-        self.discard_pile_location = [1010, 540]
-        self.p1_hand_start_location = [100, 420]
-        self.p2_hand_start_location = [1110, 420]
-        self.p1_melds_start_location = [100, 800]
-        self.p2_melds_start_location = [1110, 800]
-        self.p1_red_3_meld_start_location = [# As last meld to the right, maybe offset a bit.]
-        self.p2_red_3_meld_start_location = [# As last meld to the right, maybe offset a bit.]
-        self.p1_play_cards_location = [100, 610]
-        self.p2_play_cards_location = [1110, 610]
-        self.top_left_visible = [50, 70]
-        self.center = [1010, 610]
-        self.card_width_height = [100, 140]
-    # -------------------------------------
-    # Below Function - Called by... Assigns each meld & each card an individualized (card.x, card.y) coordinate location dependent on meld_num, card_num, and player value.
-    def meld_location_situate(self, val):
-        if type(val) == Card:
-            val
-        elif type(val) == list:
-
-        # Below Line - Changes meld's x-coordinate. For separation of each meld. Moves by card width + 20 (for empty space between).
-        meld_increase_x = self.card_width_height[0] + 20
-        # Below line - Changes card's y-coordinate. For separation of each card in a meld, for card information visibility. +20 for each card.
-        meld_increase_y = 20
-        for meld in player.melds:
-            card_num = 0
-            for card in meld:
-                # Below Line - Sets the card (meld[0]) x-coordinate to meld_location[0] (original x-coordinate) + (an increase value multiplied by the meld_num). Makes it so that each subsequent meld is resituated to a properly spaced location to the right of the previous meld.
-                card.x = self.p1_melds_location[0] + (meld_increase_x * meld_num)
-                # Below Line - Sets the card.y (y-coordinate) to meld_location[1] (original y-coordinate) + (an increase value multiplied by the card_num). Makes it so that each subsequent card is resituated to a properly spaced location below the previous card.
-                card.y = self.p1_melds_location[1] + (meld_increase_y * card_num)
-                card_num += 1
-                card_coordinates = [card.x, card.y]
-                yield
-            meld_num += 1
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Locate = Locations()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Test section to verify proper movement of card-screen locations.
 P1.melds.append(MasterDeck.deck[0:7])
