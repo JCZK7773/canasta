@@ -90,62 +90,158 @@ class Locations():
         self.p2_melds_start_location = [1110, 800]
         self.p1_red_3_meld_start_location = [] # As last meld to the right, maybe offset a bit.
         self.p2_red_3_meld_start_location = [] # As last meld to the right, maybe offset a bit.
-        self.p1_play_cards_location = [100, 610]
+        self.p1_play_cards_start_location = [100, 610]
         self.p2_play_cards_location = [1110, 610]
         self.top_left_visible = [50, 70]
         self.center = [1010, 610]
         self.card_width_height = [100, 140]
     # -------------------------------------
-        def visual_deck_update():
-            pass
-
-        def visual_discard_pile_update():
-            pass
-
-        def visual_p1_hand_update():
-            pass
-
-        def visual_p2_hand_update():
-            pass
-
-        def visual_p1_play_cards_update():
-            pass
-
-        def visual_p2_play_cards_update():
-            pass
-
-        # Below Function - NEEDS TO BE UPDATED... Called by... Assigns each meld & each card an individualized (card.x, card.y) coordinate location dependent on meld_num, card_num, and player value.
-        def visual_p1_melds_update():
-            pass
-            # if type(val) == Card:
-            #     val
-            # elif type(val) == list:
-            #
-            # # Below Line - Changes meld's x-coordinate. For separation of each meld. Moves by card width + 20 (for empty space between).
-            # meld_increase_x = self.card_width_height[0] + 20
-            # # Below line - Changes card's y-coordinate. For separation of each card in a meld, for card information visibility. +20 for each card.
-            # meld_increase_y = 20
-            # for meld in player.melds:
-            #     card_num = 0
-            #     for card in meld:
-            #         # Below Line - Sets the card (meld[0]) x-coordinate to meld_location[0] (original x-coordinate) + (an increase value multiplied by the meld_num). Makes it so that each subsequent meld is resituated to a properly spaced location to the right of the previous meld.
-            #         card.x = self.p1_melds_location[0] + (meld_increase_x * meld_num)
-            #         # Below Line - Sets the card.y (y-coordinate) to meld_location[1] (original y-coordinate) + (an increase value multiplied by the card_num). Makes it so that each subsequent card is resituated to a properly spaced location below the previous card.
-            #         card.y = self.p1_melds_location[1] + (meld_increase_y * card_num)
-            #         card_num += 1
-            #         card_coordinates = [card.x, card.y]
-            #         yield
-            #     meld_num += 1
-
-
-        def visual_p2_melds_update():
-            pass
-
-        def visual_p1_red_3_meld_update():
-            pass
-
-        def visual_p2_red_3_meld_update():
-            pass
+        # Below Function - ...
+        @property
+        def p1_hand_next_location():
+            if len(P1.hand) == 0:
+                return self.p1_hand_start_location
+            else:
+                x_val_increase = len(P1.hand) * 20
+                p1_hand_next_location = [self.p1_hand_start_location[0] + x_val_increase, self.p1_hand_start_location[1]]
+                return p1_hand_next_location
+        # -------------------------------------
+        # Below Function - ...
+        @property
+        def p2_hand_next_location():
+            if len(P2.hand) == 0:
+                return self.p2_hand_start_location
+            else:
+                x_val_increase = len(P2.hand) * 20
+                p2_hand_next_location = [self.p2_hand_start_location[0] + x_val_increase, self.p2_hand_start_location[1]]
+                return p2_hand_next_location
+        # -------------------------------------
+        # Below Function - ...
+        def card_movement(loc):
+            if card.x < Locate.loc[0]:
+                x_difference = Locate.loc[0] - card.x
+                x_lesser = True
+            elif card.x > Locate.loc[0]:
+                x_difference = card.x - Locate.loc[0]
+                x_lesser = False
+            if card.y < Locate.loc[1]:
+                y_difference = Locate.loc[1] - card.y
+                y_lesser = True
+            elif card.y > Locate.loc[1]:
+                y_difference = card.y - Locate.loc[1]
+                y_lesser = False
+            if x_difference > y_difference:
+                ratio = y_difference / x_difference
+                while card.x, card.y != Locate.loc:
+                    if x_lesser == True:
+                        card.x += 1
+                    else:
+                        card_x -= 1
+                    if y_lesser == True:
+                        card.y += ratio
+                    else:
+                        card_y -= ratio
+            elif y_difference > x_difference:
+                ratio = x_difference / y_difference
+                while card.x, card.y != Locate.loc:
+                    if x_lesser == True:
+                        card.x += ratio
+                    else:
+                        card_x -= ratio
+                    if y_lesser == True:
+                        card.y += 1
+                    else:
+                        card_y -= 1
+        # -------------------------------------
+        # Below Function - ...
+        def visual_deck_update(card):
+            card_movement(self.deck_location)
+        # -------------------------------------
+        # Below Function - ...
+        def visual_discard_pile_update(card):
+            card_movement(self.discard_pile_location)
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p1_hand_update(card):
+            card_movement(self.p1_hand_next_location)
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p2_hand_update(card):
+            card_movement(self.p2_hand_next_location)
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p1_play_cards_update(item):
+            if type(item) == list:
+                meld_num = len(p1.play_cards)
+                card_num = 0
+                for card in item:
+                    x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                    y_val_increase = card_num * 20
+                    p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
+                    card_movement(p1_play_cards_next_location)
+                    card_num += 1
+            elif type(item) == Card:
+                meld_num = len(p1.play_cards)
+                card_num = 0
+                x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                y_val_increase = card_num * 20
+                p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
+                card_movement(p1_play_cards_next_location)
+                card_num += 1
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p2_play_cards_update(item):
+            if type(item) == list:
+                meld_num = len(p2.play_cards)
+                card_num = 0
+                for card in item:
+                    x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                    y_val_increase = card_num * 20
+                    p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
+                    card_movement(p2_play_cards_next_location)
+                    card_num += 1
+            elif type(item) == Card:
+                meld_num = len(p2.play_cards)
+                card_num = 0
+                x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                y_val_increase = card_num * 20
+                p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
+                card_movement(p2_play_cards_next_location)
+                card_num += 1
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p1_melds_update(item):
+            meld_num = len(p1.play_cards)
+            card_num = 0
+            for card in item:
+                x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                y_val_increase = card_num * 20
+                p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
+                card_movement(p1_play_cards_next_location)
+                card_num += 1
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p2_melds_update(item):
+            meld_num = len(p2.play_cards)
+            card_num = 0
+            for card in item:
+                x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                y_val_increase = card_num * 20
+                p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
+                card_movement(p2_play_cards_next_location)
+                card_num += 1
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p1_red_3_meld_update(card):
+            y_val_increase = len(P1.red_3_meld) * 20
+            red_3_meld_next_location = [self.p1_red_3_meld_start_location[0], self.p1_red_3_meld_start_location[1] + y_val_increase]
+            card_movement(red_3_meld_next_location)
+        # -------------------------------------
+        # Below Function - ...
+        def visual_p2_red_3_meld_update(card):
+            y_val_increase = len(P2.red_3_meld) * 20
+            red_3_meld_next_location = [self.p2_red_3_meld_start_location[0], self.p2_red_3_meld_start_location[1] + y_val_increase]
+            card_movement(red_3_meld_next_location)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Locate = Locations()
 # Below Line - ...
@@ -157,8 +253,7 @@ class CustomAppendList(list):
         self.name = name
     # -------------------------------------
     def append(self, item):
-        if self.name in Locate.func_dict:
-            func_dict[self.name]()
+        func_dict[self.name](item)
         super(CustomAppendList, self).append(item)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
@@ -1387,6 +1482,9 @@ def game_run(): # ****
     while run == 1: # ****
         logger.debug("run start\n") # ****
         the_draw_1() # ****
+        return None
+        logger.debug("run end\n") # ****
+# -----------------------------------------------------------------------------  the_draw_1() # ****
         return None
         logger.debug("run end\n") # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
