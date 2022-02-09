@@ -2,13 +2,14 @@
     # Error code goes here in this section; for debugging.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # N O T E S #
-    # - NEW IDEA FOR ENTIRE MOVEMENT SYSTEM -
-    # 1 - Movements are to take place at the time that each card is relocated via calculated property. For instance, player.melds, when appended (via alteration to custom append method) to, will determine the card.ending_location (through external function that takes into account preexisting locations of other melds/cards).
-    # 2 - The card's x,y coordinates will be altered 1 pixel at a time toward the ending_location via a while loop that contains the updated coordinates and the draw_window() call.
-    # 3 - Whenever the ending_location is reached, the while loop is broken out of, and it will do this for each card being handled in the progression loops.
+    # ...
+    # TO BE PASTED TO DEVLOG - 02/??/22 - 02/??/22 - Completed implementation of card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
+    # 02/08/22 - Began conversion of text-based inputs to be text display rects on the game screen.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #  T H I N G S  T O  D O  #
-    # 1) Post on web so others can check for bugs as well.
+    # 1) Convert inputs to text rects on display.
+    # 2) Test implemented card movement system.
+    # 2) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
@@ -88,15 +89,24 @@ class Locations():
         self.p2_hand_start_location = [1110, 420]
         self.p1_melds_start_location = [100, 800]
         self.p2_melds_start_location = [1110, 800]
-        self.p1_red_3_meld_start_location = [] # As last meld to the right, maybe offset a bit.
-        self.p2_red_3_meld_start_location = [] # As last meld to the right, maybe offset a bit.
         self.p1_play_cards_start_location = [100, 610]
         self.p2_play_cards_location = [1110, 610]
         self.top_left_visible = [50, 70]
         self.center = [1010, 610]
         self.card_width_height = [100, 140]
+        self.text_rect_center = [self.center[0], 300] # Calculate y-coordinate based on rect size? So that if it is a larger text box, it still shows all of the text as opposed to text being off of the screen. ???
     # -------------------------------------
-        # Below Function - ...
+        # Below Function - Dynamically assigns P1's red_3_meld_location.
+        @property
+        def p1_red_3_meld_location():
+            return ((len(p1.melds) + 1) * (self.card_width_height[0] + 20))
+        # -------------------------------------
+        # Below Function - Dynamically assigns P2's red_3_meld_location.
+        @property
+        def p2_red_3_meld_location():
+            return ((len(p2.melds) + 1) * (self.card_width_height[0] + 20))
+        # -------------------------------------
+        # Below Function - Dynamically assigns P1's hand location.
         @property
         def p1_hand_next_location():
             if len(P1.hand) == 0:
@@ -106,7 +116,7 @@ class Locations():
                 p1_hand_next_location = [self.p1_hand_start_location[0] + x_val_increase, self.p1_hand_start_location[1]]
                 return p1_hand_next_location
         # -------------------------------------
-        # Below Function - ...
+        # Below Function - Dynamically assigns P2's hand location.
         @property
         def p2_hand_next_location():
             if len(P2.hand) == 0:
@@ -116,7 +126,7 @@ class Locations():
                 p2_hand_next_location = [self.p2_hand_start_location[0] + x_val_increase, self.p2_hand_start_location[1]]
                 return p2_hand_next_location
         # -------------------------------------
-        # Below Function - ...
+        # Below Function - Dynamically
         def card_movement(loc):
             if card.x < Locate.loc[0]:
                 x_difference = Locate.loc[0] - card.x
@@ -234,13 +244,13 @@ class Locations():
         # Below Function - ...
         def visual_p1_red_3_meld_update(card):
             y_val_increase = len(P1.red_3_meld) * 20
-            red_3_meld_next_location = [self.p1_red_3_meld_start_location[0], self.p1_red_3_meld_start_location[1] + y_val_increase]
+            red_3_meld_next_location = [self.p1_red_3_meld_location[0], self.p1_red_3_meld_location[1] + y_val_increase]
             card_movement(red_3_meld_next_location)
         # -------------------------------------
         # Below Function - ...
         def visual_p2_red_3_meld_update(card):
             y_val_increase = len(P2.red_3_meld) * 20
-            red_3_meld_next_location = [self.p2_red_3_meld_start_location[0], self.p2_red_3_meld_start_location[1] + y_val_increase]
+            red_3_meld_next_location = [self.p2_red_3_meld_location[0], self.p2_red_3_meld_location[1] + y_val_increase]
             card_movement(red_3_meld_next_location)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Locate = Locations()
@@ -474,11 +484,17 @@ P1.melds.append(MasterDeck.deck[19:23])
 screen = pygame.display.set_mode((1920, 1020))
 pygame.display.set_caption("Canasta")
 # -------------------------------------
+# Below Section - ...
+font = pygame.font.Font('freesansbold.ttf', 32)
+text = font.render('GeeksForGeeks', True, green, blue)
+textRect = text.get_rect()
+textRect.center = Locations.text_rect_center
+# -------------------------------------
 # Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
 def draw_window():
     screen.fill((0,40,0))
     card_group.draw(screen)
-    # text_group / text_object.draw(screen) # This is going to contain all of the input prompts, etc.
+    screen.draw(text)
     pygame.display.update()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS, pygame.event handling, and calls draw_window() for screen updating.
