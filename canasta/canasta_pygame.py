@@ -5,8 +5,10 @@
     # ...
     # TO BE PASTED TO DEVLOG - 02/??/22 - 02/??/22 - Completed implementation of card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
     # 02/08/22 - Began conversion of text-based inputs to be text display rects on the game screen.
+
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #  T H I N G S  T O  D O  #
+    # Have to fix func_dict in a way that allows for proper function calling. As it is, the functions being a method do not work because the dict calls them as if they are an attribute, and the attribute does not exist. I could change the methods to be calculated properties? Or I could make it so that the dictionary is actually a list of tuples?? But then I'm not sure how to pass the card item to the function....
     # 1) Convert inputs to text rects on display.
     # 2) Test implemented card movement system.
     # 2) Post on web so others can check for bugs as well.
@@ -142,7 +144,7 @@ class Locations():
                 y_lesser = False
             if x_difference > y_difference:
                 ratio = y_difference / x_difference
-                while card.x, card.y != Locate.loc:
+                while [card.x, card.y] != Locate.loc:
                     if x_lesser == True:
                         card.x += 1
                     else:
@@ -153,7 +155,7 @@ class Locations():
                         card_y -= ratio
             elif y_difference > x_difference:
                 ratio = x_difference / y_difference
-                while card.x, card.y != Locate.loc:
+                while [card.x, card.y] != Locate.loc:
                     if x_lesser == True:
                         card.x += ratio
                     else:
@@ -255,7 +257,7 @@ class Locations():
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Locate = Locations()
 # Below Line - ...
-Locate.func_dict = {'deck': visual_deck_update, 'discard_pile': visual_discard_pile_update, 'p1_hand': visual_p1_hand_update, 'p2_hand': visual_p2_hand_update, 'p1_play_cards': visual_p1_play_cards_update, 'p2_play_cards': visual_p2_play_cards_update, 'p1_melds': visual_p1_melds_update, 'p2_melds': visual_p2_melds_update, 'p1_red_3_meld': visual_p1_red_3_meld_update, 'p2_red_3_meld': visual_p2_red_3_meld_update}
+Locations.func_dict = {'deck': 'Locations.visual_deck_update', 'discard_pile': 'Locations.visual_discard_pile_update', 'p1_hand': 'Locations.visual_p1_hand_update', 'p2_hand': 'Locations.visual_p2_hand_update', 'p1_play_cards': 'Locations.visual_p1_play_cards_update', 'p2_play_cards': 'Locations.visual_p2_play_cards_update', 'p1_melds': 'Locations.visual_p1_melds_update', 'p2_melds': 'Locations.visual_p2_melds_update', 'p1_red_3_meld': 'Locations.visual_p1_red_3_meld_update', 'p2_red_3_meld': 'Locations.visual_p2_red_3_meld_update'}
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Class - Customized list class which is used to call a particular function whenever the sub-classed list .append method is called, for the purpose of visually updating card locations by updating the card coordinate via the function call.
 class CustomAppendList(list):
@@ -263,7 +265,8 @@ class CustomAppendList(list):
         self.name = name
     # -------------------------------------
     def append(self, item):
-        func_dict[self.name](item)
+        Locations.func_dict[(self.name)](item)
+        # Locate.func_dict[exec(self.name)](item) # Haven't tested this yet. May have to move execute to be before func_dict...so that it is called on the returned item.
         super(CustomAppendList, self).append(item)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
