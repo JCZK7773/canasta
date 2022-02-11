@@ -8,7 +8,7 @@
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #  T H I N G S  T O  D O  #
-    # Have to fix func_dict in a way that allows for proper function calling. As it is, the functions being a method do not work because the dict calls them as if they are an attribute, and the attribute does not exist. I could change the methods to be calculated properties? Or I could make it so that the dictionary is actually a list of tuples?? But then I'm not sure how to pass the card item to the function....
+    # Have to fix func_dict in a way that allows for proper function calling. As it is, the functions being a method do not work because the dict calls them as if they are an attribute, and the attribute does not exist. I could change the methods to be calculated properties? Or I could make it so that the dictionary is actually a list of tuples?? But then I'm not sure how to pass the card item to the function....USE GETATTR? https://stackoverflow.com/questions/26663032/calling-python-dictionary-of-function-from-class
     # 1) Convert inputs to text rects on display.
     # 2) Test implemented card movement system.
     # 2) Post on web so others can check for bugs as well.
@@ -257,7 +257,7 @@ class Locations():
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Locate = Locations()
 # Below Line - ...
-Locations.func_dict = {'deck': 'Locations.visual_deck_update', 'discard_pile': 'Locations.visual_discard_pile_update', 'p1_hand': 'Locations.visual_p1_hand_update', 'p2_hand': 'Locations.visual_p2_hand_update', 'p1_play_cards': 'Locations.visual_p1_play_cards_update', 'p2_play_cards': 'Locations.visual_p2_play_cards_update', 'p1_melds': 'Locations.visual_p1_melds_update', 'p2_melds': 'Locations.visual_p2_melds_update', 'p1_red_3_meld': 'Locations.visual_p1_red_3_meld_update', 'p2_red_3_meld': 'Locations.visual_p2_red_3_meld_update'}
+Locations.func_dict = {'deck': Locate.visual_deck_update, 'discard_pile': 'Locate().visual_discard_pile_update', 'p1_hand': 'Locations.visual_p1_hand_update', 'p2_hand': 'Locations.visual_p2_hand_update', 'p1_play_cards': 'Locations.visual_p1_play_cards_update', 'p2_play_cards': 'Locations.visual_p2_play_cards_update', 'p1_melds': 'Locations.visual_p1_melds_update', 'p2_melds': 'Locations.visual_p2_melds_update', 'p1_red_3_meld': 'Locations.visual_p1_red_3_meld_update', 'p2_red_3_meld': 'Locations.visual_p2_red_3_meld_update'}
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Class - Customized list class which is used to call a particular function whenever the sub-classed list .append method is called, for the purpose of visually updating card locations by updating the card coordinate via the function call.
 class CustomAppendList(list):
