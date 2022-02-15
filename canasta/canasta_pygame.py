@@ -5,13 +5,12 @@
     # ...
     # TO BE PASTED TO DEVLOG - 02/??/22 - 02/??/22 - Completed implementation of card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
     # 02/08/22 - Began conversion of text-based inputs to be text display rects on the game screen.
-
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #  T H I N G S  T O  D O  #
-    # Have to fix func_dict in a way that allows for proper function calling. As it is, the functions being a method do not work because the dict calls them as if they are an attribute, and the attribute does not exist. I could change the methods to be calculated properties? Or I could make it so that the dictionary is actually a list of tuples?? But then I'm not sure how to pass the card item to the function....USE GETATTR?
     # 1) Convert inputs to text rects on display.
-    # 2) Test implemented card movement system.
-    # 2) Post on web so others can check for bugs as well.
+    # 2) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
+    # 3) Test implemented card movement system.
+    # 4) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
@@ -20,15 +19,35 @@ import copy
 import pygame
 import os
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pygame.init()
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Line - For the purpose of testing. Is used to store the cards passed through sorted_and_numbered_list_printer so that they can be tested to ensure they are in the proper ascending order according to card rank/suit combination value.
-testing_register_list = []
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Logger setup. # ****
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s" # ****
 logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta\\Canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
 logger = logging.getLogger() # ****
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Line - For the purpose of testing. Is used to store the cards passed through sorted_and_numbered_list_printer so that they can be tested to ensure they are in the proper ascending order according to card rank/suit combination value.
+testing_register_list = []
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Section - Sets up the pygame window size and assigns a title caption for the game window.
+screen = pygame.display.set_mode((1920, 1020))
+pygame.display.set_caption("Canasta")
+# -------------------------------------
+# Below Section - Calls pygame.init (needed for other modules such as pygame.font)...
+pygame.init()
+font = pygame.font.Font('freesansbold.ttf', 32)
+text = font.render('Happy Monday, Chelsi! Still Love you!', True, (0, 255, 0), (0, 0, 255))
+textRect = text.get_rect()
+textRect.center = [1010, 300]
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Line - Creates the card_group Sprite Group.
+card_group = pygame.sprite.Group()
+# -------------------------------------
+# Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
+def draw_window():
+    screen.fill((0,40,0))
+    card_group.draw(screen)
+    screen.blit(text, textRect.center)
+    pygame.display.update()
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Card(pygame.sprite.Sprite): # ****
     def __init__(self, rank, suit): # ****
@@ -100,17 +119,20 @@ class Locations():
         self.top_left_visible = [50, 70]
         self.center = [1010, 610]
         self.card_width_height = [100, 140]
-        self.text_rect_center = [self.center[0], 300] # Calculate y-coordinate based on rect size? So that if it is a larger text box, it still shows all of the text as opposed to text being off of the screen. ???
     # -------------------------------------
     # Below Function - Dynamically assigns P1's red_3_meld_location.
     @property
     def p1_red_3_meld_location(self):
-        return ((len(P1.melds) + 1) * (self.card_width_height[0] + 20))
+        x = (len(P1.melds) + 1) * (self.card_width_height[0] + 20)
+        y = self.p1_melds_start_location[1] + 10
+        return [x, y]
     # -------------------------------------
     # Below Function - Dynamically assigns P2's red_3_meld_location.
     @property
     def p2_red_3_meld_location(self):
-        return ((len(P2.melds) + 1) * (self.card_width_height[0] + 20))
+        x = (len(P2.melds) + 1) * (self.card_width_height[0] + 20)
+        y = self.p2_melds_start_location[1] + 10
+        return [x, y]
     # -------------------------------------
     # Below Function - Dynamically assigns P1's hand location.
     @property
@@ -132,7 +154,7 @@ class Locations():
             p2_hand_next_location = [self.p2_hand_start_location[0] + x_val_increase, self.p2_hand_start_location[1]]
             return p2_hand_next_location
     # -------------------------------------
-    # Below Function - Dynamically
+    # Below Function - Dynamically...
     def card_movement(self, loc, card):
         x_difference = 0
         y_difference = 0
@@ -159,9 +181,10 @@ class Locations():
                     card.y += ratio
                 elif y_lesser == True and int(card.y) != int(loc[1]):
                     card.y -= ratio
+                draw_window()
         elif int(y_difference) > int(x_difference):
             ratio = x_difference / y_difference
-            while [card.x, card.y] != loc:
+            while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
                 if x_lesser == True:
                     card.x += ratio
                 else:
@@ -170,6 +193,7 @@ class Locations():
                     card.y += 1
                 else:
                     card.y -= 1
+                draw_window()
     # -------------------------------------
     # Below Function - ...
     def visual_deck_update(self, card):
@@ -177,15 +201,15 @@ class Locations():
     # -------------------------------------
     # Below Function - ...
     def visual_discard_pile_update(self, card):
-        card_movement(self.discard_pile_location, card)
+        self.card_movement(self.discard_pile_location, card)
     # -------------------------------------
     # Below Function - ...
     def visual_p1_hand_update(self, card):
-        card_movement(self.p1_hand_next_location, card)
+        self.card_movement(self.p1_hand_next_location, card)
     # -------------------------------------
     # Below Function - ...
     def visual_p2_hand_update(self, card):
-        card_movement(self.p2_hand_next_location, card)
+        self.card_movement(self.p2_hand_next_location, card)
     # -------------------------------------
     # Below Function - ...
     def visual_p1_play_cards_update(self, item):
@@ -229,7 +253,7 @@ class Locations():
     # -------------------------------------
     # Below Function - ...
     def visual_p1_melds_update(self, item):
-        meld_num = len(P1.play_cards)
+        meld_num = len(P1.melds)
         card_num = 0
         for card in item:
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
@@ -240,7 +264,7 @@ class Locations():
     # -------------------------------------
     # Below Function - ...
     def visual_p2_melds_update(self, item):
-        meld_num = len(P2.play_cards)
+        meld_num = len(P2.melds)
         card_num = 0
         for card in item:
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
@@ -252,7 +276,7 @@ class Locations():
     # Below Function - ...
     def visual_p1_red_3_meld_update(self, card):
         y_val_increase = len(P1.red_3_meld) * 20
-        red_3_meld_next_location = [self.p1_red_3_meld_location[0], self.p1_red_3_meld_location[1] + y_val_increase]
+        red_3_meld_next_location = [self.p1_red_3_meld_location[0], self.p1_red_3_meld_location[1]] # + y_val_increase]
         self.card_movement(red_3_meld_next_location, card)
     # -------------------------------------
     # Below Function - ...
@@ -306,10 +330,14 @@ class Deck(): # ****
             if rank != 'Joker': # ****
                 for suit in self.suits: # ****
                     card = Card(rank, suit) # ****
+                    # Below Line - Appends card into the card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                    card_group.add(card)
                     self.deck.append(card) # ****
             else: # ****
                 for Joker in range(2): # ****
                     card = Card(rank, 'Joker') # ****
+                    # Below Line - Appends card into the card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                    card_group.add(card)
                     self.deck.append(card) # ****
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
@@ -327,14 +355,9 @@ for card in Deck2.deck: # ****
 # Below Section - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
 random.shuffle(MasterDeck.deck) # ****
 MasterDeck.original_deck = copy.copy(MasterDeck.deck[:])
-# -------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Line - Calls card.assign_card_images_and_rects to set up each card to have an associated sprite that is ready for display.
 Card.assign_card_images_and_rects()
-# -------------------------------------
-# Below Section - Creates the card_group Sprite Group and appends each card from the deck into the group so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
-card_group = pygame.sprite.Group()
-for card in MasterDeck.deck:
-    card_group.add(card)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
@@ -476,46 +499,24 @@ P1.hand = CustomAppendList('p1_hand') # ****
 P2.hand = CustomAppendList('p2_hand') # ****
 P1.play_cards = CustomAppendList('p1_play_cards') # ****
 P2.play_cards = CustomAppendList('p2_play_cards') # ****
-# P1.red_3_meld = CustomAppendList('p1_red_3_meld') # ****
-# P2.red_3_meld = CustomAppendList('p2_red_3_meld') # ****
+P1.red_3_meld = CustomAppendList('p1_red_3_meld') # ****
+P2.red_3_meld = CustomAppendList('p2_red_3_meld') # ****
 P1.melds = CustomAppendList('p1_melds') # ***
 P2.melds = CustomAppendList('p2_melds') # ***
 # -------------------------------------
 players = [P1, P2] # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Test section to verify proper movement of card-screen locations.
-# P1.melds.append(MasterDeck.deck[0:7])
-# P1.melds.append(MasterDeck.deck[8:15])
-# P1.melds.append(MasterDeck.deck[16:19])
-# P1.melds.append(MasterDeck.deck[19:23])
-# -------------------------------------
-# Below Section - Sets up the pygame window size and assigns a title caption for the game window.
-screen = pygame.display.set_mode((1920, 1020))
-pygame.display.set_caption("Canasta")
-# -------------------------------------
-# Below Section - ...
-font = pygame.font.Font('freesansbold.ttf', 32)
-text = font.render('Happy Valentine\'s Day Chelsi! Love you!', True, (0, 255, 0), (0, 0, 255))
-textRect = text.get_rect()
-textRect.center = Locate.text_rect_center
-# -------------------------------------
-# Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
-def draw_window():
-    screen.fill((0,40,0))
-    P1.melds.append(MasterDeck.deck[0:7])
+def game_run():
+    # Below Section - Test section to verify proper movement of card-screen locations.
     P1.melds.append(MasterDeck.deck[8:15])
     P1.melds.append(MasterDeck.deck[16:19])
     P1.melds.append(MasterDeck.deck[19:23])
     P2.melds.append(MasterDeck.deck[24:29])
     P2.melds.append(MasterDeck.deck[30:35])
     P2.melds.append(MasterDeck.deck[36:39])
-    P1.red_3_meld.append(MasterDeck.deck[40:45])
-    P2.red_3_meld.append(MasterDeck.deck[46:50])
-    card_group.draw(screen)
-    screen.blit(text, textRect.center)
-    pygame.display.update()
-    print(P1.melds[0][0].x)
-    print(P1.melds[3][0].x)
+    P1.red_3_meld.append(MasterDeck.deck[40])
+    P2.red_3_meld.append(MasterDeck.deck[41])
+    P1.melds.append(MasterDeck.deck[0:7])
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS, pygame.event handling, and calls draw_window() for screen updating.
 def main():
@@ -523,11 +524,11 @@ def main():
     clock = pygame.time.Clock()
     run = True
     while run:
-        clock.tick(60)
+        clock.tick(1)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        draw_window()
+        game_run()
     pygame.quit()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
@@ -1512,7 +1513,7 @@ def winner_output(player, tie_game = False): # ****
         sys.exit() # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called at the end of the file. Main run loop. Runs game until a player wins. # ****
-def game_run(): # ****
+def game_run_text(): # ****
     logger.debug("game_run\n") # ****
     # -------------------------------------
     run = 1 # ****
@@ -1528,7 +1529,7 @@ def game_run(): # ****
 # Below Line - Runs the game, until someone wins! # ****
 if __name__ == "__main__":
     if input("Start Game?\n\n> ") != "":
-        game_run() # ****
+        game_run_text() # ****
     else:
         print("\nTESTING\n")
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
