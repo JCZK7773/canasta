@@ -2,15 +2,23 @@
     # Error code goes here in this section; for debugging.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # N O T E S #
-    # ...
-    # TO BE PASTED TO DEVLOG - 02/??/22 - 02/??/22 - Completed implementation of card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
-    # 02/08/22 - Began conversion of text-based inputs to be text display rects on the game screen.
+    # - General Notes -
+        # TO BE PASTED TO DEVLOG - 02/??/22 - 02/??/22 - Completed implementation of card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
+        # 02/08/22 - Began conversion of text-based inputs to be text display rects on the game screen.
+    # -------------------------------------
+    # - Lag Issue -
+        # Convert from Sprites to Dirty Sprites? Read docs for more information on how this could increase performance.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #  T H I N G S  T O  D O  #
-    # 1) Convert inputs to text rects on display.
-    # 2) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
-    # 3) Test implemented card movement system.
-    # 4) Post on web so others can check for bugs as well.
+    # 1) Make changes to current Sprites and images, so that the game will not lag. See notes for possible solutions.
+    # 2) Check to ensure that card_movement() is properly calling draw_window only after both the x AND y values have been altered, and not whenever x is changed, THEN AGAIN when y is changed, for the purpose of ensuring a smoother movement.
+    # 3) Change card_movement() so that it calls draw_window() after moving half of the current movement amount, for the purpose of a smoother movement.
+    # 4) Test implemented card movement system.
+    # 5) Figure out why game crashes whenever we alt-tab.
+    # 6) Create pygame Class to put all of the pygame setup code into, as well as some pygame related functions.
+    # 7) Convert inputs to text rects on display.
+    # 8) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
+    # 9) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
@@ -18,6 +26,7 @@ import random # ****
 import copy
 import pygame
 import os
+import time
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Logger setup. # ****
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s" # ****
@@ -28,7 +37,7 @@ logger = logging.getLogger() # ****
 testing_register_list = []
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Sets up the pygame window size and assigns a title caption for the game window.
-screen = pygame.display.set_mode((1920, 1020))
+screen = pygame.display.set_mode((960, 1020))
 pygame.display.set_caption("Canasta")
 # -------------------------------------
 # Below Section - Calls pygame.init (needed for other modules such as pygame.font)...
@@ -48,8 +57,7 @@ def draw_window():
     screen.blit(text, textRect.center)
     pygame.display.update()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Card(pygame.sprite.Sprite): # ****
+class Card(pygame.sprite.DirtySprite): # ****
     def __init__(self, rank, suit): # ****
         self.rank = rank # ****
         self.suit = suit # ****
@@ -92,19 +100,18 @@ class Card(pygame.sprite.Sprite): # ****
             self.rect.center = [self._x, val]
     # -------------------------------------
     # Below Function - Assigns each Card instance an image & associated card.rect based on c ard.name via comparison with image .png names. Assigns each card to its associated .png as the Card.image.
-    def assign_card_images_and_rects():
-        for card in MasterDeck.deck:
-            with os.scandir(os.path.join('Assets')) as asset_path:
-                for entry in asset_path:
-                    entry_str = (str(entry))
-                    if card.rank.lower() in entry_str:
-                        if card.rank != 'Joker':
-                            if card.suit.lower() in entry_str:
-                                card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140))
-                                card.rect = card.image.get_rect()
-                        else:
-                            card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140))
+    def assign_card_images_and_rects(card):
+        with os.scandir(os.path.join('Assets')) as asset_path:
+            for entry in asset_path:
+                entry_str = (str(entry))
+                if card.rank.lower() in entry_str:
+                    if card.rank != 'Joker':
+                        if card.suit.lower() in entry_str:
+                            card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140)).convert()
                             card.rect = card.image.get_rect()
+                    else:
+                        card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140)).convert()
+                        card.rect = card.image.get_rect()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Locations():
     def __init__(self):
@@ -171,7 +178,7 @@ class Locations():
             y_difference = card.y - loc[1]
             y_lesser = False
         if x_difference > y_difference:
-            ratio = y_difference / x_difference
+            ratio = int(y_difference) / int(x_difference)
             while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
                 if x_lesser == True and int(card.x) != int(loc[0]):
                     card.x += 1
@@ -330,15 +337,25 @@ class Deck(): # ****
             if rank != 'Joker': # ****
                 for suit in self.suits: # ****
                     card = Card(rank, suit) # ****
+                    # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
+                    Card.assign_card_images_and_rects(card)
                     # Below Line - Appends card into the card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
                     card_group.add(card)
+                    last_time = time.time()
                     self.deck.append(card) # ****
+                    current_time = time.time()
+                    print(current_time - last_time)
             else: # ****
                 for Joker in range(2): # ****
                     card = Card(rank, 'Joker') # ****
+                    # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
+                    Card.assign_card_images_and_rects(card)
                     # Below Line - Appends card into the card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
                     card_group.add(card)
+                    last_time = time.time()
                     self.deck.append(card) # ****
+                    current_time = time.time()
+                    print(current_time - last_time)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
 MasterDeck = Deck() # ****
@@ -355,9 +372,6 @@ for card in Deck2.deck: # ****
 # Below Section - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
 random.shuffle(MasterDeck.deck) # ****
 MasterDeck.original_deck = copy.copy(MasterDeck.deck[:])
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Line - Calls card.assign_card_images_and_rects to set up each card to have an associated sprite that is ready for display.
-Card.assign_card_images_and_rects()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
@@ -524,7 +538,7 @@ def main():
     clock = pygame.time.Clock()
     run = True
     while run:
-        clock.tick(1)
+        clock.tick(300)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
