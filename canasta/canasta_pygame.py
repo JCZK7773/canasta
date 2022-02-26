@@ -1,24 +1,26 @@
-# D E B U G
+# DEBUG
     # Error code goes here in this section; for debugging.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# N O T E S #
-    # - General Notes -
-        # TO BE PASTED TO DEVLOG - 02/??/22 - 02/??/22 - Completed implementation of card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
-        # 02/08/22 - Began conversion of text-based inputs to be text display rects on the game screen.
+# NOTES
+    # - Devlog -
+        # 02/01/22 - 02/07/22 : Completed implementation of the first pass of the card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
+        # 02/08/22 : Began conversion of text-based inputs to be text display rects on the game screen. Continued working on ideas for card movements.
+        # 02/09/22 - 02/17/22 : Put off converting text inputs after implementing the very first steps for the feature, and refocused on implementing card movements. Eventually implemented a successful card movement system, with some minor bugs in visual card overlap and game lag. Worked out all of the existing bugs from the card movement implementation and began working on reducing game lag via .convert() & using Dirty Sprites.
+        # 02/18/22 : Tidied up some code, updated devlog, added in missing section commentary, and changed card movement values from 1 to 0.5 to (hopefully) help smooth the movements.
     # -------------------------------------
-    # - Lag Issue -
-        # Convert from Sprites to Dirty Sprites? Read docs for more information on how this could increase performance.
+    # - General  -
+        # - Lag Issue -
+            # Convert from Sprites to Dirty Sprites? Read docs for more information on how this could increase performance.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#  T H I N G S  T O  D O  #
-    # 1) Make changes to current Sprites and images, so that the game will not lag. See notes for possible solutions.
-    # 2) Check to ensure that card_movement() is properly calling draw_window only after both the x AND y values have been altered, and not whenever x is changed, THEN AGAIN when y is changed, for the purpose of ensuring a smoother movement.
-    # 3) Change card_movement() so that it calls draw_window() after moving half of the current movement amount, for the purpose of a smoother movement.
-    # 4) Test implemented card movement system.
-    # 5) Figure out why game crashes whenever we alt-tab.
-    # 6) Create pygame Class to put all of the pygame setup code into, as well as some pygame related functions.
-    # 7) Convert inputs to text rects on display.
-    # 8) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
-    # 9) Post on web so others can check for bugs as well.
+# THINGS TO DO
+    # 2) Test & improve card movement system for smoothness / timing until satisfactory.
+    # 4) Create pygame Class to put all of the pygame setup code into, as well as some pygame related functions.
+    # 5) Convert inputs to text rects on display.
+    # 6) Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
+    # 7) Change input system from keyboard-based to mouse-based.
+    # 8) Add in card sounds & background music.
+    # 9) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
+    # 10) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
@@ -36,26 +38,30 @@ logger = logging.getLogger() # ****
 # Below Line - For the purpose of testing. Is used to store the cards passed through sorted_and_numbered_list_printer so that they can be tested to ensure they are in the proper ascending order according to card rank/suit combination value.
 testing_register_list = []
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Sets up the pygame window size and assigns a title caption for the game window.
-screen = pygame.display.set_mode((960, 1020))
-pygame.display.set_caption("Canasta")
-# -------------------------------------
-# Below Section - Calls pygame.init (needed for other modules such as pygame.font)...
-pygame.init()
-font = pygame.font.Font('freesansbold.ttf', 32)
-text = font.render('Happy Monday, Chelsi! Still Love you!', True, (0, 255, 0), (0, 0, 255))
-textRect = text.get_rect()
-textRect.center = [1010, 300]
+class Game():
+    def __init__(self):
+        # Below Line - Calls pygame.init (needed for other modules such as pygame.font)...
+        pygame.init()
+        # Below Section - Sets up the pygame window size and assigns a title caption for the game window.
+        self.screen = pygame.display
+        self.screen_surface = pygame.display.set_mode((960, 1020))
+        pygame.display.set_caption("Canasta")
+
+        self.background = pygame.Surface([1920, 1020])
+        self.background.fill((0,40,0))
+
+        # Below Line - Creates the card_group Sprite Group.
+        self.card_group = pygame.sprite.LayeredDirty()
+        self.card_group.clear(self.screen, self.background)
+        self.card_rects = None
+
+        self.font = pygame.font.Font('freesansbold.ttf', 32)
+
+        self.text = self.font.render('Happy Friday, Chelsi! Still Love you!', True, (0, 255, 0), (0, 0, 255))
+        self.textRect = self.text.get_rect()
+        self.textRect.center = [1010, 300]
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Line - Creates the card_group Sprite Group.
-card_group = pygame.sprite.Group()
-# -------------------------------------
-# Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
-def draw_window():
-    screen.fill((0,40,0))
-    card_group.draw(screen)
-    screen.blit(text, textRect.center)
-    pygame.display.update()
+game = Game()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Card(pygame.sprite.DirtySprite): # ****
     def __init__(self, rank, suit): # ****
@@ -65,11 +71,13 @@ class Card(pygame.sprite.DirtySprite): # ****
         # Below Line - Assigned via matching .png image file name with card.rank & card.suit via self. assign_card_images_and_rects.
         self.image = None
         # Below Line - The card's x-coordinate location (internal reference only as this ultimately becomes self.x via calculated property (for the purpose of updating self.rect.center when set)).
-        self._x = 50
+        self._x = 910
         # Below Line - The card's y-coordinate location.
-        self._y = 70
+        self._y = 540
         # Below Line - Assigned when self.image is assigned via self.assign_card_images_and_rects.
         self.rect = None
+        # Below Line - For assigning display layer when appending cards to different card groups for proper visuals.
+        self.display_layer = 1
     # -------------------------------------
     def __str__(self): # ****
         return f"{self.rank}{Deck().suits_symbols.get(self.suit)}" # ****
@@ -77,6 +85,8 @@ class Card(pygame.sprite.DirtySprite): # ****
     def __repr__(self): # ****
         return self.__str__() # ****
     # -------------------------------------
+    def update(self):
+        self.dirty = 1
     # Below Section - x functions as the card's x-coordinate. Changed it to be this way so that self.rect.center is updated every time x or y coordinate is updated.
     @property
     def x(self):
@@ -161,10 +171,14 @@ class Locations():
             p2_hand_next_location = [self.p2_hand_start_location[0] + x_val_increase, self.p2_hand_start_location[1]]
             return p2_hand_next_location
     # -------------------------------------
-    # Below Function - Dynamically...
+    # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls draw_window() at the end of the function, which visually updates the card's on-screen location.
     def card_movement(self, loc, card):
         x_difference = 0
         y_difference = 0
+
+        y_lesser = None
+        x_lesser = None
+
         if card.x < loc[0]:
             x_difference = loc[0] - card.x
             x_lesser = True
@@ -177,117 +191,163 @@ class Locations():
         elif card.y > loc[1]:
             y_difference = card.y - loc[1]
             y_lesser = False
+
         if x_difference > y_difference:
-            ratio = int(y_difference) / int(x_difference)
+            ratio = (y_difference / x_difference)
             while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
                 if x_lesser == True and int(card.x) != int(loc[0]):
                     card.x += 1
                 elif x_lesser == False and int(card.x) != int(loc[0]):
                     card.x -= 1
                 if y_lesser == True and int(card.y) != int(loc[1]):
+                    prior_y = card.y
                     card.y += ratio
-                elif y_lesser == True and int(card.y) != int(loc[1]):
+                    current_y = card.y
+                    if int(prior_y) < int(current_y):
+                        draw_window()
+                elif y_lesser == False and int(card.y) != int(loc[1]):
+                    prior_y = card.y
                     card.y -= ratio
-                draw_window()
+                    current_y = card.y
+                    if int(prior_y) > int(current_y):
+                        draw_window()
+                if y_lesser == None:
+                    # Below Line -  Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
+                    draw_window()
+
         elif int(y_difference) > int(x_difference):
-            ratio = x_difference / y_difference
+            ratio = (x_difference / y_difference)
             while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
-                if x_lesser == True:
-                    card.x += ratio
-                else:
-                    card.x -= ratio
-                if y_lesser == True:
+                if y_lesser == True and int(card.y) != int(loc[1]):
                     card.y += 1
-                else:
+                elif y_lesser == False and int(card.y) != int(loc[1]):
                     card.y -= 1
-                draw_window()
+                if x_lesser == True and int(card.x) != int(loc[0]):
+                    prior_x = card.x
+                    card.x += ratio
+                    current_x = card.x
+                    if int(prior_x) < int(current_x):
+                        draw_window()
+                elif x_lesser == False and int(card.x) != int(loc[0]):
+                    prior_x = card.x
+                    card.x -= ratio
+                    current_x = card.x
+                    if int(prior_x) > int(current_x):
+                        draw_window()
+                if x_lesser == None:
+                    # Below Line - Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
+                    draw_window()
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'deck' whenever a card is appended to the MasterDeck.deck. Calls card_movement() function to visually and digitally move card to the deck.
     def visual_deck_update(self, card):
+        card.display_layer = len(MasterDeck.deck) + 1
+        game.card_group.change_layer(card, card.display_layer)
         self.card_movement(self.deck_location, card)
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'discard_pile' whenever a card is appended to the MasterDeck.discard_pile. Calls card_movement() function to visually and digitally move card to the discard pile.
     def visual_discard_pile_update(self, card):
+        card.display_layer = len(MasterDeck.discard_pile) + 1
+        game.card_group.change_layer(card, card.display_layer)
         self.card_movement(self.discard_pile_location, card)
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p1_hand' whenever a card is appended to the P1.hand. Calls card_movement() function to visually and digitally move card to P1.hand.
     def visual_p1_hand_update(self, card):
+        card.display_layer = len(P1.hand) + 1
+        game.card_group.change_layer(card, card.display_layer)
         self.card_movement(self.p1_hand_next_location, card)
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p2_hand' whenever a card is appended to the P2.hand. Calls card_movement() function to visually and digitally move card to P2.hand.
     def visual_p2_hand_update(self, card):
+        card.display_layer = len(P2.hand) + 1
+        game.card_group.change_layer(card, card.display_layer)
         self.card_movement(self.p2_hand_next_location, card)
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p1_play_cards' whenever a card is appended to the P1.hand. Calls card_movement() function to visually and digitally move card to P1.play_cards.
     def visual_p1_play_cards_update(self, item):
         if type(item) == list:
             meld_num = len(P1.play_cards)
             card_num = 0
             for card in item:
+                card.display_layer = card_num + 1
+                game.card_group.change_layer(card, card.display_layer)
                 x_val_increase = meld_num * (self.card_width_height[0] + 20)
                 y_val_increase = card_num * 20
                 p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
-                card_movement(p1_play_cards_next_location, card)
+                self.card_movement(p1_play_cards_next_location, card)
                 card_num += 1
         elif type(item) == Card:
+            card.display_layer = len(P1.play_cards) + 1
+            game.card_group.change_layer(item, item.display_layer)
             meld_num = len(P1.play_cards)
             card_num = 0
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
-            card_movement(p1_play_cards_next_location, item)
+            self.card_movement(p1_play_cards_next_location, item)
             card_num += 1
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p1_play_cards' whenever a card is appended to P2.play_cards. Calls card_movement() function to visually and digitally move card to the P2.play_cards.
     def visual_p2_play_cards_update(self, item):
         if type(item) == list:
             meld_num = len(P2.play_cards)
             card_num = 0
             for card in item:
+                card.display_layer = card_num + 1
+                game.card_group.change_layer(card, card.display_layer)
                 x_val_increase = meld_num * (self.card_width_height[0] + 20)
                 y_val_increase = card_num * 20
                 p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
-                card_movement(p2_play_cards_next_location, card)
+                self.card_movement(p2_play_cards_next_location, card)
                 card_num += 1
         elif type(item) == Card:
+            card.display_layer = len(P2.play_cards) + 1
+            game.card_group.change_layer(item, item.display_layer)
             meld_num = len(P2.play_cards)
             card_num = 0
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
-            card_movement(p2_play_cards_next_location, item)
+            self.card_movement(p2_play_cards_next_location, item)
             card_num += 1
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p1_melds' whenever a card is appended to P1.melds. Calls card_movement() function to visually and digitally move card to the P1.melds.
     def visual_p1_melds_update(self, item):
         meld_num = len(P1.melds)
         card_num = 0
         for card in item:
+            card.display_layer = card_num + 1
+            game.card_group.change_layer(card, card.display_layer)
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
             self.card_movement(p1_play_cards_next_location, card)
             card_num += 1
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p2_melds' whenever a card is appended to P2.melds. Calls card_movement() function to visually and digitally move card to the P2.melds.
     def visual_p2_melds_update(self, item):
         meld_num = len(P2.melds)
         card_num = 0
         for card in item:
+            card.display_layer = card_num + 1
+            game.card_group.change_layer(card, card.display_layer)
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
             self.card_movement(p2_play_cards_next_location, card)
             card_num += 1
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p1_red_3_meld' whenever a card is appended to P1.red_3_meld. Calls card_movement() function to visually and digitally move card to P1.red_3_meld.
     def visual_p1_red_3_meld_update(self, card):
+        card.display_layer = len(P1.red_3_meld) + 1
+        game.card_group.change_layer(card, card.display_layer)
         y_val_increase = len(P1.red_3_meld) * 20
         red_3_meld_next_location = [self.p1_red_3_meld_location[0], self.p1_red_3_meld_location[1]] # + y_val_increase]
         self.card_movement(red_3_meld_next_location, card)
     # -------------------------------------
-    # Below Function - ...
+    # Below Function - Called by func_dict via key 'p2_red_3_meld' whenever a card is appended to P2.red_3_meld. Calls card_movement() function to visually and digitally move card to P2.red_3_meld.
     def visual_p2_red_3_meld_update(self, card):
+        card.display_layer = len(P2.red_3_meld) + 1
+        game.card_group.change_layer(card, card.display_layer)
         y_val_increase = len(P2.red_3_meld) * 20
         red_3_meld_next_location = [self.p2_red_3_meld_location[0], self.p2_red_3_meld_location[1] + y_val_increase]
         self.card_movement(red_3_meld_next_location, card)
@@ -339,39 +399,21 @@ class Deck(): # ****
                     card = Card(rank, suit) # ****
                     # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
                     Card.assign_card_images_and_rects(card)
-                    # Below Line - Appends card into the card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
-                    card_group.add(card)
-                    last_time = time.time()
+                    # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                    game.card_group.add(card)
                     self.deck.append(card) # ****
-                    current_time = time.time()
-                    print(current_time - last_time)
             else: # ****
                 for Joker in range(2): # ****
                     card = Card(rank, 'Joker') # ****
                     # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
                     Card.assign_card_images_and_rects(card)
-                    # Below Line - Appends card into the card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
-                    card_group.add(card)
-                    last_time = time.time()
+                    # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                    game.card_group.add(card)
                     self.deck.append(card) # ****
-                    current_time = time.time()
-                    print(current_time - last_time)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
 MasterDeck = Deck() # ****
 Deck2 = Deck() # ****
-# -------------------------------------
-# Below Section - Creates the actual decks via class method create_deck.
-MasterDeck.create_deck() # ****
-Deck2.create_deck() # ****
-# -------------------------------------
-# Below Section - Appends Deck2.deck to the MasterDeck.deck to create the required doubledeck.
-for card in Deck2.deck: # ****
-    MasterDeck.deck.append(card) # ****
-# -------------------------------------
-# Below Section - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
-random.shuffle(MasterDeck.deck) # ****
-MasterDeck.original_deck = copy.copy(MasterDeck.deck[:])
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
@@ -507,43 +549,76 @@ class Player(): # ****
 # Below Section - Creates the players, and gives them placeholder names for identification at start of game. # ****
 P1 = Player('Player 1') # ****
 P2 = Player('Player 2') # ****
-# -------------------------------------
-# Below Section - Assigns each player's card groups that will be visually displayed on the pygame screen to be an instance of CustomAppendList, giving each a name associated with the card group name to be used for when cards are appended to these card groups. The dictionary func_dict has the names as the keys , and a function name which updates the card coordinates of the appended card group is the dict value, so that whenever a card is appended to one of these groups, through a modified append method, the function is called before the card is appended to the card group, for the purpose of automation and simplicity.
-P1.hand = CustomAppendList('p1_hand') # ****
-P2.hand = CustomAppendList('p2_hand') # ****
-P1.play_cards = CustomAppendList('p1_play_cards') # ****
-P2.play_cards = CustomAppendList('p2_play_cards') # ****
-P1.red_3_meld = CustomAppendList('p1_red_3_meld') # ****
-P2.red_3_meld = CustomAppendList('p2_red_3_meld') # ****
-P1.melds = CustomAppendList('p1_melds') # ***
-P2.melds = CustomAppendList('p2_melds') # ***
-# -------------------------------------
 players = [P1, P2] # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-def game_run():
+# Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
+def draw_window():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    # -------------------------------------
+    game.card_group.update()
+    game.card_rects = game.card_group.draw(game.screen_surface)
+    game.screen_surface.blit(game.text, game.textRect.center)
+    game.screen.update(game.card_rects)
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def setup():
+    logger.debug("setup\n") # ****
+    # -------------------------------------
+    # Below Section - Creates the actual decks via class method create_deck.
+    MasterDeck.create_deck() # ****
+    Deck2.create_deck() # ****
+    # -------------------------------------
+    # Below Section - Appends Deck2.deck to the MasterDeck.deck to create the required doubledeck.
+    for card in Deck2.deck: # ****
+        MasterDeck.deck.append(card) # ****
+    # -------------------------------------
+    # Below Section - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
+    random.shuffle(MasterDeck.deck) # ****
+    MasterDeck.original_deck = copy.copy(MasterDeck.deck[:])
+    # -------------------------------------
+    # Below Section - Assigns each player's card groups that will be visually displayed on the pygame screen to be an instance of CustomAppendList, giving each a name associated with the card group name to be used for when cards are appended to these card groups. The dictionary func_dict has the names as the keys , and a function name which updates the card coordinates of the appended card group is the dict value, so that whenever a card is appended to one of these groups, through a modified append method, the function is called before the card is appended to the card group, for the purpose of automation and simplicity.
+    P1.hand = CustomAppendList('p1_hand') # ****
+    P2.hand = CustomAppendList('p2_hand') # ****
+    P1.play_cards = CustomAppendList('p1_play_cards') # ****
+    P2.play_cards = CustomAppendList('p2_play_cards') # ****
+    P1.red_3_meld = CustomAppendList('p1_red_3_meld') # ****
+    P2.red_3_meld = CustomAppendList('p2_red_3_meld') # ****
+    P1.melds = CustomAppendList('p1_melds') # ***
+    P2.melds = CustomAppendList('p2_melds') # ***
+    # -------------------------------------
     # Below Section - Test section to verify proper movement of card-screen locations.
-    P1.melds.append(MasterDeck.deck[8:15])
-    P1.melds.append(MasterDeck.deck[16:19])
-    P1.melds.append(MasterDeck.deck[19:23])
-    P2.melds.append(MasterDeck.deck[24:29])
-    P2.melds.append(MasterDeck.deck[30:35])
-    P2.melds.append(MasterDeck.deck[36:39])
+    # P1.melds.append(MasterDeck.deck[0:7])
+    # P1.melds.append(MasterDeck.deck[8:15])
+    # P1.melds.append(MasterDeck.deck[16:19])
+    # P1.melds.append(MasterDeck.deck[19:23])
+    # P2.melds.append(MasterDeck.deck[24:29])
+    # P2.melds.append(MasterDeck.deck[30:35])
+    # P2.melds.append(MasterDeck.deck[36:39])
     P1.red_3_meld.append(MasterDeck.deck[40])
     P2.red_3_meld.append(MasterDeck.deck[41])
-    P1.melds.append(MasterDeck.deck[0:7])
+    P1.play_cards.append(MasterDeck.deck[42:45])
+    P2.play_cards.append(MasterDeck.deck[46:50])
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS, pygame.event handling, and calls draw_window() for screen updating.
 def main():
-    print("RUNNING")
-    clock = pygame.time.Clock()
+    logger.debug("main\n") # ****
+    # -------------------------------------
+    # Below Section - Sets up the run loop so that unless the player quits the game/exits the window, it continues to cycle through this progression loop.
     run = True
     while run:
-        clock.tick(300)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        game_run()
+    # -------------------------------------
+        # Below Line - Handles creation, joining, and shuffling of the 2 initial decks into the finalized MasterDeck.deck, setting up of card lists to be associated with the different func_dict functions.
+        setup()
+        the_draw_1()
+    # -------------------------------------
+    # Below Section - Quits the pygame window and terminates the entire program.
     pygame.quit()
+    sys.exit()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     main()
