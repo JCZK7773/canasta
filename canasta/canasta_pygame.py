@@ -7,16 +7,19 @@
         # 02/08/22 : Began conversion of text-based inputs to be text display rects on the game screen. Continued working on ideas for card movements.
         # 02/09/22 - 02/17/22 : Put off converting text inputs after implementing the very first steps for the feature, and refocused on implementing card movements. Eventually implemented a successful card movement system, with some minor bugs in visual card overlap and game lag. Worked out all of the existing bugs from the card movement implementation and began working on reducing game lag via .convert() & using Dirty Sprites.
         # 02/18/22 : Tidied up some code, updated devlog, added in missing section commentary, and changed card movement values from 1 to 0.5 to (hopefully) help smooth the movements.
-        # 02/19/22 - 02/26/22 :
+        # 02/19/22 - 02/27/22 : Divided up all of the code into various different files so that they are more easily organized and readable. Worked out bugs from that change. Fixed red 3 meld, mostly, which was broken.
+        # 02/28/22: Fixed some card movement bugs including the issue with the red 3 meld, and almost fixed the issues of cards appearing in the top left corner of the screen. Spent a lot of time pinpointing the issue, which apparently lies in card.rect & card.rect.center initial assignments. Fixed the bug where the cards were staying rendered in the top left corner of the display.
+        # 02/29/22: ...
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # THINGS TO DO
-    # 1) Test & improve card movement system for smoothness / timing until satisfactory.
-    # 2) Convert inputs to text rects on display.
-    # 3) Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
-    # 4) Change input system from keyboard-based to mouse-based.
-    # 5) Add in card sounds & background music.
-    # 6) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
-    # 7) Post on web so others can check for bugs as well.
+    # 1) Improve visual layout for play_cards.
+    # 2) Test & improve card movement system for smoothness / timing until satisfactory.
+    # 3) Convert inputs to text rects on display.
+    # 4) Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
+    # 5) Change input system from keyboard-based to mouse-based.
+    # 6) Add in card sounds & background music.
+    # 7) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
+    # 8) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
@@ -27,7 +30,7 @@ import os
 import time
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import game
-import cards
+import card
 import locations
 import deck
 import player
@@ -67,17 +70,24 @@ def setup():
     player.P2.melds = deck.CustomAppendList('p2_melds') # ***
     # -------------------------------------
     # Below Section - Test section to verify proper movement of card-screen locations.
-    # P1.melds.append(MasterDeck.deck[0:7])
-    # P1.melds.append(MasterDeck.deck[8:15])
-    # P1.melds.append(MasterDeck.deck[16:19])
-    # P1.melds.append(MasterDeck.deck[19:23])
-    # P2.melds.append(MasterDeck.deck[24:29])
-    # P2.melds.append(MasterDeck.deck[30:35])
-    # P2.melds.append(MasterDeck.deck[36:39])
-    player.P1.red_3_meld.append(deck.MasterDeck.deck[40])
-    player.P2.red_3_meld.append(deck.MasterDeck.deck[41])
-    player.P1.play_cards.append(deck.MasterDeck.deck[42:45])
-    player.P2.play_cards.append(deck.MasterDeck.deck[46:50])
+    # player.P2.melds.append(deck.MasterDeck.deck[0:7])
+    player.P1.melds.append(deck.MasterDeck.deck[24:31])
+    # player.P1.melds.append(deck.MasterDeck.deck[16:19])
+    player.P2.melds.append(deck.MasterDeck.deck[16:23])
+    # player.P2.melds.append(deck.MasterDeck.deck[24:29])
+    # player.P2.melds.append(deck.MasterDeck.deck[30:36])
+    # player.P2.melds.append(deck.MasterDeck.deck[36:41])
+    # player.P2.melds.append(deck.MasterDeck.deck[42:48])
+    # player.P1.red_3_meld.append(deck.MasterDeck.deck[49])
+    # player.P1.red_3_meld.append(deck.MasterDeck.deck[50])
+    # player.P2.red_3_meld.append(deck.MasterDeck.deck[51])
+    # player.P2.red_3_meld.append(deck.MasterDeck.deck[52])
+    player.P1.play_cards.append(deck.MasterDeck.deck[8:15])
+    player.P2.play_cards.append(deck.MasterDeck.deck[0:7])
+
+    player.P1.melds.append(player.P1.play_cards[0:7])
+    player.P1.play_card.append(player.P1.melds[0:7])
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS, pygame.event handling, and calls draw_window() for screen updating.
 def main():
