@@ -51,7 +51,7 @@ class Card(pygame.sprite.DirtySprite): # ****
 
     @display_layer.setter
     def display_layer(self, val):
-        val = self._display_layer
+        self._display_layer = val
         game.game.card_group.change_layer(self, val)
     # -------------------------------------
     # Below Section - Modifies the built-in pygame update function for Dirty Sprites, automatically updating the self.dirty value to 1.

@@ -4,12 +4,17 @@ import game
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Class - Customized list class which is used to call a particular function whenever the sub-classed list .append method is called, for the purpose of visually updating card locations by updating the card coordinate via the function call.
 class CustomAppendList(list):
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, card_group_name):
+        self.card_group_name = card_group_name
+        self.list_location = [0, 0]
     # -------------------------------------
     def append(self, item):
-        locations.Locate.func_dict[(self.name)](item)
-        super(CustomAppendList, self).append(item)
+        if type(item) == list:
+            locations.Locate.func_dict[(self.card_group_name)](item)
+            super(CustomAppendList, self).append(item)
+        elif type(item) == card.Card:
+            locations.Locate.func_dict[(self.card_group_name)](item, len(self), self.list_location)
+            super(CustomAppendList, self).append(item)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
     def __init__(self): # ****

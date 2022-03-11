@@ -1,4 +1,5 @@
 import player
+import card
 import deck
 import game
 import time
@@ -38,8 +39,8 @@ class Locations():
             return p2_hand_next_location
     # -------------------------------------
     # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location.
-    def card_movement(self, loc, card):
-        card.display_layer = 9999
+    def card_movement(self, loc, current_card):
+        current_card.display_layer = 9999
         # -------------------------------------
         x_difference = 0
         y_difference = 0
@@ -47,36 +48,36 @@ class Locations():
         y_lesser = None
         x_lesser = None
         # -------------------------------------
-        if card.x < loc[0]:
-            x_difference = loc[0] - card.x
+        if current_card.x < loc[0]:
+            x_difference = loc[0] - current_card.x
             x_lesser = True
-        elif card.x > loc[0]:
-            x_difference = card.x - loc[0]
+        elif current_card.x > loc[0]:
+            x_difference = current_card.x - loc[0]
             x_lesser = False
-        if card.y < loc[1]:
-            y_difference = loc[1] - card.y
+        if current_card.y < loc[1]:
+            y_difference = loc[1] - current_card.y
             y_lesser = True
-        elif card.y > loc[1]:
-            y_difference = card.y - loc[1]
+        elif current_card.y > loc[1]:
+            y_difference = current_card.y - loc[1]
             y_lesser = False
         # -------------------------------------
         if x_difference > y_difference:
             ratio = (y_difference / x_difference)
-            while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
-                if x_lesser == True and int(card.x) != int(loc[0]):
-                    card.x += 1
-                elif x_lesser == False and int(card.x) != int(loc[0]):
-                    card.x -= 1
-                if y_lesser == True and int(card.y) != int(loc[1]):
-                    prior_y = card.y
-                    card.y += ratio
-                    current_y = card.y
+            while [int(current_card.x), int(current_card.y)] != [int(loc[0]), int(loc[1])]:
+                if x_lesser == True and int(current_card.x) != int(loc[0]):
+                    current_card.x += 1
+                elif x_lesser == False and int(current_card.x) != int(loc[0]):
+                    current_card.x -= 1
+                if y_lesser == True and int(current_card.y) != int(loc[1]):
+                    prior_y = current_card.y
+                    current_card.y += ratio
+                    current_y = current_card.y
                     if int(prior_y) < int(current_y):
                         game.draw_window()
-                elif y_lesser == False and int(card.y) != int(loc[1]):
-                    prior_y = card.y
-                    card.y -= ratio
-                    current_y = card.y
+                elif y_lesser == False and int(current_card.y) != int(loc[1]):
+                    prior_y = current_card.y
+                    current_card.y -= ratio
+                    current_y = current_card.y
                     if int(prior_y) > int(current_y):
                         game.draw_window()
                 if y_lesser == None:
@@ -85,21 +86,21 @@ class Locations():
         # -------------------------------------
         elif int(y_difference) > int(x_difference):
             ratio = (x_difference / y_difference)
-            while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
-                if y_lesser == True and int(card.y) != int(loc[1]):
-                    card.y += 1
-                elif y_lesser == False and int(card.y) != int(loc[1]):
-                    card.y -= 1
-                if x_lesser == True and int(card.x) != int(loc[0]):
-                    prior_x = card.x
-                    card.x += ratio
-                    current_x = card.x
+            while [int(current_card.x), int(current_card.y)] != [int(loc[0]), int(loc[1])]:
+                if y_lesser == True and int(current_card.y) != int(loc[1]):
+                    current_card.y += 1
+                elif y_lesser == False and int(current_card.y) != int(loc[1]):
+                    current_card.y -= 1
+                if x_lesser == True and int(current_card.x) != int(loc[0]):
+                    prior_x = current_card.x
+                    current_card.x += ratio
+                    current_x = current_card.x
                     if int(prior_x) < int(current_x):
                         game.draw_window()
-                elif x_lesser == False and int(card.x) != int(loc[0]):
-                    prior_x = card.x
-                    card.x -= ratio
-                    current_x = card.x
+                elif x_lesser == False and int(current_card.x) != int(loc[0]):
+                    prior_x = current_card.x
+                    current_card.x -= ratio
+                    current_x = current_card.x
                     if int(prior_x) > int(current_x):
                         game.draw_window()
                 if x_lesser == None:
@@ -108,120 +109,156 @@ class Locations():
         # -------------------------------------
         # Below Section - For the rare instance when both the current x & y coordinates are the same distance from the final location's x & y coordinates.
         elif int(y_difference) == int(x_difference):
-            while [int(card.x), int(card.y)] != [int(loc[0]), int(loc[1])]:
-                card.x += 1
-                card.y += 1
+            while [int(current_card.x), int(current_card.y)] != [int(loc[0]), int(loc[1])]:
+                current_card.x += 1
+                current_card.y += 1
                 game.draw_window()
     # -------------------------------------
     # Below Function - Called by func_dict via key 'deck' whenever a card is appended to the MasterDeck.deck. Calls card_movement() function to visually and digitally move card to the deck.
-    def visual_deck_update(self, card):
-        self.card_movement(self.deck_location, card)
-        card.display_layer = len(deck.MasterDeck.deck) + 1
+    def visual_deck_update(self, current_card, card_num = None, list_location = None):
+        self.card_movement(self.deck_location, current_card)
+        current_card.display_layer = len(deck.MasterDeck.deck) + 1
     # -------------------------------------
     # Below Function - Called by func_dict via key 'discard_pile' whenever a card is appended to the MasterDeck.discard_pile. Calls card_movement() function to visually and digitally move card to the discard pile.
-    def visual_discard_pile_update(self, card):
-        self.card_movement(self.discard_pile_location, card)
-        card.display_layer = len(deck.MasterDeck.discard_pile) + 1
+    def visual_discard_pile_update(self, current_card, card_num = None, list_location = None):
+        self.card_movement(self.discard_pile_location, current_card)
+        current_card.display_layer = len(deck.MasterDeck.discard_pile) + 1
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p1_hand' whenever a card is appended to the player.P1.hand. Calls card_movement() function to visually and digitally move card to player.P1.hand.
-    def visual_p1_hand_update(self, card):
-        self.card_movement(self.p1_hand_next_location, card)
-        card.display_layer = len(player.P1.hand) + 1
+    def visual_p1_hand_update(self, current_card, card_num = None, list_location = None):
+        self.card_movement(self.p1_hand_next_location, current_card)
+        current_card.display_layer = len(player.P1.hand) + 1
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p2_hand' whenever a card is appended to the player.P2.hand. Calls card_movement() function to visually and digitally move card to player.P2.hand.
-    def visual_p2_hand_update(self, card):
-        self.card_movement(self.p2_hand_next_location, card)
-        card.display_layer = len(player.P2.hand) + 1
+    def visual_p2_hand_update(self, current_card, card_num = None, list_location = None):
+        self.card_movement(self.p2_hand_next_location, current_card)
+        current_card.display_layer = len(player.P2.hand) + 1
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p1_play_cards' whenever a card is appended to the player.P1.hand. Calls card_movement() function to visually and digitally move card to player.P1.play_cards.
-    def visual_p1_play_cards_update(self, item):
+    def visual_p1_play_cards_update(self, item, card_num = None, list_location = None):
         if type(item) == list:
+            # Below Line - FOR NEW METHOD OF GIVING EACH LIST/MELD A SPECIFIED LOCATION FOR REFERENCE WHENEVER ADDING CARDS TO THEM FOR WHEN ITEM == CARDS.
             meld_num = len(player.P1.play_cards)
+            x_val_increase = meld_num * (self.card_width_height[0] + 20)
+            item.list_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1]]
             card_num = 0
-            for card in item:
+            for current_card in item:
                 prior_time = time.time()
-                x_val_increase = meld_num * (self.card_width_height[0] + 20)
                 y_val_increase = card_num * 20
                 p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
-                self.card_movement(p1_play_cards_next_location, card)
-                card.display_layer = card_num + 1
+                self.card_movement(p1_play_cards_next_location, current_card)
+                current_card.display_layer = card_num + 1
                 card_num += 1
                 current_time = time.time()
-                print("play cards", current_time - prior_time)
-        elif type(item) == Card:
-            meld_num = len(player.P1.play_cards)
-            card_num = 0
-            x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                print("p1_play_cards list", current_time - prior_time)
+        elif type(item) == card.Card:
+            prior_time = time.time()
             y_val_increase = card_num * 20
-            p1_play_cards_next_location = [self.p1_play_cards_start_location[0] + x_val_increase, self.p1_play_cards_start_location[1] + y_val_increase]
+            p1_play_cards_next_location = [list_location[0], list_location[1] + y_val_increase]
             self.card_movement(p1_play_cards_next_location, item)
-            card.display_layer = len(player.P1.play_cards) + 1
-            card_num += 1
+            item.display_layer = card_num + 1
+            current_time = time.time()
+            print("p1_play_cards cards", current_time - prior_time)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p1_play_cards' whenever a card is appended to player.P2.play_cards. Calls card_movement() function to visually and digitally move card to the player.P2.play_cards.
     def visual_p2_play_cards_update(self, item):
         if type(item) == list:
             meld_num = len(player.P2.play_cards)
             card_num = 0
-            for card in item:
+            for current_card in item:
+                prior_time = time.time()
                 x_val_increase = meld_num * (self.card_width_height[0] + 20)
                 y_val_increase = card_num * 20
                 p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
-                self.card_movement(p2_play_cards_next_location, card)
-                card.display_layer = card_num + 1
+                self.card_movement(p2_play_cards_next_location, current_card)
+                current_card.display_layer = card_num + 1
                 card_num += 1
-        elif type(item) == Card:
+                current_time = time.time()
+                print("p2_play_cards list", current_time - prior_time)
+        elif type(item) == card.Card:
+            prior_time = time.time()
             meld_num = len(player.P2.play_cards)
             card_num = 0
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p2_play_cards_next_location = [self.p2_play_cards_start_location[0] + x_val_increase, self.p2_play_cards_start_location[1] + y_val_increase]
             self.card_movement(p2_play_cards_next_location, item)
-            card.display_layer = len(player.P2.play_cards) + 1
+            item.display_layer = len(player.P2.play_cards) + 1
             card_num += 1
+            current_time = time.time()
+            print("p2_play_cards cards", current_time - prior_time)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p1_melds' whenever a card is appended to player.P1.melds. Calls card_movement() function to visually and digitally move card to the player.P1.melds.
     def visual_p1_melds_update(self, item):
-        meld_num = len(player.P1.melds)
-        card_num = 0
-        for card in item:
+        if type(item) == list:
+            meld_num = len(player.P1.melds)
+            card_num = 0
+            for current_card in item:
+                prior_time = time.time()
+                x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                y_val_increase = card_num * 20
+                p1_melds_next_location = [self.p1_melds_start_location[0] + x_val_increase, self.p1_melds_start_location[1] + y_val_increase]
+                self.card_movement(p1_melds_next_location, current_card)
+                current_card.display_layer = card_num + 1
+                card_num += 1
+                current_time = time.time()
+                print("p1_melds list", current_time - prior_time)
+        elif type(item) == card.Card:
             prior_time = time.time()
+            meld_num = len(player.P1.melds)
+            card_num = 0
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p1_melds_next_location = [self.p1_melds_start_location[0] + x_val_increase, self.p1_melds_start_location[1] + y_val_increase]
-            self.card_movement(p1_melds_next_location, card)
-            card.display_layer = card_num + 1
+            self.card_movement(p1_melds_next_location, item)
+            item.display_layer = len(player.P1.melds) + 1
             card_num += 1
             current_time = time.time()
-            print("melds", current_time - prior_time)
+            print("p1_melds card", current_time - prior_time)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p2_melds' whenever a card is appended to player.P2.melds. Calls card_movement() function to visually and digitally move card to the player.P2.melds.
     def visual_p2_melds_update(self, item):
-        meld_num = len(player.P2.melds)
-        card_num = 0
-        for card in item:
+        if type(item) == list:
+            meld_num = len(player.P2.melds)
+            card_num = 0
+            for current_card in item:
+                prior_time = time.time()
+                x_val_increase = meld_num * (self.card_width_height[0] + 20)
+                y_val_increase = card_num * 20
+                p2_melds_next_location = [self.p2_melds_start_location[0] + x_val_increase, self.p2_melds_start_location[1] + y_val_increase]
+                self.card_movement(p2_melds_next_location, current_card)
+                current_card.display_layer = card_num + 1
+                card_num += 1
+                current_time = time.time()
+                print("p2_melds list", current_time - prior_time)
+        elif type(item) == card.Card:
+            prior_time = time.time()
+            meld_num = len(player.P2.melds)
+            card_num = 0
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 20
             p2_melds_next_location = [self.p2_melds_start_location[0] + x_val_increase, self.p2_melds_start_location[1] + y_val_increase]
-            self.card_movement(p2_melds_next_location, card)
-            card.display_layer = card_num + 1
+            self.card_movement(p2_melds_next_location, item)
+            item.display_layer = len(player.P2.melds) + 1
             card_num += 1
+            current_time = time.time()
+            print("p2_melds card", current_time - prior_time)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p1_red_3_meld' whenever a card is appended to player.P1.red_3_meld. Calls card_movement() function to visually and digitally move card to player.P1.red_3_meld.
-    def visual_p1_red_3_meld_update(self, card):
+    def visual_p1_red_3_meld_update(self, current_card):
         x_val_increase = len(player.P1.melds) * (self.card_width_height[0] + 20)
         y_val_increase = len(player.P1.red_3_meld) * 20
         red_3_meld_next_location = [self.p1_melds_start_location[0] + x_val_increase, self.p1_melds_start_location[1] - 10 + y_val_increase]
-        self.card_movement(red_3_meld_next_location, card)
-        card.display_layer = len(player.P1.red_3_meld) + 1
+        self.card_movement(red_3_meld_next_location, current_card)
+        current_card.display_layer = len(player.P1.red_3_meld) + 1
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p2_red_3_meld' whenever a card is appended to player.P2.red_3_meld. Calls card_movement() function to visually and digitally move card to player.P2.red_3_meld.
-    def visual_p2_red_3_meld_update(self, card):
+    def visual_p2_red_3_meld_update(self, current_card):
         x_val_increase = len(player.P2.melds) * (self.card_width_height[0] + 20)
         y_val_increase = len(player.P2.red_3_meld) * 20
         red_3_meld_next_location = [self.p2_melds_start_location[0] + x_val_increase, self.p2_melds_start_location[1] - 10 + y_val_increase]
-        self.card_movement(red_3_meld_next_location, card)
-        card.display_layer = len(player.P2.red_3_meld) + 1
+        self.card_movement(red_3_meld_next_location, current_card)
+        current_card.display_layer = len(player.P2.red_3_meld) + 1
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Locate = Locations()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
