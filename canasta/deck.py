@@ -1,31 +1,18 @@
 import locations
 import card
 import game
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Class - Customized list class which is used to call a particular function whenever the sub-classed list .append method is called, for the purpose of visually updating card locations by updating the card coordinate via the function call.
-class CustomAppendList(list):
-    def __init__(self, card_group_name):
-        self.card_group_name = card_group_name
-        self.list_location = [0, 0]
-    # -------------------------------------
-    def append(self, item):
-        if type(item) == list:
-            locations.Locate.func_dict[(self.card_group_name)](item)
-            super(CustomAppendList, self).append(item)
-        elif type(item) == card.Card:
-            locations.Locate.func_dict[(self.card_group_name)](item, len(self), self.list_location)
-            super(CustomAppendList, self).append(item)
+import customappendlist
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
     def __init__(self): # ****
-        self.deck = CustomAppendList('deck') # ****
+        self.deck = [] # ****
         self.original_deck = [] # ****
         self.draw_ranks = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':11, 'Queen':12, 'King':13, 'Ace':14}
         self.draw_suit_ranks = {'Joker': 0, 'Club': 1, 'Diamond': 2, 'Heart': 3, 'Spade': 4} # ****
         self.ranks = {'Joker':50, '2':20, '3':100, '4':5, '5':5, '6':5, '7':5, '8':10, '9':10, '10':10, 'Jack':10, 'Queen':10, 'King':10, 'Ace':20}
         self.suits = ['Club', 'Diamond', 'Heart', 'Spade'] # ****
         self.suits_symbols = {'Heart': '♥', 'Diamond': '♦', 'Spade': '♠', 'Club': '♣', 'Joker': '🃟'} # ****
-        self.discard_pile = CustomAppendList('discard_pile')
+        self.discard_pile = []
         self.red_3s = [('3', 'Diamond'), ('3', 'Heart')] # ****
         self.black_3s = [('3', 'Club'), ('3', 'Spade')] # ****
         self.wild_cards = [('2', 'Diamond'), ('2', 'Heart'), ('2', 'Spade'), ('2', 'Club'), ('Joker', 'Joker')] # ****
@@ -64,3 +51,7 @@ class Deck(): # ****
 # Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
 MasterDeck = Deck() # ****
 Deck2 = Deck() # ****
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Section - Assigns the MasterDeck.deck & .discard_pile to both be instances of CustomAppendList so that they will handle card location updates whenever cards are appended to the lists.
+MasterDeck.deck = customappendlist.CustomAppendList('deck')
+MasterDeck.discard_pile = customappendlist.CustomAppendList('discard_pile')
