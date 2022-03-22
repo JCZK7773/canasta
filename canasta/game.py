@@ -28,6 +28,7 @@ game = Game()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
 def draw_window():
+    # print("draw_window")
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()

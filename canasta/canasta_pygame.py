@@ -2,9 +2,6 @@
     # Error code goes here in this section; for debugging.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # NOTES
-    # - Brainstorming -
-        # Appending to a temp_meld, and then appending ...... how do I handle individual melds being appended to (which themselves are inside of a certain meld group/card group) concerning their calculated card locations.
-    # -------------------------------------
     # - Devlog -
         # 02/01/22 - 02/07/22 : Completed implementation of the first pass of the card movement system by creating various methods, each associated with one of the various card lists, inside of the Locate instance which are to be called by CustomAppendList whenever they are appended to. Needs to be tested to work out bugs.
         # 02/08/22 : Began conversion of text-based inputs to be text display rects on the game screen. Continued working on ideas for card movements.
@@ -15,10 +12,10 @@
         # 02/29/22: ...
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # THINGS TO DO
-    # 1) Fix self.location for individual cards when they are moved. This is not being properly set, causing the cards to be moved to the top left of the screen (0,0) instead of their proper locations.
+    # Consolidate various meld group movement functions into one function per larger card group that takes in the card_group_name parameter to specify an individual smaller card group.
+    # 1) Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
     # 2) Improve visual layout for play_cards.
     # 3) Test & improve card movement system for smoothness / timing until satisfactory.
-        # 3a) Get new card sprites with lower resolution?
         # 3b) Implement delta timing frame system.
     # 4) Convert inputs to text rects on display.
     # 5) Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
@@ -53,100 +50,81 @@ testing_register_list = []
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def setup():
     logger.debug("setup\n") # ****
+    # Below Section - Assigns the MasterDeck.deck & .discard_pile to both be instances of CustomAppendList so that they will handle card location updates whenever cards are appended to the lists.
+    deck.MasterDeck.deck = customappendlist.CustomAppendList('deck')
+    deck.MasterDeck.discard_pile = customappendlist.CustomAppendList('discard_pile')
     # -------------------------------------
     # Below Section - Creates the actual decks via class method create_deck.
-    deck.MasterDeck.create_deck() # ****
-    deck.Deck2.create_deck() # ****
-    # -------------------------------------
-    # Below Section - Appends Deck2.deck to the MasterDeck.deck to create the required doubledeck.
-    for card in deck.Deck2.deck: # ****
-        deck.MasterDeck.deck.append(card) # ****
+    deck.MasterDeck.create_double_deck() # ****
     # -------------------------------------
     # Below Section - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
     random.shuffle(deck.MasterDeck.deck) # ****
     deck.MasterDeck.original_deck = copy.copy(deck.MasterDeck.deck[:])
     # -------------------------------------
     # Below Section - Assigns each player's card groups that will be visually displayed on the pygame screen to be an instance of CustomAppendList, giving each a name associated with the card group name to be used for when cards are appended to these card groups. The dictionary func_dict has the names as the keys , and a function name which updates the card coordinates of the appended card group is the dict value, so that whenever a card is appended to one of these groups, through a modified append method, the function is called before the card is appended to the card group, for the purpose of automation and simplicity.
-    player.P1.hand = customappendlist.CustomAppendList('p1_hand') # ****
-    player.P2.hand = customappendlist.CustomAppendList('p2_hand') # ****
-    player.P1.play_cards = customappendlist.CustomAppendList('p1_play_cards') # ****
-    player.P2.play_cards = customappendlist.CustomAppendList('p2_play_cards') # ****
-    player.P1.red_3_meld = customappendlist.CustomAppendList('p1_red_3_meld') # ****
-    player.P2.red_3_meld = customappendlist.CustomAppendList('p2_red_3_meld') # ****
-    player.P1.melds = customappendlist.CustomAppendList('p1_melds') # ***
-    player.P2.melds = customappendlist.CustomAppendList('p2_melds') # ***
+    player.P1.hand = customappendlist.CustomAppendList('P1.hand') # ****
+    player.P2.hand = customappendlist.CustomAppendList('P2.hand') # ****
+    player.P1.play_cards = customappendlist.CustomAppendList('P1.play_cards') # ****
+    player.P2.play_cards = customappendlist.CustomAppendList('P2.play_cards') # ****
+    player.P1.red_3_meld = customappendlist.CustomAppendList('P1.red_3_meld') # ****
+    player.P2.red_3_meld = customappendlist.CustomAppendList('P2.red_3_meld') # ****
+    player.P1.melds = customappendlist.CustomAppendList('P1.melds') # ***
+    player.P2.melds = customappendlist.CustomAppendList('P2.melds') # ***
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def test_run():
     # Below Section - Test section to verify proper movement of card-screen locations.
-    # Method of movement\appending #2
-    # player.P2.melds.append(deck.MasterDeck.deck[0:7])
-    # premade_hand_1 = deck.MasterDeck.deck[24:31]
-    # premade_hand_2 = deck.MasterDeck.deck[16:23]
-    # premade_hand_3 = deck.MasterDeck.deck[8:15]
-    # premade_hand_4 = deck.MasterDeck.deck[0:7]
-    # player.P1.melds.append(deck.MasterDeck.deck[24:31])
-    # player.P1.melds.append(deck.MasterDeck.deck[16:19])
-    # player.P2.melds.append(deck.MasterDeck.deck[16:23])
-    # player.P2.melds.append(deck.MasterDeck.deck[24:29])
-    # player.P2.melds.append(deck.MasterDeck.deck[30:36])
-    # player.P2.melds.append(deck.MasterDeck.deck[36:41])
-    # player.P2.melds.append(deck.MasterDeck.deck[42:48])
-    # player.P1.red_3_meld.append(deck.MasterDeck.deck[49])
-    # player.P1.red_3_meld.append(deck.MasterDeck.deck[50])
-    # player.P2.red_3_meld.append(deck.MasterDeck.deck[51])
-    # player.P2.red_3_meld.append(deck.MasterDeck.deck[52])
-    # player.P1.play_cards.append(deck.MasterDeck.deck[8:15])
-    # player.P2.play_cards.append(deck.MasterDeck.deck[0:7])
-    # player.P1.melds.append(player.P1.play_cards[0:7])
-    # player.P1.play_card.append(player.P1.melds[0:7])
-    # -------------------------------------
-    # Method of movement\appending #2
-    num = 1
-    new_meld = customappendlist.CustomAppendList('p1_melds')
+    new_meld = customappendlist.CustomAppendList('P2.melds')
     for card in range(7):
-        print(num)
         new_meld.append(deck.MasterDeck.deck.pop(-1))
-        num +=1
-    print("end of meld")
-    player.P1.melds.append(new_meld)
-    print(f"P1 MELDS - {player.P1.melds}")
-    # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('p2_melds')
-    for card in range(7):
-        print(num)
-        new_meld.append(deck.MasterDeck.deck.pop(-1))
-        num +=1
-    print("end of meld")
     player.P2.melds.append(new_meld)
-    print(f"P2 MELDS - {player.P2.melds}")
+    print("1")
     # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('p1_play_cards')
+    new_meld = customappendlist.CustomAppendList('P1.melds')
     for card in range(7):
-        print(num)
         new_meld.append(deck.MasterDeck.deck.pop(-1))
-        num +=1
-    print("end of meld")
+    player.P1.melds.append(new_meld)
+    print("2")
+    # # -------------------------------------
+    new_meld = customappendlist.CustomAppendList('P1.play_cards')
+    for card in range(7):
+        new_meld.append(deck.MasterDeck.deck.pop(-1))
     player.P1.play_cards.append(new_meld)
-    # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('p2_play_cards')
+    print("3")
+    # # -------------------------------------
+    new_meld = customappendlist.CustomAppendList('P2.play_cards')
     for card in range(7):
-        print(num)
         new_meld.append(deck.MasterDeck.deck.pop(-1))
-        num +=1
-    print("end of meld")
     player.P2.play_cards.append(new_meld)
-    # -------------------------------------
-    for card in player.P1.play_cards[0]:
-        print(num)
-        player.P1.melds[0].append(player.P1.play_cards[0].pop(-1))
-        num +=1
-    print("end of meld")
-    # -------------------------------------
-    for card in player.P1.melds[0]:
-        print(num)
-        player.P1.play_cards[0].append(player.P1.melds[0].pop(-1))
-        num +=1
-    print("end of meld")
+    print("4")
+    # # # -------------------------------------
+    new_meld = customappendlist.CustomAppendList('P2.melds')
+    player.P2.melds.append(new_meld)
+    for card in player.P1.play_cards[0][:]:
+        player.P2.melds[1].append(player.P1.play_cards[0].pop(-1))
+    print(player.P2.melds[1][0].x, player.P2.melds[1][0].y)
+    print("5")
+    # # # -------------------------------------
+    # new_meld = customappendlist.CustomAppendList('P2.play_cards')
+    # player.P2.play_cards.append(new_meld)
+    # for card in player.P2.melds[0][:]:
+    #     player.P2.play_cards[1].append(player.P1.melds[0].pop(-1))
+    # print("6")
+    # # # -------------------------------------
+    # for card in range(3):
+    #     player.P1.play_cards[0].append(deck.MasterDeck.deck.pop(-1))
+    # print("7")
+    # # # -------------------------------------
+    # for card in range(3):
+    #     player.P2.melds[0].append(deck.MasterDeck.deck.pop(-1))
+    # print("8")
+    # # -------------------------------------
+    # for card in range(3):
+    #     player.P1.hand.append(deck.MasterDeck.deck.pop(-1))
+    # print("9")
+    # # -------------------------------------
+    # for card in range(3):
+    #     player.P2.hand.append(deck.MasterDeck.deck.pop(-1))
+    # print("10")
     # -------------------------------------
     pygame.quit()
     sys.exit()

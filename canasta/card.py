@@ -6,15 +6,21 @@ import locations
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Card(pygame.sprite.DirtySprite): # ****
     def __init__(self, rank, suit): # ****
+        # Below Section - Non-parent class attributes.
         self.rank = rank # ****
         self.suit = suit # ****
+        self.prior_x = None
+        self.prior_y = None
+        # -------------------------------------
+        # Below Line - Initializes pygame.sprite.DirtySprite parent class.
         super().__init__()
-    # -------------------------------------
+        # -------------------------------------
+        # Below Section - Parent class attributes.
         # Below Line - The card's x-coordinate location (internal reference only as this ultimately becomes self.x via calculated property (for the purpose of updating self.rect.center when set)).
-        self._x = locations.Locate.deck_location[0]
-        # Below Line - The card's y-coordinate location.
-        self._y = locations.Locate.deck_location[1]
-    # -------------------------------------
+        self._x = locations.Locate.deck_loc[0]
+        # Below Line - The card's y-coordinate location. (internal reference only as this ultimately becomes self.y via calculated property (for the purpose of updating self.rect.center when set)).
+        self._y = locations.Locate.deck_loc[1]
+        # -------------------------------------
         # Below Line - Internal form of display_layer for editing the card's visual layer via the change_layer() pygame function.
         self._display_layer = 0
     # -------------------------------------
@@ -56,11 +62,13 @@ class Card(pygame.sprite.DirtySprite): # ****
     # -------------------------------------
     # Below Section - Modifies the built-in pygame update function for Dirty Sprites, automatically updating the self.dirty value to 1.
     def update(self):
-        self.dirty = 1
+        if [self.x, self.y] != [self.prior_x, self.prior_y]:
+            self.dirty = 1
+        self.prior_x, self.prior_y = self.x, self.y
     # -------------------------------------
     # Below Function - Assigns each Card instance an image & associated card.rect based on c ard.name via comparison with image .png names. Assigns each card to its associated .png as the Card.image.
     def assign_card_images_and_rects(card):
-        with os.scandir(os.path.join('Assets')) as asset_path:
+        with os.scandir(os.path.join('assets\8_bit_cards')) as asset_path:
             for entry in asset_path:
                 entry_str = (str(entry))
                 if card.rank.lower() in entry_str:
@@ -68,8 +76,8 @@ class Card(pygame.sprite.DirtySprite): # ****
                         if card.suit.lower() in entry_str:
                             card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140)).convert()
                             card.rect = card.image.get_rect()
-                            card.rect.center = locations.Locate.deck_location
+                            card.rect.center = locations.Locate.deck_loc
                     else:
                         card.image = pygame.transform.scale(pygame.image.load(entry), (100, 140)).convert()
                         card.rect = card.image.get_rect()
-                        card.rect.center = locations.Locate.deck_location
+                        card.rect.center = locations.Locate.deck_loc

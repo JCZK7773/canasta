@@ -1,7 +1,5 @@
-import locations
 import card
 import game
-import customappendlist
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Deck(): # ****
     def __init__(self): # ****
@@ -29,29 +27,26 @@ class Deck(): # ****
                 discard_pile_is_frozen = True # ****
         return discard_pile_is_frozen # ****
     # -------------------------------------
-    def create_deck(self): # ****
-        for rank in self.ranks: # ****
-            if rank != 'Joker': # ****
-                for suit in self.suits: # ****
-                    current_card = card.Card(rank, suit) # ****
-                    # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
-                    card.Card.assign_card_images_and_rects(current_card)
-                    # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
-                    game.game.card_group.add(current_card)
-                    self.deck.append(current_card) # ****
-            else: # ****
-                for Joker in range(2): # ****
-                    current_card = card.Card(rank, 'Joker') # ****
-                    # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
-                    card.Card.assign_card_images_and_rects(current_card)
-                    # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
-                    game.game.card_group.add(current_card)
-                    self.deck.append(current_card) # ****
+    def create_double_deck(self): # ****
+    # -------------------------------------
+        for x in range(2):
+            for rank in self.ranks: # ****
+                if rank != 'Joker': # ****
+                    for suit in self.suits: # ****
+                        current_card = card.Card(rank, suit) # ****
+                        # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
+                        card.Card.assign_card_images_and_rects(current_card)
+                        # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                        game.game.card_group.add(current_card)
+                        self.deck.append(current_card) # ****
+                else: # ****
+                    for Joker in range(2): # ****
+                        current_card = card.Card(rank, 'Joker') # ****
+                        # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
+                        card.Card.assign_card_images_and_rects(current_card)
+                        # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                        game.game.card_group.add(current_card)
+                        self.deck.append(current_card) # ****
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
 MasterDeck = Deck() # ****
-Deck2 = Deck() # ****
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Assigns the MasterDeck.deck & .discard_pile to both be instances of CustomAppendList so that they will handle card location updates whenever cards are appended to the lists.
-MasterDeck.deck = customappendlist.CustomAppendList('deck')
-MasterDeck.discard_pile = customappendlist.CustomAppendList('discard_pile')
