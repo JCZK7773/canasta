@@ -1,220 +1,13 @@
-# D E B U G
-    # Error code goes here in this section; for debugging.
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Things to do
-# 1) Post on web so others can check for bugs as well.
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
-import logging # ****
 import random # ****
 import copy
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Line - For the purpose of testing. Is used to store the cards passed through sorted_and_numbered_list_printer so that they can be tested to ensure they are in the proper ascending order according to card rank/suit combination value.
-testing_register_list = []
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Logger setup. # ****
-LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s" # ****
-logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta\\canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
-logger = logging.getLogger() # ****
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Card(): # ****
-    def __init__(self, rank, suit): # ****
-        self.rank = rank # ****
-        self.suit = suit # ****
-
-    def __str__(self): # ****
-        return f"{self.rank}{Deck().suits_symbols.get(self.suit)}" # ****
-
-    def __repr__(self): # ****
-        return self.__str__() # ****
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Deck(): # ****
-    def __init__(self): # ****
-        self.deck = [] # ****
-        self.original_deck = [] # ****
-        self.draw_ranks = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'J':11, 'Q':12, 'K':13, 'A':14}
-        self.draw_suit_ranks = {'Jo': 0, 'C': 1, 'D': 2, 'H': 3, 'S': 4} # ****
-        self.ranks = {'Jo':50, '2':20, '3':100, '4':5, '5':5, '6':5, '7':5, '8':10, '9':10, '10':10, 'J':10, 'Q':10, 'K':10, 'A':20}
-        self.suits = ['C', 'D', 'H', 'S'] # ****
-        self.suits_symbols = {'H': '♥', 'D': '♦', 'S': '♠', 'C': '♣', 'Jo': '🃟'} # ****
-        self.discard_pile = [] # ****
-        self.red_3s = [('3', 'D'), ('3', 'H')] # ****
-        self.black_3s = [('3', 'C'), ('3', 'S')] # ****
-        self.wild_cards = [('2', 'D'), ('2', 'H'), ('2', 'S'), ('2', 'C'), ('Jo', 'Jo')] # ****
-        # -------------------------------------
-    @property # ****
-    def face_up_discard(self): # ****
-        return self.discard_pile[-1] # ****
-    # -------------------------------------
-    @property # ****
-    def discard_pile_is_frozen(self): # ****
-        discard_pile_is_frozen = False
-        for card in MasterDeck.discard_pile: # ****
-            if (card.rank, card.suit) in MasterDeck.wild_cards or (card.rank, card.suit) in MasterDeck.black_3s : # ****
-                discard_pile_is_frozen = True # ****
-        return discard_pile_is_frozen # ****
-    # -------------------------------------
-    def create_deck(self): # ****
-        for rank in self.ranks: # ****
-            if rank != 'Jo': # ****
-                for suit in self.suits: # ****
-                    card = Card(rank, suit) # ****
-                    self.deck.append(card) # ****
-            else: # ****
-                for Joker in range(2): # ****
-                    card = Card(rank, 'Jo') # ****
-                    self.deck.append(card) # ****
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-class Player(): # ****
-    def __init__(self, name): # ****
-        self.name = name # ****
-        self.the_draw = None # ****
-        self.hand = [] # ****
-        self.play_cards = [] # ****
-        self.play_cards_wild_cards = [] # ****
-        self.initial_played_cards = [] # ****
-        self.final_played_cards = 0
-        self.last_set_played_cards = [] # ****
-        self.red_3_meld = [] # ****
-        self.black_3_meld = [] # ****
-        self.melds = [] # ****
-        self.len_2_temp_melds_list = [] # ****
-        self.matched_card_list = []
-        self.going_out = None # ****
-        self.went_out_concealed = False # ****
-        self.finished_rounds_scores = [] # ****
-        self.total_score_over_5000 = False
-        self.special_case_cant_draw = False
-    # -------------------------------------
-    @property # ****
-    def draw_card(self): # ****
-        draw_card = self.hand[0] # ****
-        return draw_card # ****
-    # -------------------------------------
-    @property # ****
-    def draw_card_val(self): # ****
-        return MasterDeck.draw_ranks.get(self.draw_card.rank) # ****
-    # ------------------------------------------
-    @property # ****
-    def meld_requirement(self): # ****
-        meld_requirement = 0 # ****
-        if self.total_score < 0: # ****
-            meld_requirement = 15 # ****
-        elif 0 <= self.total_score < 1500: # ****
-            meld_requirement = 50 # ****
-        elif 1500 <= self.total_score < 3000: # ****
-            meld_requirement = 90 # ****
-        elif self.total_score >= 3000: # ****
-            meld_requirement = 120 # ****
-        return meld_requirement # ****
-    # ------------------------------------------
-    @property # ****
-    def red_3_count(self): # ****
-        return len(self.red_3_meld) # ****
-    # -------------------------------------
-    @property # ****
-    def hand_wild_cards_reference_list(self): # ****
-        hand_wild_cards = [] # ****
-        for card in self.hand: # ****
-            if (card.rank, card.suit) in Deck().wild_cards: # ****
-                hand_wild_cards.append(card) # ****
-        return hand_wild_cards # ****
-    # -------------------------------------
-    @property # ****
-    def non_maxed_out_melds(self): # ****
-        non_maxed_out_melds = [] # ****
-        # -------------------------------------
-        for meld_group in [self.play_cards, self.melds]: # ****
-            for item in meld_group: # ****
-                if type(item) == list: # ****
-                    wild_card_count = 0 # ****
-                    for card in item: # ****
-                        if (card.rank, card.suit) in Deck().wild_cards: # ****
-                            wild_card_count += 1 # ****
-                    if 7 <= wild_card_count or wild_card_count < 3: # ****
-                        non_maxed_out_melds.append(item) # ****
-                        # -------------------------------------
-        return non_maxed_out_melds # ****
-    # -------------------------------------
-    @property # ****
-    def has_canasta(self): # ****
-        for meld_group in [self.melds, self.play_cards]: # ****
-            if len(meld_group) > 0:
-                for meld in meld_group:
-                    if len(meld) >= 7: # ****
-                        return True # ****
-    # -------------------------------------
-    @property # ****
-    def round_score(self): # ****
-        round_score = 0 # ****
-        # -------------------------------------
-        for meld_group in [self.play_cards, self.melds]: # ****
-            if len(meld_group) > 0: # ****
-                for item in meld_group: # ****
-                    wild_card_canasta_check_count = 0 # ****
-                    if type(item) == list: # ****
-                        for card in item: # ****
-                  	    # -------------------------------------
-                            if (card.rank, card.suit) in Deck().wild_cards: # ****
-                                wild_card_canasta_check_count += 1 # ****
-                            # -------------------------------------
-                            round_score += Deck().ranks.get(card.rank) # ****
-                        # -------------------------------------
-                        if len(item) >= 7: # ****
-                            if wild_card_canasta_check_count == 7: # ****
-                                round_score += 1000 # ****
-                            elif wild_card_canasta_check_count == 0: # ****
-                                round_score += 500 # ****
-                            elif wild_card_canasta_check_count > 0: # ****
-                                round_score += 300 # ****
-                                # -------------------------------------
-        if self.going_out == True: # ****
-            round_score += 100 # ****
-            if self.went_out_concealed == True: # ****
-                round_score += 100 # ****
-            round_score += (self.red_3_count * 100) # ****
-            if self.red_3_count == 4: # ****
-                round_score += 400 # ****
-                # -------------------------------------
-        elif self.going_out == False: # ****
-            if self.has_canasta == True: # ****
-                round_score += (self.red_3_count * 100) # ****
-                if self.red_3_count == 4: # ****
-                    round_score += 400 # ****
-            else: # ****
-                round_score -= (self.red_3_count * 100) # ****
-                if self.red_3_count == 4:# ****
-                    round_score -= 400 # ****
-                    # -------------------------------------
-            if len(self.hand) > 0: # ****
-                for card in self.hand: # ****
-                    round_score -= Deck().ranks.get(card.rank) # ****
-                        # -------------------------------------
-        return round_score # ****
-    # -------------------------------------
-    @property # ****
-    def total_score(self): # ****
-        return sum(self.finished_rounds_scores) # ****
+import os
+import time
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Creates the MasterDeck & Deck2 instances so that the can later be combined into the one MasterDeck. # ****
-MasterDeck = Deck() # ****
-Deck2 = Deck() # ****
-# -------------------------------------
-MasterDeck.create_deck() # ****
-Deck2.create_deck() # ****
-# -------------------------------------
-# Below Section - Appends Deck2.deck to the MasterDeck.deck.
-for card in Deck2.deck: # ****
-    MasterDeck.deck.append(card) # ****
-# -------------------------------------
-# Below Line - Shuffles the MasterDeck & assigns MasterDeck.original_deck == the newly created doubledeck MasterDeck.deck.
-random.shuffle(MasterDeck.deck) # ****
-MasterDeck.original_deck = MasterDeck.deck[:]
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Section - Creates the players, and gives them placeholder names for identification at start of game. # ****
-P1 = Player('Player 1') # ****
-P2 = Player('Player 2') # ****
-players = [P1, P2] # ****
+import player
+import deck
+import locations
+import card
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - First Function for run loop. Handles logic for sequencing of the_draw functions for when certain criteria require certain sections to be rerun. # ****
 def the_draw_1(player=P1, testing = False): # ****
@@ -261,15 +54,15 @@ def the_draw_2(player, testing = False): # ****
 # Below Function - Called by the_draw_2() for Game Loop. Checks a player's draw card to ensure it is not a Joker, and if it is, redirects the process back to the_draw_1, to be redone. # ****
 def draw_joker_check(player, testing = False): # ****
     logger.debug("draw_joker_check\n") # ****
-    if player.draw_card.rank == 'Jo': # ****
+    if player.draw_card.rank == 'Joker': # ****
         if testing == True:
-            return "player.draw_card.rank == \'Jo\'"
+            return "player.draw_card.rank == \'Joker\'"
         print(f"Sorry, {player.name}, you picked a Joker, which is not available for use during The Draw! You must choose another card!\n") # ****
         MasterDeck.deck.append(player.hand.pop(0)) # ****
         the_draw_1(player) # ****
     else:
         if testing == True:
-            return "player.draw_card.rank != \'Jo\'"
+            return "player.draw_card.rank != \'Joker\'"
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by the_draw_1() function. Checks whether or not the players have the same draw card, and if they do, redirects the process back to the_draw_1 and places player cards back into the MasterDeck. Also checks to see who wins the draw, and redirects to the_deal() after determination. # ****
 def the_draw_3(testing = False): # ****
@@ -332,7 +125,7 @@ def sorter_key_function(item): # ****
     # Below - If item is a Card (not a list or tuple). # ****
     if type(item) != list: # ****
         int_suit = MasterDeck.draw_suit_ranks.get(item.suit)
-        if item.rank != 'Jo': # ****
+        if item.rank != 'Joker': # ****
             int_rank = MasterDeck.draw_ranks.get(item.rank) # ****
             final_value = int(str(int_rank) + str(int_suit)) # ****
             return final_value # ****
@@ -341,7 +134,7 @@ def sorter_key_function(item): # ****
             return final_value # ****
     # Below - If item is a meld (list). # ****
     else: # ****
-        if item[0].rank != 'Jo': # ****
+        if item[0].rank != 'Joker': # ****
             int_rank = MasterDeck.draw_ranks.get(item[0].rank) # ****
             return int_rank # ****
         else: # ****
@@ -578,19 +371,15 @@ def draw_discard_pile(player): # ****
 # Below Function - Called by draw_discard_pile_wild_card_prompt() function. Prompts the player to choose which wild card they would like to use to add to their temp_meld for use in attempting to draw the discard pile. # ****
 def draw_discard_pile_attempt_temp_meld_wild_card_addition(player): # ****
     logger.debug("draw_discard_pile_attempt_temp_meld_wild_card_addition")
-    if len(player.hand_wild_cards_reference_list) > 1:
-        print(f"\n{player.name}, which wild card would you like to use? You have these wild cards:\n") # ****
-        sorted_and_numbered_list_printer(player.hand_wild_cards_reference_list) # ****
-        while True: # ****
-            try: # ****
-                wild_card_choice = int(input("> ")) # ****
-                player.melds[-1].append(player.hand.pop(player.hand.index(player.hand_wild_cards_reference_list[wild_card_choice - 1]))) # ****
-                break # ****
-            except (ValueError, IndexError): # ****
-                print("\nSorry, but there was a problem with your input. Please try again. Make sure that your input is one of the numbers preceding the card you would like to use.\n") # ****
-    else:
-        print(f"You added the {player.hand_wild_cards_reference_list[0]} to your meld.")
-        player.melds[-1].append(player.hand.pop(player.hand.index(player.hand_wild_cards_reference_list[0])))
+    print(f"\n{player.name}, which wild card would you like to use? You have these wild cards:\n") # ****
+    sorted_and_numbered_list_printer(player.hand_wild_cards_reference_list) # ****
+    while True: # ****
+        try: # ****
+            wild_card_choice = int(input("> ")) # ****
+            player.melds[-1].append(player.hand.pop(player.hand.index(player.hand_wild_cards_reference_list[wild_card_choice - 1]))) # ****
+            break # ****
+        except (ValueError, IndexError): # ****
+            print("\nSorry, but there was a problem with your input. Please try again. Make sure that your input is one of the numbers preceding the card you would like to use.\n") # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by draw_discard_pile_attempt_check_meld_match(), draw_discard_pile_attempt_check_hand_match() functions. Prompts the player to choose which wild card they would like to use to help them in withdrawing the discard pile. # ****
 def draw_discard_pile_wild_card_prompt(player):
@@ -1199,7 +988,7 @@ def winner_output(player, tie_game = False): # ****
         sys.exit() # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called at the end of the file. Main run loop. Runs game until a player wins. # ****
-def game_run(): # ****
+def game_run_text(): # ****
     logger.debug("game_run\n") # ****
     # -------------------------------------
     run = 1 # ****
@@ -1208,11 +997,13 @@ def game_run(): # ****
         the_draw_1() # ****
         return None
         logger.debug("run end\n") # ****
+# -----------------------------------------------------------------------------  the_draw_1() # ****
+        return None
+        logger.debug("run end\n") # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Line - Runs the game, until someone wins! # ****
 if __name__ == "__main__":
     if input("Start Game?\n\n> ") != "":
-        game_run() # ****
+        game_run_text() # ****
     else:
         print("\nTESTING\n")
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
