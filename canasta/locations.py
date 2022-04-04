@@ -1,8 +1,10 @@
+import pygame
 import player
 import card
 import deck
 import game
 import customappendlist
+import canasta_pygame
 import time
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Locations():
@@ -11,15 +13,14 @@ class Locations():
         self.discard_pile_loc = [1010, 540]
         self.p1_hand_start_loc = [100, 420]
         self.p2_hand_start_loc = [1110, 420]
-        self.p1_melds_start_loc = [100, 800]
-        self.p2_melds_start_loc = [1110, 800]
+        self.p1_melds_start_loc = [100, 820]
+        self.p2_melds_start_loc = [1110, 820]
         self.p1_play_cards_start_loc = [100, 510]
         self.p2_play_cards_start_loc = [1110, 510]
         self.top_left_visible = [50, 70]
         self.center = [1010, 610]
         self.card_width_height = [100, 140]
         self.card_group_name_dict = {'deck': deck.MasterDeck.deck, 'discard_pile': deck.MasterDeck.discard_pile, 'P1.hand': player.P1.hand, 'P2.hand': player.P2.hand, 'P1.play_cards': player.P1.play_cards, 'P2.play_cards': player.P2.play_cards, 'P1.melds': player.P1.melds, 'P2.melds': player.P2.melds, 'P1.red_3_meld': player.P1.red_3_meld, 'P2.red_3_meld': player.P2.red_3_meld}
-        self.meld_group_dict = {'P1.play_cards': player.P1.play_cards, 'P2.play_cards': player.P2.play_cards, 'P1.melds': player.P1.melds, 'P2.melds': player.P2.melds, 'P1.red_3_meld': player.P1.red_3_meld, 'P2.red_3_meld': player.P2.red_3_meld}
         self.card_group_loc_dict = {'P1.hand': self.p1_hand_next_loc, 'P2.hand': self.p2_hand_next_loc, 'P1.play_cards': self.p1_play_cards_start_loc, 'P2.play_cards': self.p2_play_cards_start_loc, 'P1.melds': self.p1_melds_start_loc, 'P2.melds': self.p2_melds_start_loc}
     # -------------------------------------
     # Below Function - Dynamically assigns player.P1's hand location.
@@ -141,30 +142,89 @@ class Locations():
     # Below Function - Called by func_dict via key 'hand' whenever a card is appended to a player's hand. Calls card_movement() function to visually and digitally move card to associated player's hand.
     def visual_hand_update(self, card_group_name, current_card):
         print("visual_hand_update")
+        print(len(self.card_group_name_dict[card_group_name]))
         self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
         current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
     # -------------------------------------
     # Below Function - Called by funct_dict via keys associated with all meld groups. Handles proper meld and card locations movements for all meld groups.
     def visual_meld_group_update(self, card_group_name, item, meld_num = None, card_num = None):
         print("visual_meld_group_update")
-        if type(item) == customappendlist.CustomAppendList:
-            print("customappendlist.CustomAppendList")
-            x_val_increase = meld_num * (self.card_width_height[0] + 20)
-            item.list_loc = [self.card_group_loc_dict[card_group_name][0] + x_val_increase, self.card_group_loc_dict[card_group_name][1]]
-            card_num = 0
-            for current_card in item:
+        # -------------------------------------
+        # Below Function - Created this function because it is used in two places: for melds AND cards. Detects the length of the melds and determines proper visual placement.
+        def card_num_canasta_detect(card_group_name, item, list_loc, meld_num = None, card_num = None):
+            # Below Section - For all instances in which the card_num < 6. Visually places the cards in the regular staggered manner.
+            if card_num <= 6:
                 y_val_increase = card_num * 18
                 card_next_loc = [item.list_loc[0], item.list_loc[1] + y_val_increase]
                 self.card_movement(card_next_loc, current_card)
-                current_card.display_layer = card_num + 1
+            # -------------------------------------
+            # Below Line - For all instances in which the cards are part of a 7 or more card canasta.
+            if card_num >= 6:
+                # Below Section - If current_card is the 7th card (making it a canasta). First places the card in the 7th staggered location, then collapses the previously placed cards into a stack at the starting list_loc.
+                if card_num == 6:
+                    for preex_card in item[0:card_num + 1]:
+                        prior_disp_layer = preex_card.display_layer
+                        self.card_movement(item.list_loc, preex_card)
+                        preex_card.display_layer = prior_disp_layer
+                # -------------------------------------
+                # Below Section - For the 8th, 9th, & 10th cards in the meld, if the meld is that big. Places them in the stacked top spot (item.list_loc).
+                elif card_num > 6:
+                    self.card_movement(item.list_loc, current_card)
+                # -------------------------------------
+                # Below Section - If current_card is the last card in the meld. Assigns mixed to 0 to be a reference variable to be changed to 1 if the canasta has a wild card in it. Places it in the item.list_loc, then checks through the meld for wild cards to determine whether or not it is a natural or mixed canasta.
+                if current_card == item[-1]:
+                    mixed = 0
+                    for wild_card in deck.MasterDeck.wild_cards:
+                        for card in item:
+                            if wild_card[0] == card.rank:
+                                mixed = 1
+                # -------------------------------------
+                    # Below Section - If canasta is mixed. Finds a black-faced card to be used as the face-up card for the canasta to distinguish it as mixed.
+                    if mixed == 1:
+                        reversed_item = item[::-1]
+                        for card in reversed_item:
+                            if card.suit == 'Spade' or card.suit == 'Club':
+                                card.changed_display_layer = 1
+                                card.display_layer = card_num + 1
+                                game.draw_window()
+                                card.changed_display_layer = 0
+                                break
+                    # -------------------------------------
+                    # Below Section - If canasta is mixed. Finds a red-faced card to be used as the face-up card for the canasta to distinguish it as natural.
+                    else:
+                        reversed_item = item[::-1]
+                        for card in reversed_item:
+                            if card.suit == 'Heart' or card.suit == 'Diamond':
+                                card.changed_display_layer = 1
+                                card.display_layer = card_num + 1
+                                game.draw_window()
+                                card.changed_display_layer = 0
+                                break
+        # -------------------------------------
+        if type(item) == customappendlist.CustomAppendList:
+            print("customappendlist.CustomAppendList")
+            # Below Section - Sets the x_val_increase to account for the meld_num in the list of melds for proper visual placement, and then assigns the item.list_loc to be the starting meld location for the associated player accounting for the just-calculated x_val_increase.
+            x_val_increase = meld_num * (self.card_width_height[0] + 20)
+            item.list_loc = [self.card_group_loc_dict[card_group_name][0] + x_val_increase, self.card_group_loc_dict[card_group_name][1]]
+            # -------------------------------------
+            # Below Section - Sets card_num to 0, which will be increased by 1 for each card iteration and begins iteration through the meld.
+            card_num = 0
+            for current_card in item:
+            # -------------------------------------
+                card_num_canasta_detect(card_group_name, item, item.list_loc, meld_num = None, card_num = card_num)
+                # Below Section - Applies to all cards in the meld. Increases the card.display_layer & card_num by 1 for proper visual locations.
+                current_card.display_layer = card_num
                 card_num += 1
+                pygame.event.wait(2000)
+            # -------------------------------------
         elif type(item) == card.Card:
             print("card.Card")
+            # Below Section - Handles cards added to melds that are to be placed in the standard, staggered manner. For melds that are NOT canastas.
             x_val_increase = meld_num * (self.card_width_height[0] + 20)
             y_val_increase = card_num * 18
             card_next_loc = [self.card_group_loc_dict[card_group_name][0] + x_val_increase, self.card_group_loc_dict[card_group_name][1] + y_val_increase]
             self.card_movement(card_next_loc, item)
-            item.display_layer = card_num + 1
+            item.display_layer = card_num
     # -------------------------------------
     # Below Function - Called by func_dict via key 'p1_red_3_meld' whenever a card is appended to player.P1.red_3_meld. Calls card_movement() function to visually and digitally move card to player.P1.red_3_meld.
     def visual_p1_red_3_meld_update(self, current_card):

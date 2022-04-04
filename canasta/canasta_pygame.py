@@ -9,20 +9,23 @@
         # 02/18/22 : Tidied up some code, updated devlog, added in missing section commentary, and changed card movement values from 1 to 0.5 to (hopefully) help smooth the movements.
         # 02/19/22 - 02/27/22 : Divided up all of the code into various different files so that they are more easily organized and readable. Worked out bugs from that change. Fixed red 3 meld, mostly, which was broken.
         # 02/28/22: Fixed some card movement bugs including the issue with the red 3 meld, and almost fixed the issues of cards appearing in the top left corner of the screen. Spent a lot of time pinpointing the issue, which apparently lies in card.rect & card.rect.center initial assignments. Fixed the bug where the cards were staying rendered in the top left corner of the display.
-        # 02/29/22: ...
+        # 02/29/22 - 03/28/22: Made a lot of bug fixes, reworked all of the movement functions into a much smaller list of functions that take the specific lists as args, and did a lot of card movement testing. Card movement seems to be nearly at 100% success. Also, drastically reduced card movement times by fixing the game code, and rearranged some other code.
+        # 03/29/22 - 04/04/22: Finished consolidating card movement functions into a smaller array of functions that take in the card group parameter instead. Finished and tested canasta sized melds to collapse visually within themselves for proper visual display, including rendering the proper face-up card dependent on whether or not the meld was natural or mixed. Finished and tested proper display_layer visual updates for canastas.
+        # 04/05/22 - ...
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # THINGS TO DO
-    # Consolidate various meld group movement functions into one function per larger card group that takes in the card_group_name parameter to specify an individual smaller card group.
-    # 1) Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
-    # 2) Improve visual layout for play_cards.
-    # 3) Test & improve card movement system for smoothness / timing until satisfactory.
-        # 3b) Implement delta timing frame system.
-    # 4) Convert inputs to text rects on display.
-    # 5) Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
-    # 6) Change input system from keyboard-based to mouse-based.
-    # 7) Add in card sounds & background music.
-    # 8) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
-    # 9) Post on web so others can check for bugs as well.
+    # 1) Finish testing and modifying card movements and visual locations.
+        # 1a) Change the visual_meld_group_update 'card' section to reflect the changes I made in the 'melds' section so that it also handles visual collapse for the melds that turn into canastas.
+    # 2) Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
+    # 3) Improve visual layout for play_cards.
+    # 4) Test & improve card movement system for smoothness / timing until satisfactory.
+        # 4b) Implement delta timing frame system.
+    # 5) Convert inputs to text rects on display.
+    # 6) Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
+    # 7) Change input system from keyboard-based to mouse-based.
+    # 8) Add in card sounds & background music.
+    # 9) Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
+    # 10) Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import sys # ****
 import logging # ****
@@ -61,6 +64,12 @@ def setup():
     random.shuffle(deck.MasterDeck.deck) # ****
     deck.MasterDeck.original_deck = copy.copy(deck.MasterDeck.deck[:])
     # -------------------------------------
+    # Below Section - Sets up the display_layer for all of the cards in the deck, ordering them least to greatest, for proper visuals.
+    display_layer = 0
+    for card in deck.MasterDeck.deck:
+        card.display_layer = display_layer + 1
+        display_layer += 1
+    # -------------------------------------
     # Below Section - Assigns each player's card groups that will be visually displayed on the pygame screen to be an instance of CustomAppendList, giving each a name associated with the card group name to be used for when cards are appended to these card groups. The dictionary func_dict has the names as the keys , and a function name which updates the card coordinates of the appended card group is the dict value, so that whenever a card is appended to one of these groups, through a modified append method, the function is called before the card is appended to the card group, for the purpose of automation and simplicity.
     player.P1.hand = customappendlist.CustomAppendList('P1.hand') # ****
     player.P2.hand = customappendlist.CustomAppendList('P2.hand') # ****
@@ -73,59 +82,77 @@ def setup():
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def test_run():
     # Below Section - Test section to verify proper movement of card-screen locations.
-    new_meld = customappendlist.CustomAppendList('P2.melds')
-    for card in range(7):
-        new_meld.append(deck.MasterDeck.deck.pop(-1))
-    player.P2.melds.append(new_meld)
+    meld_1 = customappendlist.CustomAppendList('P1.melds')
+    for card in range(10):
+        meld_1.append(deck.MasterDeck.deck.pop(-1))
+    player.P1.melds.append(meld_1)
     print("1")
-    # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('P1.melds')
-    for card in range(7):
-        new_meld.append(deck.MasterDeck.deck.pop(-1))
-    player.P1.melds.append(new_meld)
-    print("2")
     # # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('P1.play_cards')
+    # for card in meld_1[:]:
+    #     deck.MasterDeck.deck.append(meld_1.pop(-1))
+    # player.P1.melds.pop(0)
+    # print("2")
+    # # # -------------------------------------
+    meld_2 = customappendlist.CustomAppendList('P1.melds')
     for card in range(7):
-        new_meld.append(deck.MasterDeck.deck.pop(-1))
-    player.P1.play_cards.append(new_meld)
+        meld_2.append(deck.MasterDeck.deck.pop(-1))
+    player.P1.melds.append(meld_2)
     print("3")
+    # # # -------------------------------------
+    # meld_3 = customappendlist.CustomAppendList('P2.melds')
+    # for card in range(10):
+    #     meld_3.append(deck.MasterDeck.deck.pop(-1))
+    # player.P2.melds.append(meld_3)
+    # print("4")
+    # -------------------------------------
+    # meld_4 = customappendlist.CustomAppendList('P2.melds')
+    # for card in range(7):
+    #     meld_4.append(deck.MasterDeck.deck.pop(-1))
+    # player.P2.melds.append(meld_4)
+    # print("5")
     # # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('P2.play_cards')
-    for card in range(7):
-        new_meld.append(deck.MasterDeck.deck.pop(-1))
-    player.P2.play_cards.append(new_meld)
-    print("4")
-    # # # -------------------------------------
-    new_meld = customappendlist.CustomAppendList('P2.melds')
-    player.P2.melds.append(new_meld)
-    for card in player.P1.play_cards[0][:]:
-        player.P2.melds[1].append(player.P1.play_cards[0].pop(-1))
-    print(player.P2.melds[1][0].x, player.P2.melds[1][0].y)
-    print("5")
-    # # # -------------------------------------
+    # meld_5 = customappendlist.CustomAppendList('P1.play_cards')
+    # for card in range(7):
+    #     meld_5.append(deck.MasterDeck.deck.pop(-1))
+    # player.P1.play_cards.append(meld_5)
+    # print("6")
+    # # -------------------------------------
+    # new_meld = customappendlist.CustomAppendList('P2.play_cards')
+    # for card in range(7):
+    #     new_meld.append(deck.MasterDeck.deck.pop(-1))
+    # player.P2.play_cards.append(new_meld)
+    # print("7")
+    # # -------------------------------------
+    # new_meld = customappendlist.CustomAppendList('P1.melds')
+    # player.P1.melds.append(new_meld)
+    # for card in player.P1.play_cards[0][:]:
+    #     new_meld.append(player.P1.play_cards[0].pop(-1))
+    # player.P1.play_cards.pop(0)
+    # print("8")
+    # # -------------------------------------
     # new_meld = customappendlist.CustomAppendList('P2.play_cards')
     # player.P2.play_cards.append(new_meld)
     # for card in player.P2.melds[0][:]:
     #     player.P2.play_cards[1].append(player.P1.melds[0].pop(-1))
-    # print("6")
-    # # # -------------------------------------
+    # print("9")
+    # # # # -------------------------------------
     # for card in range(3):
-    #     player.P1.play_cards[0].append(deck.MasterDeck.deck.pop(-1))
-    # print("7")
-    # # # -------------------------------------
+    #     player.P2.play_cards[0].append(deck.MasterDeck.deck.pop(-1))
+    # print("10")
+    # # # # -------------------------------------
     # for card in range(3):
     #     player.P2.melds[0].append(deck.MasterDeck.deck.pop(-1))
-    # print("8")
-    # # -------------------------------------
-    # for card in range(3):
+    # print("11")
+    # # # -------------------------------------
+    # for card in range(7):
     #     player.P1.hand.append(deck.MasterDeck.deck.pop(-1))
-    # print("9")
-    # # -------------------------------------
-    # for card in range(3):
+    # print("12")
+    # # # -------------------------------------
+    # for card in range(7):
     #     player.P2.hand.append(deck.MasterDeck.deck.pop(-1))
-    # print("10")
+    # print("13")
     # -------------------------------------
+    pygame.event.wait()
     pygame.quit()
     sys.exit()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

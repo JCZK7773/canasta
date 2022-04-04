@@ -21,8 +21,10 @@ class Card(pygame.sprite.DirtySprite): # ****
         # Below Line - The card's y-coordinate location. (internal reference only as this ultimately becomes self.y via calculated property (for the purpose of updating self.rect.center when set)).
         self._y = locations.Locate.deck_loc[1]
         # -------------------------------------
-        # Below Line - Internal form of display_layer for editing the card's visual layer via the change_layer() pygame function.
+        # Below Line - Internal form of display_layer (which is a calculated property below) for editing the card's visual layer via the change_layer() pygame function.
         self._display_layer = 0
+        # Below Line - To be used in some instances whenever the display_layer of a card is going to be changed but the (x, y) coordinate is not going to be changed; used as a reference to it's prior value to determine if it is ==, or has been altered. (Used specifically in locations.py)
+        self.changed_display_layer = 0
     # -------------------------------------
     def __str__(self): # ****
         return f"{self.rank}{deck.Deck().suits_symbols.get(self.suit)}" # ****
@@ -50,7 +52,7 @@ class Card(pygame.sprite.DirtySprite): # ****
         self._y = val
         self.rect.center = [self._x, self._y]
     # -------------------------------------
-    # Below Line - For assigning display layer when appending cards to different card groups for proper visuals.
+    # Below Section - For assigning display layer when appending cards to different card groups for proper visuals.
     @property
     def display_layer(self):
         return self._display_layer
@@ -62,7 +64,7 @@ class Card(pygame.sprite.DirtySprite): # ****
     # -------------------------------------
     # Below Section - Modifies the built-in pygame update function for Dirty Sprites, automatically updating the self.dirty value to 1.
     def update(self):
-        if [self.x, self.y] != [self.prior_x, self.prior_y]:
+        if [self.x, self.y] != [self.prior_x, self.prior_y] or self.changed_display_layer == 1:
             self.dirty = 1
         self.prior_x, self.prior_y = self.x, self.y
     # -------------------------------------

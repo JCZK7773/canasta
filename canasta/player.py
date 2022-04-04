@@ -21,6 +21,7 @@ class Player(): # ****
         self.finished_rounds_scores = [] # ****
         self.total_score_over_5000 = False
         self.special_case_cant_draw = False
+        self.meld_group_dict = {} # Assigned in canasta_pygame for proper referencing/updating.
     # -------------------------------------
     @property # ****
     def draw_card(self): # ****
