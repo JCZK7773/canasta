@@ -1,10 +1,9 @@
-import card
 import deck
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
         self.name = name # ****
-        self.the_draw = None # ****
+        self.draw_card = None
         self.hand = [] # ****
         self.play_cards = [] # ****
         self.play_cards_wild_cards = [] # ****
@@ -21,12 +20,7 @@ class Player(): # ****
         self.finished_rounds_scores = [] # ****
         self.total_score_over_5000 = False
         self.special_case_cant_draw = False
-        self.meld_group_dict = {} # Assigned in canasta_pygame for proper referencing/updating.
-    # -------------------------------------
-    @property # ****
-    def draw_card(self): # ****
-        draw_card = self.hand[0] # ****
-        return draw_card # ****
+        self.meld_group_dict = {} # Assigned in customappendlist for proper referencing/updating.
     # -------------------------------------
     @property # ****
     def draw_card_val(self): # ****
