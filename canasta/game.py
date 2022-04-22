@@ -200,21 +200,42 @@ def draw_window():
             else:
                 game.input_text += event.unicode
     # -------------------------------------
-    # Below Line - Note: This has to go below game.card_group.update() & game.card_rects = game.card_group.draw(game.screen_surface) or it will not display on the screen surface.
-    pygame.draw.line(game.screen_surface, game.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
+    # text_obj_dict_keys_list = list(game.text_obj_dict.keys())
+    # # -------------------------------------
+    # for obj in text_obj_dict_keys_list[0:-1]:
+    #     if obj != None:
+    #         print(obj)
+    #         game.screen_surface.blit(obj, game.text_obj_dict[obj])
+    # # Below Section - Handles the rendering of the input text and the input text surface...
+    # if text_obj_dict_keys_list[-1] != None:
+    #     txt_surface = font.render(game.input_text, True, color)
+    #     width = max(200, txt_surface.get_width() + 10)
+    #     game.input_text_rect.w = width
+    #     game.screen_surface.blit(txt_surface, (game.input_text_rect.x, game.input_text_rect.y))
+    #     pygame.draw.rect(game.screen_surface, game.grey_color, game.input_text_rect, 2)
     # -------------------------------------
-    text_obj_dict_keys_list = list(game.text_obj_dict.keys())
-    # -------------------------------------
-    for obj in text_obj_dict_keys_list[0:-1]:
-        if obj != None:
-            print(obj)
-            game.screen_surface.blit(obj, game.text_obj_dict[obj])
-    # Below Section - Handles the rendering of the input text and the input text surface...
-    if text_obj_dict_keys_list[-1] != None:
-        txt_surface = font.render(game.input_text, True, color)
-        width = max(200, txt_surface.get_width() + 10)
-        game.input_text_rect.w = width
-        game.screen_surface.blit(txt_surface, (game.input_text_rect.x, game.input_text_rect.y))
-        pygame.draw.rect(game.screen_surface, game.grey_color, game.input_text_rect, 2)
-    # -------------------------------------
+    game.card_group.update()
+    print(f"type(game.screen_surface) = {type(game.screen_surface)}")
+    print(game.card_rects)
+    game.card_rects = game.card_group.draw(game.screen_surface)
+    game.screen_surface.blit(game.text, game.textRect.center)
     game.screen.update(game.card_rects)
+    # -------------------------------------
+    # Below Line - Note: This has to go below game.card_group.update() & game.card_rects = game.card_group.draw(game.screen_surface) or it will not display on the screen surface.
+    # pygame.draw.line(game.screen_surface, game.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
+
+
+    ###### Below Section - This is how the code for draw_window looked before I made some of these big changes to game.py. For reference when debugging.
+    # # Below Function - Called by main(). Handles screen background assignment, card_group draw updating, and the pygame.display updates.
+    # def draw_window():
+    #     # print("draw_window")
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             pygame.quit()
+    #             sys.exit()
+    #     # -------------------------------------
+    #     game.card_group.update()
+    #     game.card_rects = game.card_group.draw(game.screen_surface)
+    #     game.screen_surface.blit(game.text, game.textRect.center)
+    #     game.screen.update(game.card_rects)
+    ###### -------------------------------------
