@@ -36,7 +36,7 @@ class Deck(): # ****
                         current_card = card.Card(rank, suit) # ****
                         # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
                         card.Card.assign_card_images_and_rects(current_card)
-                        # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                        # Below Line - Appends card into the canasta_pygame.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
                         game.game.card_group.add(current_card)
                         self.deck.append(current_card) # ****
                 else: # ****
@@ -44,7 +44,7 @@ class Deck(): # ****
                         current_card = card.Card(rank, 'Joker') # ****
                         # Below Line - This function has to be ran here because this is after it's creation and before it's first attempted rendering. The cards cannot be rendered unless they have both a rect and an image, which this function assigns to them.
                         card.Card.assign_card_images_and_rects(current_card)
-                        # Below Line - Appends card into the game.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
+                        # Below Line - Appends card into the canasta_pygame.card_group (Sprite Group) so that the entire group location can be updated with only one line instead of coding movement updates of each card inidividually.
                         game.game.card_group.add(current_card)
                         self.deck.append(current_card) # ****
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
