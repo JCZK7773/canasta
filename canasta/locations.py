@@ -4,7 +4,8 @@ import card
 import deck
 import game
 import customappendlist
-import canasta_pygame
+import game
+import canasta_pygame_main
 import time
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Locations():
@@ -26,19 +27,25 @@ class Locations():
         self.p1_melds_start_loc = [80, 830]
         self.p2_melds_start_loc = [self.visible_center[0] + 80, self.p1_melds_start_loc[1]]
         self.card_group_name_dict = {'deck': deck.MasterDeck.deck, 'discard_pile': deck.MasterDeck.discard_pile, 'P1.hand': player.P1.hand, 'P2.hand': player.P2.hand, 'P1.play_cards': player.P1.play_cards, 'P2.play_cards': player.P2.play_cards, 'P1.melds': player.P1.melds, 'P2.melds': player.P2.melds, 'P1.red_3_meld': player.P1.red_3_meld, 'P2.red_3_meld': player.P2.red_3_meld}
-        self.card_group_loc_dict = {'P1.hand': self.p1_hand_next_loc, 'P2.hand': self.p2_hand_next_loc, 'P1.play_cards': self.p1_play_cards_start_loc, 'P2.play_cards': self.p2_play_cards_start_loc, 'P1.melds': self.p1_melds_start_loc, 'P2.melds': self.p2_melds_start_loc}
-        # Below Dict - Currently inside of game.py. Before I moved it here I wanted to make sure that it worked in that place.
-        # self.text_name_loc_dict = {'Deck': [locations.Locate.deck_loc[0], locations.Locate.deck_loc[1] - 10],
-        #                       'Discard Pile': [locations.Locate.discard_pile_loc[0], locations.Locate.discard_pile_loc[1] - 10],
-        #                       p1_hand_text: [locations.Locate.p1_hand_start_loc[0], locations.Locate.p1_hand_start_loc[1] - 10],
-        #                       p2_hand_text: [locations.Locate.p2_hand_start_loc[0], locations.Locate.p2_hand_start_loc[1] - 10],
-        #                       p1_play_cards_text: [locations.Locate.p1_play_cards_start_loc[0], locations.Locate.p1_play_cards_start_loc[1] - 10],
-        #                       p2_play_cards_text: [locations.Locate.p2_play_cards_start_loc[0], locations.Locate.p2_play_cards_start_loc[1] - 10],
-        #                       p1_melds_text: [locations.Locate.p1_melds_start_loc[0], locations.Locate.p1_melds_start_loc[1] - 10],
-        #                       p2_melds_text: [locations.Locate.p2_melds_start_loc[0], locations.Locate.p2_melds_start_loc[1] - 10],
-        #                       p1_red_3_meld_text: None,
-        #                       p2_red_3_meld_text: None}
-    # -------------------------------------
+        # Below Line - For whatever reason, this dictionary has to be called in customappendlist.CustomAppendList.append to be updated, or else the locations are not calculated property.
+        self.card_group_loc_dict = {'deck': self.deck_loc, 'discard_pile': self.discard_pile_loc, 'P1.hand': self.p1_hand_next_loc, 'P2.hand': self.p2_hand_next_loc, 'P1.play_cards': self.p1_play_cards_start_loc, 'P2.play_cards': self.p2_play_cards_start_loc, 'P1.melds': self.p1_melds_start_loc, 'P2.melds': self.p2_melds_start_loc}
+        # Below Line - The number used in self.text_name_loc_dict to adjust how far above a card group the text display is situated.
+        self.y_reduce_num = 93
+        # Below Dict - The text location dictionary which defines the visual locations for all of the various text displays. Accessed by game.Game.
+        self.text_name_loc_dict = {'Deck': [self.deck_loc[0], self.deck_loc[1] - self.y_reduce_num],
+                              'Discard Pile': [self.discard_pile_loc[0], self.discard_pile_loc[1] - self.y_reduce_num],
+                              'p1_hand_text_loc': [self.p1_hand_start_loc[0] + 12, self.p1_hand_start_loc[1] - self.y_reduce_num],
+                              'p2_hand_text_loc': [self.p2_hand_start_loc[0] + 12, self.p2_hand_start_loc[1] - self.y_reduce_num],
+                              'p1_play_cards_text_loc': [self.p1_play_cards_start_loc[0] + 20, self.p1_play_cards_start_loc[1] - self.y_reduce_num],
+                              'p2_play_cards_text_loc': [self.p2_play_cards_start_loc[0] + 20, self.p2_play_cards_start_loc[1] - self.y_reduce_num],
+                              'p1_melds_text_loc': [self.p1_melds_start_loc[0], self.p1_melds_start_loc[1] - self.y_reduce_num],
+                              'p2_melds_text_loc': [self.p2_melds_start_loc[0], self.p2_melds_start_loc[1] - self.y_reduce_num],
+                              'p1_red_3_meld_text_loc': [0, 0],
+                              'p2_red_3_meld_text_loc': [0, 0],
+                              # Below Section - Make it so that whenever a value is set for this (through progression.py) make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
+                              'p1_progression_text_loc': [150, 30],
+                              'p2_progression_text_loc': [1750, 30]}
+        # -------------------------------------
     # Below Function - Dynamically assigns player.P1's hand location.
     @property
     def p1_hand_next_loc(self):
@@ -64,6 +71,15 @@ class Locations():
         print("card_movement")
         # Below Section - For testing. Trying to find the cause of inconsistent card movement times.
         prior_time = time.time()
+        # -------------------------------------
+        # Below Section - Handles the assignment of proper card.image depending on whether or not it is going to the deck or not, and whether or not it already has the proper face_down or face_up image set.
+        if loc == self.card_group_loc_dict['deck']:
+            # Below Line - I do NOT need to add .get_rect() here. This is NOT required.
+            current_card.image = card.Card.face_down_image
+        else:
+            if current_card.image == card.Card.face_down_image:
+                # Below Line - I do NOT need to add .get_rect() here. This is NOT required.
+                current_card.image = current_card.face_up_image
         # -------------------------------------
         current_card.display_layer = 9999
         # -------------------------------------
@@ -98,16 +114,16 @@ class Locations():
                     current_card.y += ratio
                     current_y = current_card.y
                     if int(prior_y) < int(current_y):
-                        game.draw_window()
+                        canasta_pygame_main.draw_window()
                 elif y_lesser == False and int(current_card.y) != int(loc[1]):
                     prior_y = current_card.y
                     current_card.y -= ratio
                     current_y = current_card.y
                     if int(prior_y) > int(current_y):
-                        game.draw_window()
+                        canasta_pygame_main.draw_window()
                 if y_lesser == None:
                     # Below Line -  Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
-                    game.draw_window()
+                    canasta_pygame_main.draw_window()
         # -------------------------------------
         elif int(y_difference) > int(x_difference):
             ratio = round((x_difference / y_difference), 2)
@@ -121,16 +137,16 @@ class Locations():
                     current_card.x += ratio
                     current_x = current_card.x
                     if int(prior_x) < int(current_x):
-                        game.draw_window()
+                        canasta_pygame_main.draw_window()
                 elif x_lesser == False and int(current_card.x) != int(loc[0]):
                     prior_x = current_card.x
                     current_card.x -= ratio
                     current_x = current_card.x
                     if int(prior_x) > int(current_x):
-                        game.draw_window()
+                        canasta_pygame_main.draw_window()
                 if x_lesser == None:
                     # Below Line - Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
-                    game.draw_window()
+                    canasta_pygame_main.draw_window()
         # -------------------------------------
         # Below Section - For the rare instance when both the current x & y coordinates are the same distance from the final location's x & y coordinates.
         elif int(y_difference) == int(x_difference):
@@ -143,27 +159,15 @@ class Locations():
                     current_card.y += 1
                 else:
                     current_card.y -= 1
-                game.draw_window()
+                canasta_pygame_main.draw_window()
         # -------------------------------------
         # Below Section - For testing. Trying to figure out the cause of inconsistent times for card movements.
         current_time = time.time()
         print(round(current_time - prior_time, 2))
     # -------------------------------------
-    # Below Function - Called by func_dict via key 'deck' whenever a card is appended to the MasterDeck.deck. Calls card_movement() function to visually and digitally move card to the deck.
-    def visual_deck_update(self, current_card):
-        print("visual_deck_update")
-        self.card_movement(self.deck_loc, current_card)
-        current_card.display_layer = len(deck.MasterDeck.deck) + 1
-    # -------------------------------------
-    # Below Function - Called by func_dict via key 'discard_pile' whenever a card is appended to the MasterDeck.discard_pile. Calls card_movement() function to visually and digitally move card to the discard pile.
-    def visual_discard_pile_update(self, current_card):
-        print("visual_discard_pile_update")
-        self.card_movement(self.discard_pile_loc, current_card)
-        current_card.display_layer = len(deck.MasterDeck.discard_pile) + 1
-    # -------------------------------------
-    # Below Function - Called by func_dict via key 'hand' whenever a card is appended to a player's hand. Calls card_movement() function to visually and digitally move card to associated player's hand.
-    def visual_hand_update(self, card_group_name, current_card):
-        print("visual_hand_update")
+    # Below Function - Called by func_dict via key 'deck', 'discard_pile', and 'hand' whenever a card is appended to the MasterDeck.deck, MasterDeck.discard_pile, or P1.hand/P2.hand. Calls card_movement() function to visually and digitally move card to the proper location.
+    def visual_deck_discard_hand_update(self, card_group_name, current_card):
+        print("visual_deck_discard_hand_update")
         self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
         current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
     # -------------------------------------
@@ -216,7 +220,7 @@ class Locations():
                     if card.suit == suits[0] or card.suit == suits[1]:
                         card.changed_display_layer = 1
                         card.display_layer = card_num + 1
-                        game.draw_window()
+                        canasta_pygame_main.draw_window()
                         card.changed_display_layer = 0
                         break
     # -------------------------------------
@@ -234,7 +238,6 @@ class Locations():
                 # Below Section - Applies to all cards in the meld. Increases the card.display_layer & card_num by 1 for proper visual locations.
                 cur_card.display_layer = card_num
                 card_num += 1
-                pygame.event.wait(2000)
                 # -------------------------------------
         # Below Line - If you are adding cards to a preexisiting meld.
         elif type(item) == card.Card:
@@ -261,7 +264,7 @@ class Locations():
         self.card_movement(red_3_meld_next_loc, current_card)
         current_card.display_layer = len(cur_player.red_3_meld) + 1
     # -------------------------------------
-    # Below Function - Called by game.the_draw_2() to visually lay out all of the cards in the MasterDeck so that the player can pick the card that they want to choose for determining the first player.
+    # Below Function - Called by progression.the_draw_2() to visually lay out all of the cards in the MasterDeck so that the player can pick the card that they want to choose for determining the first player.
     def the_draw_anim(self):
         print("the_draw_anim")
         next_card_loc = self.top_left_visible
@@ -274,4 +277,4 @@ class Locations():
 Locate = Locations()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Line - Creates a dictionary attribute for Locations that includes all of the associated functions for updating visuals for the various card groups.
-Locations.func_dict = {'deck': Locate.visual_deck_update, 'discard_pile': Locate.visual_discard_pile_update, 'P1.hand': Locate.visual_hand_update, 'P2.hand': Locate.visual_hand_update, 'P1.play_cards': Locate.visual_meld_update, 'P2.play_cards': Locate.visual_meld_update, 'P1.melds': Locate.visual_meld_update, 'P2.melds': Locate.visual_meld_update, 'P1.red_3_meld': Locate.visual_red_3_meld_update, 'P2.red_3_meld': Locate.visual_red_3_meld_update}
+Locations.func_dict = {'deck': Locate.visual_deck_discard_hand_update, 'discard_pile': Locate.visual_deck_discard_hand_update, 'P1.hand': Locate.visual_deck_discard_hand_update, 'P2.hand': Locate.visual_deck_discard_hand_update, 'P1.play_cards': Locate.visual_meld_update, 'P2.play_cards': Locate.visual_meld_update, 'P1.melds': Locate.visual_meld_update, 'P2.melds': Locate.visual_meld_update, 'P1.red_3_meld': Locate.visual_red_3_meld_update, 'P2.red_3_meld': Locate.visual_red_3_meld_update}
