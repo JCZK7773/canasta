@@ -10,7 +10,6 @@ class Card(pygame.sprite.DirtySprite): # ****
     # -------------------------------------
     def __init__(self, rank, suit): # ****
         super().__init__()
-        # Below Section - Non-parent class attributes.
         self.rank = rank # ****
         self.suit = suit # ****
         # -------------------------------------
@@ -28,16 +27,12 @@ class Card(pygame.sprite.DirtySprite): # ****
         # Below Line - Assigned through assign_card_images_and_rects(); is the face-up version of each card, as opposed to the face-down version that will be used whenever the card is placed in the deck.
         self.face_up_image = None
         # -------------------------------------
-    ###### Below Section - Needs to be finished
     # Below Section - Highlighting section
         # Below Line - Type: bool. The internal variable used in the self.highlighted calculated property used to determine whether or not game.Game will detect the variable as T/F and highlight the card, or not, accordingly.
-        # self._highlighted = False
+        self._highlighted = False
         # Below Line - The yellow highlighted color used for highlighting cards' perimeters.
-        # self.yellow_highlight_color = (242, 255, 0)
-        # Below Line - The highlighting image that will go around cards and melds that, during gameplay, are up for being chosen from an array of options. This will be active or inactive for each card dependent upon the card's status.
-        # self.highlight_rect = pygame.Rect(self.x, self.y, locations.Locate.card_width_height[0] + 1, locations.Locate.card_width_height[1] + 1)
-    ###### -------------------------------------
-        # -------------------------------------
+        self.yellow_highlight_color = (242, 255, 0)
+    # -------------------------------------
     # Below Section - Layer section
         # Below Line - Internal form of display_layer (which is a calculated property below) for editing the card's visual layer via the change_layer() pygame function.
         self._display_layer = 0
@@ -86,19 +81,20 @@ class Card(pygame.sprite.DirtySprite): # ****
             self.dirty = 1
         self.prior_x, self.prior_y = self.x, self.y
     # -------------------------------------
+    # Below Function - The highlighting rect that will go around cards and melds that, during gameplay, are up for being chosen from an array of options. This will be active or inactive for each card dependent upon the card's status.
+    def draw_highlight_rect(self):
+        pygame.draw.rect(game.game.screen_surface, self.yellow_highlight_color, self.rect, 2)
+    # -------------------------------------
     # Below Function - Calculated property which is either set to True or False. If True, assigns the card's image to include a highlighted perimeter which functions to notify the user that the card is eligible for being clicked.
-    # @property
-    # def highlighted(self):
-    #     return self._highlighted
-    # ###### Below Section - Needs to be completed
-    # @highlighted.setter
-    # def highlighted(self, val):
-    #     self._highlighted = val
-    #     if val == True:
-    #         game.game.card_group.add(self.highlight_rect)
-    #     else:
-    #         game.game.card_group.remove(self.highlight_rect)
-        # Detection for highlighted cards should happen in game.Game, which will draw the self.highlight_rect around the highlighted cards.
+    @property
+    def highlighted(self):
+        return self._highlighted
+    ###### Below Section - Needs to be completed...
+    @highlighted.setter
+    def highlighted(self, val):
+        self._highlighted = val
+        if val == True:
+            self.draw_highlight_rect()
     ###### -------------------------------------
     # Below Function - Loads the Card class's face_down_image (one time, instead of many, as it is used for all cards). Called by canasta_pygame.setup() because it requires pygame.display to be initialized. Must be run before assign_card_images_and_rects() because it looks for this to be the card's initial image. Also assigns to card.face_down_image.
     def assign_face_down_image():
@@ -121,3 +117,4 @@ class Card(pygame.sprite.DirtySprite): # ****
                         card.image = Card.face_down_image
                         card.rect = card.image.get_rect()
                         card.rect.center = locations.Locate.deck_loc
+    # -------------------------------------

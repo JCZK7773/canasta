@@ -13,15 +13,29 @@
         # 04/11/22: Finished adjusting all of the card group positions. Finished creating and adjusting the text labels for the various card groups.
         # 04/12/22 - 04/20/22: Began and finished implementing logic system for event handling of text output, user input, and card-clicking. Began and mostly finished reworking progression.py to be compatible with the modern 2D code base. Began work on determining how to change areas of code where numerical values were used to represent cards to the new system of card-clicking & processing.
         # 04/21/22: Spent entire 4 hr. session debugging and fixing up some bad code from the many changes I made from the last session. Worked out most of the bugs from that, such as some logic, improper indentations, improper module/class/instance references, etc.
+
+# FOR REFERENCE
+    #     pygame.Rect
+    # pygame object for storing rectangular coordinates
+    # Rect(left, top, width, height) -> Rect
+
+    #     pygame.draw.rect()
+    # draw a rectangle
+    # rect(surface, color, rect) -> Rect
+
+    #     Using this suggested line: for event in [pygame.event.wait()]+pygame.event.get(): greatly reduces CPU usage in games where the CPU runs full-bore when there are no events (compared to for event in pygame.event.get():). Nice. –
+    # Moondoggy
+    #  Nov 25, 2021 at 15:24
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # THINGS TO DO
-    # To avoid having to call module.class/instance.attribute/method, etc. I can instead instantiate the classes inside of canasta_pygame_main so that they will be directly referenced via instance.attribute/method.
-    # Figure out a solution to problem of how to create a border/outline for the highlighted cards.
-        # Test the below solution on new_features_test.py with a basic image and rect.
-        # Following link is a possible solution for problem of how to create a border/outline for the highlighted cards by drawing a rect over the image.
-            # https://stackoverflow.com/questions/46742393/how-to-draw-a-border-around-a-sprite-or-image-in-pygame
+    # Model the input_text_obj_rect after the same manner in which all of the other text objects are rendered and assigned rects (through .get_rect())
+    # Change event_handler() so that the 'for event in pygame.event.get()' is instead 'for event in pygame.event.wait()'?? Or something along those lines. Supposedly this will reduce CPU usage. Perhaps I can call pygame.event.wait() in the progression loops ONLY whenever I am expecting user input. See NOTES for a paste of supposedly improved code snippet.
+    # FINISHED BUT NOT 100% SATISFIED - CHANGE LATER?
+        # Figure out a solution to problem of how to create a border/outline for the highlighted cards.
+            # Test the below solution on new_features_test.py with a basic image and rect.
+            # Following link is a possible solution for problem of how to create a border/outline for the highlighted cards by drawing a rect over the image.
+                # https://stackoverflow.com/questions/46742393/how-to-draw-a-border-around-a-sprite-or-image-in-pygame
         # May have to use mask.outline() in conjunction with Rect() to get the desired result.
-    # Have to rearrange the code at a high level so that event handling happens in one place and the code inside of draw_window() is directly inside of the main while loop.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
         # Change the instances where numerical inputs are utilized, converting them to use card-clicks to determine the values instead.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
@@ -29,7 +43,6 @@
         # Implement delta timing frame system.
     # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.
     # Convert inputs to text rects on display.
-    # Fix main game loop so that it will properly run through game progression loops while maintaining proper display outputs.
     # Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
     # Change input system from keyboard-based to mouse-based.
     # Add in card sounds & background music.

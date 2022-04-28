@@ -39,20 +39,26 @@ def the_draw_1(current_player=player.P1, testing = False): # ****
 def the_draw_2(current_player, testing = False): # ****
     print('the_draw_2')
     logger.debug("the_draw_2") # ****
+    # -------------------------------------
+    game.game.game_state = 'the_draw'
+    # -------------------------------------
     if current_player.name == 'Player 1' or current_player.name == 'Player 2': # ****
         while True: # ****
             try: # ****
-                ###### Below Line - Replaces the commented line 2 lines below it. It is the original form, before conversion to be implemented as a full 2D game.
                 text = (f"\n{current_player.name}, what is your name?")
                 game.game.progression_text_func(current_player, text, True)
-                current_player.name = game.game.input_text_final
-                ###### player.name = input(f"\n{player.name}, what is your name? \n\n> ") # ****
-                if len(current_player.name) < 1: # ****
-                    raise ValueError # ****
-                break # ****
+                while game.game.text_input_active == True:
+                    game.game.draw_window_the_draw()
+                if game.game.text_input_active == False:
+                    current_player.name = game.game.input_text_final
+                    game.game.draw_window_the_draw()
+                    if len(current_player.name) < 1: # ****
+                        raise ValueError # ****
+                    break # ****
             except ValueError: # ****
-                text = ("\nSorry, but your name must be at least one character long. It looks as if your input was blank.\n")
+                text = ("\nSorry, but your name must be at least one character long. It looks as if your input was blank. Hit Enter to try again.\n")
                 game.game.progression_text_func(current_player, text) # ****
+                pygame.event.wait()
     # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they choose.
     locations.Locate.the_draw_anim()
     while True: # ****
@@ -137,6 +143,7 @@ def return_draw_card(players): # ****
 def the_deal(player1, player2): # ****
     logger.debug("the_deal\n") # ****
     # -------------------------------------
+    game.game.game_state = 'main'
     # Below - Deals each player their 11 cards, sorts them, prints them, and checks for Red 3s. # ****
     for current_player in (player1, player2): # ****
         for card in range(11): # ****

@@ -1,12 +1,10 @@
 import pygame
+import time
 import player
 import card
 import deck
 import game
 import customappendlist
-import game
-import canasta_pygame_main
-import time
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Locations():
     def __init__(self):
@@ -66,6 +64,16 @@ class Locations():
             p2_hand_next_loc = [self.p2_hand_start_loc[0] + x_val_increase, self.p2_hand_start_loc[1]]
             return p2_hand_next_loc
     # -------------------------------------
+    # Below Function - Called by card_movement(). Detects the game_state, which is assigned in the various progression.py loops. This determines which version of draw_window() will be called, which renders a different set of Sprites, rects, lines, etc. to conform to the game progress content.
+    def draw_window_func(self):
+        if game.game.game_state == 'the_draw':
+            game.game.draw_window_the_draw()
+        elif game.game.game_state == 'main':
+            game.game.draw_window_main()
+        # Below Line - For test_run.test_run() only. For testing card movements and features.
+        elif game.game.game_state == 'test_run':
+            game.game.draw_window_main()
+        # -------------------------------------
     # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location.
     def card_movement(self, loc, current_card):
         print("card_movement")
@@ -114,16 +122,16 @@ class Locations():
                     current_card.y += ratio
                     current_y = current_card.y
                     if int(prior_y) < int(current_y):
-                        canasta_pygame_main.draw_window()
+                        self.draw_window_func()
                 elif y_lesser == False and int(current_card.y) != int(loc[1]):
                     prior_y = current_card.y
                     current_card.y -= ratio
                     current_y = current_card.y
                     if int(prior_y) > int(current_y):
-                        canasta_pygame_main.draw_window()
+                        self.draw_window_func()
                 if y_lesser == None:
                     # Below Line -  Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
-                    canasta_pygame_main.draw_window()
+                    self.draw_window_func()
         # -------------------------------------
         elif int(y_difference) > int(x_difference):
             ratio = round((x_difference / y_difference), 2)
@@ -137,16 +145,16 @@ class Locations():
                     current_card.x += ratio
                     current_x = current_card.x
                     if int(prior_x) < int(current_x):
-                        canasta_pygame_main.draw_window()
+                        self.draw_window_func()
                 elif x_lesser == False and int(current_card.x) != int(loc[0]):
                     prior_x = current_card.x
                     current_card.x -= ratio
                     current_x = current_card.x
                     if int(prior_x) > int(current_x):
-                        canasta_pygame_main.draw_window()
+                        self.draw_window_func()
                 if x_lesser == None:
                     # Below Line - Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
-                    canasta_pygame_main.draw_window()
+                    self.draw_window_func()
         # -------------------------------------
         # Below Section - For the rare instance when both the current x & y coordinates are the same distance from the final location's x & y coordinates.
         elif int(y_difference) == int(x_difference):
@@ -159,7 +167,7 @@ class Locations():
                     current_card.y += 1
                 else:
                     current_card.y -= 1
-                canasta_pygame_main.draw_window()
+                self.draw_window_func()
         # -------------------------------------
         # Below Section - For testing. Trying to figure out the cause of inconsistent times for card movements.
         current_time = time.time()
@@ -220,7 +228,7 @@ class Locations():
                     if card.suit == suits[0] or card.suit == suits[1]:
                         card.changed_display_layer = 1
                         card.display_layer = card_num + 1
-                        canasta_pygame_main.draw_window()
+                        game.game.draw_window_main()
                         card.changed_display_layer = 0
                         break
     # -------------------------------------
@@ -269,7 +277,7 @@ class Locations():
         print("the_draw_anim")
         next_card_loc = self.top_left_visible
         for current_card in deck.MasterDeck.deck:
-            print("next_card the_draw_anim")
+            print("the_draw_anim > next_card")
             self.card_movement(next_card_loc, current_card)
             next_card_loc[0] += 17
             next_card_loc[1] += 17

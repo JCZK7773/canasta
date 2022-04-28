@@ -49,57 +49,6 @@ def setup():
     player.P1.melds = customappendlist.CustomAppendList('P1.melds') # ***
     player.P2.melds = customappendlist.CustomAppendList('P2.melds') # ***
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Function - Called by locations.Locations.card_movement(). Handles framerate, event handling, and updating display.
-def draw_window():
-    # -------------------------------------
-    # Below Section - Sets the max framerate for the game.
-    clock = pygame.time.Clock()
-    clock.tick(400)
-    # -------------------------------------
-    for event in pygame.event.get():
-        # print(event)
-        if event.type == pygame.QUIT:
-            # Below Section - Quits the pygame window and terminates the entire program.
-            pygame.quit()
-            sys.exit()
-        elif event.type == pygame.MOUSEBUTTONDOWN and game.game.click_card_active == True:
-            ###### Below Section - Needs to be finished. For whenever clicking a card, for detecting if the card was clicked, and saving it as a value to be accessed elsewhere for reference.
-            for card in game.game.clickable_card_group:
-                if card.collidepoint(event.pos):
-                    game.game.clicked_card = card
-                    game.game.clicked_card.highlighted = True
-            ###### -------------------------------------
-        elif event.type == pygame.KEYDOWN and game.game.text_input_active == True:
-            if event.key == pygame.K_RETURN:
-                game.game.text_input_active = False
-                game.game.input_text_final = game.game.input_text
-                game.game.input_text = game.game.input_text_reset
-            elif event.key == pygame.K_BACKSPACE:
-                game.game.input_text = game.game.input_text[:-1]
-            else:
-                game.game.input_text += event.unicode
-    # -------------------------------------
-    # text_obj_dict_keys_list = list(game.game.text_obj_dict.keys())
-    # # -------------------------------------
-    # for obj in text_obj_dict_keys_list[0:-1]:
-    #     if obj != None:
-    #         print(obj)
-    #         game.game.screen_surface.blit(obj, game.game.text_obj_dict[obj])
-    # # Below Section - Handles the rendering of the input text and the input text surface...
-    # if text_obj_dict_keys_list[-1] != None:
-    #     txt_surface = font.render(game.game.input_text, True, color)
-    #     width = max(200, txt_surface.get_width() + 10)
-    #     game.game.input_text_rect.w = width
-    #     game.game.screen_surface.blit(txt_surface, (game.game.input_text_rect.x, game.game.input_text_rect.y))
-    #     pygame.draw.rect(game.game.screen_surface, game.game.grey_color, game.game.input_text_rect, 2)
-    # -------------------------------------
-    game.game.card_group.update()
-    game.game.card_rects = game.game.card_group.draw(game.game.screen_surface)
-    # -------------------------------------
-    # Below Line - Note: This has to go below game.game.card_group.update() & game.game.card_rects = game.game.card_group.draw(game.game.screen_surface) or it will not display on the screen surface.
-    pygame.draw.line(game.game.screen_surface, game.game.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
-    game.game.screen.update(game.game.card_rects)
-# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS and calls draw_window() for screen updating.
 def main():
     print("main")
@@ -107,8 +56,8 @@ def main():
     # -------------------------------------
     # Below Section - Sets up the run loop so that unless the player quits the game/exits the window, it continues to cycle through this progression loop.
     setup()
-    test_run.test_run()
-    # progression.the_draw_1()
+    # test_run.test_run()
+    progression.the_draw_1()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     main()

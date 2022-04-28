@@ -1,9 +1,11 @@
 import customappendlist
 import deck
 import player
+import game
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def test_run():
     print("test_run 1")
+    game.game.game_state = 'test_run'
     # Below Section - Test section to verify proper movement of card-screen locations.
     # -------------------------------------
     # Below Section - Player melds testing.
