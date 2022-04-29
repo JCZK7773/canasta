@@ -56,8 +56,8 @@ def main():
     # -------------------------------------
     # Below Section - Sets up the run loop so that unless the player quits the game/exits the window, it continues to cycle through this progression loop.
     setup()
-    test_run.test_run()
-    # progression.the_draw_1()
+    # test_run.test_run()
+    progression.the_draw_1()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     main()

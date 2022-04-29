@@ -52,7 +52,9 @@
     # If you reassign self.image.get_rect() then you have to reassign .center() as well. You do not need to reassign .get_rect() every time you edit the object!!!!!
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # THINGS TO DO
-    # Change draw_window_the_draw() so that it matches draw_window_main() concerning the input_text display, which I got working (mostly, except the text doesn't show unless a card is blitted over it first).
+    # Make draw_window_main() reflect the proper changes made in draw_window_the_draw() so that it will properly blit the input text on the screen. draw_window_the_draw() has the latest, and best version of the code for this.
+    # Fix issue whereing backspacing during input text does not properly make the deleted text disappear. Perhaps this is a rect issue.
+    # Fix the issue wherein input display is blitted twice for draw_window_the_draw(). Problem lies in it being assigned a rect & center at an earlier and later time.
     # Make it so that the red_3_meld_text doesn't display unless the player has cards in their red_3_meld. Do this for all card groups?
     # Model the input_text_obj_rect after the same manner in which all of the other text objects are rendered and assigned rects (through .get_rect())
     # Change event_handler() so that the 'for event in pygame.event.get()' is instead 'for event in pygame.event.wait()'?? Or something along those lines. Supposedly this will reduce CPU usage. Perhaps I can call pygame.event.wait() in the progression loops ONLY whenever I am expecting user input. See NOTES for a paste of supposedly improved code snippet.

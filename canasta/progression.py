@@ -49,7 +49,6 @@ def the_draw_2(current_player, testing = False): # ****
                 text = (f"{current_player.name}, what is your name?")
                 game.game.progression_text_func(current_player, text, True)
                 while game.game.text_input_active == True:
-                    ###### Pretty sure I do NOT need pygame.event.wait() here.
                     game.game.draw_window_the_draw()
                 if game.game.text_input_active == False:
                     current_player.name = game.game.input_text_final
