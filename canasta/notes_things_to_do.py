@@ -26,8 +26,34 @@
     #     Using this suggested line: for event in [pygame.event.wait()]+pygame.event.get(): greatly reduces CPU usage in games where the CPU runs full-bore when there are no events (compared to for event in pygame.event.get():). Nice. –
     # Moondoggy
     #  Nov 25, 2021 at 15:24
+
+    #     render()¶
+    # draw text on a new Surface
+    # render(text, antialias, color, background=None) -> Surface
+    # This creates a new Surface with the specified text rendered on it. pygame provides no way to directly draw text on an existing Surface: instead you must use Font.render() to create an image (Surface) of the text, then blit this image onto another Surface.
+
+    #     pygame.draw.rect()
+    # draw a rectangle
+    # rect(surface, color, rect) -> Rect
+    # rect(surface, color, rect, width=0, border_radius=0, border_top_left_radius=-1, border_top_right_radius=-1, border_bottom_left_radius=-1, border_bottom_right_radius=-1) -> Rect
+    # Draws a rectangle on the given surface.
+    #
+    # Parameters
+    # surface (Surface) -- surface to draw on
+    #
+    # color (Color or int or tuple(int, int, int, [int])) -- color to draw with, the alpha value is optional if using a tuple (RGB[A])
+    #
+    # rect (Rect) -- rectangle to draw, position and dimensions
+    #
+    # width (int) --
+    #
+    # (optional) used for line thickness or to indicate that the rectangle is to be filled (not to be confused with the width value of the rect parameter)
+
+    # If you reassign self.image.get_rect() then you have to reassign .center() as well. You do not need to reassign .get_rect() every time you edit the object!!!!!
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # THINGS TO DO
+    # Change draw_window_the_draw() so that it matches draw_window_main() concerning the input_text display, which I got working (mostly, except the text doesn't show unless a card is blitted over it first).
+    # Make it so that the red_3_meld_text doesn't display unless the player has cards in their red_3_meld. Do this for all card groups?
     # Model the input_text_obj_rect after the same manner in which all of the other text objects are rendered and assigned rects (through .get_rect())
     # Change event_handler() so that the 'for event in pygame.event.get()' is instead 'for event in pygame.event.wait()'?? Or something along those lines. Supposedly this will reduce CPU usage. Perhaps I can call pygame.event.wait() in the progression loops ONLY whenever I am expecting user input. See NOTES for a paste of supposedly improved code snippet.
     # FINISHED BUT NOT 100% SATISFIED - CHANGE LATER?

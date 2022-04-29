@@ -4,6 +4,7 @@ import copy
 import os
 import time
 import logging # ****
+import pygame
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 import player
 import deck
@@ -45,12 +46,14 @@ def the_draw_2(current_player, testing = False): # ****
     if current_player.name == 'Player 1' or current_player.name == 'Player 2': # ****
         while True: # ****
             try: # ****
-                text = (f"\n{current_player.name}, what is your name?")
+                text = (f"{current_player.name}, what is your name?")
                 game.game.progression_text_func(current_player, text, True)
                 while game.game.text_input_active == True:
+                    ###### Pretty sure I do NOT need pygame.event.wait() here.
                     game.game.draw_window_the_draw()
                 if game.game.text_input_active == False:
                     current_player.name = game.game.input_text_final
+                    print(current_player.name)
                     game.game.draw_window_the_draw()
                     if len(current_player.name) < 1: # ****
                         raise ValueError # ****

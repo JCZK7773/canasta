@@ -175,7 +175,7 @@ class Locations():
     # -------------------------------------
     # Below Function - Called by func_dict via key 'deck', 'discard_pile', and 'hand' whenever a card is appended to the MasterDeck.deck, MasterDeck.discard_pile, or P1.hand/P2.hand. Calls card_movement() function to visually and digitally move card to the proper location.
     def visual_deck_discard_hand_update(self, card_group_name, current_card):
-        print("visual_deck_discard_hand_update")
+        # print("visual_deck_discard_hand_update")
         self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
         current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
     # -------------------------------------

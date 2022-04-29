@@ -8,6 +8,12 @@ class Game():
         # Below Line - The variable that is used to change the 'game_state', which determines which version of draw_window() will be called by card_movement(), so that the display properly reflects the content of the progression loops.
         self.game_state = None
     # -------------------------------------
+    # Below Section - Color Section
+    # -------------------------------------
+        self.black_color = (0, 0, 0)
+        self.grey_color = (79, 78, 74)
+        self.background_color = (0,40,0)
+    # -------------------------------------
     # Below Section - Pygame Display Setup Section
     # -------------------------------------
         # Below Line - Calls pygame.init (needed for other modules such as pygame.font)...
@@ -18,7 +24,6 @@ class Game():
         pygame.display.set_caption("Canasta")
         # -------------------------------------
         self.background = pygame.Surface([1920, 1020])
-        self.background_color = (0,40,0)
         self.background.fill(self.background_color)
     # -------------------------------------
     # Below Section - Card Sprite Section
@@ -53,22 +58,26 @@ class Game():
         self.p2_melds_text = (f'{player.P2.name}\'s Melds')
         self.p1_red_3_meld_text = (f'{player.P1.name}\'s Red 3 Meld')
         self.p2_red_3_meld_text = (f'{player.P2.name}\'s Red 3 Meld')
-        self._progression_text = (f'What is your name?')
+        self._progression_text = ('What is your name?!?')
         # Below Section - Placeholder to avoid error. Assigned through progression_text.
         self.progression_text_obj = None
         self.progression_text_obj_rect = None
         # -------------------------------------
-        # Below Line - Type: str. The actual text the user inputs via processed keypresses in the main loop.
-        self.input_text = 'While inputting...'
-        # Below Line - Type: str. The blank string that the input_text will be reset to upon the user hitting enter/return, which causes input_text to be assigned to the finished input_text_final. This variable never changes.
+        # Below Line - Type: str. Internal value; external use value is self.input_text as a calculated property which assigns the self.input_text_obj & self.input_text_obj_rect automatically. The actual text the user inputs via processed keypresses in the main loop.
+        self.input_text = 'input text'
+        ###### Below Line - Do I actually need this? Can't I just run 'self.input_text = '''? Type: str. The blank string that the input_text will be reset to upon the user hitting enter/return, which causes input_text to be assigned to the finished input_text_final. This variable never changes.
         self.input_text_reset = ''
         # Below Line - Type: str. The finished input string which is the 'returned' input. After the user finishes input / hits enter/return, this string copies the input_text before the input_text is reset back to a blank string, input_text_reset.
         self.input_text_final = 'Return this input...'
         # Below Line -n The active variable that changes whether or not text input is active or inactive (True or False).
         self.text_input_active = False
-        # Below Line - Placeholder. Type: pygame.Rect(top-left x, top-left y, width, height). Modified inside of progr_text() according to the current progression_text rect. The input rect object which is to be calculated based off of the current progression_text to create a text input window through which the player adds inputs in response to various questions throughout the game. Input must be filtered to process desired result.
-        self.input_text_obj_rect = None
-        # -------------------------------------
+        ###### Below Section - Comment needs to be updated. Placeholders. Accessed through self.text_obj_dict & assigned through the self.input_text calculated property every time it is altered.
+        self.input_text_obj = self.font.render(self.input_text, True, (255, 255, 255), self.background_color)
+        self.input_text_obj_rect = self.input_text_obj.get_rect()
+        self.input_text_obj_rect.center = [400, 400]
+        ###### Below Line - Alternate way of creating the input_text_obj_rect that doesn't assign it dynamically, but with a predefined width and height as opposed to conformity to the input_text val. Have not tested this as working yet.
+        ###### self.input_text_obj_rect = pygame.Rect(self.progression_text_obj_rect.center[0], self.progression_text_obj_rect.center[1] + 5, 70, 32)
+        ###### -------------------------------------
         self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.background_color)
         self.deck_text_obj_rect = self.deck_text_obj.get_rect()
         self.deck_text_obj_rect.center = locations.Locate.text_name_loc_dict['Deck']
@@ -122,12 +131,7 @@ class Game():
                               self.p1_red_3_meld_text_obj: self.p1_red_3_meld_text_obj_rect,
                               self.p2_red_3_meld_text_obj: self.p2_red_3_meld_text_obj_rect,
                               self.progression_text_obj: self.progression_text_obj_rect,
-                              self.input_text_obj_rect: None}
-    # -------------------------------------
-    # Below Section - Color Section
-    # -------------------------------------
-        self.black_color = (0, 0, 0)
-        self.grey_color = (79, 78, 74)
+                              self.input_text_obj: self.input_text_obj_rect}
     # -------------------------------------
     # Below Section - Calculated property; whenever a value is set for this, make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
     @property
@@ -140,7 +144,7 @@ class Game():
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
     # -------------------------------------
-    # Below Function - Called by various places in progression.py to update the self.progression_text and the associated rects and centers, as well as whether or not an input is being asked for from the user. If so, handles the assigning of the rect and center for the self.input_text and the activating of the text_input_active variable for the event handler to allow for processed input. If there is no input, ensures that input_text_obj_rect = None so that the renderer does not try to draw it on the screen.
+    # Below Function - Called by various places in progression.py to update the self.progression_text and the associated rects and centers, as well as whether or not an input is being asked for from the user. If so, handles the assigning of the rect and center for the self.input_text and the activating of the text_input_active variable for the event handler to allow for processed input. If there is no input, ensures that input_text_obj = None so that the renderer does not try to draw it on the screen.
     def progression_text_func(self, current_player, text, has_input = False, click_card_active = False):
         print("progression_text_func")
         self.progression_text = text
@@ -152,17 +156,20 @@ class Game():
         # -------------------------------------
         # Below Section - Handles input. Assigns the input rect to coincide with the position of the progression_text
         if has_input == True:
-            prog_txt_ctr = self.progression_text_obj_rect.center
-            self.input_text_obj_rect = pygame.Rect(prog_txt_ctr[0], prog_txt_ctr[1] + 5, 70, 32)
             self.text_input_active = True
         else:
-            self.input_text_obj_rect = None
+            print("else")
+            ###### Below Line - I need to make it so that whenever an input is completed, the input resets back to a blank value. I am not positive that this is the best way to reach that goal. It might be. Commenting out for further review.
+            # self.input_text_obj = None
         if click_card_active == True:
             self.click_card_active = True
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Below Function - Handles all events for pygame. Called by the various draw_window() functions.
     def event_handler(self):
         # print("event_handler")
+        # -------------------------------------
+        # Below Line - Added merely for testing purposes.
+        self.text_input_active = True
         for event in pygame.event.get():
             # print(event)
             if event.type == pygame.QUIT:
@@ -184,6 +191,7 @@ class Game():
                     self.input_text_final = self.input_text
                     self.input_text = self.input_text_reset
                     self.text_input_active = False
+                    print("self.text_input_active = False")
                 elif event.key == pygame.K_BACKSPACE:
                     self.input_text = self.input_text[:-1]
                 else:
@@ -207,18 +215,21 @@ class Game():
         text_obj_dict_keys_list = list(self.text_obj_dict.keys())
         # -------------------------------------
         # Below Section - Handles the rendering of the card group info text and the associated surfaces.
-        for obj in text_obj_dict_keys_list[0:-1]:
-            if obj != None:
-                self.screen_surface.blit(obj, self.text_obj_dict[obj])
+        # for obj in text_obj_dict_keys_list[0:-1]:
+            # if obj != None:
+                # self.screen_surface.blit(obj, self.text_obj_dict[obj])
         # -------------------------------------
         # Below Section - Handles the rendering of the input_text_obj and the input_text_surface.
-        if self.input_text_obj_rect != None:
-            txt_surface = font.render(self.input_text, True, color)
-            width = max(200, txt_surface.get_width() + 10)
-            self.input_text_obj_rect.w = width
-            self.screen_surface.blit(txt_surface, (self.input_text_obj_rect.x, self.input_text_obj_rect.y))
-            # Below Line - The background text box for the input_text.
-            pygame.draw.rect(self.screen_surface, self.grey_color, self.input_text_obj_rect, 2)
+        if self.input_text_obj != None:
+            # print(self.input_text)
+            ###### Below Section - For defining the width of the input_text window/rect/background rect??? Copy and pasted this but have not used yet.
+            # width = max(200, txt_surface.get_width() + 10)
+            # self.input_text_obj.w = width
+            ###### -------------------------------------
+            self.input_text_obj = self.font.render(self.input_text, True, (255, 255, 255))
+            self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
+            # Below Line - Disabled for now as not necessary for working input text. The background text box for the input_text.
+            # pygame.draw.rect(self.screen_surface, self.grey_color, self.input_text_obj_rect, 2)
         # -------------------------------------
         # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
         pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
@@ -248,19 +259,16 @@ class Game():
             self.screen_surface.blit(self.progression_text_obj, self.progression_text_obj_rect)
         # -------------------------------------
         # Below Section - Handles the rendering of the input_text_obj and the input_text_surface.
-        if self.input_text_obj_rect != None:
-            print(f"self.input_text = {self.input_text}")
-            txt_surface = self.font.render(self.input_text, True, self.grey_color)
-            width = max(200, txt_surface.get_width() + 10)
-            self.input_text_obj_rect.w = width
-            self.screen_surface.blit(txt_surface, (self.input_text_obj_rect.x, self.input_text_obj_rect.y))
-            # Below Line - The background text box for the input_text.
-            pygame.draw.rect(self.screen_surface, self.grey_color, self.input_text_obj_rect, 2)
+        if self.input_text_obj != None:
+            if self.input_text != '':
+                print(f"self.input_text = {self.input_text}")
+            self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
         # -------------------------------------
         # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
         pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # Below Line - The main .update() call which updates the new draw information for each frame.
         self.screen.update(self.card_rects)
+        pygame.display.update()
         # print("draw_window_the_draw > finished")
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 game = Game()
