@@ -19,7 +19,7 @@ class CustomAppendList(list):
     # -------------------------------------
     # Below Function - Customized version of the built-in append method. Handles items differently based on certain qualifications, and also stores and passes certain required information about the self (list) to the various location movement functions for 'automation'. Also determines card.image based on destination location.
     def append(self, item):
-        print("append")
+        # print("append")
         # Below Section - Appends the item to the self (list) and then updates the associated reference dictionaries for accurate comparisons. If these dicts are not updated, the locations are not properly calculated.
         super(CustomAppendList, self).append(item)
         locations.Locate.card_group_name_dict = {'deck': deck.MasterDeck.deck, 'discard_pile': deck.MasterDeck.discard_pile, 'P1.hand': player.P1.hand, 'P2.hand': player.P2.hand, 'P1.play_cards': player.P1.play_cards, 'P2.play_cards': player.P2.play_cards, 'P1.melds': player.P1.melds, 'P2.melds': player.P2.melds, 'P1.red_3_meld': player.P1.red_3_meld, 'P2.red_3_meld': player.P2.red_3_meld}

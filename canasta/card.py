@@ -18,8 +18,8 @@ class Card(pygame.sprite.DirtySprite): # ****
         # Below Line - The card's y-coordinate location. (internal reference only as this ultimately becomes self.y via calculated property (for the purpose of updating self.rect.center when set)).
         self._y = locations.Locate.deck_loc[1]
         # -------------------------------------
-        self.prior_x = None
-        self.prior_y = None
+        self.prior_x = 0
+        self.prior_y = 0
         # -------------------------------------
     # Below Section - Image section.
         # Below Line - Assigned through self.assign_face_down_image() wherever pygame.display, which is required, is initiated. The converted image file for the face-down card backing (red colored) to be assigned as the card's face_down_image.
@@ -77,7 +77,7 @@ class Card(pygame.sprite.DirtySprite): # ****
     # -------------------------------------
     # Below Section - Modifies the built-in pygame update function for Dirty Sprites, automatically updating the self.dirty value to 1.
     def update(self):
-        if [self.x, self.y] != [self.prior_x, self.prior_y] or self.changed_display_layer == 1:
+        if [int(self.x), int(self.y)] != [int(self.prior_x), int(self.prior_y)] or self.changed_display_layer == 1:
             self.dirty = 1
         self.prior_x, self.prior_y = self.x, self.y
     # -------------------------------------

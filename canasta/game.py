@@ -2,10 +2,11 @@ import pygame
 import sys
 import locations
 import player
+import deck
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Game():
     def __init__(self):
-        # Below Line - The variable that is used to change the 'game_state', which determines which version of draw_window() will be called by card_movement(), so that the display properly reflects the content of the progression loops.
+        # Below Line - The variable that is used to change the 'game_state', which determines which version of draw_window() will be called by card_movement() (via draw_window_func()), so that the display properly reflects the content of the progression loops.
         self.game_state = None
     # -------------------------------------
     # Below Section - Color Section
@@ -59,24 +60,28 @@ class Game():
         self.p1_red_3_meld_text = (f'{player.P1.name}\'s Red 3 Meld')
         self.p2_red_3_meld_text = (f'{player.P2.name}\'s Red 3 Meld')
         self._progression_text = ('What is your name?!?')
+        # Below Line - Type: str. Internal value; external use value is self.input_text as a calculated property which assigns the self.input_text_obj & self.input_text_obj_rect automatically. The actual text the user inputs via processed keypresses in the main loop.
+        self._input_text = ''
+        # Below Line - Type: str. The finished input string which is the 'returned' input. After the user finishes input / hits enter/return, this string copies the input_text before the input_text is reset back to a blank string, input_text_reset.
+        self.input_text_final = 'Return this input...'
+        # Below Line - Type: str. Assigned inside of the self.input_text calcualted property.
+        self.prior_input_text = None
+        # Below Line - The active variable that changes whether or not text input is active or inactive (True or False).
+        self.text_input_active = False
+        # Below Line - Type: bool. Whenever an exception is raised, this is changed to True until the player reads the message and then hits 'Enter'.
+        self.error_input_active = False
+        self.invalid_keypress_dict = {'numpad_enter': 1073741912, 'tab': 9, 'DEL': 127, 'ESC': 27}
+        # -------------------------------------
         # Below Section - Placeholder to avoid error. Assigned through progression_text.
         self.progression_text_obj = None
         self.progression_text_obj_rect = None
         # -------------------------------------
-        # Below Line - Type: str. Internal value; external use value is self.input_text as a calculated property which assigns the self.input_text_obj & self.input_text_obj_rect automatically. The actual text the user inputs via processed keypresses in the main loop.
-        self._input_text = 'input text'
-        ###### Below Line - Do I actually need this? Can't I just run 'self.input_text = '''? Type: str. The blank string that the input_text will be reset to upon the user hitting enter/return, which causes input_text to be assigned to the finished input_text_final. This variable never changes.
-        self.input_text_reset = ''
-        # Below Line - Type: str. The finished input string which is the 'returned' input. After the user finishes input / hits enter/return, this string copies the input_text before the input_text is reset back to a blank string, input_text_reset.
-        self.input_text_final = 'Return this input...'
-        # Below Line -n The active variable that changes whether or not text input is active or inactive (True or False).
-        self.text_input_active = False
-        # -------------------------------------
         # Below Section - Placeholders to avoid 'NoneType' error. Accessed through self.text_obj_dict & assigned through the self.input_text calculated property every time it is altered (except for .get_rect() as that does not need to be changed every time it is updated. If that is done, it messes up the text display by 'recreating' another rect centered at a different location centered on it's new dimensions).
-        self.input_text_obj = self.font.render(self._input_text, True, (255, 255, 255), self.grey_color)
-        self.input_text_obj_rect = self.input_text_obj.get_rect()
-        # Below Line - This changes to be slightly offset from self.progression_text_obj_rect.center inside the self.input_text calculated property.
-        self.input_text_obj_rect.center = [400, 400]
+        self.input_text_obj = None
+        # Below Line - Placeholder: This rect's .center is slightly offset from self.progression_text_obj_rect.center inside the self.input_text calculated property.
+        self.input_text_obj_rect = None
+        # Below Line - Placeholder: The background 'outline' text box for the input display.
+        self.input_text_outline_rect = None
         # -------------------------------------
         self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.background_color)
         self.deck_text_obj_rect = self.deck_text_obj.get_rect()
@@ -118,6 +123,18 @@ class Game():
         self.p2_red_3_meld_text_obj_rect = self.p2_red_3_meld_text_obj.get_rect()
         self.p2_red_3_meld_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc']
         # -------------------------------------
+        self.p1_player_name_text_obj = self.font.render(player.P1.name, True, (255, 255, 255), self.background_color)
+        self.p1_player_name_text_obj_rect = self.p1_player_name_text_obj.get_rect()
+        self.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
+        self.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
+        # -------------------------------------
+        self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.background_color)
+        self.p2_player_name_text_obj_rect = self.p2_player_name_text_obj.get_rect()
+        self.p2_player_name_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_player_name_text_loc']
+        self.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
+        self.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
+        # -------------------------------------
+        ###### Below Line - This is not currently being used.
         self.top_center_title = [locations.Locate.visible_center[0] - (round(self.deck_text_obj_rect[2] / 2)), locations.Locate.visible_top + 20]
         # -------------------------------------
         self.text_obj_dict = {self.deck_text_obj: self.deck_text_obj_rect,
@@ -130,9 +147,22 @@ class Game():
                               self.p2_melds_text_obj: self.p2_melds_text_obj_rect,
                               self.p1_red_3_meld_text_obj: self.p1_red_3_meld_text_obj_rect,
                               self.p2_red_3_meld_text_obj: self.p2_red_3_meld_text_obj_rect,
+                              self.p1_player_name_text_obj: self.p1_player_name_text_obj_rect,
+                              self.p2_player_name_text_obj: self.p2_player_name_text_obj_rect,
                               self.progression_text_obj: self.progression_text_obj_rect,
                               self.input_text_obj: self.input_text_obj_rect}
-    # -------------------------------------
+        # -------------------------------------
+        self.object_card_group_dict = {self.deck_text_obj: deck.MasterDeck.deck,
+                              self.discard_pile_text_obj: deck.MasterDeck.discard_pile,
+                              self.p1_hand_text_obj: player.P1.hand,
+                              self.p2_hand_text_obj: player.P2.hand,
+                              self.p1_play_cards_text_obj: player.P1.play_cards,
+                              self.p2_play_cards_text_obj: player.P2.play_cards,
+                              self.p1_melds_text_obj: player.P1.melds,
+                              self.p2_melds_text_obj: player.P2.melds,
+                              self.p1_red_3_meld_text_obj: player.P1.red_3_meld,
+                              self.p2_red_3_meld_text_obj: player.P2.red_3_meld}
+        # -------------------------------------
     # Below Section - Calculated property; whenever a value is set for this, make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
     @property
     def progression_text(self):
@@ -143,6 +173,7 @@ class Game():
         self._progression_text = val
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
+        self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['progression_text_loc']
     # -------------------------------------
     # Below Section - Calculated property; whenever a value is set for this, make it calculate and assign the self.input_text_obj and self.input_text_obj_rect.center() so that it will always properly display on the screen.
     @property
@@ -151,29 +182,25 @@ class Game():
 
     @input_text.setter
     def input_text(self, val):
+        if self.input_text_obj != None and len(val) < len(self.prior_input_text):
+            pygame.draw.rect(self.screen_surface, self.background_color, self.input_text_obj_rect)
         self._input_text = val
-        self.input_text_obj = self.font.render(val, True, (255, 255, 255), self.grey_color)
-        # Below Line - Have to have this during testing using test_run.test_run() because the script does not call progression_text_func() as does the actual progression.the_draw_1() call eventual does subsequent to calling this calculated property. Can remove this later once testing is verified as working 100%.
+        self.prior_input_text = self._input_text
+        self.input_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.input_text_obj_rect = self.input_text_obj.get_rect()
+        # Below Line - Have to have this if clause during testing using test_run.test_run() because the script does not call progression_text_func() as does the actual progression.the_draw_1() call eventual does subsequent to calling this calculated property. Can remove this later once testing is verified as working 100%.
         if self.progression_text_obj_rect != None:
-            self.input_text_obj_rect.center = [self.progression_text_obj_rect.center[0] - 100, self.progression_text_obj_rect.center[1] + 30]
+            self.input_text_obj_rect.center = [self.progression_text_obj_rect.center[0], self.progression_text_obj_rect.center[1] + 40]
     # -------------------------------------
     # Below Function - Called by various places in progression.py to update the self.progression_text and the associated rects and centers, as well as whether or not an input is being asked for from the user. If so, handles the assigning of the rect and center for the self.input_text and the activating of the text_input_active variable for the event handler to allow for processed input. If there is no input, ensures that input_text_obj = None so that the renderer does not try to draw it on the screen.
     def progression_text_func(self, current_player, text, has_input = False, click_card_active = False):
         print("progression_text_func")
+        # -------------------------------------
         self.progression_text = text
-        # -------------------------------------
-        if current_player.name == 'P1':
-            self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['p1_progression_text_loc']
-        else:
-            self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_progression_text_loc']
-        # -------------------------------------
         # Below Section - Handles input. Assigns the input rect to coincide with the position of the progression_text
         if has_input == True:
             self.text_input_active = True
-        else:
-            print("else")
-            ###### Below Line - I need to make it so that whenever an input is completed, the input resets back to a blank value. I am not positive that this is the best way to reach that goal. It might be. Commenting out for further review.
-            # self.input_text_obj = None
+        # -------------------------------------
         if click_card_active == True:
             self.click_card_active = True
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -181,16 +208,12 @@ class Game():
     def event_handler(self):
         # print("event_handler")
         # -------------------------------------
-        # Below Line - Added merely for testing purposes.
-        self.text_input_active = True
         for event in pygame.event.get():
-            # print(event)
             if event.type == pygame.QUIT:
                 # Below Section - Quits the pygame window and terminates the entire program.
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN and self.click_card_active == True:
-                print("event_handler > click_card_active == True")
                 # Below Section - Whenever clicking a card; detects if the card was clicked, and appends it to clicked_card_list.
                 for card in self.clickable_card_list:
                     if card.collidepoint(event.pos):
@@ -198,17 +221,24 @@ class Game():
                         self.clicked_card_list.append(card)
                         self.clicked_card.highlighted = True
                 # -------------------------------------
-            elif event.type == pygame.KEYDOWN and self.text_input_active == True:
-                print("event_handler > text_input_active == True")
-                if event.key == pygame.K_RETURN:
-                    self.input_text_final = self.input_text
-                    self.input_text = self.input_text_reset
-                    self.text_input_active = False
-                    print("self.text_input_active = False")
-                elif event.key == pygame.K_BACKSPACE:
-                    self.input_text = self.input_text[:-1]
-                else:
-                    self.input_text += event.unicode
+            elif event.type == pygame.KEYDOWN:
+                if self.text_input_active == True:
+                    # Below Section - Filters out keypresses from self.invalid_keypress_dict that do not have a proper visual display, but instead show as a 'rectangle' as the visual input value.
+                    if event.key in self.invalid_keypress_dict.values():
+                        pass
+                    # -------------------------------------
+                    elif event.key == pygame.K_RETURN:
+                        self.text_input_active = False
+                        self.input_text_final = self.input_text
+                        self.input_text = ''
+                    elif event.key == pygame.K_BACKSPACE:
+                        self.input_text = self.input_text[:-1]
+                    else:
+                        self.input_text += event.unicode
+                elif self.error_input_active == True:
+                    if event.key == pygame.K_RETURN:
+                        self.error_input_active = False
+    # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Below Function - Called by locations.Locations.card_movement(). Handles framerate, event handling, and updating display.
     def draw_window_main(self):
         # print("draw_window_main")
@@ -217,6 +247,7 @@ class Game():
         clock = pygame.time.Clock()
         # clock.tick(500)
         # -------------------------------------
+        # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
         # -------------------------------------
         # Below Line - Updates the sprites rect locations for each frame. If this is not run, the cards simply teleport from the start location > the final location in card_movement() without any gradual movement.
@@ -224,55 +255,57 @@ class Game():
         # Below Line - Calls the LayeredDirty draw() method which ensures the cards are updated; draws all sprites in the right order onto the passed surface.
         self.card_rects = self.card_group.draw(self.screen_surface)
         # -------------------------------------
-        # Below Line - A list of all of the text objects' keys; the surfaces (The values are the rects).
+        # Below Line - A list of all of the text objects' keys; the surfaces (The values of the dict are the rects).
         text_obj_dict_keys_list = list(self.text_obj_dict.keys())
+        ###### Below Line - Do I actually need this? A list of all of the text objects as keys. (The values of the dict are the associated card groups).
+        ###### object_card_group_dict_keys_list = list(self.object_card_group_dict.keys())
         # -------------------------------------
         # Below Section - Handles the rendering of the card group info text and the associated surfaces.
-        for obj in text_obj_dict_keys_list[0:-1]:
+        for obj in text_obj_dict_keys_list[0:-4]:
             if obj != None:
-                self.screen_surface.blit(obj, self.text_obj_dict[obj])
+                if len(self.object_card_group_dict[obj]) != 0:
+                    self.screen_surface.blit(obj, self.text_obj_dict[obj])
+        # -------------------------------------
+        # Below Section - Handles the rendering of the player names.
+        for obj in text_obj_dict_keys_list[-4:-3]:
+            self.screen_surface.blit(obj, self.text_obj_dict[obj])
         # -------------------------------------
         # Below Section - Handles the rendering of the input_text_obj and the input_text_surface.
         if self.input_text_obj != None:
+            # Below Line - Disabled because I didn't like how it looked. The background text box 'outline' for the input_text display.
+            # self.input_text_outline_rect = pygame.draw.rect(self.screen_surface, self.grey_color, (self.input_text_obj_rect[0], self.input_text_obj_rect[1], 300, 100))
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
-            ###### Below Line - Disabled for now as not necessary for working input text. The background text box for the input_text.
-            # pygame.draw.rect(self.screen_surface, self.grey_color, self.input_text_obj_rect, 2)
         # -------------------------------------
         # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
         pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # Below Line - The main .update() call which updates the new draw information for each frame.
         self.screen.update(self.card_rects)
+        # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
+        pygame.display.update()
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Below Function - Called by locations.Locations.card_movement(). Handles framerate, event handling, and updating display.
-    def draw_window_the_draw(self):
-        # print("draw_window_the_draw")
+    def draw_window_the_draw_1(self):
+        # print("draw_window_the_draw_1")
         # -------------------------------------
         # Below Section - Sets the max framerate for the game.
         clock = pygame.time.Clock()
         # clock.tick(500)
         # -------------------------------------
+        # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
         # -------------------------------------
-        # Below Line - Updates the sprites rect locations for each frame. If this is not run, the cards simply teleport from the start location > the final location in card_movement() without any gradual movement.
-        self.card_group.update()
-        # Below Line - Calls the LayeredDirty draw() method which ensures the cards are updated; draws all sprites in the right order onto the passed surface.
-        self.card_rects = self.card_group.draw(self.screen_surface)
+        # Below Line - Blits (draws onto another surface) the background (Surface) to the background.rect (Rect).
+        self.screen_surface.blit(self.background, self.background.get_rect())
         # -------------------------------------
-        # Below Line - A list of all of the text objects' keys; the surfaces (The values are the rects).
-        text_obj_dict_keys_list = list(self.text_obj_dict.keys())
-        # -------------------------------------
-        # Below Section - Handles the rendering of the progression_text_obj and the progression_text_obj_rect.
-        if self.progression_text_obj != None:
-            self.screen_surface.blit(self.progression_text_obj, self.progression_text_obj_rect)
-        # -------------------------------------
-        # Below Section - Handles the rendering of the input_text_obj and the input_text_surface.
+        # Below Section - Handles the rendering of the progression_text_obj, input_text_obj, p1_player_name_text_obj, and the p2_player_name_text_obj onto the associated surfaces.
+        ###### Below Line - Disabled because I didn't like how it looked. The background text box 'outline' for the input_text display.
+        # self.input_text_outline_rect = pygame.draw.rect(self.screen_surface, self.grey_color, (self.progression_text_obj_rect.left, self.progression_text_obj_rect.top, 300, 100))
+        self.screen_surface.blit(self.progression_text_obj, self.progression_text_obj_rect)
         if self.input_text_obj != None:
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
+        self.screen_surface.blit(self.p1_player_name_text_obj, self.p1_player_name_text_obj_rect)
+        self.screen_surface.blit(self.p2_player_name_text_obj, self.p2_player_name_text_obj_rect)
         # -------------------------------------
-        # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
-        pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
-        ###### Below Line - *** Note: Is this a special method for LayeredDirty or something? Because this does not properly update the entire display as this alone does not cause the input text to be rendered on top of the screen, but only shows it if a card is blitted past it. ***  The main .update() call which updates the new draw information for each frame.
-        self.screen.update(self.card_rects)
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
         pygame.display.update()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

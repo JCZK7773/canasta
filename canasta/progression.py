@@ -18,74 +18,65 @@ LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s" # ****
 logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta\\Canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
 logger = logging.getLogger() # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Function - First Function for run loop. Handles logic for sequencing of the_draw functions for when certain criteria require certain sections to be rerun. # ****
-def the_draw_1(current_player=player.P1, testing = False): # ****
+# Below Function - Called by main.main(). Handles name creation. # ****
+def the_draw_1(testing = False): # ****
     print('the_draw_1')
-    logger.debug("the_draw_1\n") # ****
-    if current_player == player.P1: # ****
-        logger.debug("current_player == P1") # ****
-        if testing == True:
-            return "current_player == P1"
-        for players in [player.P1, player.P2]: # ****
-            the_draw_2(players) # ****
-        return the_draw_3() # ****
-    else: # ****
-        logger.debug("current_player != P1") # ****
-        if testing == True:
-            return "current_player == P2"
-        the_draw_2(current_player) # ****
-        return the_draw_3() # ****
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Function - Called by the_draw_1() function. Handles name creation, draw card choice (to determine first player), and ensures that if a Joker is drawn during this process, it is reset and redone (Logic for that handled in draw_joker_check). # ****
-def the_draw_2(current_player, testing = False): # ****
-    print('the_draw_2')
-    logger.debug("the_draw_2") # ****
+    logger.debug("the_draw_1") # ****
     # -------------------------------------
-    game.game.game_state = 'the_draw'
+    game.game.game_state = 'the_draw_1'
     # -------------------------------------
-    if current_player.name == 'Player 1' or current_player.name == 'Player 2': # ****
+    for current_player in [player.P1, player.P2]:
         while True: # ****
             try: # ****
+                prior_name = current_player.name
                 text = (f"{current_player.name}, what is your name?")
                 game.game.progression_text_func(current_player, text, True)
                 while game.game.text_input_active == True:
-                    game.game.draw_window_the_draw()
-                if game.game.text_input_active == False:
+                    game.game.draw_window_the_draw_1()
+                game.game.draw_window_the_draw_1()
+                if len(game.game.input_text_final) < 1: # ****
+                    raise ValueError # ****
+                else:
                     current_player.name = game.game.input_text_final
-                    print(current_player.name)
-                    game.game.draw_window_the_draw()
-                    if len(current_player.name) < 1: # ****
-                        raise ValueError # ****
-                    break # ****
+                break # ****
             except ValueError: # ****
-                text = ("\nSorry, but your name must be at least one character long. It looks as if your input was blank. Hit Enter to try again.\n")
+                game.game.error_input_active = True
+                text = ("Sorry, but your name must be at least one character long. It looks as if your input was blank. Hit Enter to try again.")
                 game.game.progression_text_func(current_player, text) # ****
-                pygame.event.wait()
-    # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they choose.
-    locations.Locate.the_draw_anim()
-    while True: # ****
-        try: # ****
-            text = (f"\n{current_player.name}, Select your card from the stack to determine which player will have the first play. Click a card to choose it.\n")
-            game.game.progression_text_func(current_player, text, False, True)
-            while game.Game.clicked_card == None:
-                pass
-            if game.Game.clicked_card != None:
-                ###### Below Section - Uncommented lines replace commented out lines.
-                current_player.draw_card = game.Game.clicked_card
-                current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(current_player.draw_card)))
-                ###### current_player.the_draw = int(input(f"\n{current_player.name}, Select your card from the stack to determine which player will have the first play. (Pick a card, represented as a number from 1-{len(deck.MasterDeck.deck)})\n\n> ")) # ****
-                ###### current_player.hand.append(deck.MasterDeck.deck.pop(current_player.the_draw - 1)) # ****
-                ###### -------------------------------------
-            break # ****
-        except (ValueError, IndexError): # ****
-            text = (f"\nSorry, but there was a problem with your input. Please try again.")
-            game.game.progression_text_func(current_player, text)
-    text = (f"\n{current_player.name} drew a {current_player.draw_card}\n") # ****
-    game.game.progression_text_func(current_player, text)
+                while game.game.error_input_active == True:
+                    game.game.draw_window_the_draw_1()
     # -------------------------------------
-    if testing == True:
-        return "draw_joker_check(current_player)"
-    draw_joker_check(current_player) # ****
+    return the_draw_2()
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Below Function - Called by the_draw_1() function. Handles draw card choice (to determine first player).
+def the_draw_2():
+    print('the_draw_2')
+    logger.debug('the_draw_2') # ****
+    # -------------------------------------
+    game.game.game_state = 'main'
+    # -------------------------------------
+    for current_player in [player.P1, player.P2]:
+        # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they choose.
+        locations.Locate.the_draw_anim()
+        while True: # ****
+            try: # ****
+                text = (f"{current_player.name}, Select your card from the stack to determine which player will have the first play. Click a card to choose it.")
+                game.game.progression_text_func(current_player, text, False, True)
+                while game.game.clicked_card == None:
+                    pass
+                if game.game.clicked_card != None:
+                    current_player.draw_card = game.Game.clicked_card
+                    current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(current_player.draw_card)))
+                break # ****
+            except (ValueError, IndexError): # ****
+                text = (f"\nSorry, but there was a problem with your input. Please try again.")
+                game.game.progression_text_func(current_player, text)
+        text = (f"\n{current_player.name} drew a {current_player.draw_card}\n") # ****
+        game.game.progression_text_func(current_player, text)
+        # -------------------------------------
+        if testing == True:
+            return "draw_joker_check(current_player)"
+        draw_joker_check(current_player) # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by the_draw_2() for Game Loop. Checks a player's draw card to ensure it is not a Joker, and if it is, redirects the process back to the_draw_1, to be redone. # ****
 def draw_joker_check(current_player, testing = False): # ****

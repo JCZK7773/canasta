@@ -1,6 +1,10 @@
+import pygame
+import game
+import locations
+# -------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
-        self.name = name # ****
+        self._name = name # ****
         self.draw_card = None
         self.hand = [] # ****
         self.play_cards = [] # ****
@@ -19,6 +23,27 @@ class Player(): # ****
         self.total_score_over_5000 = False
         self.special_case_cant_draw = False
         self.meld_group_dict = {} # Assigned in customappendlist for proper referencing/updating.
+    # -------------------------------------
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, val):
+        if self._name == 'Player 1':
+            pygame.draw.rect(game.game.screen_surface, game.game.background_color, game.game.p1_player_name_text_obj_rect)
+            game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.background_color)
+            game.game.p1_player_name_text_obj_rect = game.game.p1_player_name_text_obj.get_rect()
+            game.game.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
+            game.game.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
+        else:
+            pygame.draw.rect(game.game.screen_surface, game.game.background_color, game.game.p2_player_name_text_obj_rect)
+            game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.background_color)
+            game.game.p2_player_name_text_obj_rect = game.game.p2_player_name_text_obj.get_rect()
+            game.game.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
+            game.game.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
+        # -------------------------------------
+        self._name = val
     # -------------------------------------
     @property # ****
     def draw_card_val(self): # ****
