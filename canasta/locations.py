@@ -81,6 +81,8 @@ class Locations():
         # print("draw_window_func")
         if game.game.game_state == 'the_draw_1':
             game.game.draw_window_the_draw_1()
+        elif game.game.game_state == 'draw_window_the_draw_2':
+            game.game.draw_window_the_draw_2()
         elif game.game.game_state == 'main':
             game.game.draw_window_main()
         # Below Line - For test_run.test_run() only. For testing card movements and features.

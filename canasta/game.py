@@ -239,7 +239,7 @@ class Game():
                     if event.key == pygame.K_RETURN:
                         self.error_input_active = False
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Below Function - Called by locations.Locations.card_movement(). Handles framerate, event handling, and updating display.
+    # Below Function - Called by locations.Locations.card_movement() via draw_window_func(). Handles framerate, event handling, and updating display.
     def draw_window_main(self):
         # print("draw_window_main")
         # -------------------------------------
@@ -278,12 +278,10 @@ class Game():
         # -------------------------------------
         # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
         pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
-        # Below Line - The main .update() call which updates the new draw information for each frame.
-        self.screen.update(self.card_rects)
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
         pygame.display.update()
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Below Function - Called by locations.Locations.card_movement(). Handles framerate, event handling, and updating display.
+    # Below Function - Called by locations.Locations.card_movement() via draw_window_func(). Handles framerate, event handling, and updating display.
     def draw_window_the_draw_1(self):
         # print("draw_window_the_draw_1")
         # -------------------------------------
@@ -306,6 +304,48 @@ class Game():
         self.screen_surface.blit(self.p1_player_name_text_obj, self.p1_player_name_text_obj_rect)
         self.screen_surface.blit(self.p2_player_name_text_obj, self.p2_player_name_text_obj_rect)
         # -------------------------------------
+        # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
+        pygame.display.update()
+    # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Below Function - Called by locations.Locations.card_movement() via draw_window_func(). Handles framerate, event handling, and updating display.
+    def draw_window_the_draw_2(self):
+        # print("draw_window_the_draw_2")
+        # -------------------------------------
+        # Below Section - Sets the max framerate for the game.
+        clock = pygame.time.Clock()
+        # clock.tick(500)
+        # -------------------------------------
+        # Below Line - Calls the event handler which handles all events as if through a while loop.
+        self.event_handler()
+        # -------------------------------------
+        # Below Line - Updates the sprites rect locations for each frame. If this is not run, the cards simply teleport from the start location > the final location in card_movement() without any gradual movement.
+        self.card_group.update()
+        # Below Line - Calls the LayeredDirty draw() method which ensures the cards are updated; draws all sprites in the right order onto the passed surface.
+        self.card_rects = self.card_group.draw(self.screen_surface)
+        # -------------------------------------
+        # Below Line - A list of all of the text objects' keys; the surfaces (The values of the dict are the rects).
+        text_obj_dict_keys_list = list(self.text_obj_dict.keys())
+        ###### Below Line - Do I actually need this? A list of all of the text objects as keys. (The values of the dict are the associated card groups).
+        ###### object_card_group_dict_keys_list = list(self.object_card_group_dict.keys())
+        # -------------------------------------
+        # Below Section - Handles the rendering of the card group info text and the associated surfaces.
+        for obj in text_obj_dict_keys_list[0:-4]:
+            if obj != None:
+                if len(self.object_card_group_dict[obj]) != 0:
+                    self.screen_surface.blit(obj, self.text_obj_dict[obj])
+        # -------------------------------------
+        # Below Section - Handles the rendering of the player names.
+        for obj in text_obj_dict_keys_list[-4:-3]:
+            self.screen_surface.blit(obj, self.text_obj_dict[obj])
+        # -------------------------------------
+        # Below Section - Handles the rendering of the input_text_obj and the input_text_surface.
+        if self.input_text_obj != None:
+            # Below Line - Disabled because I didn't like how it looked. The background text box 'outline' for the input_text display.
+            # self.input_text_outline_rect = pygame.draw.rect(self.screen_surface, self.grey_color, (self.input_text_obj_rect[0], self.input_text_obj_rect[1], 300, 100))
+            self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
+        # -------------------------------------
+        # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
+        pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
         pygame.display.update()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
