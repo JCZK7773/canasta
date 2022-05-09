@@ -55,10 +55,10 @@ def the_draw_2(testing = False):
     game.game.game_state = 'the_draw_2'
     # -------------------------------------
     for current_player in [player.P1, player.P2]:
-        # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they choose.
-        locations.Locate.the_draw_anim()
-        while True: # ****
-            try: # ****
+        if current_player.draw_card == None:
+            # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they want to choose.
+            locations.Locate.the_draw_anim()
+            while True: # ****
                 text = (f"{current_player.name}, Select your card from the stack to determine which player will have the first play. Click a card to choose.")
                 game.game.progression_text_func(current_player, text, False, True)
                 for card in deck.MasterDeck.deck:
@@ -71,29 +71,26 @@ def the_draw_2(testing = False):
                 game.game.clicked_card = None
                 game.game.clicked_card_list.clear()
                 break # ****
-            except (ValueError, IndexError): # ****
-                text = (f"Sorry, but there was a problem with your input. Please hit Enter to try again.")
-                game.game.progression_text_func(current_player, text)
-                game.game.error_input_active = True
-                while game.game.error_input_active == True:
-                    game.game.draw_window_main()
-        text = (f"\n{current_player.name} drew a {current_player.draw_card}\n") # ****
-        game.game.progression_text_func(current_player, text)
-        # -------------------------------------
-        if testing == True:
-            return "draw_joker_check(current_player)"
-        draw_joker_check(current_player) # ****
+            # -------------------------------------
+            if testing == True:
+                return "draw_joker_check(current_player)"
+            draw_joker_check(current_player) # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Below Function - Called by the_draw_2() for Game Loop. Checks a player's draw card to ensure it is not a Joker, and if it is, redirects the process back to the_draw_1, to be redone. # ****
+# Below Function - Called by the_draw_2() for Game Loop. Checks a player's draw card to ensure it is not a Joker, and if it is, redirects the process back to the_draw_2, to be redone. # ****
 def draw_joker_check(current_player, testing = False): # ****
+    print('draw_joker_check')
     logger.debug("draw_joker_check\n") # ****
     if current_player.draw_card.rank == 'Joker': # ****
         if testing == True:
             return "current_player.draw_card.rank == \'Joker\'"
-        text = (f"Sorry, {current_player.name}, you picked a Joker, which is not available for use during The Draw! You must choose another card!\n") # ****
+        text = (f"Sorry, {current_player.name}, you picked a Joker, which is not available for use during The Draw! You must choose another card! Hit Enter to try again!") # ****
         game.game.progression_text_func(current_player, text)
-        MasterDeck.deck.append(current_player.hand.pop(0)) # ****
-        the_draw_1(current_player) # ****
+        game.game.error_input_active = True
+        deck.MasterDeck.deck.append(current_player.hand.pop(0)) # ****
+        current_player.draw_card = None
+        while game.game.error_input_active == True:
+            game.game.draw_window_main()
+        the_draw_2(current_player) # ****
     else:
         if testing == True:
             return "current_player.draw_card.rank != \'Joker\'"

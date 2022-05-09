@@ -6450,3 +6450,94 @@ DEBUG 2022-05-09 13:14:10,402 - draw_joker_check
 
 DEBUG 2022-05-09 13:14:12,306 - draw_joker_check
 
+DEBUG 2022-05-09 13:32:38,193 - main
+
+DEBUG 2022-05-09 13:32:38,194 - setup
+
+DEBUG 2022-05-09 13:32:39,429 - the_draw_1
+DEBUG 2022-05-09 13:32:58,448 - main
+
+DEBUG 2022-05-09 13:32:58,449 - setup
+
+DEBUG 2022-05-09 13:32:59,721 - the_draw_1
+DEBUG 2022-05-09 13:33:01,121 - the_draw_2
+DEBUG 2022-05-09 13:33:05,243 - draw_joker_check
+
+DEBUG 2022-05-09 13:33:08,294 - draw_joker_check
+
+DEBUG 2022-05-09 13:33:17,037 - main
+
+DEBUG 2022-05-09 13:33:17,038 - setup
+
+DEBUG 2022-05-09 13:33:18,309 - the_draw_1
+DEBUG 2022-05-09 13:33:20,636 - the_draw_2
+DEBUG 2022-05-09 13:33:26,214 - draw_joker_check
+
+DEBUG 2022-05-09 13:33:30,437 - draw_joker_check
+
+DEBUG 2022-05-09 13:39:53,949 - main
+
+DEBUG 2022-05-09 13:39:53,950 - setup
+
+DEBUG 2022-05-09 13:39:55,264 - the_draw_1
+DEBUG 2022-05-09 13:39:56,667 - the_draw_2
+DEBUG 2022-05-09 13:40:06,471 - draw_joker_check
+
+DEBUG 2022-05-09 13:40:08,154 - draw_joker_check
+
+DEBUG 2022-05-09 13:41:14,838 - main
+
+DEBUG 2022-05-09 13:41:14,839 - setup
+
+DEBUG 2022-05-09 13:41:16,137 - the_draw_1
+DEBUG 2022-05-09 13:41:17,352 - the_draw_2
+DEBUG 2022-05-09 13:41:22,473 - draw_joker_check
+
+DEBUG 2022-05-09 13:41:25,124 - draw_joker_check
+
+DEBUG 2022-05-09 13:42:27,910 - main
+
+DEBUG 2022-05-09 13:42:27,911 - setup
+
+DEBUG 2022-05-09 13:42:29,198 - the_draw_1
+DEBUG 2022-05-09 13:42:30,320 - the_draw_2
+DEBUG 2022-05-09 13:42:32,444 - draw_joker_check
+
+DEBUG 2022-05-09 13:42:32,934 - draw_joker_check
+
+DEBUG 2022-05-09 14:00:24,869 - main
+
+DEBUG 2022-05-09 14:00:24,870 - setup
+
+DEBUG 2022-05-09 14:00:25,963 - the_draw_1
+DEBUG 2022-05-09 14:00:27,403 - the_draw_2
+DEBUG 2022-05-09 14:00:32,352 - draw_joker_check
+
+DEBUG 2022-05-09 14:04:51,512 - main
+
+DEBUG 2022-05-09 14:04:51,513 - setup
+
+DEBUG 2022-05-09 14:04:52,707 - the_draw_1
+DEBUG 2022-05-09 14:04:54,636 - the_draw_2
+DEBUG 2022-05-09 14:04:57,169 - draw_joker_check
+
+DEBUG 2022-05-09 14:05:00,556 - the_draw_2
+DEBUG 2022-05-09 14:05:05,420 - draw_joker_check
+
+DEBUG 2022-05-09 14:05:17,605 - main
+
+DEBUG 2022-05-09 14:05:17,606 - setup
+
+DEBUG 2022-05-09 14:05:18,796 - the_draw_1
+DEBUG 2022-05-09 14:05:20,025 - the_draw_2
+DEBUG 2022-05-09 14:05:22,736 - draw_joker_check
+
+DEBUG 2022-05-09 14:06:59,888 - main
+
+DEBUG 2022-05-09 14:06:59,889 - setup
+
+DEBUG 2022-05-09 14:07:01,090 - the_draw_1
+DEBUG 2022-05-09 14:07:02,110 - the_draw_2
+DEBUG 2022-05-09 14:07:05,336 - draw_joker_check
+
+DEBUG 2022-05-09 14:07:21,454 - the_draw_2

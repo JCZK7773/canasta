@@ -173,6 +173,8 @@ class Game():
 
     @progression_text.setter
     def progression_text(self, val):
+        if self.progression_text_obj != None and len(val) < len(self._progression_text):
+            pygame.draw.rect(self.screen_surface, self.background_color, self.progression_text_obj_rect)
         self._progression_text = val
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
@@ -218,14 +220,17 @@ class Game():
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN and self.click_card_active == True:
                 # Below Section - Whenever clicking a card; detects if the card was clicked, and appends it to clicked_card_list.
+                clicked_a_card = False
                 for card in self.clickable_card_list:
                     if card.rect.collidepoint(event.pos):
+                        clicked_a_card = True
                         card.pos_y_dist_to_card_top = event.pos[1] - card.rect.top
                         self.collided_cards_dict[card.pos_y_dist_to_card_top] = card
-                if self.clicked_card == None:
-                    self.clicked_card = self.collided_cards_dict[min(self.collided_cards_dict.keys())]
-                    self.clicked_card.highlighted = True
-                    self.collided_cards_dict.clear()
+                if clicked_a_card == True:
+                    if self.clicked_card == None:
+                        self.clicked_card = self.collided_cards_dict[min(self.collided_cards_dict.keys())]
+                        self.clicked_card.highlighted = True
+                        self.collided_cards_dict.clear()
                 # -------------------------------------
             elif event.type == pygame.KEYDOWN:
                 if self.text_input_active == True:

@@ -17,7 +17,7 @@ class CustomAppendList(list):
         list_index = player.Player.meld_group_dict[self.card_group_name].index(self)
         return list_index
     # -------------------------------------
-    # Below Function - Customized version of the built-in append method. Handles items differently based on certain qualifications, and also stores and passes certain required information about the self (list) to the various location movement functions for 'automation'. Also determines card.image based on destination location.
+    # Below Function - Customized version of the built-in append method. Handles items differently based on certain qualifications, and also stores and passes certain required information about the self (list) to the various location movement functions for 'automation'.
     def append(self, item):
         # print("append")
         # Below Section - Appends the item to the self (list) and then updates the associated reference dictionaries for accurate comparisons. If these dicts are not updated, the locations are not properly calculated.
