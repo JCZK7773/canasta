@@ -76,19 +76,6 @@ class Locations():
             p2_hand_next_loc = [self.p2_hand_start_loc[0] + x_val_increase, self.p2_hand_start_loc[1]]
             return p2_hand_next_loc
     # -------------------------------------
-    # Below Function - Called by card_movement(). Detects the game_state, which is assigned in the various progression.py loops. This determines which version of draw_window() will be called, which renders a different set of Sprites, rects, lines, etc. to conform to the game progress content.
-    def draw_window_func(self):
-        # print("draw_window_func")
-        if game.game.game_state == 'the_draw_1':
-            game.game.draw_window_the_draw_1()
-        elif game.game.game_state == 'draw_window_the_draw_2':
-            game.game.draw_window_the_draw_2()
-        elif game.game.game_state == 'main':
-            game.game.draw_window_main()
-        # Below Line - For test_run.test_run() only. For testing card movements and features.
-        elif game.game.game_state == 'test_run':
-            game.game.draw_window_main()
-        # -------------------------------------
     # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location.
     def card_movement(self, loc, current_card):
         # print("card_movement")
@@ -100,8 +87,8 @@ class Locations():
         # -------------------------------------
         # Below Section - Handles the assignment of proper card.image depending on whether or not it is going to the deck or not, and whether or not it already has the proper face_down or face_up image set.
         if loc == self.card_group_loc_dict['deck'] or game.game.game_state == 'draw_window_the_draw_2':
-            # Below Line - I do NOT need to add .get_rect() here. This is NOT required.
-            current_card.image = card.Card.face_down_image
+            ###### Below Line - CHANGD FROM FACE DOWN TO FACE UP FOR TESTING PURPOSES. I do NOT need to add .get_rect() here. This is NOT required.
+            current_card.image = current_card.face_up_image
         else:
             if current_card.image == card.Card.face_down_image:
                 # Below Line - I do NOT need to add .get_rect() here. This is NOT required.
@@ -142,18 +129,18 @@ class Locations():
                     current_y = current_card.y
                     if int(prior_y) < int(current_y):
                         # draw_window_calls_num += 1
-                        self.draw_window_func()
+                        game.game.draw_window_main()
                 elif y_lesser == False and int(current_card.y) != int(loc[1]):
                     prior_y = current_card.y
                     current_card.y -= ratio
                     current_y = current_card.y
                     if int(prior_y) > int(current_y):
                         # draw_window_calls_num += 1
-                        self.draw_window_func()
+                        game.game.draw_window_main()
                 elif y_lesser == None:
                     pass
                     ###### Below Line - Bugged for some reason. Can't figure it out. Takes 3 seconds to move the card. Keep disabled.  Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
-                    # self.draw_window_func()
+                    # game.game.draw_window_main()
         # -------------------------------------
         elif int(y_difference) > int(x_difference):
             ratio = round((x_difference / y_difference), 3)
@@ -169,18 +156,18 @@ class Locations():
                     current_x = current_card.x
                     if int(prior_x) < int(current_x):
                         # draw_window_calls_num += 1
-                        self.draw_window_func()
+                        game.game.draw_window_main()
                 elif x_lesser == False and int(current_card.x) != int(loc[0]):
                     prior_x = current_card.x
                     current_card.x -= ratio
                     current_x = current_card.x
                     if int(prior_x) > int(current_x):
                         # draw_window_calls_num += 1
-                        self.draw_window_func()
+                        game.game.draw_window_main()
                 elif x_lesser == None:
                     pass
                     ###### Below Line - Bugged for some reason. Can't figure it out. Takes 3 seconds to move the card. Keep disabled. Added for the instance in which the y-coordinate is == final y-coordinate, but x-coordinate still needs to be changed.
-                    # self.draw_window_func()
+                    # game.game.draw_window_main()
         # -------------------------------------
         # Below Section - For the rare instance when both the current x & y coordinates are the same distance from the final location's x & y coordinates.
         elif int(y_difference) == int(x_difference):
@@ -195,7 +182,7 @@ class Locations():
                 else:
                     current_card.y -= 1
                 # draw_window_calls_num += 1
-                self.draw_window_func()
+                game.game.draw_window_main()
         # -------------------------------------
         # Below Section - For testing. Trying to figure out the cause of inconsistent times for card movements.
         # current_time = time.time()
@@ -313,7 +300,8 @@ class Locations():
     def the_draw_anim(self):
         print("the_draw_anim")
         # -------------------------------------
-        prior_time = time.time()
+        # Below Line - For testing purposes only.
+        # prior_time = time.time()
         # -------------------------------------
         next_card_loc = [self.top_left_visible_from_center[0], self.top_left_visible_from_center[1] + 5]
         # -------------------------------------
@@ -323,9 +311,10 @@ class Locations():
             next_card_loc[0] += 17
             next_card_loc[1] += 8
         # -------------------------------------
-        current_time = time.time()
-        final_time = round(current_time - prior_time, 2)
-        print(f"the_draw_anim() final_time = {final_time}")
+        # Below Section - For testing purposes only.
+        # current_time = time.time()
+        # final_time = round(current_time - prior_time, 2)
+        # print(f"the_draw_anim() final_time = {final_time}")
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Locate = Locations()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

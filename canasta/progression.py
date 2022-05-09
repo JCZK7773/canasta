@@ -32,8 +32,7 @@ def the_draw_1(testing = False): # ****
                 text = (f"{current_player.name}, what is your name?")
                 game.game.progression_text_func(current_player, text, True)
                 while game.game.text_input_active == True:
-                    locations.Locate.draw_window_func()
-                locations.Locate.draw_window_func()
+                    game.game.draw_window_main()
                 if len(game.game.input_text_final) < 1: # ****
                     raise ValueError # ****
                 else:
@@ -44,34 +43,40 @@ def the_draw_1(testing = False): # ****
                 text = ("Sorry, but your name must be at least one character long. It looks as if your input was blank. Hit Enter to try again.")
                 game.game.progression_text_func(current_player, text) # ****
                 while game.game.error_input_active == True:
-                    locations.Locate.draw_window_func()
+                    game.game.draw_window_main()
     # -------------------------------------
     return the_draw_2()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by the_draw_1() function. Handles draw card choice (to determine first player).
-def the_draw_2():
+def the_draw_2(testing = False):
     print('the_draw_2')
     logger.debug('the_draw_2') # ****
     # -------------------------------------
-    game.game.game_state = 'main'
+    game.game.game_state = 'the_draw_2'
     # -------------------------------------
     for current_player in [player.P1, player.P2]:
         # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they choose.
         locations.Locate.the_draw_anim()
         while True: # ****
             try: # ****
-                text = (f"{current_player.name}, Select your card from the stack to determine which player will have the first play. Click a card to choose it.")
+                text = (f"{current_player.name}, Select your card from the stack to determine which player will have the first play. Click a card to choose.")
                 game.game.progression_text_func(current_player, text, False, True)
+                for card in deck.MasterDeck.deck:
+                    game.game.clickable_card_list.append(card)
                 while game.game.clicked_card == None:
-                    print("game.game.clicked_card == None")
-                    locations.Locate.draw_window_func()
-                if game.game.clicked_card != None:
-                    current_player.draw_card = game.Game.clicked_card
-                    current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(current_player.draw_card)))
+                    game.game.draw_window_main()
+                current_player.draw_card = game.game.clicked_card
+                current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(current_player.draw_card)))
+                game.game.click_card_active = False
+                game.game.clicked_card = None
+                game.game.clicked_card_list.clear()
                 break # ****
             except (ValueError, IndexError): # ****
-                text = (f"\nSorry, but there was a problem with your input. Please try again.")
+                text = (f"Sorry, but there was a problem with your input. Please hit Enter to try again.")
                 game.game.progression_text_func(current_player, text)
+                game.game.error_input_active = True
+                while game.game.error_input_active == True:
+                    game.game.draw_window_main()
         text = (f"\n{current_player.name} drew a {current_player.draw_card}\n") # ****
         game.game.progression_text_func(current_player, text)
         # -------------------------------------

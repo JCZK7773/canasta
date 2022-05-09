@@ -1,4 +1,5 @@
 # THINGS TO DO
+    # Change back locations.card_movement() first if clause back to assign face_down images instead of face_up images. Changed this for testing purposes in determining which card is being chosen for card clicks.
     # Pretty sure that I am loading the images each time I reassign the image. I think it would increase performance to load the image once and then just assign a variable to the image??
     # Finish the error_input_active section in progression.py. Need to finish coding it in the event_handler().
     # Remove the 'return None' code inside of progression.the_draw_2(). Implemented to avoid the_draw_anim() call for debugging purposes.
@@ -96,5 +97,5 @@
         # Conclusions
             # Higher the Ratio = Higher the Total Time
             # Higher the draw_window_calls_num = Higher the Total Time. More calls; more time.
-            # Actual problem was in game.py. Was updating every single card again after only updating them via LayeredDirty .update() method. 
+            # Actual problem was in game.py. Was updating every single card again after only updating them via LayeredDirty .update() method.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -102,7 +102,7 @@ class Card(pygame.sprite.DirtySprite): # ****
     # -------------------------------------
     # Below Function - Assigns each Card instance an image & associated card.rect based on card.name via comparison with image .png names. Assigns each card to its associated .png as the Card.image.
     def assign_card_images_and_rects(card):
-        with os.scandir(os.path.join('assets\8_bit_cards')) as asset_path:
+        with os.scandir(os.path.join('assets\hi_res_cards')) as asset_path:
             for entry in asset_path:
                 entry_str = (str(entry))
                 if card.rank.lower() in entry_str:
