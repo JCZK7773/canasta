@@ -33,7 +33,7 @@
     # 04/21/22: Spent entire 4 hr. session debugging and fixing up some bad code from the many changes I made from the last session. Worked out most of the bugs from that, such as some logic, improper indentations, improper module/class/instance references, etc.
     # 04/22/22 - 05/04/22: Finished and polished the progression text and input text sections in game.py and the associated logic. Completely debugged the system, and cleaned up and changed things around in the code for draw_window_the_draw(). Input happens in real time, backspace works, and display is reset each time a value is processed. Continued to debug logic in progression.py.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# FOR REFERENCE
+# NOTES
     #     pygame.Rect
     # pygame object for storing rectangular coordinates
     # Rect(left, top, width, height) -> Rect
@@ -69,4 +69,32 @@
     # (optional) used for line thickness or to indicate that the rectangle is to be filled (not to be confused with the width value of the rect parameter)
 
     # If you reassign self.image.get_rect() then you have to reassign .center() as well. You do not need to reassign .get_rect() every time you edit the object!!!!!
+
+    # Debugging Info for Card Movement Speed Testing
+        # First Half of List Iteration
+            # Highest Performance Card Info
+                # Lowest Time = 0.01
+                # Iter_num = 1,000
+                # Ratio = .001
+                # Iter_num/Final_time = 100,000
+            # Lowest Performance Card Info
+                # Highest Time = 1.1
+                # Iter_num = 288
+                # Ratio = .976
+                # Iter_num/Final_time = 261
+        # Second Half of List Iteration
+            # Highest Performance Card Info
+                # Lowest Time = 0.01
+                # Iter_num = 501
+                # Ratio = .002
+                # Iter_num/Final_time = 50,100
+            # Lowest Performance Card Info
+                # Highest Time = 1.71
+                # Iter_num = 712
+                # Ratio = .608
+                # Iter_num/Final_time = 424
+        # Conclusions
+            # Higher the Ratio = Higher the Total Time
+            # Higher the draw_window_calls_num = Higher the Total Time. More calls; more time.
+            # Actual problem was in game.py. Was updating every single card again after only updating them via LayeredDirty .update() method. 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

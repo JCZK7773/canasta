@@ -32,8 +32,8 @@ def the_draw_1(testing = False): # ****
                 text = (f"{current_player.name}, what is your name?")
                 game.game.progression_text_func(current_player, text, True)
                 while game.game.text_input_active == True:
-                    game.game.draw_window_the_draw_1()
-                game.game.draw_window_the_draw_1()
+                    locations.Locate.draw_window_func()
+                locations.Locate.draw_window_func()
                 if len(game.game.input_text_final) < 1: # ****
                     raise ValueError # ****
                 else:
@@ -44,7 +44,7 @@ def the_draw_1(testing = False): # ****
                 text = ("Sorry, but your name must be at least one character long. It looks as if your input was blank. Hit Enter to try again.")
                 game.game.progression_text_func(current_player, text) # ****
                 while game.game.error_input_active == True:
-                    game.game.draw_window_the_draw_1()
+                    locations.Locate.draw_window_func()
     # -------------------------------------
     return the_draw_2()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +63,8 @@ def the_draw_2():
                 text = (f"{current_player.name}, Select your card from the stack to determine which player will have the first play. Click a card to choose it.")
                 game.game.progression_text_func(current_player, text, False, True)
                 while game.game.clicked_card == None:
-                    pass
+                    print("game.game.clicked_card == None")
+                    locations.Locate.draw_window_func()
                 if game.game.clicked_card != None:
                     current_player.draw_card = game.Game.clicked_card
                     current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(current_player.draw_card)))

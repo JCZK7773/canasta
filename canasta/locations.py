@@ -93,13 +93,13 @@ class Locations():
     def card_movement(self, loc, current_card):
         # print("card_movement")
         # Below Section - For testing. Trying to find the cause of inconsistent card movement times.
-        prior_time = time.time()
-        iter_num = 0
-        draw_window_calls_num = 0
-        total_distance = round(math.sqrt((loc[0] - current_card.x) ** 2 + (loc[1] - current_card.y) ** 2), 2)
+        # prior_time = time.time()
+        # iter_num = 0
+        # draw_window_calls_num = 0
+        # total_distance = round(math.sqrt((loc[0] - current_card.x) ** 2 + (loc[1] - current_card.y) ** 2), 2)
         # -------------------------------------
         # Below Section - Handles the assignment of proper card.image depending on whether or not it is going to the deck or not, and whether or not it already has the proper face_down or face_up image set.
-        if loc == self.card_group_loc_dict['deck']:
+        if loc == self.card_group_loc_dict['deck'] or game.game.game_state == 'draw_window_the_draw_2':
             # Below Line - I do NOT need to add .get_rect() here. This is NOT required.
             current_card.image = card.Card.face_down_image
         else:
@@ -131,7 +131,7 @@ class Locations():
         if x_difference > y_difference:
             ratio = round((y_difference / x_difference), 3)
             while [int(current_card.x), int(current_card.y)] != loc:
-                iter_num += 1
+                # iter_num += 1
                 if x_lesser == True and int(current_card.x) != int(loc[0]):
                     current_card.x += 1
                 elif x_lesser == False and int(current_card.x) != int(loc[0]):
@@ -141,14 +141,14 @@ class Locations():
                     current_card.y += ratio
                     current_y = current_card.y
                     if int(prior_y) < int(current_y):
-                        draw_window_calls_num += 1
+                        # draw_window_calls_num += 1
                         self.draw_window_func()
                 elif y_lesser == False and int(current_card.y) != int(loc[1]):
                     prior_y = current_card.y
                     current_card.y -= ratio
                     current_y = current_card.y
                     if int(prior_y) > int(current_y):
-                        draw_window_calls_num += 1
+                        # draw_window_calls_num += 1
                         self.draw_window_func()
                 elif y_lesser == None:
                     pass
@@ -158,7 +158,7 @@ class Locations():
         elif int(y_difference) > int(x_difference):
             ratio = round((x_difference / y_difference), 3)
             while [int(current_card.x), int(current_card.y)] != loc:
-                iter_num += 1
+                # iter_num += 1
                 if y_lesser == True and int(current_card.y) != int(loc[1]):
                     current_card.y += 1
                 elif y_lesser == False and int(current_card.y) != int(loc[1]):
@@ -168,14 +168,14 @@ class Locations():
                     current_card.x += ratio
                     current_x = current_card.x
                     if int(prior_x) < int(current_x):
-                        draw_window_calls_num += 1
+                        # draw_window_calls_num += 1
                         self.draw_window_func()
                 elif x_lesser == False and int(current_card.x) != int(loc[0]):
                     prior_x = current_card.x
                     current_card.x -= ratio
                     current_x = current_card.x
                     if int(prior_x) > int(current_x):
-                        draw_window_calls_num += 1
+                        # draw_window_calls_num += 1
                         self.draw_window_func()
                 elif x_lesser == None:
                     pass
@@ -185,7 +185,7 @@ class Locations():
         # Below Section - For the rare instance when both the current x & y coordinates are the same distance from the final location's x & y coordinates.
         elif int(y_difference) == int(x_difference):
             while [int(current_card.x), int(current_card.y)] != loc:
-                iter_num += 1
+                # iter_num += 1
                 if x_lesser == True:
                     current_card.x += 1
                 else:
@@ -194,46 +194,21 @@ class Locations():
                     current_card.y += 1
                 else:
                     current_card.y -= 1
-                draw_window_calls_num += 1
+                # draw_window_calls_num += 1
                 self.draw_window_func()
         # -------------------------------------
         # Below Section - For testing. Trying to figure out the cause of inconsistent times for card movements.
-        current_time = time.time()
-        final_time = round(current_time - prior_time, 2)
-        if final_time != 0.0:
-            print(f"final_time = {final_time}")
-            print(f"total_distance / final_time = {round(total_distance / final_time, 2)}")
-            print(f"iter_num = {iter_num}")
-            print(f"draw_window_calls_num / total_distance = {draw_window_calls_num / total_distance}")
-            print(f"ratio = {ratio}")
-            print(f"iter_num / final_time = {round(iter_num / final_time, 2)}")
-            print(f"ratio / final_time = {round(ratio / final_time, 2)}")
-            print("**********************************")
-        # First Half of List Iteration
-            # Highest Performance Card Info
-                # Lowest Time = 0.01
-                # Iter_num = 1,000
-                # Ratio = .001
-                # Iter_num/Final_time = 100,000
-            # Lowest Performance Card Info
-                # Highest Time = 1.1
-                # Iter_num = 288
-                # Ratio = .976
-                # Iter_num/Final_time = 261
-        # Second Half of List Iteration
-            # Highest Performance Card Info
-                # Lowest Time = 0.01
-                # Iter_num = 501
-                # Ratio = .002
-                # Iter_num/Final_time = 50,100
-            # Lowest Performance Card Info
-                # Highest Time = 1.71
-                # Iter_num = 712
-                # Ratio = .608
-                # Iter_num/Final_time = 424
-        # Conclusions
-            # Higher the Ratio = Higher the Total Time
-            # Higher the draw_window_calls_num = Higher the Total Time. More calls; more time.
+        # current_time = time.time()
+        # final_time = round(current_time - prior_time, 2)
+        # if final_time != 0.0:
+        #     print(f"final_time = {final_time}")
+        #     print(f"total_distance / final_time = {round(total_distance / final_time, 2)}")
+        #     print(f"iter_num = {iter_num}")
+        #     print(f"draw_window_calls_num / total_distance = {draw_window_calls_num / total_distance}")
+        #     print(f"ratio = {ratio}")
+        #     print(f"iter_num / final_time = {round(iter_num / final_time, 2)}")
+        #     print(f"ratio / final_time = {round(ratio / final_time, 2)}")
+        #     print("**********************************")
     # -------------------------------------
     # Below Function - Called by func_dict via key 'deck', 'discard_pile', and 'hand' whenever a card is appended to the MasterDeck.deck, MasterDeck.discard_pile, or P1.hand/P2.hand. Calls card_movement() function to visually and digitally move card to the proper location.
     def visual_deck_discard_hand_update(self, card_group_name, current_card):
@@ -340,13 +315,13 @@ class Locations():
         # -------------------------------------
         prior_time = time.time()
         # -------------------------------------
-        next_card_loc = self.top_left_visible_from_center
+        next_card_loc = [self.top_left_visible_from_center[0], self.top_left_visible_from_center[1] + 5]
         # -------------------------------------
         # Below Section - Iterator method. Performance time for function - 135.76 vs generator method performance - 137.33.
         for current_card in deck.MasterDeck.deck:
-            self.card_movement(next_card_loc, current_card)
+            [current_card.x, current_card.y] = next_card_loc
             next_card_loc[0] += 17
-            next_card_loc[1] += 10
+            next_card_loc[1] += 8
         # -------------------------------------
         current_time = time.time()
         final_time = round(current_time - prior_time, 2)

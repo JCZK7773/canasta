@@ -245,7 +245,7 @@ class Game():
         # -------------------------------------
         # Below Section - Sets the max framerate for the game.
         clock = pygame.time.Clock()
-        # clock.tick(500)
+        # clock.tick(50)
         # -------------------------------------
         # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
@@ -276,6 +276,10 @@ class Game():
             # self.input_text_outline_rect = pygame.draw.rect(self.screen_surface, self.grey_color, (self.input_text_obj_rect[0], self.input_text_obj_rect[1], 300, 100))
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
         # -------------------------------------
+        # Below Section - Handles the rendering of the progression_text_obj/rect.
+        if self.progression_text_obj != None:
+            self.screen_surface.blit(self.progression_text_obj, self.progression_text_obj_rect)
+        # -------------------------------------
         # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
         pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
@@ -287,7 +291,7 @@ class Game():
         # -------------------------------------
         # Below Section - Sets the max framerate for the game.
         clock = pygame.time.Clock()
-        # clock.tick(500)
+        # clock.tick(50)
         # -------------------------------------
         # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
@@ -313,7 +317,7 @@ class Game():
         # -------------------------------------
         # Below Section - Sets the max framerate for the game.
         clock = pygame.time.Clock()
-        # clock.tick(500)
+        # clock.tick(50)
         # -------------------------------------
         # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
@@ -345,7 +349,7 @@ class Game():
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
         # -------------------------------------
         # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
-        pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
+        # pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
         pygame.display.update()
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
