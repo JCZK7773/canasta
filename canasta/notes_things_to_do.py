@@ -1,21 +1,13 @@
 # THINGS TO DO
-    # Change back locations.card_movement() first if clause back to assign face_down images instead of face_up images. Changed this for testing purposes in determining which card is being chosen for card clicks.
-    # Pretty sure that I am loading the images each time I reassign the image. I think it would increase performance to load the image once and then just assign a variable to the image??
-    # Finish the error_input_active section in progression.py. Need to finish coding it in the event_handler().
-    # Remove the 'return None' code inside of progression.the_draw_2(). Implemented to avoid the_draw_anim() call for debugging purposes.
-    # I think I tried this but it did not work. Change event_handler() so that the 'for event in pygame.event.get()' is instead 'for event in pygame.event.wait()'?? Or something along those lines. Supposedly this will reduce CPU usage. Perhaps I can call pygame.event.wait() in the progression loops ONLY whenever I am expecting user input. See NOTES for a paste of supposedly improved code snippet.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
-        # Convert inputs to text rects on display.
-        # Change the instances where numerical inputs are utilized, converting them to use card-clicks to determine the values instead.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
-    # Test & improve card movement system for smoothness / timing until satisfactory.
-        # I suspect the card speed movement issue has to do with cards in Deck 1 vs cards in Deck 2. ???
-        # Implement delta timing frame system.
-    # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.
+        # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.
+    # Pretty sure that I am loading the images each time I reassign the image. I think it would increase performance to load the image once and then just assign a variable to the image??
+    # Implement delta timing frame system.
+    # I think I tried this but it did not work. Change event_handler() so that the 'for event in pygame.event.get()' is instead 'for event in pygame.event.wait()'?? Or something along those lines. Supposedly this will reduce CPU usage. Perhaps I can call pygame.event.wait() in the progression loops ONLY whenever I am expecting user input. See NOTES for a paste of supposedly improved code snippet.
     # Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
-    # Change input system from keyboard-based to mouse-based.
-    # Add in card sounds & background music.
     # Change length of import words/characters (and variable & function names) to a lesser amount by using import xxxxxx AS x to improve readability, etc.
+    # Add in card sounds & background music.
     # Post on web so others can check for bugs as well.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # DEVLOG
@@ -33,6 +25,8 @@
     # 04/12/22 - 04/20/22: Began and finished implementing logic system for event handling of text output, user input, and card-clicking. Began and mostly finished reworking progression.py to be compatible with the modern 2D code base. Began work on determining how to change areas of code where numerical values were used to represent cards to the new system of card-clicking & processing.
     # 04/21/22: Spent entire 4 hr. session debugging and fixing up some bad code from the many changes I made from the last session. Worked out most of the bugs from that, such as some logic, improper indentations, improper module/class/instance references, etc.
     # 04/22/22 - 05/04/22: Finished and polished the progression text and input text sections in game.py and the associated logic. Completely debugged the system, and cleaned up and changed things around in the code for draw_window_the_draw(). Input happens in real time, backspace works, and display is reset each time a value is processed. Continued to debug logic in progression.py.
+    # 05/05/22 - 05/09/22: Started, finished, debugged, and tested the card movement speed issue, card click event handling, input (backspacking, clearing the rects after input, etc.), reworked much of the logic in progression.py, and continued to clean up comments and outdated code as I go along.
+    # 05/10/22 - ...
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # NOTES
     #     pygame.Rect
@@ -98,4 +92,8 @@
             # Higher the Ratio = Higher the Total Time
             # Higher the draw_window_calls_num = Higher the Total Time. More calls; more time.
             # Actual problem was in game.py. Was updating every single card again after only updating them via LayeredDirty .update() method.
+
+    # The best alternative is DeviantArt, which is free. Other great sites and apps similar to OpenGameArt.org are Freesound (Free, Open Source), Poly Haven (Free), SkinBase (Free) and RateMyDrawings (Free).
+
+    # 1.452
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

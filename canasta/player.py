@@ -1,6 +1,7 @@
 import pygame
 import game
 import locations
+import deck
 # -------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
@@ -30,14 +31,12 @@ class Player(): # ****
 
     @name.setter
     def name(self, val):
-        if self._name == 'Player 1':
-            pygame.draw.rect(game.game.screen_surface, game.game.background_color, game.game.p1_player_name_text_obj_rect)
+        if self.name == 'Player 1':
             game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.background_color)
             game.game.p1_player_name_text_obj_rect = game.game.p1_player_name_text_obj.get_rect()
             game.game.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
             game.game.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
         else:
-            pygame.draw.rect(game.game.screen_surface, game.game.background_color, game.game.p2_player_name_text_obj_rect)
             game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.background_color)
             game.game.p2_player_name_text_obj_rect = game.game.p2_player_name_text_obj.get_rect()
             game.game.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
@@ -47,7 +46,7 @@ class Player(): # ****
     # -------------------------------------
     @property # ****
     def draw_card_val(self): # ****
-        return MasterDeck.draw_ranks.get(self.draw_card.rank) # ****
+        return deck.MasterDeck.draw_ranks.get(self.draw_card.rank) # ****
     # ------------------------------------------
     @property # ****
     def meld_requirement(self): # ****

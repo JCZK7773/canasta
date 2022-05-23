@@ -6,7 +6,7 @@ import locations
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Card(pygame.sprite.DirtySprite): # ****
     # Below Line - Assigns the face-down 'card backing' file. To be used as the card.image whenever cards are populated into the deck.
-    face_down_image_file = os.path.join('assets\8_bit_cards\card back red.png')
+    face_down_image_file = os.path.join('assets\hi_res_cards\card_back_red.jpg')
     # -------------------------------------
     def __init__(self, rank, suit): # ****
         super().__init__()

@@ -76,8 +76,8 @@ class Locations():
             p2_hand_next_loc = [self.p2_hand_start_loc[0] + x_val_increase, self.p2_hand_start_loc[1]]
             return p2_hand_next_loc
     # -------------------------------------
-    # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location.
-    def card_movement(self, loc, current_card):
+    # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location. Also takes the the_draw_2 parameter for whenever the cards need to be placed face-down during the draw card selection segment.
+    def card_movement(self, loc, current_card, the_draw_2 = False):
         # print("card_movement")
         # Below Section - For testing. Trying to find the cause of inconsistent card movement times.
         # prior_time = time.time()
@@ -86,9 +86,8 @@ class Locations():
         # total_distance = round(math.sqrt((loc[0] - current_card.x) ** 2 + (loc[1] - current_card.y) ** 2), 2)
         # -------------------------------------
         # Below Section - Handles the assignment of proper card.image depending on whether or not it is going to the deck or not, and whether or not it already has the proper face_down or face_up image set.
-        if loc == self.card_group_loc_dict['deck'] or game.game.game_state == 'draw_window_the_draw_2':
-            ###### Below Line - CHANGD FROM FACE DOWN TO FACE UP FOR TESTING PURPOSES. I do NOT need to add .get_rect() here. This is NOT required.
-            current_card.image = current_card.face_up_image
+        if loc == self.card_group_loc_dict['deck'] or the_draw_2 == True:
+            current_card.image = card.Card.face_down_image
         else:
             if current_card.image == card.Card.face_down_image:
                 # Below Line - I do NOT need to add .get_rect() here. This is NOT required.
@@ -305,9 +304,10 @@ class Locations():
         # -------------------------------------
         next_card_loc = [self.top_left_visible_from_center[0], self.top_left_visible_from_center[1] + 5]
         # -------------------------------------
-        # Below Section - Iterator method. Performance time for function - 135.76 vs generator method performance - 137.33.
+        # Below Section - Places the cards in their staggered locations. The top option '[current_card.x]' makes them all appear instantaneously, while the lower 'self.card_movement' moves them one-by-one.
         for current_card in deck.MasterDeck.deck:
-            [current_card.x, current_card.y] = next_card_loc
+            [current_card.x, current_card.y] = next_card_loc # INSTANT OPTION
+            # self.card_movement(next_card_loc, current_card, True) # ONE-BY-ONE OPTION
             next_card_loc[0] += 17
             next_card_loc[1] += 8
         # -------------------------------------

@@ -1,3 +1,4 @@
+import time
 import pygame
 import sys
 import math
@@ -22,10 +23,10 @@ class Game():
         pygame.init()
         # Below Section - Sets up the pygame window size and assigns a title caption for the game window.
         self.screen = pygame.display
-        self.screen_surface = pygame.display.set_mode((1920 / 2, 1020))
+        self.screen_surface = pygame.display.set_mode((1920, 1020))
         pygame.display.set_caption("Canasta")
         # -------------------------------------
-        self.background = pygame.Surface([1920 / 2, 1020])
+        self.background = pygame.Surface([1920, 1020])
         self.background.fill(self.background_color)
     # -------------------------------------
     # Below Section - Card Sprite Section
@@ -54,6 +55,19 @@ class Game():
     # -------------------------------------
         self.font = pygame.font.Font('freesansbold.ttf', 18)
         # -------------------------------------
+        # Below Line - Type: dict. A dictionary of invalid keypresses (which cannot be displayed properly, but instead show as rectangular symbols). Key = description, Value = associated event_key.
+        self.invalid_keypress_dict = {'numpad_enter': 1073741912, 'tab': 9, 'DEL': 127, 'ESC': 27}
+        # -------------------------------------
+        # Below Line - Type: bool. The active variable that changes whether or not text input is active or inactive (True or False).
+        self.text_input_active = False
+        # Below Line - Type: bool. The active error variable. Whenever an exception is raised, this is changed to True until the player reads the message and then hits 'Enter'.
+        self.error_input_active = False
+        # Below Line - Type: bool. The multiple choice active variable. This is altered in progression.py in various locations whenever a player is being prompted with a multiple choice question. When active (True), the game searches for the newly created text rects so that they will be rendered on the screen, and the rects are up for being clicked on and detected in the self.event_handler(). Once a choice is made, the choice is assigned to self.chosen.mc, and this bool is changed back to False via the event_handler().
+        self.multiple_choice_active = False
+        # Below Line - Type: bool. The internal use variable for the calculated property self.choose_multiple_cards; used when the player has to choose multiple cards instead of just one. Allows the player to keep adding cards to the self.clicked_card_list as long as it is active (True).
+        self._choose_multiple_cards = False
+        # -------------------------------------
+        # Below Section - Type: str. The text associated with all of the different, unchanging player names and card groups.
         self.p1_hand_text = (f'{player.P1.name}\'s Hand')
         self.p2_hand_text = (f'{player.P2.name}\'s Hand')
         self.p1_play_cards_text = (f'{player.P1.name}\'s Play Cards')
@@ -62,29 +76,41 @@ class Game():
         self.p2_melds_text = (f'{player.P2.name}\'s Melds')
         self.p1_red_3_meld_text = (f'{player.P1.name}\'s Red 3 Meld')
         self.p2_red_3_meld_text = (f'{player.P2.name}\'s Red 3 Meld')
-        self._progression_text = ('What is your name?!?')
-        # Below Line - Type: str. Internal value; external use value is self.input_text as a calculated property which assigns the self.input_text_obj & self.input_text_obj_rect automatically. The actual text the user inputs via processed keypresses in the main loop.
-        self._input_text = ''
-        # Below Line - Type: str. The finished input string which is the 'returned' input. After the user finishes input / hits enter/return, this string copies the input_text before the input_text is reset back to a blank string, input_text_reset.
-        self.input_text_final = 'Return this input...'
-        # Below Line - Type: str. Assigned inside of the self.input_text calcualted property.
-        self.prior_input_text = None
-        # Below Line - The active variable that changes whether or not text input is active or inactive (True or False).
-        self.text_input_active = False
-        # Below Line - Type: bool. Whenever an exception is raised, this is changed to True until the player reads the message and then hits 'Enter'.
-        self.error_input_active = False
-        self.invalid_keypress_dict = {'numpad_enter': 1073741912, 'tab': 9, 'DEL': 127, 'ESC': 27}
         # -------------------------------------
-        # Below Section - Placeholder to avoid error. Assigned through progression_text.
+        # Below Section - Placeholders to avoid error. Assigned through progression_text.
+        # Below Line - Type: str. Internal value; external use value is self.progression text calculated property which assigns the self.progression_text_obj & self.progression_text_obj_rect automatically. The actual text the game outputs in the main loop, assigned through various locations in progression.py.
+        self._progression_text = ('What is your name?!?')
         self.progression_text_obj = None
         self.progression_text_obj_rect = None
         # -------------------------------------
         # Below Section - Placeholders to avoid 'NoneType' error. Accessed through self.text_obj_dict & assigned through the self.input_text calculated property every time it is altered (except for .get_rect() as that does not need to be changed every time it is updated. If that is done, it messes up the text display by 'recreating' another rect centered at a different location centered on it's new dimensions).
+        # Below Line - Type: str. Internal value; external use value is self.input_text as a calculated property which assigns the self.input_text_obj & self.input_text_obj_rect automatically. The actual text the user inputs via processed keypresses in the main loop.
+        self._input_text = ''
+        # Below Line - Type: rendered string. Placeholder to avoid error. Assigned through self.input_text calculated property.
         self.input_text_obj = None
-        # Below Line - Placeholder: This rect's .center is slightly offset from self.progression_text_obj_rect.center inside the self.input_text calculated property.
+        # Below Line - Type: rect. Placeholder: Assigned through calculated property self.input_text. This rect's .center is slightly offset from self.progression_text_obj_rect.center inside the self.input_text calculated property.
         self.input_text_obj_rect = None
         # Below Line - Placeholder: The background 'outline' text box for the input display.
         self.input_text_outline_rect = None
+        # Below Line - Type: str. The finished input string which is the 'returned' input. After the user finishes input / hits enter/return, this string copies the input_text before the input_text is reset back to a blank string, input_text_reset.
+        self.input_text_final = 'Return this input...'
+        # Below Line - Type: str. Assigned inside of the self.input_text calcualted property.
+        self.prior_input_text = None
+        # -------------------------------------
+        # Below Line - Type: str? or rect? The variable that is the player's selected choice from among the multiple choice options. Assigned in various places in progression.py
+        self.selected_choice = None
+        # -------------------------------------
+        # Below Section - Placeholders to avoid error. Assigned through calculated property self.multiple_choice_text_1.
+        # Below Line - Type: string. Internal value for the calculated property self.multiple_choice_text_1. The text for the first multiple choice option.
+        self._multiple_choice_text_1 = 'MC Text 1'
+        self.multiple_choice_text_1_obj = None
+        self.multiple_choice_text_1_obj_rect = None
+        # -------------------------------------
+        # Below Section - Placeholders to avoid error. Assigned through calculated property self.multiple_choice_text_2.
+        # Below Line - Type: string. Placeholder for the calculated property self.multiple_choice_text_1. The text for the first multiple choice option.
+        self._multiple_choice_text_2 = 'MC Text 2'
+        self.multiple_choice_text_2_obj = None
+        self.multiple_choice_text_2_obj_rect = None
         # -------------------------------------
         self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.background_color)
         self.deck_text_obj_rect = self.deck_text_obj.get_rect()
@@ -133,12 +159,11 @@ class Game():
         # -------------------------------------
         self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.background_color)
         self.p2_player_name_text_obj_rect = self.p2_player_name_text_obj.get_rect()
-        self.p2_player_name_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_player_name_text_loc']
         self.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
         self.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
         # -------------------------------------
-        ###### Below Line - This is not currently being used.
-        self.top_center_title = [locations.Locate.visible_center[0] - (round(self.deck_text_obj_rect[2] / 2)), locations.Locate.visible_top + 20]
+        ###### Below Line - This is currently not being used.
+        # self.top_center_title = [locations.Locate.visible_center[0] - (round(self.deck_text_obj_rect[2] / 2)), locations.Locate.visible_top + 20]
         # -------------------------------------
         self.text_obj_dict = {self.deck_text_obj: self.deck_text_obj_rect,
                               self.discard_pile_text_obj: self.discard_pile_text_obj_rect,
@@ -153,7 +178,9 @@ class Game():
                               self.p1_player_name_text_obj: self.p1_player_name_text_obj_rect,
                               self.p2_player_name_text_obj: self.p2_player_name_text_obj_rect,
                               self.progression_text_obj: self.progression_text_obj_rect,
-                              self.input_text_obj: self.input_text_obj_rect}
+                              self.input_text_obj: self.input_text_obj_rect,
+                              self.multiple_choice_text_1_obj: self.multiple_choice_text_1_obj_rect,
+                              self.multiple_choice_text_2_obj: self.multiple_choice_text_2_obj_rect}
         # -------------------------------------
         self.object_card_group_dict = {self.deck_text_obj: deck.MasterDeck.deck,
                               self.discard_pile_text_obj: deck.MasterDeck.discard_pile,
@@ -174,7 +201,10 @@ class Game():
     @progression_text.setter
     def progression_text(self, val):
         if self.progression_text_obj != None and len(val) < len(self._progression_text):
-            pygame.draw.rect(self.screen_surface, self.background_color, self.progression_text_obj_rect)
+            print(val)
+            for current_card in self.card_group:
+                current_card.dirty = 1
+            # -------------------------------------
         self._progression_text = val
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
@@ -197,18 +227,41 @@ class Game():
         if self.progression_text_obj_rect != None:
             self.input_text_obj_rect.center = [self.progression_text_obj_rect.center[0], self.progression_text_obj_rect.center[1] + 40]
     # -------------------------------------
-    # Below Function - Called by various places in progression.py to update the self.progression_text and the associated rects and centers, as well as whether or not an input is being asked for from the user. If so, handles the assigning of the rect and center for the self.input_text and the activating of the text_input_active variable for the event handler to allow for processed input. If there is no input, ensures that input_text_obj = None so that the renderer does not try to draw it on the screen.
-    def progression_text_func(self, current_player, text, has_input = False, click_card_active = False):
-        print("progression_text_func")
-        # -------------------------------------
-        self.progression_text = text
-        # Below Section - Handles input. Assigns the input rect to coincide with the position of the progression_text
-        if has_input == True:
-            self.text_input_active = True
-        # -------------------------------------
-        if click_card_active == True:
-            self.click_card_active = True
-    # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    @property
+    def multiple_choice_text_1(self):
+        return self._multiple_choice_text_1
+
+    @multiple_choice_text_1.setter
+    def multiple_choice_text_1(self, val):
+        self._multiple_choice_text_1 = val
+        self.multiple_choice_text_1_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.multiple_choice_text_1_obj_rect = self.multiple_choice_text_1_obj.get_rect()
+        if self.progression_text_obj_rect != None:
+            self.multiple_choice_text_1_obj_rect.center = [self.progression_text_obj_rect.center[0], self.progression_text_obj_rect.center[1] + 40]
+    # -------------------------------------
+    @property
+    def multiple_choice_text_2(self):
+        return self._multiple_choice_text_2
+
+    @multiple_choice_text_1.setter
+    def multiple_choice_text_2(self, val):
+        self._multiple_choice_text_2 = val
+        self.multiple_choice_text_2_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.multiple_choice_text_2_obj_rect = self.multiple_choice_text_2_obj.get_rect()
+        if self.multiple_choice_text_1_obj != None:
+            self.multiple_choice_text_2_obj_rect.center = [self.multiple_choice_text_1_obj_rect.center[0], self.multiple_choice_text_1_obj_rect.center[1] + 40]
+    # -------------------------------------
+    # Below Section - Calculated property which assigns the value to the internal variable _choose_multiple_cards & clears the self.clicked_card_list so that it is cleared  when val == False for next time it is activated
+    @property
+    def choose_multiple_cards(self):
+        return self._choose_multiple_cards
+
+    @choose_multiple_cards.setter
+    def choose_multiple_cards(self, val):
+        self._choose_multiple_cards = val
+        if val == False:
+            self.clicked_card_list.clear()
+    # -------------------------------------
     # Below Function - Handles all events for pygame. Called by the various draw_window() functions.
     def event_handler(self):
         # print("event_handler")
@@ -220,6 +273,7 @@ class Game():
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN and self.click_card_active == True:
                 # Below Section - Whenever clicking a card; detects if the card was clicked, and appends it to clicked_card_list.
+                self.clicked_card = None
                 clicked_a_card = False
                 for card in self.clickable_card_list:
                     if card.rect.collidepoint(event.pos):
@@ -229,9 +283,32 @@ class Game():
                 if clicked_a_card == True:
                     if self.clicked_card == None:
                         self.clicked_card = self.collided_cards_dict[min(self.collided_cards_dict.keys())]
-                        self.clicked_card.highlighted = True
                         self.collided_cards_dict.clear()
+                        ###### Below Line - Disabled because I did not like how it looked.
+                        ###### self.clicked_card.highlighted = True
+                        if self.choose_multiple_cards == True:
+                            self.clicked_card_list.append(self.clicked_card)
+                        else:
+                            self.click_card_active = False
+                        # Below Section - For the cases when a player has to choose from multiple card/meld options and the option to not use any card at all by clicking a multiple_choice_text rect. This will change the multiple_choice_text to False in the instance that they choose a card/meld instead, and visa versa in the other instance's code block.
+                        if self.multiple_choice_active == True:
+                            self.multiple_choice_active = False
                 # -------------------------------------
+            # Below Section - For clicking both of the multiple_choice_text rects (1 & 2) whenever the player is prompted with a multiple choice option.
+            elif event.type == pygame.MOUSEBUTTONDOWN and self.multiple_choice_active == True:
+                for rect in self.text_obj_dict[-1:-3][rect]:
+                    if rect.collidepoint(event.pos):
+                        if rect == self.multiple_choice_text_1_obj_rect:
+                            self.selected_choice = self._multiple_choice_text_1
+                        else:
+                            self.selected_choice = self._multiple_choice_text_2
+                        ###### Below Line - Don't have this coded yet, but maybe want to make it so that the rect will become highlighted whenever a player clicks on it.
+                        ###### self.selected_choice.highlighted = True
+                        self.multiple_choice_active = False
+                        # Below Section - For the case in which the player is choosing multiple cards and is finalizing their selections; changes self.click_card_active to False (as it remains active while self.multiple_choice_active == True).
+                        if self.click_card_active == True:
+                            self.click_card_active = False
+            # -------------------------------------
             elif event.type == pygame.KEYDOWN:
                 if self.text_input_active == True:
                     # Below Section - Filters out keypresses from self.invalid_keypress_dict that do not have a proper visual display, but instead show as a 'rectangle' as the visual input value.
@@ -249,6 +326,15 @@ class Game():
                 elif self.error_input_active == True:
                     if event.key == pygame.K_RETURN:
                         self.error_input_active = False
+    # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Below Function - Called by progression.py in various locations. Used to display a progression_text output for 3 seconds so the player has time to read the message.
+    def xs_display(self, num):
+        # print('xs_display')
+        prior_time = time.time()
+        current_time = 0
+        while (current_time - prior_time) < num:
+            self.draw_window_main()
+            current_time = time.time()
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Below Function - Called by locations.Locations.card_movement() via draw_window_main()(). Handles framerate, event handling, and updating display.
     def draw_window_main(self):
@@ -270,6 +356,22 @@ class Game():
             # Below Line - Calls the LayeredDirty draw() method which ensures the cards are updated; draws all sprites in the right order onto the passed surface.
             self.card_rects = self.card_group.draw(self.screen_surface)
         # -------------------------------------
+        self.text_obj_dict = {self.deck_text_obj: self.deck_text_obj_rect,
+                              self.discard_pile_text_obj: self.discard_pile_text_obj_rect,
+                              self.p1_hand_text_obj: self.p1_hand_text_obj_rect,
+                              self.p2_hand_text_obj: self.p2_hand_text_obj_rect,
+                              self.p1_play_cards_text_obj: self.p1_play_cards_text_obj_rect,
+                              self.p2_play_cards_text_obj: self.p2_play_cards_text_obj_rect,
+                              self.p1_melds_text_obj: self.p1_melds_text_obj_rect,
+                              self.p2_melds_text_obj: self.p2_melds_text_obj_rect,
+                              self.p1_red_3_meld_text_obj: self.p1_red_3_meld_text_obj_rect,
+                              self.p2_red_3_meld_text_obj: self.p2_red_3_meld_text_obj_rect,
+                              self.p1_player_name_text_obj: self.p1_player_name_text_obj_rect,
+                              self.p2_player_name_text_obj: self.p2_player_name_text_obj_rect,
+                              self.progression_text_obj: self.progression_text_obj_rect,
+                              self.input_text_obj: self.input_text_obj_rect,
+                              self.multiple_choice_text_1_obj: self.multiple_choice_text_1_obj_rect,
+                              self.multiple_choice_text_2_obj: self.multiple_choice_text_2_obj_rect}
         # Below Line - A list of all of the text objects' keys; the surfaces (The values of the dict are the rects).
         text_obj_dict_keys_list = list(self.text_obj_dict.keys())
         ###### Below Line - I don't think I need this. Do I actually need this? A list of all of the text objects as keys. (The values of the dict are the associated card groups).
@@ -277,7 +379,7 @@ class Game():
         # -------------------------------------
         if self.game_state == 'main':
             # Below Section - Handles the rendering of the card group info text and the associated surfaces.
-            for obj in text_obj_dict_keys_list[0:-4]:
+            for obj in text_obj_dict_keys_list[0:10]:
                 if obj != None:
                     if len(self.object_card_group_dict[obj]) != 0:
                         self.screen_surface.blit(obj, self.text_obj_dict[obj])
@@ -285,7 +387,7 @@ class Game():
             pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # -------------------------------------
         # Below Section - Handles the rendering of the player names.
-        for obj in text_obj_dict_keys_list[-4:-3]:
+        for obj in text_obj_dict_keys_list[10:12]:
             self.screen_surface.blit(obj, self.text_obj_dict[obj])
         # -------------------------------------
         # Below Section - Handles the rendering of the progression_text_obj/rect.
@@ -297,6 +399,14 @@ class Game():
             # Below Line - Disabled because I didn't like how it looked. The background text box 'outline' for the input_text display.
             # self.input_text_outline_rect = pygame.draw.rect(self.screen_surface, self.grey_color, (self.input_text_obj_rect[0], self.input_text_obj_rect[1], 300, 100))
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
+        # -------------------------------------
+        # Below Section - Handles the rendering of the multiple_choice_text_1_obj and the associated surface.
+        if self.multiple_choice_text_1_obj != None:
+            self.screen_surface.blit(self.multiple_choice_text_1_obj, self.multiple_choice_text_1_obj_rect)
+        # -------------------------------------
+        # Below Section - Handles the rendering of the multiple_choice_text_2_obj and the associated surface.
+        if self.multiple_choice_text_2_obj != None:
+            self.screen_surface.blit(self.multiple_choice_text_2_obj, self.multiple_choice_text_2_obj_rect)
         # -------------------------------------
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.
         pygame.display.update()

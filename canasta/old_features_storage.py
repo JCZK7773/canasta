@@ -43,6 +43,10 @@
     # Below Line - Note: This has to go below game.game.card_group.update() & game.game.card_rects = game.game.card_group.draw(game.game.screen_surface) or it will not display on the screen surface.
     # pygame.draw.line(game.game.screen_surface, game.game.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 # def card_movement(self, loc, current_card):
 #     print("card_movement")
 #     # Below Section - For testing. Trying to find the cause of inconsistent card movement times.
@@ -138,3 +142,17 @@
 #         current_time = time.time()
 #         print(round(current_time - prior_time, 2))
 # # -------------------------------------
+
+
+
+
+###### Below Section - I THINK I CAN REMOVE THIS AS I HAVE MOVED THIS CODE BLOCK TO BE RUN EVERY TIME progression_text IS UPDATED IF THE VAL IS SMALLER THAN PREVIOUS VAL. Trying to make it so that the progression_text & rect are 'erased' from the screen so that it doesn't leave behind changed pixels after the fact.
+# Below Secion - Fixes issue by redrawing the background and all of the cards. I believe there is a more proper way to do this, though.
+# for card in game.game.card_group:
+#     card.dirty = 1
+# -------------------------------------
+# Below Section - Does not fix the issue. For reference so I don't try this stuff again.
+# game.game.screen_surface.blit(game.game.background, game.game.background.get_rect())
+# game.game.card_rects = game.game.card_group.draw(game.game.screen_surface)
+# pygame.display.update()
+###### -------------------------------------
