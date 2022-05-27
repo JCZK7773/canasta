@@ -156,3 +156,58 @@
 # game.game.card_rects = game.game.card_group.draw(game.game.screen_surface)
 # pygame.display.update()
 ###### -------------------------------------
+
+
+
+
+# Below Function - NO LONGER NEEDED IN 2D VERSION. Called by sorted_and_numbered_list_printer(). To be used as a sorter key function which orders the cards in ascending order based on card rank. # ****
+# def sorter_key_function(item): # ****
+#     # Below - If item is a Card (not a list or tuple). # ****
+#     if type(item) != list: # ****
+#         int_suit = MasterDeck.draw_suit_ranks.get(item.suit)
+#         if item.rank != 'Joker': # ****
+#             int_rank = MasterDeck.draw_ranks.get(item.rank) # ****
+#             final_value = int(str(int_rank) + str(int_suit)) # ****
+#             return final_value # ****
+#         else: # ****
+#             final_value = int(str(1) + str(int_suit)) # ****
+#             return final_value # ****
+#     # Below - If item is a meld (list). # ****
+#     else: # ****
+#         if item[0].rank != 'Joker': # ****
+#             int_rank = MasterDeck.draw_ranks.get(item[0].rank) # ****
+#             return int_rank # ****
+#         else: # ****
+#             return int(1) # ****
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+###### Below Function - NO LONGER NEEDED IN 2D VERSION. Not sure I will continue to use this in the 2D version of the game. Called by play_1(), draw_discard_pile_attempt_temp_meld_wild_card_addition(), play_2(), valid_play_check_and_sort(), wild_card_meld_choice_prompt(), discard(), went_out_check() functions. Miscellaneous function for handling printed lists that I want to be sorted and then numbered; for the purpose of input choice selection via the preceding num. # ****
+# def sorted_and_numbered_list_printer(passed_list_1, passed_list_2 = None): # ****
+#     logger.debug("sorted_and_numbered_list_printer\n") # ****
+#     # -------------------------------------
+#     passed_list_1.sort(key=sorter_key_function) # ****
+#     # -------------------------------------
+#     num = 1 # ****
+#     for item in passed_list_1: # ****
+#         # -------------------------------------
+#         # Below Line - Strictly for the purpose of testing.
+#         testing_register_list.append(item)
+#         # -------------------------------------
+#         if item != passed_list_1[-1]: # ****
+#             print(f"{num}) {item}") # ****
+#         else: # ****
+#             print(f"{num}) {item}\n") # ****
+#         num += 1 # ****
+#         # -------------------------------------
+#     if passed_list_2 != None: # ****
+#         passed_list_2.sort(key=sorter_key_function) # ****
+#         for item in passed_list_2: # ****
+#             if item != passed_list_2[-1]: # ****
+#                 print(f"{num}) {item}") # ****
+#             else: # ****
+#                 print(f"{num}) {item}\n") # ****
+#             num += 1 # ****
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

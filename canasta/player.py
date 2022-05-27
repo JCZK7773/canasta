@@ -32,12 +32,12 @@ class Player(): # ****
     @name.setter
     def name(self, val):
         if self.name == 'Player 1':
-            game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.background_color)
+            game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.dark_blue_color)
             game.game.p1_player_name_text_obj_rect = game.game.p1_player_name_text_obj.get_rect()
             game.game.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
             game.game.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
         else:
-            game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.background_color)
+            game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.dark_blue_color)
             game.game.p2_player_name_text_obj_rect = game.game.p2_player_name_text_obj.get_rect()
             game.game.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
             game.game.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
@@ -69,7 +69,7 @@ class Player(): # ****
     def hand_wild_cards_reference_list(self): # ****
         hand_wild_cards = [] # ****
         for card in self.hand: # ****
-            if (card.rank, card.suit) in Deck().wild_cards: # ****
+            if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
                 hand_wild_cards.append(card) # ****
         return hand_wild_cards # ****
     # -------------------------------------
@@ -82,7 +82,7 @@ class Player(): # ****
                 if type(item) == list: # ****
                     wild_card_count = 0 # ****
                     for card in item: # ****
-                        if (card.rank, card.suit) in Deck().wild_cards: # ****
+                        if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
                             wild_card_count += 1 # ****
                     if 7 <= wild_card_count or wild_card_count < 3: # ****
                         non_maxed_out_melds.append(item) # ****
@@ -108,10 +108,10 @@ class Player(): # ****
                     if type(item) == list: # ****
                         for card in item: # ****
                         # -------------------------------------
-                            if (card.rank, card.suit) in Deck().wild_cards: # ****
+                            if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
                                 wild_card_canasta_check_count += 1 # ****
                             # -------------------------------------
-                            round_score += Deck().ranks.get(card.rank) # ****
+                            round_score += deck.Deck().ranks.get(card.rank) # ****
                         # -------------------------------------
                         if len(item) >= 7: # ****
                             if wild_card_canasta_check_count == 7: # ****
@@ -141,7 +141,7 @@ class Player(): # ****
                     # -------------------------------------
             if len(self.hand) > 0: # ****
                 for card in self.hand: # ****
-                    round_score -= Deck().ranks.get(card.rank) # ****
+                    round_score -= deck.Deck().ranks.get(card.rank) # ****
                     # -------------------------------------
         return round_score # ****
     # -------------------------------------

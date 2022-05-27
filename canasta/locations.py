@@ -86,7 +86,7 @@ class Locations():
         # total_distance = round(math.sqrt((loc[0] - current_card.x) ** 2 + (loc[1] - current_card.y) ** 2), 2)
         # -------------------------------------
         # Below Section - Handles the assignment of proper card.image depending on whether or not it is going to the deck or not, and whether or not it already has the proper face_down or face_up image set.
-        if loc == self.card_group_loc_dict['deck'] or the_draw_2 == True:
+        if loc == self.card_group_loc_dict['deck'] or game.game.game_state == 'the_draw_2':
             current_card.image = card.Card.face_down_image
         else:
             if current_card.image == card.Card.face_down_image:
@@ -204,7 +204,7 @@ class Locations():
     # -------------------------------------
     # Below Function - Detects where cards should be placed within a meld, and detects and visually updates the proper visual locations associated with this. Called by visual_meld_update(). Calls canasta_find_face_up_card() at the end of the function. Created this function because it is used in two places: for melds AND cards. Detects the length of the melds and determines proper visual placement.
     def card_num_canasta_detect(self, card_group_name, card, meld, meld_num, card_num):
-        print("card_num_canasta_detect")
+        # print("card_num_canasta_detect")
         # -------------------------------------
         # Below Section - Assigns variables associated with the meld's & cards' location.
         y_val_increase = card_num * 18
@@ -297,7 +297,7 @@ class Locations():
     # -------------------------------------
     # Below Function - Called by progression.the_draw_2() to visually lay out all of the cards in the MasterDeck so that the player can pick the card that they want to choose for determining the first player.
     def the_draw_anim(self):
-        print("the_draw_anim")
+        # print("the_draw_anim")
         # -------------------------------------
         # Below Line - For testing purposes only.
         # prior_time = time.time()

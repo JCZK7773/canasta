@@ -15,6 +15,8 @@ class Game():
     # -------------------------------------
         self.black_color = (0, 0, 0)
         self.grey_color = (79, 78, 74)
+        self.light_blue_color = (36, 107, 240)
+        self.dark_blue_color = (1, 16, 89)
         self.background_color = (0,40,0)
     # -------------------------------------
     # Below Section - Pygame Display Setup Section
@@ -112,52 +114,52 @@ class Game():
         self.multiple_choice_text_2_obj = None
         self.multiple_choice_text_2_obj_rect = None
         # -------------------------------------
-        self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.background_color)
+        self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.dark_blue_color)
         self.deck_text_obj_rect = self.deck_text_obj.get_rect()
         self.deck_text_obj_rect.center = locations.Locate.text_name_loc_dict['Deck']
         # -------------------------------------
-        self.discard_pile_text_obj = self.font.render('Discard Pile', True, (255, 255, 255), self.background_color)
+        self.discard_pile_text_obj = self.font.render('Discard Pile', True, (255, 255, 255), self.dark_blue_color)
         self.discard_pile_text_obj_rect = self.discard_pile_text_obj.get_rect()
         self.discard_pile_text_obj_rect.center = locations.Locate.text_name_loc_dict['Discard Pile']
         # -------------------------------------
-        self.p1_hand_text_obj = self.font.render(self.p1_hand_text, True, (255, 255, 255), self.background_color)
+        self.p1_hand_text_obj = self.font.render(self.p1_hand_text, True, (255, 255, 255), self.dark_blue_color)
         self.p1_hand_text_obj_rect = self.p1_hand_text_obj.get_rect()
         self.p1_hand_text_obj_rect.center = locations.Locate.text_name_loc_dict['p1_hand_text_loc']
         # -------------------------------------
-        self.p2_hand_text_obj = self.font.render(self.p2_hand_text, True, (255, 255, 255), self.background_color)
+        self.p2_hand_text_obj = self.font.render(self.p2_hand_text, True, (255, 255, 255), self.dark_blue_color)
         self.p2_hand_text_obj_rect = self.p2_hand_text_obj.get_rect()
         self.p2_hand_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_hand_text_loc']
         # -------------------------------------
-        self.p1_play_cards_text_obj = self.font.render(self.p1_play_cards_text, True, (255, 255, 255), self.background_color)
+        self.p1_play_cards_text_obj = self.font.render(self.p1_play_cards_text, True, (255, 255, 255), self.dark_blue_color)
         self.p1_play_cards_text_obj_rect = self.p1_play_cards_text_obj.get_rect()
         self.p1_play_cards_text_obj_rect.center = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc']
         # -------------------------------------
-        self.p2_play_cards_text_obj = self.font.render(self.p2_play_cards_text, True, (255, 255, 255), self.background_color)
+        self.p2_play_cards_text_obj = self.font.render(self.p2_play_cards_text, True, (255, 255, 255), self.dark_blue_color)
         self.p2_play_cards_text_obj_rect = self.p2_play_cards_text_obj.get_rect()
         self.p2_play_cards_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc']
         # -------------------------------------
-        self.p1_melds_text_obj = self.font.render(self.p1_melds_text, True, (255, 255, 255), self.background_color)
+        self.p1_melds_text_obj = self.font.render(self.p1_melds_text, True, (255, 255, 255), self.dark_blue_color)
         self.p1_melds_text_obj_rect = self.p1_melds_text_obj.get_rect()
         self.p1_melds_text_obj_rect.center = locations.Locate.text_name_loc_dict['p1_melds_text_loc']
         # -------------------------------------
-        self.p2_melds_text_obj = self.font.render(self.p2_melds_text, True, (255, 255, 255), self.background_color)
+        self.p2_melds_text_obj = self.font.render(self.p2_melds_text, True, (255, 255, 255), self.dark_blue_color)
         self.p2_melds_text_obj_rect = self.p2_melds_text_obj.get_rect()
         self.p2_melds_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_melds_text_loc']
         # -------------------------------------
-        self.p1_red_3_meld_text_obj = self.font.render(self.p1_red_3_meld_text, True, (255, 255, 255), self.background_color)
+        self.p1_red_3_meld_text_obj = self.font.render(self.p1_red_3_meld_text, True, (255, 255, 255), self.dark_blue_color)
         self.p1_red_3_meld_text_obj_rect = self.p1_red_3_meld_text_obj.get_rect()
         self.p1_red_3_meld_text_obj_rect.center = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc']
         # -------------------------------------
-        self.p2_red_3_meld_text_obj = self.font.render(self.p2_red_3_meld_text, True, (255, 255, 255), self.background_color)
+        self.p2_red_3_meld_text_obj = self.font.render(self.p2_red_3_meld_text, True, (255, 255, 255), self.dark_blue_color)
         self.p2_red_3_meld_text_obj_rect = self.p2_red_3_meld_text_obj.get_rect()
         self.p2_red_3_meld_text_obj_rect.center = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc']
         # -------------------------------------
-        self.p1_player_name_text_obj = self.font.render(player.P1.name, True, (255, 255, 255), self.background_color)
+        self.p1_player_name_text_obj = self.font.render(player.P1.name, True, (255, 255, 255), self.dark_blue_color)
         self.p1_player_name_text_obj_rect = self.p1_player_name_text_obj.get_rect()
         self.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
         self.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
         # -------------------------------------
-        self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.background_color)
+        self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.dark_blue_color)
         self.p2_player_name_text_obj_rect = self.p2_player_name_text_obj.get_rect()
         self.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
         self.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
@@ -201,12 +203,12 @@ class Game():
     @progression_text.setter
     def progression_text(self, val):
         if self.progression_text_obj != None and len(val) < len(self._progression_text):
-            print(val)
+            pygame.draw.rect(self.screen_surface, self.background_color, (self.progression_text_obj_rect[0] - 6, self.progression_text_obj_rect[1] - 5, self.progression_text_obj_rect[2] + 11, self.progression_text_obj_rect[3] + 10))
             for current_card in self.card_group:
                 current_card.dirty = 1
-            # -------------------------------------
+        # -------------------------------------
         self._progression_text = val
-        self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
         self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['progression_text_loc']
     # -------------------------------------
@@ -217,11 +219,9 @@ class Game():
 
     @input_text.setter
     def input_text(self, val):
-        if self.input_text_obj != None and len(val) < len(self.prior_input_text):
-            pygame.draw.rect(self.screen_surface, self.background_color, self.input_text_obj_rect)
         self._input_text = val
         self.prior_input_text = self._input_text
-        self.input_text_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.input_text_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.input_text_obj_rect = self.input_text_obj.get_rect()
         # Below Line - Have to have this if clause during testing using test_run.test_run() because the script does not call progression_text_func() as does the actual progression.the_draw_1() call eventual does subsequent to calling this calculated property. Can remove this later once testing is verified as working 100%.
         if self.progression_text_obj_rect != None:
@@ -234,7 +234,7 @@ class Game():
     @multiple_choice_text_1.setter
     def multiple_choice_text_1(self, val):
         self._multiple_choice_text_1 = val
-        self.multiple_choice_text_1_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.multiple_choice_text_1_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.multiple_choice_text_1_obj_rect = self.multiple_choice_text_1_obj.get_rect()
         if self.progression_text_obj_rect != None:
             self.multiple_choice_text_1_obj_rect.center = [self.progression_text_obj_rect.center[0], self.progression_text_obj_rect.center[1] + 40]
@@ -246,7 +246,7 @@ class Game():
     @multiple_choice_text_1.setter
     def multiple_choice_text_2(self, val):
         self._multiple_choice_text_2 = val
-        self.multiple_choice_text_2_obj = self.font.render(val, True, (255, 255, 255), self.background_color)
+        self.multiple_choice_text_2_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.multiple_choice_text_2_obj_rect = self.multiple_choice_text_2_obj.get_rect()
         if self.multiple_choice_text_1_obj != None:
             self.multiple_choice_text_2_obj_rect.center = [self.multiple_choice_text_1_obj_rect.center[0], self.multiple_choice_text_1_obj_rect.center[1] + 40]
@@ -261,6 +261,13 @@ class Game():
         self._choose_multiple_cards = val
         if val == False:
             self.clicked_card_list.clear()
+            self.clickable_card_list.clear()
+    # -------------------------------------
+    # Below Function - Creates a border rect for better looking text display areas. Takes in a rect and creates the border from it's dimensions.
+    def create_border_rect(self, rect):
+        new_rect = pygame.Rect(rect[0] - 3, rect[1] - 3, rect[2] + 7, rect[3] + 7)
+        pygame.draw.rect(self.screen_surface, self.dark_blue_color, new_rect)
+        pygame.draw.rect(self.screen_surface, self.black_color, (rect[0] - 6, rect[1] - 5, rect[2] + 11, rect[3] + 10), 3)
     # -------------------------------------
     # Below Function - Handles all events for pygame. Called by the various draw_window() functions.
     def event_handler(self):
@@ -271,7 +278,7 @@ class Game():
                 # Below Section - Quits the pygame window and terminates the entire program.
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN and self.click_card_active == True:
+            if event.type == pygame.MOUSEBUTTONDOWN and self.click_card_active == True:
                 # Below Section - Whenever clicking a card; detects if the card was clicked, and appends it to clicked_card_list.
                 self.clicked_card = None
                 clicked_a_card = False
@@ -295,8 +302,8 @@ class Game():
                             self.multiple_choice_active = False
                 # -------------------------------------
             # Below Section - For clicking both of the multiple_choice_text rects (1 & 2) whenever the player is prompted with a multiple choice option.
-            elif event.type == pygame.MOUSEBUTTONDOWN and self.multiple_choice_active == True:
-                for rect in self.text_obj_dict[-1:-3][rect]:
+            if event.type == pygame.MOUSEBUTTONDOWN and self.multiple_choice_active == True:
+                for rect in [self.multiple_choice_text_1_obj_rect, self.multiple_choice_text_2_obj_rect]:
                     if rect.collidepoint(event.pos):
                         if rect == self.multiple_choice_text_1_obj_rect:
                             self.selected_choice = self._multiple_choice_text_1
@@ -309,7 +316,7 @@ class Game():
                         if self.click_card_active == True:
                             self.click_card_active = False
             # -------------------------------------
-            elif event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN:
                 if self.text_input_active == True:
                     # Below Section - Filters out keypresses from self.invalid_keypress_dict that do not have a proper visual display, but instead show as a 'rectangle' as the visual input value.
                     if event.key in self.invalid_keypress_dict.values():
@@ -337,24 +344,11 @@ class Game():
             current_time = time.time()
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Below Function - Called by locations.Locations.card_movement() via draw_window_main()(). Handles framerate, event handling, and updating display.
-    def draw_window_main(self):
+    def draw_window_main(self, reset = False):
         # print("draw_window_main")
-        # -------------------------------------
-        ###### Below Section - Quite sure this is in the incorrect location. It needs to be OUTSIDE of this location. Sets the max framerate for the game.
-        # clock = pygame.time.Clock()
-        # clock.tick(50)
         # -------------------------------------
         # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
-        # -------------------------------------
-        if self.game_state == 'the_draw_1':
-            # Below Line - Blits (draws onto another surface) the background (Surface) to the background.rect (Rect).
-            self.screen_surface.blit(self.background, self.background.get_rect())
-        else:
-            # Below Line - Updates the sprites rect locations for each frame. If this is not run, the cards simply teleport from the start location > the final location in card_movement() without any gradual movement.
-            self.card_group.update()
-            # Below Line - Calls the LayeredDirty draw() method which ensures the cards are updated; draws all sprites in the right order onto the passed surface.
-            self.card_rects = self.card_group.draw(self.screen_surface)
         # -------------------------------------
         self.text_obj_dict = {self.deck_text_obj: self.deck_text_obj_rect,
                               self.discard_pile_text_obj: self.discard_pile_text_obj_rect,
@@ -374,38 +368,50 @@ class Game():
                               self.multiple_choice_text_2_obj: self.multiple_choice_text_2_obj_rect}
         # Below Line - A list of all of the text objects' keys; the surfaces (The values of the dict are the rects).
         text_obj_dict_keys_list = list(self.text_obj_dict.keys())
-        ###### Below Line - I don't think I need this. Do I actually need this? A list of all of the text objects as keys. (The values of the dict are the associated card groups).
-        ###### object_card_group_dict_keys_list = list(self.object_card_group_dict.keys())
         # -------------------------------------
         if self.game_state == 'main':
             # Below Section - Handles the rendering of the card group info text and the associated surfaces.
             for obj in text_obj_dict_keys_list[0:10]:
                 if obj != None:
                     if len(self.object_card_group_dict[obj]) != 0:
+                        self.create_border_rect(self.text_obj_dict[obj])
                         self.screen_surface.blit(obj, self.text_obj_dict[obj])
             # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
             pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # -------------------------------------
+        if self.game_state == 'the_draw_1':
+            # Below Line - Blits (draws onto another surface) the background (Surface) to the background.rect (Rect).
+            self.screen_surface.blit(self.background, self.background.get_rect())
+        # -------------------------------------
+        else:
+            # Below Line - Updates the sprites rect locations for each frame. If this is not run, the cards simply teleport from the start location > the final location in card_movement() without any gradual movement.
+            self.card_group.update()
+            # Below Line - Calls the LayeredDirty draw() method which ensures the cards are updated; draws all sprites in the right order onto the passed surface.
+            self.card_rects = self.card_group.draw(self.screen_surface)
+        # -------------------------------------
         # Below Section - Handles the rendering of the player names.
         for obj in text_obj_dict_keys_list[10:12]:
+            self.create_border_rect(self.text_obj_dict[obj])
             self.screen_surface.blit(obj, self.text_obj_dict[obj])
         # -------------------------------------
         # Below Section - Handles the rendering of the progression_text_obj/rect.
         if self.progression_text_obj != None:
+            self.create_border_rect(self.progression_text_obj_rect)
             self.screen_surface.blit(self.progression_text_obj, self.progression_text_obj_rect)
         # -------------------------------------
         # Below Section - Handles the rendering of the input_text_obj and the input_text_surface.
-        if self.input_text_obj != None:
-            # Below Line - Disabled because I didn't like how it looked. The background text box 'outline' for the input_text display.
-            # self.input_text_outline_rect = pygame.draw.rect(self.screen_surface, self.grey_color, (self.input_text_obj_rect[0], self.input_text_obj_rect[1], 300, 100))
+        if self.input_text_obj != None and self.input_text != '':
+            self.create_border_rect(self.input_text_obj_rect)
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
         # -------------------------------------
         # Below Section - Handles the rendering of the multiple_choice_text_1_obj and the associated surface.
         if self.multiple_choice_text_1_obj != None:
+            self.create_border_rect(self.multiple_choice_text_1_obj_rect)
             self.screen_surface.blit(self.multiple_choice_text_1_obj, self.multiple_choice_text_1_obj_rect)
         # -------------------------------------
         # Below Section - Handles the rendering of the multiple_choice_text_2_obj and the associated surface.
         if self.multiple_choice_text_2_obj != None:
+            self.create_border_rect(self.multiple_choice_text_2_obj_rect)
             self.screen_surface.blit(self.multiple_choice_text_2_obj, self.multiple_choice_text_2_obj_rect)
         # -------------------------------------
         # Below Line - Updates the display to reflect the new game information. This is required for the input text to properly display on the screen. If it is not called, input text only displays after it has been blitted over by a card or something.

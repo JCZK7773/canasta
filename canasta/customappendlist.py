@@ -29,15 +29,46 @@ class CustomAppendList(list):
         # Below Section - Figures out which locations movement function needs to be called, and determines the correct parameters to be passed to the function for proper card movements.
         if self.card_group_name in player.Player.meld_group_dict.keys():
             if type(item) == CustomAppendList:
-                print("CustomAppendList")
+                # print("CustomAppendList")
                 locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item, len(self) - 1)
             elif type(item) == card.Card: # If it is a Card (For instances such as when a card is being added to a preexisting meld).
-                print("card.Card")
+                # print("card.Card")
                 # Below line - For when a meld is created for an intended location, but has not been placed there yet.
                 if self in player.Player.meld_group_dict[self.card_group_name]:
                     locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item, self.meld_num, len(self) - 1)
         # -------------------------------------
         # Below Section - Handles location movement function calls for the .deck, .discard_pile, and .hand.
         else:
+            print(f'append {item}')
             locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item)
         # -------------------------------------
+        # Below Section - For whenever a card/meld is popped from another CustomAppendList list; calls the locations.Locate card group update function to visually 'resituate' the prior_card_group via the prior_card_group_name.
+        if type(item) == CustomAppendList:
+            if item[0].prior_card_group_name != None:
+                ###### Below Line - May not need this line as all CustomAppendList instances should be melds in the meld_group_dict.
+                if item[0].prior_card_group_name in player.Player.meld_group_dict:
+                    meld_num = item.prior_meld_num
+                    for meld in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num:]:
+                        locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, meld, meld_num)
+                        meld_num += 1
+        else:
+            if item.prior_card_group_name != None:
+                # Below Section - If the item is a Card and is in meld_group_dict; resituates the meld card by card for proper visual display.
+                if item.prior_card_group_name in player.Player.meld_group_dict:
+                    card_num = 0
+                    for current_card in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num]:
+                        locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, current_card, item.prior_meld_num, card_num)
+                        card_num += 1
+    # -------------------------------------
+    # Below Function - ...
+    def pop(self, item):
+        # print('pop')
+        if type(item) == card.Card:
+            item.prior_card_group_name = self.card_group_name
+            if self.card_group_name in player.Player.meld_group_dict:
+                item.prior_meld_num = self.meld_num
+        elif type(item) == CustomAppendList:
+            item[0].prior_card_group_name = self.card_group_name
+            if self.card_group_name in player.Player.meld_group_dict:
+                item[0].prior_meld_num = self.meld_num
+        super(CustomAppendList, self).pop(item)

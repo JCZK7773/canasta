@@ -1,4 +1,5 @@
 # THINGS TO DO
+    # Worked on this a bit. Will continue later when more sure about solution. Make it so that whenever visually displayed card groups are popped from (technically done at the end of the append()) the card group is visually reorganized. Already started this process by creating custom .pop() function, etc...
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
         # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.
@@ -36,19 +37,6 @@
     #     pygame.draw.rect()
     # draw a rectangle
     # rect(surface, color, rect) -> Rect
-
-    #     Using this suggested line: for event in [pygame.event.wait()]+pygame.event.get(): greatly reduces CPU usage in games where the CPU runs full-bore when there are no events (compared to for event in pygame.event.get():). Nice. –
-    # Moondoggy
-    #  Nov 25, 2021 at 15:24
-
-    #     render()¶
-    # draw text on a new Surface
-    # render(text, antialias, color, background=None) -> Surface
-    # This creates a new Surface with the specified text rendered on it. pygame provides no way to directly draw text on an existing Surface: instead you must use Font.render() to create an image (Surface) of the text, then blit this image onto another Surface.
-
-    #     pygame.draw.rect()
-    # draw a rectangle
-    # rect(surface, color, rect) -> Rect
     # rect(surface, color, rect, width=0, border_radius=0, border_top_left_radius=-1, border_top_right_radius=-1, border_bottom_left_radius=-1, border_bottom_right_radius=-1) -> Rect
     # Draws a rectangle on the given surface.
     #
@@ -63,7 +51,14 @@
     #
     # (optional) used for line thickness or to indicate that the rectangle is to be filled (not to be confused with the width value of the rect parameter)
 
+    #     render()¶
+    # draw text on a new Surface
+    # render(text, antialias, color, background=None) -> Surface
+    # This creates a new Surface with the specified text rendered on it. pygame provides no way to directly draw text on an existing Surface: instead you must use Font.render() to create an image (Surface) of the text, then blit this image onto another Surface.
+
     # If you reassign self.image.get_rect() then you have to reassign .center() as well. You do not need to reassign .get_rect() every time you edit the object!!!!!
+
+    # Using this suggested line: for event in [pygame.event.wait()]+pygame.event.get(): greatly reduces CPU usage in games where the CPU runs full-bore when there are no events (compared to for event in pygame.event.get():). Nice. –
 
     # Debugging Info for Card Movement Speed Testing
         # First Half of List Iteration
@@ -94,6 +89,4 @@
             # Actual problem was in game.py. Was updating every single card again after only updating them via LayeredDirty .update() method.
 
     # The best alternative is DeviantArt, which is free. Other great sites and apps similar to OpenGameArt.org are Freesound (Free, Open Source), Poly Haven (Free), SkinBase (Free) and RateMyDrawings (Free).
-
-    # 1.452
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -38,7 +38,10 @@ class Card(pygame.sprite.DirtySprite): # ****
         self._display_layer = 0
         # Below Line - To be used in some instances whenever the display_layer of a card is going to be changed but the (x, y) coordinate is not going to be changed; used as a reference to it's prior value to determine if it is ==, or has been altered. (Used specifically in locations.py)
         self.changed_display_layer = 0
-    ## -------------------------------------
+    # -------------------------------------
+        # Below Line - The card's prior CustomAppendList.card_group_name. Used to determine prior location in customappendlist.py so that the proper visual reogranization function can be called for the associated card group the card was just popped from.
+        self.prior_card_group_name = None
+    # -------------------------------------
     def __str__(self): # ****
         return f"{self.rank}{deck.Deck().suits_symbols.get(self.suit)}" # ****
 
