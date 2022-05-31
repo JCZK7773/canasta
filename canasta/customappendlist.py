@@ -39,7 +39,6 @@ class CustomAppendList(list):
         # -------------------------------------
         # Below Section - Handles location movement function calls for the .deck, .discard_pile, and .hand.
         else:
-            print(f'append {item}')
             locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item)
         # -------------------------------------
         # Below Section - For whenever a card/meld is popped from another CustomAppendList list; calls the locations.Locate card group update function to visually 'resituate' the prior_card_group via the prior_card_group_name.
@@ -59,16 +58,18 @@ class CustomAppendList(list):
                     for current_card in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num]:
                         locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, current_card, item.prior_meld_num, card_num)
                         card_num += 1
+                elif 'hand' in item.prior_card_group_name:
+                    locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name)
     # -------------------------------------
     # Below Function - ...
     def pop(self, item):
         # print('pop')
-        if type(item) == card.Card:
-            item.prior_card_group_name = self.card_group_name
+        if type(self[item]) == card.Card:
+            self[item].prior_card_group_name = self.card_group_name
             if self.card_group_name in player.Player.meld_group_dict:
-                item.prior_meld_num = self.meld_num
-        elif type(item) == CustomAppendList:
-            item[0].prior_card_group_name = self.card_group_name
+                self[item].prior_meld_num = self.meld_num
+        elif type(self[item]) == CustomAppendList:
+            self[item][0].prior_card_group_name = self.card_group_name
             if self.card_group_name in player.Player.meld_group_dict:
-                item[0].prior_meld_num = self.meld_num
-        super(CustomAppendList, self).pop(item)
+                self[item][0].prior_meld_num = self.meld_num
+        return super(CustomAppendList, self).pop(item)

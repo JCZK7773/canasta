@@ -18,7 +18,7 @@ import test_run
 testing_register_list = []
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def setup():
-    print("setup")
+    # print("setup")
     progression.logger.debug("setup\n") # ****
     # Below Line - Loads the Card class's self.face_down_image (one time, instead of many, as they all use this same image), which must be called here because it requires pygame.display to be initiated.
     card.Card.assign_face_down_image()
@@ -51,7 +51,7 @@ def setup():
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS and calls draw_window() for screen updating.
 def main():
-    print("main")
+    # print("main")
     progression.logger.debug("main\n") # ****
     # -------------------------------------
     # Below Section - Sets up the run loop so that unless the player quits the game/exits the window, it continues to cycle through this progression loop.

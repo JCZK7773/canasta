@@ -84,6 +84,8 @@ class Game():
         self._progression_text = ('What is your name?!?')
         self.progression_text_obj = None
         self.progression_text_obj_rect = None
+        # Below Line - Placeholder. Accessed and changed within the self.progression_text calculated property. The prior self.progression_text_obj_rect to be compared against the current rect.
+        self.prior_progression_text_obj_rect = None
         # -------------------------------------
         # Below Section - Placeholders to avoid 'NoneType' error. Accessed through self.text_obj_dict & assigned through the self.input_text calculated property every time it is altered (except for .get_rect() as that does not need to be changed every time it is updated. If that is done, it messes up the text display by 'recreating' another rect centered at a different location centered on it's new dimensions).
         # Below Line - Type: str. Internal value; external use value is self.input_text as a calculated property which assigns the self.input_text_obj & self.input_text_obj_rect automatically. The actual text the user inputs via processed keypresses in the main loop.
@@ -107,12 +109,16 @@ class Game():
         self._multiple_choice_text_1 = 'MC Text 1'
         self.multiple_choice_text_1_obj = None
         self.multiple_choice_text_1_obj_rect = None
+        # Below Line - Placeholder. Accessed inside of self.multiple_choice_text_1 calculated property; the previous self.multiple_choice_text_1_obj_rect to be compared against the new one to determine whether or not the screen needs to be cleared for proper visual display in the case that the new rect is smaller than the old one.
+        self.prior_multiple_choice_text_1_obj_rect = None
         # -------------------------------------
         # Below Section - Placeholders to avoid error. Assigned through calculated property self.multiple_choice_text_2.
         # Below Line - Type: string. Placeholder for the calculated property self.multiple_choice_text_1. The text for the first multiple choice option.
         self._multiple_choice_text_2 = 'MC Text 2'
         self.multiple_choice_text_2_obj = None
         self.multiple_choice_text_2_obj_rect = None
+        # Below Line - Placeholder. Accessed inside of self.multiple_choice_text_2 calculated property; the previous self.multiple_choice_text_2_obj_rect to be compared against the new one to determine whether or not the screen needs to be cleared for proper visual display in the case that the new rect is smaller than the old one.
+        self.prior_multiple_choice_text_2_obj_rect = None
         # -------------------------------------
         self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.dark_blue_color)
         self.deck_text_obj_rect = self.deck_text_obj.get_rect()
@@ -159,9 +165,10 @@ class Game():
         self.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
         self.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
         # -------------------------------------
+        # Below Section - Placeholder / initial settings for below values. Values are changed and assigned through player.P2.name calculated property.
         self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.dark_blue_color)
         self.p2_player_name_text_obj_rect = self.p2_player_name_text_obj.get_rect()
-        self.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
+        self.p2_player_name_text_obj_rect.right = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
         self.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
         # -------------------------------------
         ###### Below Line - This is currently not being used.
@@ -202,15 +209,19 @@ class Game():
 
     @progression_text.setter
     def progression_text(self, val):
-        if self.progression_text_obj != None and len(val) < len(self._progression_text):
-            pygame.draw.rect(self.screen_surface, self.background_color, (self.progression_text_obj_rect[0] - 6, self.progression_text_obj_rect[1] - 5, self.progression_text_obj_rect[2] + 11, self.progression_text_obj_rect[3] + 10))
-            for current_card in self.card_group:
-                current_card.dirty = 1
+        # Below Section - The prior values of the progression_text, to be compared against the new self.progression_text values to determine if the screen needs to be redrawn to overwrite the previous (larger) rect for proper visual display.
+        if self.progression_text_obj != None:
+            self.prior_progression_text_obj_rect = self.progression_text_obj_rect
         # -------------------------------------
         self._progression_text = val
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
         self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['progression_text_loc']
+        # -------------------------------------
+        if self.progression_text_obj != None and self.prior_progression_text_obj_rect != None and self.progression_text_obj_rect[2] < self.prior_progression_text_obj_rect[2]:
+            pygame.draw.rect(self.screen_surface, self.background_color, (self.prior_progression_text_obj_rect[0] - 6, self.prior_progression_text_obj_rect[1] - 5, self.prior_progression_text_obj_rect[2] + 11, self.prior_progression_text_obj_rect[3] + 10))
+            for current_card in self.card_group:
+                current_card.dirty = 1
     # -------------------------------------
     # Below Section - Calculated property; whenever a value is set for this, make it calculate and assign the self.input_text_obj and self.input_text_obj_rect.center() so that it will always properly display on the screen.
     @property
@@ -233,23 +244,37 @@ class Game():
 
     @multiple_choice_text_1.setter
     def multiple_choice_text_1(self, val):
+        self.prior_multiple_choice_text_1_obj_rect = self.multiple_choice_text_1_obj_rect
+        # -------------------------------------
         self._multiple_choice_text_1 = val
         self.multiple_choice_text_1_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.multiple_choice_text_1_obj_rect = self.multiple_choice_text_1_obj.get_rect()
         if self.progression_text_obj_rect != None:
             self.multiple_choice_text_1_obj_rect.center = [self.progression_text_obj_rect.center[0], self.progression_text_obj_rect.center[1] + 40]
+        if self.prior_multiple_choice_text_1_obj_rect != None:
+            if self.multiple_choice_text_1_obj_rect[2] < self.prior_multiple_choice_text_1_obj_rect[2]:
+                pygame.draw.rect(self.screen_surface, self.background_color, (self.prior_multiple_choice_text_1_obj_rect[0] - 6, self.prior_multiple_choice_text_1_obj_rect[1] - 5, self.prior_multiple_choice_text_1_obj_rect[2] + 11, self.prior_multiple_choice_text_1_obj_rect[3] + 10))
+                for current_card in self.card_group:
+                    current_card.dirty = 1
     # -------------------------------------
     @property
     def multiple_choice_text_2(self):
         return self._multiple_choice_text_2
 
-    @multiple_choice_text_1.setter
+    @multiple_choice_text_2.setter
     def multiple_choice_text_2(self, val):
+        self.prior_multiple_choice_text_2_obj_rect = self.multiple_choice_text_2_obj_rect
+        # -------------------------------------
         self._multiple_choice_text_2 = val
         self.multiple_choice_text_2_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.multiple_choice_text_2_obj_rect = self.multiple_choice_text_2_obj.get_rect()
         if self.multiple_choice_text_1_obj != None:
             self.multiple_choice_text_2_obj_rect.center = [self.multiple_choice_text_1_obj_rect.center[0], self.multiple_choice_text_1_obj_rect.center[1] + 40]
+        if self.prior_multiple_choice_text_2_obj_rect != None:
+            if self.multiple_choice_text_2_obj_rect[2] < self.prior_multiple_choice_text_2_obj_rect[2]:
+                pygame.draw.rect(self.screen_surface, self.background_color, (self.prior_multiple_choice_text_2_obj_rect[0] - 6, self.prior_multiple_choice_text_2_obj_rect[1] - 5, self.prior_multiple_choice_text_2_obj_rect[2] + 11, self.prior_multiple_choice_text_2_obj_rect[3] + 10))
+                for current_card in self.card_group:
+                    current_card.dirty = 1
     # -------------------------------------
     # Below Section - Calculated property which assigns the value to the internal variable _choose_multiple_cards & clears the self.clicked_card_list so that it is cleared  when val == False for next time it is activated
     @property
@@ -297,6 +322,7 @@ class Game():
                             self.clicked_card_list.append(self.clicked_card)
                         else:
                             self.click_card_active = False
+                            self.clickable_card_list.clear()
                         # Below Section - For the cases when a player has to choose from multiple card/meld options and the option to not use any card at all by clicking a multiple_choice_text rect. This will change the multiple_choice_text to False in the instance that they choose a card/meld instead, and visa versa in the other instance's code block.
                         if self.multiple_choice_active == True:
                             self.multiple_choice_active = False

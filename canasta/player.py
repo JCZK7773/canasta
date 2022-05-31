@@ -39,7 +39,7 @@ class Player(): # ****
         else:
             game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.dark_blue_color)
             game.game.p2_player_name_text_obj_rect = game.game.p2_player_name_text_obj.get_rect()
-            game.game.p2_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
+            game.game.p2_player_name_text_obj_rect.right = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
             game.game.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
         # -------------------------------------
         self._name = val

@@ -52,8 +52,8 @@ class Locations():
                                   'p1_red_3_meld_text_loc': [-100, 0],
                                   'p2_red_3_meld_text_loc': [-100, 0],
                                   # Below Section - Make it so that whenever a value is set for this (through progression.py) make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
-                                  'p1_player_name_text_loc': [10, 10],
-                                  'p2_player_name_text_loc': [self.visible_center[0] + 10, 10],
+                                  'p1_player_name_text_loc': [15, 10],
+                                  'p2_player_name_text_loc': [self.visible_right - 15, 10],
                                   'progression_text_loc': self.visible_center}
         # -------------------------------------
     # Below Function - Dynamically assigns player.P1's hand location.
@@ -86,7 +86,7 @@ class Locations():
         # total_distance = round(math.sqrt((loc[0] - current_card.x) ** 2 + (loc[1] - current_card.y) ** 2), 2)
         # -------------------------------------
         # Below Section - Handles the assignment of proper card.image depending on whether or not it is going to the deck or not, and whether or not it already has the proper face_down or face_up image set.
-        if loc == self.card_group_loc_dict['deck'] or game.game.game_state == 'the_draw_2':
+        if loc == self.card_group_loc_dict['deck'] or game.game.game_state == 'the_draw_2' and current_card != game.game.clicked_card:
             current_card.image = card.Card.face_down_image
         else:
             if current_card.image == card.Card.face_down_image:
@@ -197,10 +197,16 @@ class Locations():
         #     print("**********************************")
     # -------------------------------------
     # Below Function - Called by func_dict via key 'deck', 'discard_pile', and 'hand' whenever a card is appended to the MasterDeck.deck, MasterDeck.discard_pile, or P1.hand/P2.hand. Calls card_movement() function to visually and digitally move card to the proper location.
-    def visual_deck_discard_hand_update(self, card_group_name, current_card):
+    def visual_deck_discard_hand_update(self, card_group_name, current_card = None):
         # print("visual_deck_discard_hand_update")
-        self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
-        current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
+        if current_card == None and 'hand' in card_group_name:
+            temp_loc = self.card_group_name_dict[card_group_name][:]
+            self.card_group_name_dict[card_group_name].clear()
+            for x_card in temp_loc:
+                self.card_group_name_dict[card_group_name].append(x_card)
+        else:
+            self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
+            current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
     # -------------------------------------
     # Below Function - Detects where cards should be placed within a meld, and detects and visually updates the proper visual locations associated with this. Called by visual_meld_update(). Calls canasta_find_face_up_card() at the end of the function. Created this function because it is used in two places: for melds AND cards. Detects the length of the melds and determines proper visual placement.
     def card_num_canasta_detect(self, card_group_name, card, meld, meld_num, card_num):
@@ -257,11 +263,11 @@ class Locations():
     # -------------------------------------
     # Below Function - Called by funct_dict via keys associated with all meld groups. Handles proper meld and card locations movements for all meld groups.
     def visual_meld_update(self, card_group_name, item, meld_num = None, card_num = None):
-        print("visual_meld_update")
+        # print("visual_meld_update")
         # -------------------------------------
         # Below line - If you are adding from a completed meld.
         if type(item) == customappendlist.CustomAppendList:
-            print("customappendlist.CustomAppendList")
+            # print("customappendlist.CustomAppendList")
             # Below Section - Sets card_num to 0, which will be increased by 1 for each card iteration and begins iteration through the meld.
             card_num = 0
             for cur_card in item:
@@ -272,13 +278,13 @@ class Locations():
                 # -------------------------------------
         # Below Line - If you are adding cards to a preexisiting meld.
         elif type(item) == card.Card:
-            print("card.Card")
+            # print("card.Card")
             meld = player.Player.meld_group_dict[card_group_name][meld_num]
             self.card_num_canasta_detect(card_group_name, item, meld, meld_num, card_num)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'red_3_meld' whenever a card is appended to player.P1.red_3_meld. Calls card_movement() function to visually and digitally move card to player.P1.red_3_meld.
     def visual_red_3_meld_update(self, card_group_name, current_card):
-        print("visual_red_3_meld_update")
+        # print("visual_red_3_meld_update")
         # -------------------------------------
         # Below Section - Determines the player based on the card_group_name and assigns the associated player's (x, y) starting coordinates.
         cur_player = player.P1

@@ -1,5 +1,5 @@
 # THINGS TO DO
-    # Worked on this a bit. Will continue later when more sure about solution. Make it so that whenever visually displayed card groups are popped from (technically done at the end of the append()) the card group is visually reorganized. Already started this process by creating custom .pop() function, etc...
+    # Current Bug: Multiple choice text display is not working correctly; does not clear the screen whenever a new, smaller rect is drawn later.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
         # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.

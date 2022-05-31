@@ -61,17 +61,12 @@ def the_draw_2(testing = False):
         game.game.click_card_active = True
         # Below Line - Called the_draw_anim() function to visually lay our the cards in the 2 decks so the player can click the card they want to choose.
         while True: # ****
-            for card in deck.MasterDeck.deck:
-                game.game.clickable_card_list.append(card)
+            for current_card in deck.MasterDeck.deck:
+                game.game.clickable_card_list.append(current_card)
             while game.game.clicked_card == None:
                 game.game.draw_window_main()
-            # -------------------------------------
-            game.game.click_card_active = False
             current_player.draw_card = game.game.clicked_card
-            # -------------------------------------
-            print(f'current_player.draw_card = {current_player.draw_card}')
-            print(f'game.game.clicked_card = {game.game.clicked_card}')
-            current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(game.game.clicked_card)))
+            current_player.hand.append(deck.MasterDeck.deck.pop(deck.MasterDeck.deck.index(current_player.draw_card)))
             # -------------------------------------
             game.game.clicked_card = None
             game.game.clicked_card_list.clear()
@@ -79,13 +74,13 @@ def the_draw_2(testing = False):
             # Below Section - Checks to see if the current_player's draw_card is a Joker; if so, places the card back into the deck.MasterDeck from the current_player.hand, and assigns the .draw_card to None. It will then make the current_player choose another card. If not, calls the_draw_3().
             if current_player.draw_card.rank == 'Joker': # ****
                 game.game.progression_text = (f"Sorry, {current_player.name}, you picked a Joker, which is not available for use during The Draw! Choose another card!") # ****
+                game.game.xs_display(2)
                 game.game.click_card_active = True
                 deck.MasterDeck.deck.append(current_player.hand.pop(0)) # ****
                 current_player.draw_card = None
             else:
                 game.game.progression_text = (f"{current_player.name}, you picked a {current_player.draw_card}!") # ****
-                game.game.draw_window_main()
-                game.game.xs_display(1)
+                game.game.xs_display(2)
                 break # ****
             # -------------------------------------
     the_draw_3()
@@ -101,7 +96,7 @@ def the_draw_3(testing = False): # ****
             return "You have the same exact card! You both must pick another card!" # ****
         # -------------------------------------
         game.game.progression_text = ("You have the same exact card! You both must pick another card!") # ****
-        game.game.xs_display(1)
+        game.game.xs_display(2)
         # -------------------------------------
         return_draw_card() # ****
         return the_draw_1() # ****
@@ -147,8 +142,10 @@ def the_draw_3(testing = False): # ****
 def return_draw_card(): # ****
     # print('return_draw_card')
     logger.debug("return_draw_card\n") # ****
+    # Below Section - Moves each card from the deck into the proper deck location (from the draw_anim) locations.
     for current_card in deck.MasterDeck.deck:
         [current_card.x, current_card.y] = locations.Locate.deck_loc
+    # -------------------------------------
     for current_player in [player.P1, player.P2]: # ****
         deck.MasterDeck.deck.append(current_player.hand.pop(0)) # ****
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -201,6 +198,7 @@ def red_3_check(current_player, drawn = False): # ****
             game.game.xs_display(1)
             current_player.hand.append(deck.MasterDeck.deck.pop(0)) # ****
             game.game.progression_text = f'{current_player.name}, in place of your Red 3, you drew a {current_player.hand[-1]}' # ****
+            red_3_check(current_player, True)
             game.game.xs_display(2)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by went_out_check(), the_deal() functions. Gives the player the option to either draw from the deck or to attempt a draw from the discard pile. Also prints out all preexisting melds for reference as it is important for choosing between the draw options. # ****
@@ -796,12 +794,12 @@ def discard(current_player): # ****
     print('discard')
     logger.debug("discard\n") # ****
     # -------------------------------------
+    game.game.clickable_card_list = current_player.hand[:]
     game.game.progression_text = f'{current_player.name}, which card would you like to discard? Click the card of your choice.' # ****
     game.game.click_card_active = True
     while game.game.click_card_active == True:
         game.game.draw_window_main()
     game.game.progression_text = f'{current_player.name}, you discarded the {game.game.clicked_card}!'
-    print(current_player.hand)
     deck.MasterDeck.discard_pile.append(current_player.hand.pop(current_player.hand.index(game.game.clicked_card))) # ****
     # -------------------------------------
     if len(current_player.hand) == 0: # ****
