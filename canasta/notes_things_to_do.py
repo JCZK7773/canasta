@@ -1,5 +1,6 @@
 # THINGS TO DO
-    # Current Bug: Multiple choice text display is not working correctly; does not clear the screen whenever a new, smaller rect is drawn later.
+    # Current Bug: Play cards is not working properly. Only lets you click one card and then gives an output saying you can't play only 1 card, etc.
+    # Current Bug: Multiple choice text display rects do not clear away from the screen after a new screen draw without a new rect to replace them.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
         # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.

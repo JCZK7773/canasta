@@ -14,8 +14,9 @@ class CustomAppendList(list):
     # Below Section - Calculates the meld_num dynamically.
     @property
     def meld_num(self):
-        list_index = player.Player.meld_group_dict[self.card_group_name].index(self)
-        return list_index
+        if self in player.Player.meld_group_dict[self.card_group_name]:
+            list_index = player.Player.meld_group_dict[self.card_group_name].index(self)
+            return list_index
     # -------------------------------------
     # Below Function - Customized version of the built-in append method. Handles items differently based on certain qualifications, and also stores and passes certain required information about the self (list) to the various location movement functions for 'automation'.
     def append(self, item):
@@ -50,7 +51,7 @@ class CustomAppendList(list):
                     for meld in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num:]:
                         locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, meld, meld_num)
                         meld_num += 1
-        else:
+        elif type(item) == card.Card:
             if item.prior_card_group_name != None:
                 # Below Section - If the item is a Card and is in meld_group_dict; resituates the meld card by card for proper visual display.
                 if item.prior_card_group_name in player.Player.meld_group_dict:

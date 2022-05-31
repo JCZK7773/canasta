@@ -316,25 +316,24 @@ class Game():
                     if self.clicked_card == None:
                         self.clicked_card = self.collided_cards_dict[min(self.collided_cards_dict.keys())]
                         self.collided_cards_dict.clear()
-                        ###### Below Line - Disabled because I did not like how it looked.
-                        ###### self.clicked_card.highlighted = True
+                        self.clicked_card.highlighted = True
                         if self.choose_multiple_cards == True:
                             self.clicked_card_list.append(self.clicked_card)
                         else:
                             self.click_card_active = False
                             self.clickable_card_list.clear()
-                        # Below Section - For the cases when a player has to choose from multiple card/meld options and the option to not use any card at all by clicking a multiple_choice_text rect. This will change the multiple_choice_text to False in the instance that they choose a card/meld instead, and visa versa in the other instance's code block.
-                        if self.multiple_choice_active == True:
-                            self.multiple_choice_active = False
+                            # Below Section - For the cases when a player has to choose from multiple card/meld options and the option to not use any card at all by clicking a multiple_choice_text rect. This will change the multiple_choice_text to False in the instance that they choose a card/meld instead, and visa versa in the other instance's code block.
+                            if self.multiple_choice_active == True:
+                                self.multiple_choice_active = False
                 # -------------------------------------
             # Below Section - For clicking both of the multiple_choice_text rects (1 & 2) whenever the player is prompted with a multiple choice option.
             if event.type == pygame.MOUSEBUTTONDOWN and self.multiple_choice_active == True:
                 for rect in [self.multiple_choice_text_1_obj_rect, self.multiple_choice_text_2_obj_rect]:
                     if rect.collidepoint(event.pos):
                         if rect == self.multiple_choice_text_1_obj_rect:
-                            self.selected_choice = self._multiple_choice_text_1
+                            self.selected_choice = self.multiple_choice_text_1
                         else:
-                            self.selected_choice = self._multiple_choice_text_2
+                            self.selected_choice = self.multiple_choice_text_2
                         ###### Below Line - Don't have this coded yet, but maybe want to make it so that the rect will become highlighted whenever a player clicks on it.
                         ###### self.selected_choice.highlighted = True
                         self.multiple_choice_active = False

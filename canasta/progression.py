@@ -190,7 +190,7 @@ def red_3_check(current_player, drawn = False): # ****
                 game.game.progression_text = (f"Congratulations, {current_player.name}! You have 4 Red 3s, so you get a 400 point bonus when the round ends if you have at least 1 Canasta, or a deduction of 400 points if you have no Canastas! All Red 3s must be played down and you will withdraw replacements from the stock for each one!") # ****
                 game.game.xs_display(4)
             elif len(current_player.red_3_meld) > 0: # ****
-                game.game.progression_text = f"{current_player.name}, you have {len(current_player.red_3_meld)} Red 3(s) in your hand! The rules dictate that all Red 3s must be played down, and you have to withdraw a replacement card from the stock for each one!"
+                game.game.progression_text = f"{current_player.name}, you have {len(current_player.red_3_meld)} Red 3(s) in your hand! All Red 3s must be played, and you will draw a new card from the stock for each one!"
                 game.game.xs_display(4)
         # -------------------------------------
         # Below Section - Replaces the Red 3s that were moved to current_player.red_3_meld with an equal amount of cards from the deck.MasterDeck.deck. Compares the current len against the prior len to determine how many cards to replace, so that it doesn't replace an errant amount whenever the player already had some Red 3s whenever this function was called.
@@ -467,9 +467,10 @@ def play_2(current_player, rerouted = False): # ****
         game.game.multiple_choice_text_1 = 'Play Selected Cards'
         while game.game.multiple_choice_active == True:
             game.game.draw_window_main()
-        game.game.choose_multiple_cards = False
         for current_card in game.game.clicked_card_list:
+            # print(f'current_card {current_card}')
             current_player.play_cards.append(current_card)
+        game.game.choose_multiple_cards = False
         valid_play_check_and_sort(current_player) # ****
     else: # ****
         discard(current_player) # ****
@@ -513,14 +514,14 @@ def valid_play_check_and_sort(current_player): # ****
         # Below Extended Section - Handles all cards that were not found in a preexisting meld. Handles black_3s, wild cards, new melds, and cards that match the rank of new melds so that they can all be properly sorted and later validated. # ****
         if card_found_in_meld == False: # ****
             # Below Section - Checks if card is a Black 3 and whether the player meets the card count requirements to be able to play a Black 3 meld. If not, appends it to play_cards_removed_black_3s, which is used to print out all of these instances later on to inform the player, and removes it from current_player.play_cards, placing it back into current_player.hand. If so, appends the Black 3s into current_player.black_3_meld. # ****
-            if (current_card.rank, current_card.suit) in Deck().black_3s: # ****
+            if (current_card.rank, current_card.suit) in deck.Deck().black_3s: # ****
                 if len(current_player.hand) <= 1: # ****
                     current_player.black_3_meld.append(current_player.play_cards.pop(current_player.play_cards.index(current_card))) # ****
                 else: # ****
                     play_cards_removed_black_3s.append(current_player.play_cards.pop(current_player.play_cards.index(current_card))) # ****
             # -------------------------------------
             # Below Section - If card is a Wild Card; appends it to play_cards_wild_cards, popping it from current_player.play_cards, for the purpose of segregation so that later on when meld lengths are determined, they are not convoluted by having individual wild cards mixed in. # ****
-            elif (current_card.rank, current_card.suit) in Deck().wild_cards: # ****
+            elif (current_card.rank, current_card.suit) in deck.Deck().wild_cards: # ****
                 current_player.play_cards_wild_cards.append(current_player.play_cards.pop(current_player.play_cards.index(current_card))) # ****
             # -------------------------------------
             # Below Section - If card is a valid, non-wild card that is the first of it's rank iterated through in the group of play cards. Creates a new temp_meld for it to be placed into, and the temp_meld is then placed back into current_player.play_cards, which is where other cards of the same rank will be placed. # ****
@@ -540,7 +541,7 @@ def valid_play_check_and_sort(current_player): # ****
     # -------------------------------------
     # Below Section - Handles temp_melds that are too small or that require a wild card to be able to meet the 3 card minimum requirement. If the melds consist of only 1 card, they are appended to bad_len_temp_melds_list_print for later output and removal from current_player.play_cards back into current_player.hand, and the melds that require a wild card (consisting of 2 cards) are put in len_2_temp_melds_list, given that there is at least one card in play_cards_wild_cards so that the player can later choose which meld he would like to add the wild card(s) to. If there is nothing in play_cards_wild_cards, those melds are also added to bad_len_temp_melds_list_print for later removal back into the current_player.hand. # ****
     for temp_meld in current_player.play_cards[:]: # ****
-        if type(temp_meld) != Card:
+        if type(temp_meld) != card.Card:
             if len(temp_meld) < 2: # ****
                 bad_len_temp_melds_list_print.append(current_player.play_cards.pop(current_player.play_cards.index(temp_meld))) # ****
             elif len(temp_meld) == 2: # ****
@@ -557,7 +558,7 @@ def valid_play_check_and_sort(current_player): # ****
         if len(current_player.play_cards_wild_cards) > 0: # ****
             game.game.progression_text = (f"{current_player.name}, at least one of your attempted play card melds have only 2 cards in them. 3 cards are required for a valid meld, so you must add a wild card to them for them to remain in play. It looks as if you have {len(current_player.play_cards_wild_cards)} wild card(s) in your set of play cards to use for this. Would you like to do this?") # ****
             game.game.multiple_choice_text_1 = 'Yes'
-            game.game.multiple_choice_text_1 = 'No'
+            game.game.multiple_choice_text_2 = 'No'
             game.game.multiple_choice_active = True
             while game.game.multiple_choice_active == True:
                 game.game.draw_window_main()
@@ -737,7 +738,7 @@ def wild_card_handler(current_player): # ****
                 meld_choice_index = wild_card_meld_choice_prompt(current_player, wild_card) # ****
     # -------------------------------------
                 # Below Section - If player chooses not to use the wild card, it is popped from play_cards_wild_cards and appended back into the player's hand. # ****
-                if meld_choice_index > (len(current_player.non_maxed_out_melds) - 1): # ****
+                if meld_choice_index == game.game.multiple_choice_text_1: # ****
                     game.game.progression_text = ("Okay, the wild card will be placed back into your hand.") # ****
                     game.game.xs_display(1)
                     current_player.hand.append(current_player.play_cards_wild_cards.pop(current_player.play_cards_wild_cards.index(wild_card))) # ****
@@ -777,16 +778,20 @@ def wild_card_meld_choice_prompt(current_player, wild_card): # ****
     game.game.multiple_choice_active = True
     while game.game.click_card_active == True:
         game.game.draw_window_main()
-    if len(current_player.play_cards) > 0:
-        for meld in current_player.play_cards:
-            if game.game.clicked_card in meld:
-                print('game.game.clicked_card in play_cards')
-                meld_choice_index = game.game.clicked_card
-    if len(current_player.melds) > 0:
-        for meld in current_player.melds:
-            if game.game.clicked_card in meld:
-                print('game.game.clicked_card in melds')
-                meld_choice_index = game.game.clicked_card
+    if game.game.clicked_card == None:
+        print('wild_card_meld_choice_prompt - game.game.clicked_card == None')
+        meld_choice_index = game.game.multiple_choice_text_1
+    else:
+        if len(current_player.play_cards) > 0:
+            for meld in current_player.play_cards:
+                if game.game.clicked_card in meld:
+                    print('wild_card_meld_choice_prompt - game.game.clicked_card in play_cards')
+                    meld_choice_index = game.game.clicked_card
+        if len(current_player.melds) > 0:
+            for meld in current_player.melds:
+                if game.game.clicked_card in meld:
+                    print('wild_card_meld_choice_prompt - game.game.clicked_card in melds')
+                    meld_choice_index = game.game.clicked_card
     return meld_choice_index # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by play_2(), valid_play_check_and_sort(), went_out_check() functions. For discarding; prompts the player to choose a card from their hand to be placed into the discard pile. # ****
