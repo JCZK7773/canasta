@@ -12526,3 +12526,2026 @@ valid_play_check_and_sort
 
 DEBUG 2022-05-31 15:14:08,983 - current_player.round_score < current_player.meld_requirement
 
+DEBUG 2022-06-01 10:26:15,863 - main
+
+DEBUG 2022-06-01 10:26:15,863 - setup
+
+DEBUG 2022-06-01 10:26:16,346 - the_draw_1
+DEBUG 2022-06-01 10:26:18,645 - the_draw_2
+DEBUG 2022-06-01 10:26:25,132 - the_draw_3
+
+DEBUG 2022-06-01 10:26:28,132 - return_draw_card
+
+DEBUG 2022-06-01 10:26:29,257 - the_deal
+
+DEBUG 2022-06-01 10:26:36,100 - red_3_check
+
+DEBUG 2022-06-01 10:26:42,892 - red_3_check
+
+DEBUG 2022-06-01 10:26:48,909 - red_3_check
+
+DEBUG 2022-06-01 10:26:52,575 - red_3_check
+
+DEBUG 2022-06-01 10:26:54,576 - play_1
+
+DEBUG 2022-06-01 10:27:00,561 - stock_draw
+
+DEBUG 2022-06-01 10:27:03,190 - red_3_check
+
+DEBUG 2022-06-01 10:27:03,190 - play_2
+
+DEBUG 2022-06-01 10:27:12,987 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-01 10:27:12,987 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-01 10:27:15,990 - play_2
+
+DEBUG 2022-06-01 10:27:41,557 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-01 10:27:41,557 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-04 09:26:20,740 - main
+
+DEBUG 2022-06-04 09:26:20,740 - setup
+
+DEBUG 2022-06-04 09:26:21,084 - the_draw_1
+DEBUG 2022-06-04 09:26:31,739 - the_draw_2
+DEBUG 2022-06-04 09:26:49,176 - the_draw_3
+
+DEBUG 2022-06-04 09:26:52,176 - return_draw_card
+
+DEBUG 2022-06-04 09:26:53,002 - the_deal
+
+DEBUG 2022-06-04 09:26:59,659 - red_3_check
+
+DEBUG 2022-06-04 09:27:05,284 - red_3_check
+
+DEBUG 2022-06-04 09:27:14,209 - red_3_check
+
+DEBUG 2022-06-04 09:27:20,317 - red_3_check
+
+DEBUG 2022-06-04 09:27:23,955 - red_3_check
+
+DEBUG 2022-06-04 09:27:29,093 - red_3_check
+
+DEBUG 2022-06-04 09:27:33,096 - play_1
+
+DEBUG 2022-06-04 09:28:11,914 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-06-04 09:28:14,914 - stock_draw
+
+DEBUG 2022-06-04 09:28:17,372 - red_3_check
+
+DEBUG 2022-06-04 09:28:17,372 - play_2
+
+DEBUG 2022-06-04 09:28:33,118 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-04 09:28:33,118 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-04 09:53:12,830 - main
+
+DEBUG 2022-06-04 09:53:12,835 - setup
+
+DEBUG 2022-06-04 09:53:12,999 - the_draw_1
+DEBUG 2022-06-04 10:00:46,033 - main
+
+DEBUG 2022-06-04 10:00:46,034 - setup
+
+DEBUG 2022-06-04 10:00:46,204 - the_draw_1
+DEBUG 2022-06-04 10:00:53,270 - the_draw_2
+DEBUG 2022-06-04 10:00:59,932 - the_draw_3
+
+DEBUG 2022-06-04 10:01:02,936 - return_draw_card
+
+DEBUG 2022-06-04 10:01:04,089 - the_deal
+
+DEBUG 2022-06-04 10:01:11,071 - red_3_check
+
+DEBUG 2022-06-04 10:01:17,207 - red_3_check
+
+DEBUG 2022-06-04 10:01:26,011 - red_3_check
+
+DEBUG 2022-06-04 10:01:31,906 - red_3_check
+
+DEBUG 2022-06-04 10:01:33,908 - play_1
+
+DEBUG 2022-06-04 10:01:45,926 - 
+draw_discard_pile_attempt
+
+DEBUG 2022-06-04 10:01:45,926 - discard_pile_is_frozen == False
+
+DEBUG 2022-06-04 10:01:45,928 - draw_discard_pile_attempt_check_meld_match
+DEBUG 2022-06-04 10:01:45,929 - draw_discard_pile_attempt_check_hand_match
+
+DEBUG 2022-06-04 10:01:49,933 - replace_discard_pile_temp_meld
+DEBUG 2022-06-04 10:03:16,496 - main
+
+DEBUG 2022-06-04 10:03:16,496 - setup
+
+DEBUG 2022-06-04 10:03:16,625 - the_draw_1
+DEBUG 2022-06-04 10:03:19,543 - the_draw_2
+DEBUG 2022-06-04 10:03:26,201 - the_draw_3
+
+DEBUG 2022-06-04 10:03:29,202 - return_draw_card
+
+DEBUG 2022-06-04 10:03:30,299 - the_deal
+
+DEBUG 2022-06-04 10:03:36,926 - red_3_check
+
+DEBUG 2022-06-04 10:03:43,392 - red_3_check
+
+DEBUG 2022-06-04 10:03:49,282 - red_3_check
+
+DEBUG 2022-06-04 10:03:51,284 - play_1
+
+DEBUG 2022-06-04 10:03:52,594 - stock_draw
+
+DEBUG 2022-06-04 10:03:55,274 - red_3_check
+
+DEBUG 2022-06-04 10:03:55,275 - play_2
+
+DEBUG 2022-06-04 10:04:21,344 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-04 10:04:21,344 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-04 10:40:11,878 - main
+
+DEBUG 2022-06-04 10:40:11,878 - setup
+
+DEBUG 2022-06-04 10:40:12,017 - the_draw_1
+DEBUG 2022-06-04 10:40:18,762 - the_draw_2
+DEBUG 2022-06-04 10:40:27,313 - the_draw_3
+
+DEBUG 2022-06-04 10:40:30,315 - return_draw_card
+
+DEBUG 2022-06-04 10:40:31,327 - the_deal
+
+DEBUG 2022-06-04 10:40:37,258 - red_3_check
+
+DEBUG 2022-06-04 10:40:43,225 - red_3_check
+
+DEBUG 2022-06-04 10:40:43,226 - play_1
+
+DEBUG 2022-06-04 10:41:03,369 - stock_draw
+
+DEBUG 2022-06-04 10:41:05,855 - red_3_check
+
+DEBUG 2022-06-04 10:41:05,856 - play_2
+
+DEBUG 2022-06-04 10:41:30,632 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-04 10:41:30,632 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-04 10:41:33,635 - play_2
+
+DEBUG 2022-06-04 10:41:58,276 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-04 10:41:58,276 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-04 10:41:58,276 - wild_card_handler
+DEBUG 2022-06-04 10:41:58,276 - wild_card_meld_choice_prompt
+DEBUG 2022-06-15 13:22:07,134 - main
+
+DEBUG 2022-06-15 13:22:07,135 - setup
+
+DEBUG 2022-06-15 13:22:07,760 - the_draw_1
+DEBUG 2022-06-15 13:22:12,877 - the_draw_2
+DEBUG 2022-06-15 13:22:20,926 - the_draw_3
+
+DEBUG 2022-06-15 13:22:23,928 - return_draw_card
+
+DEBUG 2022-06-15 13:22:25,052 - the_deal
+
+DEBUG 2022-06-15 13:22:32,182 - red_3_check
+
+DEBUG 2022-06-15 13:22:38,417 - red_3_check
+
+DEBUG 2022-06-15 13:22:47,203 - red_3_check
+
+DEBUG 2022-06-15 13:22:47,204 - play_1
+
+DEBUG 2022-06-15 13:22:50,119 - stock_draw
+
+DEBUG 2022-06-15 13:22:52,749 - red_3_check
+
+DEBUG 2022-06-15 13:22:52,750 - play_2
+
+DEBUG 2022-06-15 13:23:33,538 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-15 13:23:33,539 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-15 13:35:05,501 - main
+
+DEBUG 2022-06-15 13:35:05,501 - setup
+
+DEBUG 2022-06-15 13:35:05,699 - the_draw_1
+DEBUG 2022-06-15 13:35:10,559 - the_draw_2
+DEBUG 2022-06-15 13:35:19,421 - the_draw_3
+
+DEBUG 2022-06-15 13:35:22,425 - return_draw_card
+
+DEBUG 2022-06-15 13:35:23,511 - the_deal
+
+DEBUG 2022-06-15 13:35:30,380 - red_3_check
+
+DEBUG 2022-06-15 13:35:37,179 - red_3_check
+
+DEBUG 2022-06-15 13:35:37,180 - play_1
+
+DEBUG 2022-06-15 13:35:46,392 - main
+
+DEBUG 2022-06-15 13:35:46,392 - setup
+
+DEBUG 2022-06-15 13:35:46,563 - the_draw_1
+DEBUG 2022-06-15 13:35:47,757 - the_draw_2
+DEBUG 2022-06-15 13:35:56,801 - the_draw_3
+
+DEBUG 2022-06-15 13:35:59,804 - return_draw_card
+
+DEBUG 2022-06-15 13:36:05,345 - main
+
+DEBUG 2022-06-15 13:36:05,345 - setup
+
+DEBUG 2022-06-15 13:36:05,513 - the_draw_1
+DEBUG 2022-06-15 13:36:06,539 - the_draw_2
+DEBUG 2022-06-15 13:36:13,675 - the_draw_3
+
+DEBUG 2022-06-15 13:36:16,677 - return_draw_card
+
+DEBUG 2022-06-15 13:36:17,762 - the_deal
+
+DEBUG 2022-06-15 13:36:24,589 - red_3_check
+
+DEBUG 2022-06-15 13:36:30,568 - red_3_check
+
+DEBUG 2022-06-15 13:36:39,353 - red_3_check
+
+DEBUG 2022-06-15 13:36:39,354 - play_1
+
+DEBUG 2022-06-15 13:36:43,292 - stock_draw
+
+DEBUG 2022-06-15 13:36:45,937 - red_3_check
+
+DEBUG 2022-06-15 13:36:45,937 - play_2
+
+DEBUG 2022-06-15 13:37:01,798 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-15 13:37:01,798 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-15 13:37:04,801 - play_2
+
+DEBUG 2022-06-15 13:38:12,746 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-15 13:38:12,746 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-15 13:38:15,749 - play_2
+
+DEBUG 2022-06-15 13:38:45,469 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-15 13:38:45,469 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-15 13:38:51,472 - play_2
+
+DEBUG 2022-06-15 13:40:23,918 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-15 13:40:23,918 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-15 13:40:29,923 - play_2
+
+DEBUG 2022-06-15 13:50:07,389 - main
+
+DEBUG 2022-06-15 13:50:07,389 - setup
+
+DEBUG 2022-06-15 13:50:07,563 - the_draw_1
+DEBUG 2022-06-15 13:50:09,382 - the_draw_2
+DEBUG 2022-06-15 13:50:17,702 - the_draw_3
+
+DEBUG 2022-06-15 13:50:20,703 - return_draw_card
+
+DEBUG 2022-06-15 13:50:21,747 - the_deal
+
+DEBUG 2022-06-15 13:50:28,548 - red_3_check
+
+DEBUG 2022-06-15 13:50:34,216 - red_3_check
+
+DEBUG 2022-06-15 13:50:43,077 - red_3_check
+
+DEBUG 2022-06-15 13:50:43,078 - play_1
+
+DEBUG 2022-06-15 13:50:45,696 - stock_draw
+
+DEBUG 2022-06-15 13:50:48,351 - red_3_check
+
+DEBUG 2022-06-15 13:50:48,353 - play_2
+
+DEBUG 2022-06-15 13:51:46,916 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-15 13:51:46,916 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-20 14:45:52,305 - main
+
+DEBUG 2022-06-20 14:45:52,305 - setup
+
+DEBUG 2022-06-20 14:45:52,972 - the_draw_1
+DEBUG 2022-06-20 14:45:56,467 - the_draw_2
+DEBUG 2022-06-20 14:46:05,102 - the_draw_3
+
+DEBUG 2022-06-20 14:46:08,103 - return_draw_card
+
+DEBUG 2022-06-20 14:46:09,114 - the_deal
+
+DEBUG 2022-06-20 14:46:15,916 - red_3_check
+
+DEBUG 2022-06-20 14:46:22,795 - red_3_check
+
+DEBUG 2022-06-20 14:46:22,796 - play_1
+
+DEBUG 2022-06-20 14:46:24,742 - stock_draw
+
+DEBUG 2022-06-20 14:46:27,393 - red_3_check
+
+DEBUG 2022-06-20 14:46:27,394 - play_2
+
+DEBUG 2022-06-20 14:46:31,595 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-20 14:46:31,595 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-20 14:46:34,596 - play_2
+
+DEBUG 2022-06-20 14:47:03,949 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-20 14:47:03,950 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-20 14:47:09,956 - play_2
+
+DEBUG 2022-06-20 14:47:41,731 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-20 14:47:41,732 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-20 14:47:47,738 - play_2
+
+DEBUG 2022-06-20 14:48:01,883 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-20 14:48:01,883 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-20 14:48:07,889 - play_2
+
+DEBUG 2022-06-20 15:11:31,808 - main
+
+DEBUG 2022-06-20 15:11:31,809 - setup
+
+DEBUG 2022-06-20 15:11:32,139 - the_draw_1
+DEBUG 2022-06-20 15:12:07,793 - main
+
+DEBUG 2022-06-20 15:12:07,794 - setup
+
+DEBUG 2022-06-20 15:12:07,936 - the_draw_1
+DEBUG 2022-06-20 15:12:10,174 - the_draw_2
+DEBUG 2022-06-20 15:12:16,086 - the_draw_3
+
+DEBUG 2022-06-20 15:12:19,086 - return_draw_card
+
+DEBUG 2022-06-20 15:12:20,116 - the_deal
+
+DEBUG 2022-06-20 15:12:26,221 - red_3_check
+
+DEBUG 2022-06-20 15:12:32,515 - red_3_check
+
+DEBUG 2022-06-20 15:12:32,516 - play_1
+
+DEBUG 2022-06-20 15:13:44,490 - stock_draw
+
+DEBUG 2022-06-20 15:13:47,128 - red_3_check
+
+DEBUG 2022-06-20 15:13:53,385 - red_3_check
+
+DEBUG 2022-06-20 15:13:55,386 - play_2
+
+DEBUG 2022-06-20 15:14:07,785 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-20 15:14:07,786 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 13:46:43,226 - main
+
+DEBUG 2022-06-23 13:46:43,227 - setup
+
+DEBUG 2022-06-23 13:46:43,722 - the_draw_1
+DEBUG 2022-06-23 13:46:46,454 - the_draw_2
+DEBUG 2022-06-23 13:46:55,554 - the_draw_3
+
+DEBUG 2022-06-23 13:46:58,557 - return_draw_card
+
+DEBUG 2022-06-23 13:46:59,645 - the_deal
+
+DEBUG 2022-06-23 13:47:06,498 - red_3_check
+
+DEBUG 2022-06-23 13:47:13,455 - red_3_check
+
+DEBUG 2022-06-23 13:47:13,456 - play_1
+
+DEBUG 2022-06-23 13:47:17,041 - stock_draw
+
+DEBUG 2022-06-23 13:47:19,711 - red_3_check
+
+DEBUG 2022-06-23 13:47:19,712 - play_2
+
+DEBUG 2022-06-23 13:50:38,684 - main
+
+DEBUG 2022-06-23 13:50:38,685 - setup
+
+DEBUG 2022-06-23 13:50:38,860 - the_draw_1
+DEBUG 2022-06-23 13:50:40,837 - the_draw_2
+DEBUG 2022-06-23 13:50:51,101 - the_draw_3
+
+DEBUG 2022-06-23 13:50:54,101 - return_draw_card
+
+DEBUG 2022-06-23 13:50:55,180 - the_deal
+
+DEBUG 2022-06-23 13:51:02,060 - red_3_check
+
+DEBUG 2022-06-23 13:51:08,811 - red_3_check
+
+DEBUG 2022-06-23 13:51:08,812 - play_1
+
+DEBUG 2022-06-23 13:51:09,990 - stock_draw
+
+DEBUG 2022-06-23 13:51:12,591 - red_3_check
+
+DEBUG 2022-06-23 13:51:12,591 - play_2
+
+DEBUG 2022-06-23 13:51:25,206 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 13:51:25,207 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 13:51:59,770 - main
+
+DEBUG 2022-06-23 13:51:59,770 - setup
+
+DEBUG 2022-06-23 13:51:59,939 - the_draw_1
+DEBUG 2022-06-23 13:52:00,813 - the_draw_2
+DEBUG 2022-06-23 13:52:07,807 - the_draw_3
+
+DEBUG 2022-06-23 13:52:10,810 - return_draw_card
+
+DEBUG 2022-06-23 13:52:11,897 - the_deal
+
+DEBUG 2022-06-23 13:52:18,675 - red_3_check
+
+DEBUG 2022-06-23 13:52:25,427 - red_3_check
+
+DEBUG 2022-06-23 13:52:25,428 - play_1
+
+DEBUG 2022-06-23 13:52:27,285 - stock_draw
+
+DEBUG 2022-06-23 13:52:29,969 - red_3_check
+
+DEBUG 2022-06-23 13:52:29,971 - play_2
+
+DEBUG 2022-06-23 13:56:56,308 - main
+
+DEBUG 2022-06-23 13:56:56,308 - setup
+
+DEBUG 2022-06-23 13:56:56,487 - the_draw_1
+DEBUG 2022-06-23 13:56:57,336 - the_draw_2
+DEBUG 2022-06-23 13:57:04,071 - the_draw_3
+
+DEBUG 2022-06-23 13:57:07,074 - return_draw_card
+
+DEBUG 2022-06-23 13:57:08,146 - the_deal
+
+DEBUG 2022-06-23 13:57:14,816 - red_3_check
+
+DEBUG 2022-06-23 13:57:21,735 - red_3_check
+
+DEBUG 2022-06-23 13:57:21,737 - play_1
+
+DEBUG 2022-06-23 13:57:22,939 - stock_draw
+
+DEBUG 2022-06-23 13:57:25,559 - red_3_check
+
+DEBUG 2022-06-23 13:57:25,562 - play_2
+
+DEBUG 2022-06-23 13:57:36,368 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 13:57:36,369 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 14:37:40,038 - main
+
+DEBUG 2022-06-23 14:37:40,039 - setup
+
+DEBUG 2022-06-23 14:37:40,218 - the_draw_1
+DEBUG 2022-06-23 14:37:41,783 - the_draw_2
+DEBUG 2022-06-23 14:37:48,767 - the_draw_3
+
+DEBUG 2022-06-23 14:37:51,767 - return_draw_card
+
+DEBUG 2022-06-23 14:37:52,844 - the_deal
+
+DEBUG 2022-06-23 14:37:59,647 - red_3_check
+
+DEBUG 2022-06-23 14:38:05,339 - red_3_check
+
+DEBUG 2022-06-23 14:38:14,543 - red_3_check
+
+DEBUG 2022-06-23 14:38:14,545 - play_1
+
+DEBUG 2022-06-23 14:38:16,338 - stock_draw
+
+DEBUG 2022-06-23 14:38:19,023 - red_3_check
+
+DEBUG 2022-06-23 14:38:19,026 - play_2
+
+DEBUG 2022-06-23 14:38:51,290 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 14:38:51,290 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 14:39:00,190 - wild_card_handler
+DEBUG 2022-06-23 14:39:06,196 - play_2
+
+DEBUG 2022-06-23 14:39:43,616 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 14:39:43,616 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 14:52:13,606 - main
+
+DEBUG 2022-06-23 14:52:13,606 - setup
+
+DEBUG 2022-06-23 14:52:13,758 - the_draw_1
+DEBUG 2022-06-23 14:52:14,825 - the_draw_2
+DEBUG 2022-06-23 14:52:21,583 - the_draw_3
+
+DEBUG 2022-06-23 14:52:24,584 - return_draw_card
+
+DEBUG 2022-06-23 14:52:25,681 - the_deal
+
+DEBUG 2022-06-23 14:52:32,471 - red_3_check
+
+DEBUG 2022-06-23 14:52:38,239 - red_3_check
+
+DEBUG 2022-06-23 14:52:46,995 - red_3_check
+
+DEBUG 2022-06-23 14:52:46,997 - play_1
+
+DEBUG 2022-06-23 14:52:48,461 - stock_draw
+
+DEBUG 2022-06-23 14:52:51,085 - red_3_check
+
+DEBUG 2022-06-23 14:52:51,087 - play_2
+
+DEBUG 2022-06-23 14:53:05,103 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 14:53:05,103 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 14:53:48,817 - main
+
+DEBUG 2022-06-23 14:53:48,818 - setup
+
+DEBUG 2022-06-23 14:53:48,963 - the_draw_1
+DEBUG 2022-06-23 14:53:49,693 - the_draw_2
+DEBUG 2022-06-23 14:53:59,410 - the_draw_3
+
+DEBUG 2022-06-23 14:54:02,411 - return_draw_card
+
+DEBUG 2022-06-23 14:54:03,413 - the_deal
+
+DEBUG 2022-06-23 14:54:10,216 - red_3_check
+
+DEBUG 2022-06-23 14:54:16,025 - red_3_check
+
+DEBUG 2022-06-23 14:54:24,847 - red_3_check
+
+DEBUG 2022-06-23 14:54:24,850 - play_1
+
+DEBUG 2022-06-23 14:54:27,301 - stock_draw
+
+DEBUG 2022-06-23 14:54:29,954 - red_3_check
+
+DEBUG 2022-06-23 14:54:29,957 - play_2
+
+DEBUG 2022-06-23 14:58:08,541 - main
+
+DEBUG 2022-06-23 14:58:08,542 - setup
+
+DEBUG 2022-06-23 14:58:08,689 - the_draw_1
+DEBUG 2022-06-23 14:58:11,627 - the_draw_2
+DEBUG 2022-06-23 14:58:19,793 - the_draw_3
+
+DEBUG 2022-06-23 14:58:22,795 - return_draw_card
+
+DEBUG 2022-06-23 14:58:23,879 - the_deal
+
+DEBUG 2022-06-23 14:58:30,615 - red_3_check
+
+DEBUG 2022-06-23 14:58:37,448 - red_3_check
+
+DEBUG 2022-06-23 14:58:37,450 - play_1
+
+DEBUG 2022-06-23 14:58:40,200 - stock_draw
+
+DEBUG 2022-06-23 14:58:42,856 - red_3_check
+
+DEBUG 2022-06-23 14:58:42,858 - play_2
+
+DEBUG 2022-06-23 15:04:24,482 - main
+
+DEBUG 2022-06-23 15:04:24,483 - setup
+
+DEBUG 2022-06-23 15:04:24,644 - the_draw_1
+DEBUG 2022-06-23 15:04:25,848 - the_draw_2
+DEBUG 2022-06-23 15:04:32,986 - the_draw_3
+
+DEBUG 2022-06-23 15:04:35,990 - return_draw_card
+
+DEBUG 2022-06-23 15:04:37,102 - the_deal
+
+DEBUG 2022-06-23 15:04:43,922 - red_3_check
+
+DEBUG 2022-06-23 15:04:50,761 - red_3_check
+
+DEBUG 2022-06-23 15:04:50,764 - play_1
+
+DEBUG 2022-06-23 15:04:51,973 - stock_draw
+
+DEBUG 2022-06-23 15:04:54,641 - red_3_check
+
+DEBUG 2022-06-23 15:04:54,643 - play_2
+
+DEBUG 2022-06-23 15:05:15,277 - main
+
+DEBUG 2022-06-23 15:05:15,278 - setup
+
+DEBUG 2022-06-23 15:05:15,390 - the_draw_1
+DEBUG 2022-06-23 15:05:17,183 - the_draw_2
+DEBUG 2022-06-23 15:05:26,533 - the_draw_3
+
+DEBUG 2022-06-23 15:05:29,533 - return_draw_card
+
+DEBUG 2022-06-23 15:05:30,626 - the_deal
+
+DEBUG 2022-06-23 15:05:37,469 - red_3_check
+
+DEBUG 2022-06-23 15:05:43,686 - red_3_check
+
+DEBUG 2022-06-23 15:05:52,504 - red_3_check
+
+DEBUG 2022-06-23 15:05:58,224 - red_3_check
+
+DEBUG 2022-06-23 15:06:00,225 - play_1
+
+DEBUG 2022-06-23 15:06:02,409 - stock_draw
+
+DEBUG 2022-06-23 15:06:05,038 - red_3_check
+
+DEBUG 2022-06-23 15:06:05,041 - play_2
+
+DEBUG 2022-06-23 15:24:39,555 - main
+
+DEBUG 2022-06-23 15:24:39,555 - setup
+
+DEBUG 2022-06-23 15:24:39,733 - the_draw_1
+DEBUG 2022-06-23 15:24:41,451 - the_draw_2
+DEBUG 2022-06-23 15:24:48,654 - the_draw_3
+
+DEBUG 2022-06-23 15:24:51,655 - return_draw_card
+
+DEBUG 2022-06-23 15:24:52,716 - the_deal
+
+DEBUG 2022-06-23 15:24:59,461 - red_3_check
+
+DEBUG 2022-06-23 15:25:05,086 - red_3_check
+
+DEBUG 2022-06-23 15:25:13,791 - red_3_check
+
+DEBUG 2022-06-23 15:25:13,793 - play_1
+
+DEBUG 2022-06-23 15:25:15,475 - stock_draw
+
+DEBUG 2022-06-23 15:25:18,108 - red_3_check
+
+DEBUG 2022-06-23 15:25:18,110 - play_2
+
+DEBUG 2022-06-23 15:27:47,653 - main
+
+DEBUG 2022-06-23 15:27:47,653 - setup
+
+DEBUG 2022-06-23 15:27:47,799 - the_draw_1
+DEBUG 2022-06-23 15:27:48,736 - the_draw_2
+DEBUG 2022-06-23 15:27:55,460 - the_draw_3
+
+DEBUG 2022-06-23 15:27:58,463 - return_draw_card
+
+DEBUG 2022-06-23 15:27:59,539 - the_deal
+
+DEBUG 2022-06-23 15:28:06,392 - red_3_check
+
+DEBUG 2022-06-23 15:28:12,269 - red_3_check
+
+DEBUG 2022-06-23 15:28:21,008 - red_3_check
+
+DEBUG 2022-06-23 15:28:21,010 - play_1
+
+DEBUG 2022-06-23 15:28:22,394 - stock_draw
+
+DEBUG 2022-06-23 15:28:25,009 - red_3_check
+
+DEBUG 2022-06-23 15:28:25,012 - play_2
+
+DEBUG 2022-06-23 15:28:36,874 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:28:36,875 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:42:44,144 - main
+
+DEBUG 2022-06-23 15:42:44,144 - setup
+
+DEBUG 2022-06-23 15:42:44,320 - the_draw_1
+DEBUG 2022-06-23 15:42:45,188 - the_draw_2
+DEBUG 2022-06-23 15:42:52,636 - the_draw_3
+
+DEBUG 2022-06-23 15:42:55,640 - return_draw_card
+
+DEBUG 2022-06-23 15:42:56,739 - the_deal
+
+DEBUG 2022-06-23 15:43:03,626 - red_3_check
+
+DEBUG 2022-06-23 15:43:10,388 - red_3_check
+
+DEBUG 2022-06-23 15:43:10,390 - play_1
+
+DEBUG 2022-06-23 15:43:12,042 - stock_draw
+
+DEBUG 2022-06-23 15:43:14,679 - red_3_check
+
+DEBUG 2022-06-23 15:43:14,681 - play_2
+
+DEBUG 2022-06-23 15:43:45,586 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:43:45,586 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:43:51,596 - play_2
+
+DEBUG 2022-06-23 15:46:17,130 - main
+
+DEBUG 2022-06-23 15:46:17,130 - setup
+
+DEBUG 2022-06-23 15:46:17,303 - the_draw_1
+DEBUG 2022-06-23 15:46:18,304 - the_draw_2
+DEBUG 2022-06-23 15:46:25,299 - the_draw_3
+
+DEBUG 2022-06-23 15:46:28,301 - return_draw_card
+
+DEBUG 2022-06-23 15:46:29,382 - the_deal
+
+DEBUG 2022-06-23 15:46:36,149 - red_3_check
+
+DEBUG 2022-06-23 15:46:42,770 - red_3_check
+
+DEBUG 2022-06-23 15:46:42,773 - play_1
+
+DEBUG 2022-06-23 15:46:44,162 - stock_draw
+
+DEBUG 2022-06-23 15:46:46,779 - red_3_check
+
+DEBUG 2022-06-23 15:46:46,782 - play_2
+
+DEBUG 2022-06-23 15:47:02,203 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:47:02,204 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:47:05,207 - play_2
+
+DEBUG 2022-06-23 15:47:13,572 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:47:13,572 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:47:19,581 - play_2
+
+DEBUG 2022-06-23 15:48:01,927 - main
+
+DEBUG 2022-06-23 15:48:01,928 - setup
+
+DEBUG 2022-06-23 15:48:02,152 - the_draw_1
+DEBUG 2022-06-23 15:48:03,378 - the_draw_2
+DEBUG 2022-06-23 15:48:09,997 - the_draw_3
+
+DEBUG 2022-06-23 15:48:13,000 - return_draw_card
+
+DEBUG 2022-06-23 15:48:14,088 - the_deal
+
+DEBUG 2022-06-23 15:48:20,877 - red_3_check
+
+DEBUG 2022-06-23 15:48:27,750 - red_3_check
+
+DEBUG 2022-06-23 15:48:27,754 - play_1
+
+DEBUG 2022-06-23 15:48:30,038 - stock_draw
+
+DEBUG 2022-06-23 15:48:32,659 - red_3_check
+
+DEBUG 2022-06-23 15:48:32,661 - play_2
+
+DEBUG 2022-06-23 15:48:45,604 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:48:45,604 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:50:35,784 - main
+
+DEBUG 2022-06-23 15:50:35,784 - setup
+
+DEBUG 2022-06-23 15:50:35,971 - the_draw_1
+DEBUG 2022-06-23 15:50:37,118 - the_draw_2
+DEBUG 2022-06-23 15:50:44,032 - the_draw_3
+
+DEBUG 2022-06-23 15:50:47,034 - return_draw_card
+
+DEBUG 2022-06-23 15:50:48,121 - the_deal
+
+DEBUG 2022-06-23 15:50:54,924 - red_3_check
+
+DEBUG 2022-06-23 15:51:00,687 - red_3_check
+
+DEBUG 2022-06-23 15:51:09,398 - red_3_check
+
+DEBUG 2022-06-23 15:51:09,402 - play_1
+
+DEBUG 2022-06-23 15:51:10,532 - stock_draw
+
+DEBUG 2022-06-23 15:51:13,149 - red_3_check
+
+DEBUG 2022-06-23 15:51:13,151 - play_2
+
+DEBUG 2022-06-23 15:51:25,433 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:51:25,433 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:51:28,447 - wild_card_handler
+DEBUG 2022-06-23 15:51:34,453 - play_2
+
+DEBUG 2022-06-23 15:56:56,068 - main
+
+DEBUG 2022-06-23 15:56:56,069 - setup
+
+DEBUG 2022-06-23 15:56:56,310 - the_draw_1
+DEBUG 2022-06-23 15:57:05,127 - the_draw_2
+DEBUG 2022-06-23 15:57:12,171 - the_draw_3
+
+DEBUG 2022-06-23 15:57:15,172 - return_draw_card
+
+DEBUG 2022-06-23 15:57:16,260 - the_deal
+
+DEBUG 2022-06-23 15:57:23,078 - red_3_check
+
+DEBUG 2022-06-23 15:57:29,761 - red_3_check
+
+DEBUG 2022-06-23 15:57:29,765 - play_1
+
+DEBUG 2022-06-23 15:57:30,669 - stock_draw
+
+DEBUG 2022-06-23 15:57:33,292 - red_3_check
+
+DEBUG 2022-06-23 15:57:33,295 - play_2
+
+DEBUG 2022-06-23 15:57:41,950 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:57:41,950 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 15:58:09,363 - main
+
+DEBUG 2022-06-23 15:58:09,363 - setup
+
+DEBUG 2022-06-23 15:58:09,587 - the_draw_1
+DEBUG 2022-06-23 15:58:10,624 - the_draw_2
+DEBUG 2022-06-23 15:58:16,973 - the_draw_3
+
+DEBUG 2022-06-23 15:58:19,974 - return_draw_card
+
+DEBUG 2022-06-23 15:58:21,054 - the_deal
+
+DEBUG 2022-06-23 15:58:27,913 - red_3_check
+
+DEBUG 2022-06-23 15:58:34,672 - red_3_check
+
+DEBUG 2022-06-23 15:58:34,674 - play_1
+
+DEBUG 2022-06-23 15:58:35,522 - stock_draw
+
+DEBUG 2022-06-23 15:58:38,159 - red_3_check
+
+DEBUG 2022-06-23 15:58:38,160 - play_2
+
+DEBUG 2022-06-23 15:58:46,257 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 15:58:46,258 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 16:01:57,019 - main
+
+DEBUG 2022-06-23 16:01:57,020 - setup
+
+DEBUG 2022-06-23 16:01:57,208 - the_draw_1
+DEBUG 2022-06-23 16:01:57,765 - the_draw_2
+DEBUG 2022-06-23 16:02:03,846 - the_draw_3
+
+DEBUG 2022-06-23 16:02:06,848 - return_draw_card
+
+DEBUG 2022-06-23 16:02:07,966 - the_deal
+
+DEBUG 2022-06-23 16:02:14,768 - red_3_check
+
+DEBUG 2022-06-23 16:02:21,726 - red_3_check
+
+DEBUG 2022-06-23 16:02:21,729 - play_1
+
+DEBUG 2022-06-23 16:02:23,069 - stock_draw
+
+DEBUG 2022-06-23 16:02:25,747 - red_3_check
+
+DEBUG 2022-06-23 16:02:25,749 - play_2
+
+DEBUG 2022-06-23 16:02:36,673 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 16:02:36,674 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 16:02:44,662 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-06-23 16:02:44,663 - discard
+
+DEBUG 2022-06-23 16:02:50,329 - play_1
+
+DEBUG 2022-06-23 16:19:28,359 - main
+
+DEBUG 2022-06-23 16:19:28,359 - setup
+
+DEBUG 2022-06-23 16:19:28,545 - the_draw_1
+DEBUG 2022-06-23 16:19:29,389 - the_draw_2
+DEBUG 2022-06-23 16:19:36,205 - the_draw_3
+
+DEBUG 2022-06-23 16:19:39,206 - return_draw_card
+
+DEBUG 2022-06-23 16:19:40,282 - the_deal
+
+DEBUG 2022-06-23 16:19:47,057 - red_3_check
+
+DEBUG 2022-06-23 16:19:53,643 - red_3_check
+
+DEBUG 2022-06-23 16:19:57,296 - red_3_check
+
+DEBUG 2022-06-23 16:20:06,180 - red_3_check
+
+DEBUG 2022-06-23 16:20:06,182 - play_1
+
+DEBUG 2022-06-23 16:20:08,042 - stock_draw
+
+DEBUG 2022-06-23 16:20:10,670 - red_3_check
+
+DEBUG 2022-06-23 16:20:10,672 - play_2
+
+DEBUG 2022-06-23 16:20:25,207 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 16:20:25,207 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 16:20:31,216 - play_2
+
+DEBUG 2022-06-23 16:38:27,277 - main
+
+DEBUG 2022-06-23 16:38:27,277 - setup
+
+DEBUG 2022-06-23 16:38:27,464 - the_draw_1
+DEBUG 2022-06-23 16:38:28,440 - the_draw_2
+DEBUG 2022-06-23 16:38:34,815 - the_draw_3
+
+DEBUG 2022-06-23 16:38:37,816 - return_draw_card
+
+DEBUG 2022-06-23 16:38:38,900 - the_deal
+
+DEBUG 2022-06-23 16:38:45,785 - red_3_check
+
+DEBUG 2022-06-23 16:38:51,908 - red_3_check
+
+DEBUG 2022-06-23 16:39:00,760 - red_3_check
+
+DEBUG 2022-06-23 16:39:00,762 - play_1
+
+DEBUG 2022-06-23 16:39:02,146 - stock_draw
+
+DEBUG 2022-06-23 16:39:04,800 - red_3_check
+
+DEBUG 2022-06-23 16:39:04,802 - play_2
+
+DEBUG 2022-06-23 16:48:11,396 - main
+
+DEBUG 2022-06-23 16:48:11,397 - setup
+
+DEBUG 2022-06-23 16:48:11,572 - the_draw_1
+DEBUG 2022-06-23 16:48:12,486 - the_draw_2
+DEBUG 2022-06-23 16:48:18,436 - the_draw_3
+
+DEBUG 2022-06-23 16:48:21,440 - return_draw_card
+
+DEBUG 2022-06-23 16:48:22,574 - the_deal
+
+DEBUG 2022-06-23 16:48:29,381 - red_3_check
+
+DEBUG 2022-06-23 16:48:36,411 - red_3_check
+
+DEBUG 2022-06-23 16:48:36,413 - play_1
+
+DEBUG 2022-06-23 16:48:37,148 - stock_draw
+
+DEBUG 2022-06-23 16:48:39,789 - red_3_check
+
+DEBUG 2022-06-23 16:48:39,790 - play_2
+
+DEBUG 2022-06-23 16:48:53,073 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 16:48:53,073 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 17:29:56,918 - main
+
+DEBUG 2022-06-23 17:29:56,918 - setup
+
+DEBUG 2022-06-23 17:29:57,103 - the_draw_1
+DEBUG 2022-06-23 17:29:58,226 - the_draw_2
+DEBUG 2022-06-23 17:30:04,621 - the_draw_3
+
+DEBUG 2022-06-23 17:30:07,622 - return_draw_card
+
+DEBUG 2022-06-23 17:30:08,760 - the_deal
+
+DEBUG 2022-06-23 17:30:15,634 - red_3_check
+
+DEBUG 2022-06-23 17:30:22,461 - red_3_check
+
+DEBUG 2022-06-23 17:30:22,464 - play_1
+
+DEBUG 2022-06-23 17:30:23,613 - stock_draw
+
+DEBUG 2022-06-23 17:30:26,254 - red_3_check
+
+DEBUG 2022-06-23 17:30:26,255 - play_2
+
+DEBUG 2022-06-23 17:31:38,634 - main
+
+DEBUG 2022-06-23 17:31:38,635 - setup
+
+DEBUG 2022-06-23 17:31:38,838 - the_draw_1
+DEBUG 2022-06-23 17:31:39,474 - the_draw_2
+DEBUG 2022-06-23 17:31:45,393 - the_draw_3
+
+DEBUG 2022-06-23 17:31:48,395 - return_draw_card
+
+DEBUG 2022-06-23 17:31:49,468 - the_deal
+
+DEBUG 2022-06-23 17:31:56,349 - red_3_check
+
+DEBUG 2022-06-23 17:32:02,692 - red_3_check
+
+DEBUG 2022-06-23 17:32:06,312 - red_3_check
+
+DEBUG 2022-06-23 17:32:15,272 - red_3_check
+
+DEBUG 2022-06-23 17:32:15,275 - play_1
+
+DEBUG 2022-06-23 17:32:21,606 - stock_draw
+
+DEBUG 2022-06-23 17:32:24,236 - red_3_check
+
+DEBUG 2022-06-23 17:32:24,238 - play_2
+
+DEBUG 2022-06-23 17:32:38,658 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 17:32:38,659 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 17:32:38,660 - wild_card_handler
+DEBUG 2022-06-23 17:32:38,661 - wild_card_meld_choice_prompt
+DEBUG 2022-06-23 17:36:21,745 - main
+
+DEBUG 2022-06-23 17:36:21,745 - setup
+
+DEBUG 2022-06-23 17:36:21,957 - the_draw_1
+DEBUG 2022-06-23 17:36:24,527 - the_draw_2
+DEBUG 2022-06-23 17:36:38,002 - the_draw_3
+
+DEBUG 2022-06-23 17:36:41,006 - return_draw_card
+
+DEBUG 2022-06-23 17:36:42,080 - the_deal
+
+DEBUG 2022-06-23 17:36:48,986 - red_3_check
+
+DEBUG 2022-06-23 17:36:54,937 - red_3_check
+
+DEBUG 2022-06-23 17:37:03,957 - red_3_check
+
+DEBUG 2022-06-23 17:37:03,959 - play_1
+
+DEBUG 2022-06-23 17:37:04,943 - stock_draw
+
+DEBUG 2022-06-23 17:37:07,583 - red_3_check
+
+DEBUG 2022-06-23 17:37:07,585 - play_2
+
+DEBUG 2022-06-23 17:37:21,381 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 17:37:21,381 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 17:37:30,380 - play_2
+
+DEBUG 2022-06-23 17:40:26,835 - main
+
+DEBUG 2022-06-23 17:40:26,835 - setup
+
+DEBUG 2022-06-23 17:40:27,054 - the_draw_1
+DEBUG 2022-06-23 17:40:27,487 - the_draw_2
+DEBUG 2022-06-23 17:40:33,749 - the_draw_3
+
+DEBUG 2022-06-23 17:40:36,750 - return_draw_card
+
+DEBUG 2022-06-23 17:40:37,830 - the_deal
+
+DEBUG 2022-06-23 17:40:44,569 - red_3_check
+
+DEBUG 2022-06-23 17:40:51,423 - red_3_check
+
+DEBUG 2022-06-23 17:40:57,429 - red_3_check
+
+DEBUG 2022-06-23 17:40:59,431 - play_1
+
+DEBUG 2022-06-23 17:41:00,553 - stock_draw
+
+DEBUG 2022-06-23 17:41:03,206 - red_3_check
+
+DEBUG 2022-06-23 17:41:03,207 - play_2
+
+DEBUG 2022-06-23 17:41:12,107 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 17:41:12,107 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 17:41:22,080 - play_2
+
+DEBUG 2022-06-23 17:41:27,778 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 17:41:27,778 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 17:41:30,781 - play_2
+
+DEBUG 2022-06-23 17:41:36,463 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 17:41:36,463 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-23 17:41:40,229 - wild_card_handler
+DEBUG 2022-06-23 17:41:48,803 - play_2
+
+DEBUG 2022-06-23 17:41:52,277 - discard
+
+DEBUG 2022-06-23 17:41:54,118 - play_1
+
+DEBUG 2022-06-23 17:41:55,167 - stock_draw
+
+DEBUG 2022-06-23 17:41:57,788 - red_3_check
+
+DEBUG 2022-06-23 17:41:57,790 - play_2
+
+DEBUG 2022-06-23 17:42:08,232 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-23 17:42:08,232 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-24 14:09:15,433 - main
+
+DEBUG 2022-06-24 14:09:15,434 - setup
+
+DEBUG 2022-06-24 14:09:15,649 - the_draw_1
+DEBUG 2022-06-24 14:09:17,831 - the_draw_2
+DEBUG 2022-06-24 14:09:24,436 - the_draw_3
+
+DEBUG 2022-06-24 14:09:27,439 - return_draw_card
+
+DEBUG 2022-06-24 14:09:28,305 - the_deal
+
+DEBUG 2022-06-24 14:09:34,830 - red_3_check
+
+DEBUG 2022-06-24 14:09:41,321 - red_3_check
+
+DEBUG 2022-06-24 14:09:44,987 - red_3_check
+
+DEBUG 2022-06-24 14:09:53,983 - red_3_check
+
+DEBUG 2022-06-24 14:09:53,987 - play_1
+
+DEBUG 2022-06-24 14:09:55,431 - stock_draw
+
+DEBUG 2022-06-24 14:09:58,100 - red_3_check
+
+DEBUG 2022-06-24 14:09:58,102 - play_2
+
+DEBUG 2022-06-24 14:10:08,195 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-24 14:10:08,196 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-24 14:10:16,190 - play_2
+
+DEBUG 2022-06-24 14:10:26,357 - discard
+
+DEBUG 2022-06-24 14:10:29,382 - play_1
+
+DEBUG 2022-06-24 14:10:30,600 - stock_draw
+
+DEBUG 2022-06-24 14:10:33,252 - red_3_check
+
+DEBUG 2022-06-24 14:10:33,254 - play_2
+
+DEBUG 2022-06-24 14:10:44,460 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-24 14:10:44,460 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-24 14:10:51,625 - total_initial_played_cards_len != total_melds_len
+
+DEBUG 2022-06-24 14:10:51,627 - discard
+
+DEBUG 2022-06-24 14:11:23,640 - play_1
+
+DEBUG 2022-06-24 14:11:24,830 - stock_draw
+
+DEBUG 2022-06-24 14:11:27,452 - red_3_check
+
+DEBUG 2022-06-24 14:11:27,454 - play_2
+
+DEBUG 2022-06-24 14:11:30,637 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-24 14:11:30,637 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-24 14:11:33,640 - play_2
+
+DEBUG 2022-06-24 14:11:40,887 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-24 14:11:40,887 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-24 14:11:48,503 - play_2
+
+DEBUG 2022-06-24 16:44:55,313 - main
+
+DEBUG 2022-06-24 16:44:55,314 - setup
+
+DEBUG 2022-06-24 16:44:56,069 - the_draw_1
+DEBUG 2022-06-24 16:44:58,129 - the_draw_2
+DEBUG 2022-06-24 16:45:37,749 - main
+
+DEBUG 2022-06-24 16:45:37,749 - setup
+
+DEBUG 2022-06-24 16:45:37,928 - the_draw_1
+DEBUG 2022-06-24 16:47:33,779 - main
+
+DEBUG 2022-06-24 16:47:33,779 - setup
+
+DEBUG 2022-06-24 16:47:33,952 - the_draw_1
+DEBUG 2022-06-24 16:47:34,835 - the_draw_2
+DEBUG 2022-06-24 16:47:41,291 - the_draw_3
+
+DEBUG 2022-06-24 16:47:44,292 - return_draw_card
+
+DEBUG 2022-06-24 16:47:45,377 - the_deal
+
+DEBUG 2022-06-24 16:47:52,241 - red_3_check
+
+DEBUG 2022-06-24 16:47:59,029 - red_3_check
+
+DEBUG 2022-06-24 16:47:59,031 - play_1
+
+DEBUG 2022-06-24 16:48:02,460 - stock_draw
+
+DEBUG 2022-06-24 16:48:05,127 - red_3_check
+
+DEBUG 2022-06-24 16:48:05,131 - play_2
+
+DEBUG 2022-06-24 16:48:21,640 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-24 16:48:21,641 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 08:48:27,322 - main
+
+DEBUG 2022-06-27 08:48:27,322 - setup
+
+DEBUG 2022-06-27 08:48:27,833 - the_draw_1
+DEBUG 2022-06-27 08:48:30,964 - the_draw_2
+DEBUG 2022-06-27 08:48:39,152 - the_draw_3
+
+DEBUG 2022-06-27 08:48:42,154 - return_draw_card
+
+DEBUG 2022-06-27 08:48:43,239 - the_deal
+
+DEBUG 2022-06-27 08:48:50,041 - red_3_check
+
+DEBUG 2022-06-27 08:48:56,874 - red_3_check
+
+DEBUG 2022-06-27 08:48:56,876 - play_1
+
+DEBUG 2022-06-27 08:49:07,219 - stock_draw
+
+DEBUG 2022-06-27 08:49:09,880 - red_3_check
+
+DEBUG 2022-06-27 08:49:09,880 - play_2
+
+DEBUG 2022-06-27 08:49:22,864 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 08:49:22,864 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 08:50:07,862 - main
+
+DEBUG 2022-06-27 08:50:07,863 - setup
+
+DEBUG 2022-06-27 08:50:08,038 - the_draw_1
+DEBUG 2022-06-27 08:50:09,605 - the_draw_2
+DEBUG 2022-06-27 08:50:16,685 - the_draw_3
+
+DEBUG 2022-06-27 08:50:19,687 - return_draw_card
+
+DEBUG 2022-06-27 08:50:20,768 - the_deal
+
+DEBUG 2022-06-27 08:50:27,629 - red_3_check
+
+DEBUG 2022-06-27 08:50:34,459 - red_3_check
+
+DEBUG 2022-06-27 08:50:34,460 - play_1
+
+DEBUG 2022-06-27 08:50:36,077 - stock_draw
+
+DEBUG 2022-06-27 08:50:38,718 - red_3_check
+
+DEBUG 2022-06-27 08:50:38,721 - play_2
+
+DEBUG 2022-06-27 08:51:02,730 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 08:51:02,731 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 09:27:31,523 - main
+
+DEBUG 2022-06-27 09:27:31,523 - setup
+
+DEBUG 2022-06-27 09:27:31,695 - the_draw_1
+DEBUG 2022-06-27 09:27:33,371 - the_draw_2
+DEBUG 2022-06-27 09:27:40,213 - the_draw_3
+
+DEBUG 2022-06-27 09:27:43,217 - return_draw_card
+
+DEBUG 2022-06-27 09:27:44,312 - the_deal
+
+DEBUG 2022-06-27 09:27:51,148 - red_3_check
+
+DEBUG 2022-06-27 09:27:57,876 - red_3_check
+
+DEBUG 2022-06-27 09:27:57,879 - play_1
+
+DEBUG 2022-06-27 09:27:59,378 - stock_draw
+
+DEBUG 2022-06-27 09:28:02,017 - red_3_check
+
+DEBUG 2022-06-27 09:28:02,019 - play_2
+
+DEBUG 2022-06-27 09:28:12,908 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 09:28:12,908 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 10:19:21,853 - main
+
+DEBUG 2022-06-27 10:19:21,853 - setup
+
+DEBUG 2022-06-27 10:19:22,040 - the_draw_1
+DEBUG 2022-06-27 10:19:23,610 - the_draw_2
+DEBUG 2022-06-27 10:19:31,244 - the_draw_3
+
+DEBUG 2022-06-27 10:19:34,246 - return_draw_card
+
+DEBUG 2022-06-27 10:19:35,335 - the_deal
+
+DEBUG 2022-06-27 10:19:42,179 - red_3_check
+
+DEBUG 2022-06-27 10:19:48,824 - red_3_check
+
+DEBUG 2022-06-27 10:19:48,827 - play_1
+
+DEBUG 2022-06-27 10:19:51,441 - stock_draw
+
+DEBUG 2022-06-27 10:19:54,061 - red_3_check
+
+DEBUG 2022-06-27 10:20:00,312 - red_3_check
+
+DEBUG 2022-06-27 10:20:02,314 - play_2
+
+DEBUG 2022-06-27 10:20:57,359 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 10:20:57,359 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 10:25:58,377 - main
+
+DEBUG 2022-06-27 10:25:58,377 - setup
+
+DEBUG 2022-06-27 10:25:58,549 - the_draw_1
+DEBUG 2022-06-27 10:26:00,898 - the_draw_2
+DEBUG 2022-06-27 10:26:07,779 - the_draw_3
+
+DEBUG 2022-06-27 10:26:10,781 - return_draw_card
+
+DEBUG 2022-06-27 10:26:11,955 - the_deal
+
+DEBUG 2022-06-27 10:26:18,879 - red_3_check
+
+DEBUG 2022-06-27 10:26:24,630 - red_3_check
+
+DEBUG 2022-06-27 10:26:33,330 - red_3_check
+
+DEBUG 2022-06-27 10:26:33,332 - play_1
+
+DEBUG 2022-06-27 10:26:34,734 - stock_draw
+
+DEBUG 2022-06-27 10:26:37,382 - red_3_check
+
+DEBUG 2022-06-27 10:26:37,385 - play_2
+
+DEBUG 2022-06-27 10:27:04,202 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 10:27:04,202 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 10:30:12,239 - main
+
+DEBUG 2022-06-27 10:30:12,240 - setup
+
+DEBUG 2022-06-27 10:30:12,411 - the_draw_1
+DEBUG 2022-06-27 10:30:14,050 - the_draw_2
+DEBUG 2022-06-27 10:30:21,522 - the_draw_3
+
+DEBUG 2022-06-27 10:30:24,523 - return_draw_card
+
+DEBUG 2022-06-27 10:30:25,605 - the_deal
+
+DEBUG 2022-06-27 10:30:32,374 - red_3_check
+
+DEBUG 2022-06-27 10:30:38,585 - red_3_check
+
+DEBUG 2022-06-27 10:30:47,438 - red_3_check
+
+DEBUG 2022-06-27 10:30:53,492 - red_3_check
+
+DEBUG 2022-06-27 10:30:55,495 - play_1
+
+DEBUG 2022-06-27 10:44:57,782 - stock_draw
+
+DEBUG 2022-06-27 10:45:00,376 - red_3_check
+
+DEBUG 2022-06-27 10:45:00,378 - play_2
+
+DEBUG 2022-06-27 10:45:20,983 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 10:45:20,984 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 10:45:21,005 - 10 is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 10:45:21,005 - 8 is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 10:45:25,137 - wild_card_handler
+DEBUG 2022-06-27 11:00:49,585 - main
+
+DEBUG 2022-06-27 11:00:49,585 - setup
+
+DEBUG 2022-06-27 11:00:49,763 - the_draw_1
+DEBUG 2022-06-27 11:00:51,584 - the_draw_2
+DEBUG 2022-06-27 11:01:00,466 - the_draw_3
+
+DEBUG 2022-06-27 11:01:03,468 - return_draw_card
+
+DEBUG 2022-06-27 11:01:04,553 - the_deal
+
+DEBUG 2022-06-27 11:01:11,424 - red_3_check
+
+DEBUG 2022-06-27 11:01:18,152 - red_3_check
+
+DEBUG 2022-06-27 11:01:18,154 - play_1
+
+DEBUG 2022-06-27 11:01:19,059 - stock_draw
+
+DEBUG 2022-06-27 11:01:21,685 - red_3_check
+
+DEBUG 2022-06-27 11:01:21,688 - play_2
+
+DEBUG 2022-06-27 11:01:34,297 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:01:34,298 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:01:34,309 - King is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 11:01:34,310 - King is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 11:02:06,015 - main
+
+DEBUG 2022-06-27 11:02:06,016 - setup
+
+DEBUG 2022-06-27 11:02:06,193 - the_draw_1
+DEBUG 2022-06-27 11:02:07,599 - the_draw_2
+DEBUG 2022-06-27 11:02:15,842 - the_draw_3
+
+DEBUG 2022-06-27 11:02:18,844 - return_draw_card
+
+DEBUG 2022-06-27 11:02:19,923 - the_deal
+
+DEBUG 2022-06-27 11:02:26,732 - red_3_check
+
+DEBUG 2022-06-27 11:02:32,709 - red_3_check
+
+DEBUG 2022-06-27 11:02:41,519 - red_3_check
+
+DEBUG 2022-06-27 11:02:41,521 - play_1
+
+DEBUG 2022-06-27 11:02:42,898 - stock_draw
+
+DEBUG 2022-06-27 11:02:45,548 - red_3_check
+
+DEBUG 2022-06-27 11:02:45,551 - play_2
+
+DEBUG 2022-06-27 11:02:59,677 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:02:59,677 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:02:59,688 - 9 is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 11:03:02,866 - wild_card_handler
+DEBUG 2022-06-27 11:03:07,429 - play_2
+
+DEBUG 2022-06-27 11:03:19,147 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:03:19,148 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:03:19,158 - 9 is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 11:03:22,321 - wild_card_handler
+DEBUG 2022-06-27 11:03:26,897 - play_2
+
+DEBUG 2022-06-27 11:03:42,690 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:03:42,690 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:03:42,701 - 9 is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.
+DEBUG 2022-06-27 11:03:45,867 - wild_card_handler
+DEBUG 2022-06-27 11:03:50,429 - play_2
+
+DEBUG 2022-06-27 11:14:26,336 - main
+
+DEBUG 2022-06-27 11:14:26,336 - setup
+
+DEBUG 2022-06-27 11:14:26,511 - the_draw_1
+DEBUG 2022-06-27 11:14:27,435 - the_draw_2
+DEBUG 2022-06-27 11:14:34,699 - the_draw_3
+
+DEBUG 2022-06-27 11:14:37,701 - return_draw_card
+
+DEBUG 2022-06-27 11:14:38,795 - the_deal
+
+DEBUG 2022-06-27 11:14:45,649 - red_3_check
+
+DEBUG 2022-06-27 11:14:51,511 - red_3_check
+
+DEBUG 2022-06-27 11:15:00,193 - red_3_check
+
+DEBUG 2022-06-27 11:15:00,196 - play_1
+
+DEBUG 2022-06-27 11:15:01,830 - stock_draw
+
+DEBUG 2022-06-27 11:15:04,462 - red_3_check
+
+DEBUG 2022-06-27 11:15:10,797 - red_3_check
+
+DEBUG 2022-06-27 11:15:12,801 - play_2
+
+DEBUG 2022-06-27 11:15:45,934 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:15:45,935 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:16:27,265 - main
+
+DEBUG 2022-06-27 11:16:27,265 - setup
+
+DEBUG 2022-06-27 11:16:27,442 - the_draw_1
+DEBUG 2022-06-27 11:16:27,999 - the_draw_2
+DEBUG 2022-06-27 11:16:37,317 - the_draw_3
+
+DEBUG 2022-06-27 11:16:40,320 - return_draw_card
+
+DEBUG 2022-06-27 11:16:41,374 - the_deal
+
+DEBUG 2022-06-27 11:16:48,209 - red_3_check
+
+DEBUG 2022-06-27 11:16:54,978 - red_3_check
+
+DEBUG 2022-06-27 11:16:54,981 - play_1
+
+DEBUG 2022-06-27 11:16:55,893 - stock_draw
+
+DEBUG 2022-06-27 11:16:58,539 - red_3_check
+
+DEBUG 2022-06-27 11:16:58,542 - play_2
+
+DEBUG 2022-06-27 11:17:23,785 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:17:23,785 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:17:33,021 - play_2
+
+DEBUG 2022-06-27 11:17:47,597 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:17:47,597 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:17:56,824 - play_2
+
+DEBUG 2022-06-27 11:18:07,092 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:18:07,092 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 11:18:16,144 - play_2
+
+DEBUG 2022-06-27 11:18:36,343 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 11:18:36,344 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:06:09,983 - main
+
+DEBUG 2022-06-27 15:06:09,984 - setup
+
+DEBUG 2022-06-27 15:07:38,813 - main
+
+DEBUG 2022-06-27 15:07:38,814 - setup
+
+DEBUG 2022-06-27 15:07:39,123 - the_draw_1
+DEBUG 2022-06-27 15:07:40,175 - the_draw_2
+DEBUG 2022-06-27 15:07:46,883 - the_draw_3
+
+DEBUG 2022-06-27 15:07:49,885 - return_draw_card
+
+DEBUG 2022-06-27 15:07:50,980 - the_deal
+
+DEBUG 2022-06-27 15:07:57,861 - red_3_check
+
+DEBUG 2022-06-27 15:08:03,901 - red_3_check
+
+DEBUG 2022-06-27 15:08:12,702 - red_3_check
+
+DEBUG 2022-06-27 15:08:12,707 - play_1
+
+DEBUG 2022-06-27 15:08:14,373 - stock_draw
+
+DEBUG 2022-06-27 15:08:17,004 - red_3_check
+
+DEBUG 2022-06-27 15:08:17,007 - play_2
+
+DEBUG 2022-06-27 15:08:35,136 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:08:35,136 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:09:45,199 - main
+
+DEBUG 2022-06-27 15:09:45,199 - setup
+
+DEBUG 2022-06-27 15:09:45,369 - the_draw_1
+DEBUG 2022-06-27 15:09:46,385 - the_draw_2
+DEBUG 2022-06-27 15:09:54,933 - the_draw_3
+
+DEBUG 2022-06-27 15:09:57,935 - return_draw_card
+
+DEBUG 2022-06-27 15:09:59,019 - the_deal
+
+DEBUG 2022-06-27 15:10:05,849 - red_3_check
+
+DEBUG 2022-06-27 15:10:12,110 - red_3_check
+
+DEBUG 2022-06-27 15:10:15,748 - red_3_check
+
+DEBUG 2022-06-27 15:10:24,613 - red_3_check
+
+DEBUG 2022-06-27 15:10:24,616 - play_1
+
+DEBUG 2022-06-27 15:10:27,612 - stock_draw
+
+DEBUG 2022-06-27 15:10:30,238 - red_3_check
+
+DEBUG 2022-06-27 15:10:30,240 - play_2
+
+DEBUG 2022-06-27 15:10:58,926 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:10:58,927 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:30:53,199 - main
+
+DEBUG 2022-06-27 15:30:53,199 - setup
+
+DEBUG 2022-06-27 15:30:53,344 - the_draw_1
+DEBUG 2022-06-27 15:30:55,335 - the_draw_2
+DEBUG 2022-06-27 15:31:02,450 - the_draw_3
+
+DEBUG 2022-06-27 15:31:05,451 - return_draw_card
+
+DEBUG 2022-06-27 15:31:06,537 - the_deal
+
+DEBUG 2022-06-27 15:31:13,402 - red_3_check
+
+DEBUG 2022-06-27 15:31:20,100 - red_3_check
+
+DEBUG 2022-06-27 15:31:20,103 - play_1
+
+DEBUG 2022-06-27 15:31:21,217 - stock_draw
+
+DEBUG 2022-06-27 15:31:23,840 - red_3_check
+
+DEBUG 2022-06-27 15:31:23,842 - play_2
+
+DEBUG 2022-06-27 15:31:44,500 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:31:44,500 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:31:58,911 - main
+
+DEBUG 2022-06-27 15:31:58,912 - setup
+
+DEBUG 2022-06-27 15:31:59,237 - the_draw_1
+DEBUG 2022-06-27 15:32:00,231 - the_draw_2
+DEBUG 2022-06-27 15:32:07,529 - the_draw_3
+
+DEBUG 2022-06-27 15:32:10,532 - return_draw_card
+
+DEBUG 2022-06-27 15:32:11,639 - the_deal
+
+DEBUG 2022-06-27 15:32:18,557 - red_3_check
+
+DEBUG 2022-06-27 15:32:25,322 - red_3_check
+
+DEBUG 2022-06-27 15:32:31,597 - red_3_check
+
+DEBUG 2022-06-27 15:32:33,602 - play_1
+
+DEBUG 2022-06-27 15:32:34,763 - stock_draw
+
+DEBUG 2022-06-27 15:32:37,398 - red_3_check
+
+DEBUG 2022-06-27 15:32:37,400 - play_2
+
+DEBUG 2022-06-27 15:32:54,056 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:32:54,056 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:33:54,400 - main
+
+DEBUG 2022-06-27 15:33:54,401 - setup
+
+DEBUG 2022-06-27 15:33:54,682 - the_draw_1
+DEBUG 2022-06-27 15:33:55,817 - the_draw_2
+DEBUG 2022-06-27 15:34:03,770 - the_draw_3
+
+DEBUG 2022-06-27 15:34:06,771 - return_draw_card
+
+DEBUG 2022-06-27 15:34:07,831 - the_deal
+
+DEBUG 2022-06-27 15:34:14,737 - red_3_check
+
+DEBUG 2022-06-27 15:34:21,483 - red_3_check
+
+DEBUG 2022-06-27 15:34:27,640 - red_3_check
+
+DEBUG 2022-06-27 15:34:29,646 - play_1
+
+DEBUG 2022-06-27 15:34:31,260 - stock_draw
+
+DEBUG 2022-06-27 15:34:33,910 - red_3_check
+
+DEBUG 2022-06-27 15:34:33,914 - play_2
+
+DEBUG 2022-06-27 15:34:46,963 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:34:46,963 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:36:24,540 - main
+
+DEBUG 2022-06-27 15:36:24,540 - setup
+
+DEBUG 2022-06-27 15:36:24,821 - the_draw_1
+DEBUG 2022-06-27 15:36:25,683 - the_draw_2
+DEBUG 2022-06-27 15:36:33,790 - the_draw_3
+
+DEBUG 2022-06-27 15:36:36,793 - return_draw_card
+
+DEBUG 2022-06-27 15:36:37,909 - the_deal
+
+DEBUG 2022-06-27 15:36:44,858 - red_3_check
+
+DEBUG 2022-06-27 15:36:51,678 - red_3_check
+
+DEBUG 2022-06-27 15:36:51,683 - play_1
+
+DEBUG 2022-06-27 15:36:52,929 - stock_draw
+
+DEBUG 2022-06-27 15:36:55,585 - red_3_check
+
+DEBUG 2022-06-27 15:36:55,587 - play_2
+
+DEBUG 2022-06-27 15:37:16,509 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:37:16,509 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:37:20,804 - wild_card_handler
+DEBUG 2022-06-27 15:37:28,040 - play_2
+
+DEBUG 2022-06-27 15:37:45,644 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:37:45,644 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:37:52,684 - wild_card_handler
+DEBUG 2022-06-27 15:38:04,261 - play_2
+
+DEBUG 2022-06-27 15:38:15,910 - discard
+
+DEBUG 2022-06-27 15:38:17,427 - play_1
+
+DEBUG 2022-06-27 15:38:19,077 - stock_draw
+
+DEBUG 2022-06-27 15:38:21,743 - red_3_check
+
+DEBUG 2022-06-27 15:38:21,744 - play_2
+
+DEBUG 2022-06-27 15:38:38,038 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:38:38,038 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:38:51,177 - play_2
+
+DEBUG 2022-06-27 15:39:14,336 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-27 15:39:14,336 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-27 15:39:27,284 - play_2
+
+DEBUG 2022-06-28 10:28:14,682 - main
+
+DEBUG 2022-06-28 10:28:14,683 - setup
+
+DEBUG 2022-06-28 10:28:15,330 - the_draw_1
+DEBUG 2022-06-28 10:28:17,011 - the_draw_2
+DEBUG 2022-06-28 10:28:25,289 - the_draw_3
+
+DEBUG 2022-06-28 10:28:28,290 - return_draw_card
+
+DEBUG 2022-06-28 10:28:29,475 - the_deal
+
+DEBUG 2022-06-28 10:28:36,668 - red_3_check
+
+DEBUG 2022-06-28 10:28:43,918 - red_3_check
+
+DEBUG 2022-06-28 10:28:49,763 - red_3_check
+
+DEBUG 2022-06-28 10:28:51,766 - play_1
+
+DEBUG 2022-06-28 10:28:53,634 - stock_draw
+
+DEBUG 2022-06-28 10:28:56,217 - red_3_check
+
+DEBUG 2022-06-28 10:29:02,483 - red_3_check
+
+DEBUG 2022-06-28 10:29:04,484 - play_2
+
+DEBUG 2022-06-28 10:29:16,845 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-28 10:29:16,846 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-28 10:29:23,434 - play_2
+
+DEBUG 2022-06-28 10:33:44,233 - main
+
+DEBUG 2022-06-28 10:33:44,233 - setup
+
+DEBUG 2022-06-28 10:33:44,564 - the_draw_1
+DEBUG 2022-06-28 10:33:45,256 - the_draw_2
+DEBUG 2022-06-28 10:33:57,922 - the_draw_3
+
+DEBUG 2022-06-28 10:34:00,924 - return_draw_card
+
+DEBUG 2022-06-28 10:34:01,995 - the_deal
+
+DEBUG 2022-06-28 10:34:08,794 - red_3_check
+
+DEBUG 2022-06-28 10:34:14,644 - red_3_check
+
+DEBUG 2022-06-28 10:34:18,301 - red_3_check
+
+DEBUG 2022-06-28 10:34:23,561 - red_3_check
+
+DEBUG 2022-06-28 10:34:34,451 - red_3_check
+
+DEBUG 2022-06-28 10:34:34,457 - play_1
+
+DEBUG 2022-06-28 10:34:36,297 - stock_draw
+
+DEBUG 2022-06-28 10:34:38,934 - red_3_check
+
+DEBUG 2022-06-28 10:34:38,937 - play_2
+
+DEBUG 2022-06-28 10:35:04,518 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-28 10:35:04,518 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-28 10:35:13,677 - play_2
+
+DEBUG 2022-06-28 14:07:49,198 - main
+
+DEBUG 2022-06-28 14:07:49,199 - setup
+
+DEBUG 2022-06-28 14:07:49,502 - the_draw_1
+DEBUG 2022-06-28 14:07:50,609 - the_draw_2
+DEBUG 2022-06-28 14:07:58,240 - the_draw_3
+
+DEBUG 2022-06-28 14:08:01,241 - return_draw_card
+
+DEBUG 2022-06-28 14:08:02,338 - the_deal
+
+DEBUG 2022-06-28 14:08:09,180 - red_3_check
+
+DEBUG 2022-06-28 14:08:14,909 - red_3_check
+
+DEBUG 2022-06-28 14:08:23,698 - red_3_check
+
+DEBUG 2022-06-28 14:08:23,703 - play_1
+
+DEBUG 2022-06-28 14:08:24,990 - stock_draw
+
+DEBUG 2022-06-28 14:08:27,592 - red_3_check
+
+DEBUG 2022-06-28 14:08:27,594 - play_2
+
+DEBUG 2022-06-28 14:08:47,708 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-28 14:08:47,709 - current_player.round_score < current_player.meld_requirement
+
+DEBUG 2022-06-28 14:08:57,704 - play_2
+
+DEBUG 2022-06-28 14:09:41,791 - 
+valid_play_check_and_sort
+
+DEBUG 2022-06-28 14:09:41,792 - current_player.round_score < current_player.meld_requirement
+

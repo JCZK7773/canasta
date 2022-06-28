@@ -43,7 +43,7 @@ class Card(pygame.sprite.DirtySprite): # ****
         self.prior_card_group_name = None
     # -------------------------------------
     def __str__(self): # ****
-        return f"{self.rank}{deck.Deck().suits_symbols.get(self.suit)}" # ****
+        return f"{self.rank}" # ****
 
     def __repr__(self): # ****
         return self.__str__() # ****

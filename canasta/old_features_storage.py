@@ -211,3 +211,9 @@
 #                 print(f"{num}) {item}\n") # ****
 #             num += 1 # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+###### Below Line - Progression_text_obj_rect alternate version for static text-box instead of current ambiguous text-box.
+# self.progression_text_obj_rect = pygame.draw.rect(self.screen_surface, self.dark_blue_color, (locations.Locate.visible_center[0], locations.Locate.visible_center[1], 1000, 400))

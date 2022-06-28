@@ -1,10 +1,10 @@
 # THINGS TO DO
-    # Current Bug: Play cards is not working properly. Only lets you click one card and then gives an output saying you can't play only 1 card, etc.
-    # Current Bug: Multiple choice text display rects do not clear away from the screen after a new screen draw without a new rect to replace them.
+    # Add in a new meld group called pre_sort_play_cards for play_cards before they are sorted. They will be placed there during the initial portion of valid_play_check_and_sort(), having their own visual location (as do the other card groups). Once the cards are placed into the temp_melds, they will then be appended into the normal play_cards location.
+    # Work with bugs in bugs_debug.py & update the state of the bugs.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.
         # Go through all code to ensure that all for loops are being broken out of whenever a condition is met, instead of continuing the iteration as this slows the execution of the code.
-    # Pretty sure that I am loading the images each time I reassign the image. I think it would increase performance to load the image once and then just assign a variable to the image??
+    # IS THIS TRUE??? Pretty sure that I am loading the images each time I reassign the image. I think it would increase performance to load the image once and then just assign a variable to the image??
     # Implement delta timing frame system.
     # I think I tried this but it did not work. Change event_handler() so that the 'for event in pygame.event.get()' is instead 'for event in pygame.event.wait()'?? Or something along those lines. Supposedly this will reduce CPU usage. Perhaps I can call pygame.event.wait() in the progression loops ONLY whenever I am expecting user input. See NOTES for a paste of supposedly improved code snippet.
     # Move card creation, card ranks, card suits, and other attributes more properly associated with the Card class, into the Card class code base instead of being inside of the Deck class.
@@ -29,6 +29,8 @@
     # 04/22/22 - 05/04/22: Finished and polished the progression text and input text sections in game.py and the associated logic. Completely debugged the system, and cleaned up and changed things around in the code for draw_window_the_draw(). Input happens in real time, backspace works, and display is reset each time a value is processed. Continued to debug logic in progression.py.
     # 05/05/22 - 05/09/22: Started, finished, debugged, and tested the card movement speed issue, card click event handling, input (backspacking, clearing the rects after input, etc.), reworked much of the logic in progression.py, and continued to clean up comments and outdated code as I go along.
     # 05/10/22 - ...
+    # 06/01/22 - 06/19/22: Took a long break. Did not code at all during this time.
+    # 06/20/22: Worked on implementing code for the case wherein the width of the progression text is wider than the screen display. Mostly finished. Need to finish and debug that. A couple other minor changes.
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # NOTES
     #     pygame.Rect

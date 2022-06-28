@@ -8,6 +8,7 @@ class Player(): # ****
         self._name = name # ****
         self.draw_card = None
         self.hand = [] # ****
+        self.pre_sort_play_cards = []
         self.play_cards = [] # ****
         self.play_cards_wild_cards = [] # ****
         self.initial_played_cards = [] # ****

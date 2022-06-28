@@ -42,6 +42,8 @@ def setup():
     # Below Section - Assigns each player's card groups that will be visually displayed on the pygame screen to be an instance of CustomAppendList, giving each a name associated with the card group name to be used for when cards are appended to these card groups. The dictionary func_dict has the names as the keys , and a function name which updates the card coordinates of the appended card group is the dict value, so that whenever a card is appended to one of these groups, through a modified append method, the function is called before the card is appended to the card group, for the purpose of automation and simplicity.
     player.P1.hand = customappendlist.CustomAppendList('P1.hand') # ****
     player.P2.hand = customappendlist.CustomAppendList('P2.hand') # ****
+    player.P1.pre_sort_play_cards = customappendlist.CustomAppendList('P1.pre_sort_play_cards')
+    player.P2.pre_sort_play_cards = customappendlist.CustomAppendList('P2.pre_sort_play_cards')
     player.P1.play_cards = customappendlist.CustomAppendList('P1.play_cards') # ****
     player.P2.play_cards = customappendlist.CustomAppendList('P2.play_cards') # ****
     player.P1.red_3_meld = customappendlist.CustomAppendList('P1.red_3_meld') # ****

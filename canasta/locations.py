@@ -24,6 +24,8 @@ class Locations():
         self.p2_hand_start_loc = [self.visible_center[0] + 64, self.p1_hand_start_loc[1]]
         self.p1_play_cards_start_loc = [80, 540]
         self.p2_play_cards_start_loc = [self.visible_center[0] + 80, self.p1_play_cards_start_loc[1]]
+        self.p1_play_cards_start_pre_sort_loc = [600, 540]
+        self.p2_play_cards_start_pre_sort_loc = [1300, 540]
         self.p1_melds_start_loc = [80, 830]
         self.p2_melds_start_loc = [self.visible_center[0] + 80, self.p1_melds_start_loc[1]]
         self.card_group_name_dict = {'deck': deck.MasterDeck.deck,
@@ -75,6 +77,28 @@ class Locations():
             x_val_increase = len(player.P2.hand) * 20
             p2_hand_next_loc = [self.p2_hand_start_loc[0] + x_val_increase, self.p2_hand_start_loc[1]]
             return p2_hand_next_loc
+    # -------------------------------------
+    # Below Function - Calculated property; for visually placing pre-sorted play cards for P1.
+    @property
+    def p1_play_cards_pre_sort_next_loc(self):
+        print(f'p1 - {len(player.P1.pre_sort_play_cards)}')
+        if len(player.P1.pre_sort_play_cards) == 0:
+            return self.p1_play_cards_start_pre_sort_loc
+        else:
+            x_val_increase = len(player.P1.pre_sort_play_cards) * 20
+            p1_play_cards_pre_sort_next_loc = [self.p1_play_cards_start_pre_sort_loc[0] + x_val_increase, self.p1_play_cards_start_pre_sort_loc[1]]
+            return p1_play_cards_pre_sort_next_loc
+    # -------------------------------------
+    # Below Function - Calculated property; for visually placing pre-sorted play cards for P2.
+    @property
+    def p2_play_cards_pre_sort_next_loc(self):
+        print(f'p2 - {len(player.P2.pre_sort_play_cards)}')
+        if len(player.P2.pre_sort_play_cards) == 0:
+            return self.p2_play_cards_start_pre_sort_loc
+        else:
+            x_val_increase = len(player.P2.pre_sort_play_cards) * 20
+            p2_play_cards_pre_sort_next_loc = [self.p2_play_cards_start_pre_sort_loc[0] + x_val_increase, self.p2_play_cards_start_pre_sort_loc[1]]
+            return p2_play_cards_pre_sort_next_loc
     # -------------------------------------
     # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location. Also takes the the_draw_2 parameter for whenever the cards need to be placed face-down during the draw card selection segment.
     def card_movement(self, loc, current_card, the_draw_2 = False):
@@ -199,11 +223,15 @@ class Locations():
     # Below Function - Called by func_dict via key 'deck', 'discard_pile', and 'hand' whenever a card is appended to the MasterDeck.deck, MasterDeck.discard_pile, or P1.hand/P2.hand. Calls card_movement() function to visually and digitally move card to the proper location.
     def visual_deck_discard_hand_update(self, card_group_name, current_card = None):
         # print("visual_deck_discard_hand_update")
+        # Below Section - For whenever the hand is being 'resituated' after cards have just been appended to another card_group after having been popped from the hand. Creates a replica of the hand for the cards to temporarily reside in, then iterates through the cards appending them back into the hand.
         if current_card == None and 'hand' in card_group_name:
             temp_loc = self.card_group_name_dict[card_group_name][:]
             self.card_group_name_dict[card_group_name].clear()
             for x_card in temp_loc:
+                # Below Line - Unsure if proper fix!! For the case in which resituation is happening and the card is about to be passed to the append function. If prior_card_group_name is not set to None, then it will recursively call the prior_card_group_name resituation function AGAIN, when in fact it should only run that once.
+                x_card.prior_card_group_name = None
                 self.card_group_name_dict[card_group_name].append(x_card)
+        # -------------------------------------
         else:
             self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
             current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
@@ -263,11 +291,11 @@ class Locations():
     # -------------------------------------
     # Below Function - Called by funct_dict via keys associated with all meld groups. Handles proper meld and card locations movements for all meld groups.
     def visual_meld_update(self, card_group_name, item, meld_num = None, card_num = None):
-        # print("visual_meld_update")
+        print("visual_meld_update")
         # -------------------------------------
         # Below line - If you are adding from a completed meld.
         if type(item) == customappendlist.CustomAppendList:
-            # print("customappendlist.CustomAppendList")
+            print("visual_meld_update > customappendlist.CustomAppendList")
             # Below Section - Sets card_num to 0, which will be increased by 1 for each card iteration and begins iteration through the meld.
             card_num = 0
             for cur_card in item:
@@ -276,11 +304,18 @@ class Locations():
                 cur_card.display_layer = card_num
                 card_num += 1
                 # -------------------------------------
-        # Below Line - If you are adding cards to a preexisiting meld.
         elif type(item) == card.Card:
-            # print("card.Card")
-            meld = player.Player.meld_group_dict[card_group_name][meld_num]
-            self.card_num_canasta_detect(card_group_name, item, meld, meld_num, card_num)
+            print("visual_meld_update > card.Card")
+            # Below Line - If you are adding cards to a preexisiting meld.
+            if meld_num != None:
+                meld = player.Player.meld_group_dict[card_group_name][meld_num]
+                self.card_num_canasta_detect(card_group_name, item, meld, meld_num, card_num)
+            # Below Section - If you are adding cards to play_cards; before they are sorted in valid_play_check_and_sort.
+            else:
+                if 'P1' in card_group_name:
+                    self.card_movement(self.p1_play_cards_pre_sort_next_loc, item)
+                else:
+                    self.card_movement(self.p2_play_cards_pre_sort_next_loc, item)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'red_3_meld' whenever a card is appended to player.P1.red_3_meld. Calls card_movement() function to visually and digitally move card to player.P1.red_3_meld.
     def visual_red_3_meld_update(self, card_group_name, current_card):
@@ -325,4 +360,4 @@ class Locations():
 Locate = Locations()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Line - Creates a dictionary attribute for Locations that includes all of the associated functions for updating visuals for the various card groups.
-Locations.func_dict = {'deck': Locate.visual_deck_discard_hand_update, 'discard_pile': Locate.visual_deck_discard_hand_update, 'P1.hand': Locate.visual_deck_discard_hand_update, 'P2.hand': Locate.visual_deck_discard_hand_update, 'P1.play_cards': Locate.visual_meld_update, 'P2.play_cards': Locate.visual_meld_update, 'P1.melds': Locate.visual_meld_update, 'P2.melds': Locate.visual_meld_update, 'P1.red_3_meld': Locate.visual_red_3_meld_update, 'P2.red_3_meld': Locate.visual_red_3_meld_update}
+Locations.func_dict = {'deck': Locate.visual_deck_discard_hand_update, 'discard_pile': Locate.visual_deck_discard_hand_update, 'P1.hand': Locate.visual_deck_discard_hand_update, 'P2.hand': Locate.visual_deck_discard_hand_update, 'P1.pre_sort_play_cards': Locate.visual_meld_update, 'P2.pre_sort_play_cards': Locate.visual_meld_update, 'P1.play_cards': Locate.visual_meld_update, 'P2.play_cards': Locate.visual_meld_update, 'P1.melds': Locate.visual_meld_update, 'P2.melds': Locate.visual_meld_update, 'P1.red_3_meld': Locate.visual_red_3_meld_update, 'P2.red_3_meld': Locate.visual_red_3_meld_update}

@@ -55,7 +55,7 @@ class Game():
     # -------------------------------------
     # Below Section - Text Section
     # -------------------------------------
-        self.font = pygame.font.Font('freesansbold.ttf', 18)
+        self.font = pygame.font.Font('freesansbold.ttf', 17)
         # -------------------------------------
         # Below Line - Type: dict. A dictionary of invalid keypresses (which cannot be displayed properly, but instead show as rectangular symbols). Key = description, Value = associated event_key.
         self.invalid_keypress_dict = {'numpad_enter': 1073741912, 'tab': 9, 'DEL': 127, 'ESC': 27}
@@ -216,8 +216,21 @@ class Game():
         self._progression_text = val
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
+        ###### BELOW SECTION - NOT FINISHED OR DEBUGGED: NEED TO MAKE IT SO THAT BOTH OF THE TEXT OBJS GET BLITTED AND THAT IN THE CASE THAT OBJ_2 WAS PREVIOUSLY BLITTED THAT THE 'ERASE' SECTION IS RUN IN THAT INSTANCE AS WELL AS ALL OF THE OTHERS. ALSO NEED TO FINISH LOGIC CONCERNING WHETHER OR NOT WHEN IN THIS CASE 'OBJ' SHOULD BE CHANGE D TO NONE, THEN CREATE 'OBJ_1' & 'OBJ_2', HAVING THE BLIT SECTION CHECK WHETHER OR NOT 'OBJ_1' & 'OBJ_2' ARE NONE, JUST AS IT CHECKS FOR ALL OF THE OTHER RENDERS...
+        # Below Section - Whenever the progression_text_obj_rect.width exceeds the screen display width; doubles the height of the rect for 2 rows of text display, divides the val into 2 halves, and creates a .render() object for each of them.
+        if self.progression_text_obj_rect[2] > 1920:
+            self.progression_text_obj_rect[3] = self.progression_text_obj_rect[3] * 2
+            val_split = val.split(' ')
+            val_half_1_end = round(len(val_split) / 2)
+            val_half_1 = val_split[0:val_half_1_end]
+            val_half_2 = val_split[val_half_1_end + 1:]
+            val_half_1_joined = ' '.join(val_half_1)
+            val_half_2_joined = ' '.join(val_half_2)
+            self.progression_text_obj = self.font.render(val_half_1_joined, True, (255, 255, 255), self.dark_blue_color)
+            self.progression_text_obj_2 = self.font.render(val_half_2_joined, True, (255, 255, 255), self.dark_blue_color)
         self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['progression_text_loc']
         # -------------------------------------
+        # Below Section - For whenever the prior_progression_text_obj_rect is bigger than the new rect; 'erases' the prior rect area.
         if self.progression_text_obj != None and self.prior_progression_text_obj_rect != None and self.progression_text_obj_rect[2] < self.prior_progression_text_obj_rect[2]:
             pygame.draw.rect(self.screen_surface, self.background_color, (self.prior_progression_text_obj_rect[0] - 6, self.prior_progression_text_obj_rect[1] - 5, self.prior_progression_text_obj_rect[2] + 11, self.prior_progression_text_obj_rect[3] + 10))
             for current_card in self.card_group:
@@ -318,13 +331,17 @@ class Game():
                         self.collided_cards_dict.clear()
                         self.clicked_card.highlighted = True
                         if self.choose_multiple_cards == True:
-                            self.clicked_card_list.append(self.clicked_card)
+                            if self.clicked_card not in self.clicked_card_list:
+                                self.clicked_card_list.append(self.clicked_card)
                         else:
                             self.click_card_active = False
                             self.clickable_card_list.clear()
                             # Below Section - For the cases when a player has to choose from multiple card/meld options and the option to not use any card at all by clicking a multiple_choice_text rect. This will change the multiple_choice_text to False in the instance that they choose a card/meld instead, and visa versa in the other instance's code block.
                             if self.multiple_choice_active == True:
                                 self.multiple_choice_active = False
+                                # Below Section - Sets self.multiple_choice_text_1 & self.multiple_choice_text_2 to '' so that the multple choice rects are automatically cleared from the screen whenever this bool is changed to False.
+                                self.multiple_choice_text_1 = ''
+                                self.multiple_choice_text_2 = ''
                 # -------------------------------------
             # Below Section - For clicking both of the multiple_choice_text rects (1 & 2) whenever the player is prompted with a multiple choice option.
             if event.type == pygame.MOUSEBUTTONDOWN and self.multiple_choice_active == True:
@@ -337,6 +354,10 @@ class Game():
                         ###### Below Line - Don't have this coded yet, but maybe want to make it so that the rect will become highlighted whenever a player clicks on it.
                         ###### self.selected_choice.highlighted = True
                         self.multiple_choice_active = False
+                        # Below Section - Sets self.multiple_choice_text_1 & self.multiple_choice_text_2 to '' so that the multple choice rects are automatically cleared from the screen whenever this bool is changed to False.
+                        self.multiple_choice_text_1 = ''
+                        self.multiple_choice_text_2 = ''
+                        # -------------------------------------
                         # Below Section - For the case in which the player is choosing multiple cards and is finalizing their selections; changes self.click_card_active to False (as it remains active while self.multiple_choice_active == True).
                         if self.click_card_active == True:
                             self.click_card_active = False
@@ -430,12 +451,12 @@ class Game():
             self.screen_surface.blit(self.input_text_obj, self.input_text_obj_rect)
         # -------------------------------------
         # Below Section - Handles the rendering of the multiple_choice_text_1_obj and the associated surface.
-        if self.multiple_choice_text_1_obj != None:
+        if self.multiple_choice_text_1_obj != None and self.multiple_choice_text_1 != '':
             self.create_border_rect(self.multiple_choice_text_1_obj_rect)
             self.screen_surface.blit(self.multiple_choice_text_1_obj, self.multiple_choice_text_1_obj_rect)
         # -------------------------------------
         # Below Section - Handles the rendering of the multiple_choice_text_2_obj and the associated surface.
-        if self.multiple_choice_text_2_obj != None:
+        if self.multiple_choice_text_2_obj != None and self.multiple_choice_text_2 != '':
             self.create_border_rect(self.multiple_choice_text_2_obj_rect)
             self.screen_surface.blit(self.multiple_choice_text_2_obj, self.multiple_choice_text_2_obj_rect)
         # -------------------------------------
