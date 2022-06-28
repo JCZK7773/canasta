@@ -1,5 +1,5 @@
 # THINGS TO DO
-    # Add in a new meld group called pre_sort_play_cards for play_cards before they are sorted. They will be placed there during the initial portion of valid_play_check_and_sort(), having their own visual location (as do the other card groups). Once the cards are placed into the temp_melds, they will then be appended into the normal play_cards location.
+    # Whenever adding wild cards to a choice of melds, add in code that displays an output message whenever a player clicks an attempted black 3 meld saying the player cannot add wild cards to black 3 melds. (Already made it so that they cannot be 'clicked' validly as a choice.)
     # Work with bugs in bugs_debug.py & update the state of the bugs.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
         # Change progression.py so that all melds are instances of CustomAppendList & are assigned the proper card_group_names for proper visual placement.

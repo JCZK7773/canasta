@@ -22,12 +22,12 @@ class Locations():
         self.discard_pile_loc = [self.deck_loc[0] + self.card_width_height[0] + 20, self.deck_loc[1]]
         self.p1_hand_start_loc = [64, 330]
         self.p2_hand_start_loc = [self.visible_center[0] + 64, self.p1_hand_start_loc[1]]
-        self.p1_play_cards_start_loc = [80, 540]
-        self.p2_play_cards_start_loc = [self.visible_center[0] + 80, self.p1_play_cards_start_loc[1]]
-        self.p1_play_cards_start_pre_sort_loc = [600, 540]
-        self.p2_play_cards_start_pre_sort_loc = [1300, 540]
-        self.p1_melds_start_loc = [80, 830]
-        self.p2_melds_start_loc = [self.visible_center[0] + 80, self.p1_melds_start_loc[1]]
+        self.p1_play_cards_start_loc = [10, 540]
+        self.p2_play_cards_start_loc = [self.visible_center[0] + 10, self.p1_play_cards_start_loc[1]]
+        self.p1_play_cards_start_pre_sort_loc = [630, 540]
+        self.p2_play_cards_start_pre_sort_loc = [self.visible_center[0] + 630, 540]
+        self.p1_melds_start_loc = [10, 830]
+        self.p2_melds_start_loc = [self.visible_center[0] + 10, self.p1_melds_start_loc[1]]
         self.card_group_name_dict = {'deck': deck.MasterDeck.deck,
                                     'discard_pile': deck.MasterDeck.discard_pile,
                                     'P1.hand': player.P1.hand,
@@ -56,7 +56,7 @@ class Locations():
                                   # Below Section - Make it so that whenever a value is set for this (through progression.py) make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
                                   'p1_player_name_text_loc': [15, 10],
                                   'p2_player_name_text_loc': [self.visible_right - 15, 10],
-                                  'progression_text_loc': self.visible_center}
+                                  'progression_text_loc': [self.visible_center[0], self.visible_top + 20]}
         # -------------------------------------
     # Below Function - Dynamically assigns player.P1's hand location.
     @property
@@ -242,7 +242,7 @@ class Locations():
         # -------------------------------------
         # Below Section - Assigns variables associated with the meld's & cards' location.
         y_val_increase = card_num * 18
-        x_val_increase = meld_num * (self.card_width_height[0] + 20)
+        x_val_increase = meld_num * (self.card_width_height[0] + 10)
         meld_group_loc = self.card_group_loc_dict[card_group_name]
         meld_loc = [meld_group_loc[0] + x_val_increase, meld_group_loc[1]]
         # -------------------------------------
@@ -330,7 +330,7 @@ class Locations():
             x_start_loc = self.p2_melds_start_loc[0]
             y_start_loc = self.p2_melds_start_loc[1]
         # -------------------------------------
-        x_val_increase = len(cur_player.melds) * (self.card_width_height[0] + 20)
+        x_val_increase = len(cur_player.melds) * (self.card_width_height[0] + 10)
         y_val_increase = len(cur_player.red_3_meld) * 18
         red_3_meld_next_loc = [x_start_loc + x_val_increase, y_start_loc - 40 + y_val_increase]
         self.card_movement(red_3_meld_next_loc, current_card)

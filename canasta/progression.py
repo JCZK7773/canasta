@@ -567,40 +567,36 @@ def valid_play_check_and_sort(current_player): # ****
                 game.game.draw_window_main()
             if game.game.selected_choice == 'Yes':
                 if len(current_player.len_2_temp_melds_list) > 1:
-                    clicked_len_2_meld = False
-                    while clicked_len_2_meld == False:
-                        game.game.progression_text = 'Click the meld that you would like to add the wild card to.'
-                        game.game.click_card_active = True
-                        while game.game.click_card_active == True:
-                            game.game.draw_window_main()
-                        for meld in current_player.len_2_temp_melds_list:
-                            if game.game.clicked_card in meld:
-                                clicked_len_2_meld = True
-                                len_2_temp_meld_choice = meld
-                            else:
-                                game.game.progression_text = 'You clicked a meld with more than 2 cards. You must choose one of the melds with only 2 cards.'
-                                game.game.xs_display(1)
+                    for meld in current_player.len_2_temp_melds_list:
+                        for current_card in meld:
+                            if current_card not in deck.MasterDeck.black_3s:
+                                game.game.clickable_card_list.append(current_card)
+                    game.game.progression_text = 'Click the meld that you would like to add the wild card to.'
+                    game.game.click_card_active = True
+                    while game.game.click_card_active == True:
+                        game.game.draw_window_main()
+                    for meld in current_player.len_2_temp_melds_list:
+                        if game.game.clicked_card in meld:
+                            len_2_temp_meld_choice_index = current_player.play_cards.index(meld)
                 else:
                     game.game.progression_text = f'Okay, you will add the {current_player.play_cards_wild_cards[0]} to the attempted meld.'
                     game.game.xs_display(1)
-                    len_2_temp_meld_choice = 0
+                    len_2_temp_meld_choice_index = 0
                 if len(current_player.play_cards_wild_cards) > 1:
-                    clicked_wild_card = False
-                    while clicked_wild_card == False:
-                        game.game.progression_text = 'Click the wild card that you would like to use.'
-                        game.game.click_card_active = True
-                        while game.game.click_card_active == True:
-                            game.game.draw_window_main()
-                        if (game.game.clicked_card.rank, game.game.clicked_card.suit) in deck.MasterDeck.wild_cards:
-                            clicked_wild_card = True
-                            wild_card_choice = game.game.clicked_card
-                            wild_card_choice_index = current_player.play_cards_wild_cards.index(game.game.clicked_card)
+                    for current_card in current_player.play_cards_wild_cards:
+                        game.game.clickable_card_list.append(current_card)
+                    game.game.progression_text = 'Click the wild card that you would like to use.'
+                    game.game.click_card_active = True
+                    while game.game.click_card_active == True:
+                        game.game.draw_window_main()
+                    wild_card_choice = game.game.clicked_card
+                    wild_card_choice_index = current_player.play_cards_wild_cards.index(game.game.clicked_card)
                 else:
                     wild_card_choice = game.game.clicked_card
                     wild_card_choice_index = 0
                 game.game.progression_text = (f"You successfully added the {wild_card_choice} to your meld.") # ****
-                current_player.len_2_temp_melds_list[len_2_temp_meld_choice].append(current_player.play_cards_wild_cards.pop(wild_card_choice_index)) # ****
-                current_player.play_cards.append(current_player.len_2_temp_melds_list.pop(len_2_temp_meld_choice)) # ****
+                current_player.len_2_temp_melds_list[len_2_temp_meld_choice_index].append(current_player.play_cards_wild_cards.pop(wild_card_choice_index)) # ****
+                current_player.play_cards.append(current_player.len_2_temp_melds_list.pop(len_2_temp_meld_choice_index)) # ****
         # -------------------------------------
             # Below Section - If the player chooses not to use the available wild card(s); places the len_2_temp_melds_list melds into bad_len_temp_melds_list, leaving the wild cards in play cards to be handled by wild_card_handler(). # ****
             else: # ****
@@ -745,7 +741,10 @@ def wild_card_handler(current_player): # ****
     if len(current_player.play_cards) > 0 or len(current_player.melds) > 0: # ****
         for wild_card in current_player.play_cards_wild_cards[:]: # ****
             if len(current_player.non_maxed_out_melds) > 0: # ****
-                meld_choice_index = wild_card_meld_choice_prompt(current_player, wild_card) # ****
+                if len(current_player.play_cards) + len(current_player.melds) > 1:
+                    meld_choice_index = wild_card_meld_choice_prompt(current_player, wild_card) # ****
+                else:
+                    meld_choice_index = 0
     # -------------------------------------
                 # Below Section - If player chooses not to use the wild card, it is popped from play_cards_wild_cards and appended back into the player's hand. # ****
                 if meld_choice_index == game.game.multiple_choice_text_1: # ****

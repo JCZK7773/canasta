@@ -80,14 +80,13 @@ class Player(): # ****
         # -------------------------------------
         for meld_group in [self.play_cards, self.melds]: # ****
             for item in meld_group: # ****
-                if type(item) == list: # ****
-                    wild_card_count = 0 # ****
-                    for card in item: # ****
-                        if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
-                            wild_card_count += 1 # ****
-                    if 7 <= wild_card_count or wild_card_count < 3: # ****
-                        non_maxed_out_melds.append(item) # ****
-                        # -------------------------------------
+                wild_card_count = 0 # ****
+                for card in item: # ****
+                    if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
+                        wild_card_count += 1 # ****
+                if 7 <= wild_card_count or wild_card_count < 3: # ****
+                    non_maxed_out_melds.append(item) # ****
+                # -------------------------------------
         return non_maxed_out_melds # ****
     # -------------------------------------
     @property # ****
@@ -106,22 +105,21 @@ class Player(): # ****
             if len(meld_group) > 0: # ****
                 for item in meld_group: # ****
                     wild_card_canasta_check_count = 0 # ****
-                    if type(item) == list: # ****
-                        for card in item: # ****
+                    for card in item: # ****
+                    # -------------------------------------
+                        if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
+                            wild_card_canasta_check_count += 1 # ****
                         # -------------------------------------
-                            if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
-                                wild_card_canasta_check_count += 1 # ****
-                            # -------------------------------------
-                            round_score += deck.Deck().ranks.get(card.rank) # ****
-                        # -------------------------------------
-                        if len(item) >= 7: # ****
-                            if wild_card_canasta_check_count == 7: # ****
-                                round_score += 1000 # ****
-                            elif wild_card_canasta_check_count == 0: # ****
-                                round_score += 500 # ****
-                            elif wild_card_canasta_check_count > 0: # ****
-                                round_score += 300 # ****
-                        # -------------------------------------
+                        round_score += deck.Deck().ranks.get(card.rank) # ****
+                    # -------------------------------------
+                    if len(item) >= 7: # ****
+                        if wild_card_canasta_check_count == 7: # ****
+                            round_score += 1000 # ****
+                        elif wild_card_canasta_check_count == 0: # ****
+                            round_score += 500 # ****
+                        elif wild_card_canasta_check_count > 0: # ****
+                            round_score += 300 # ****
+                    # -------------------------------------
         if self.going_out == True: # ****
             round_score += 100 # ****
             if self.went_out_concealed == True: # ****
