@@ -1,4 +1,6 @@
 # THINGS TO DO
+    # Make play_cards_wild_cards be placed on the same y-coordinate of the hand, so that whenever many cards are played at once, there is almost always enough room for all of the cards without having them overlap each other.
+    # Change the text outputs to be 'click-to-continue' instead of a time-based display.
     # Whenever adding wild cards to a choice of melds, add in code that displays an output message whenever a player clicks an attempted black 3 meld saying the player cannot add wild cards to black 3 melds. (Already made it so that they cannot be 'clicked' validly as a choice.)
     # Work with bugs in bugs_debug.py & update the state of the bugs.
     # Make all of the necessary changes to progression.py so that it will all operate smoothly. Take your time. Do it right.
@@ -28,9 +30,10 @@
     # 04/21/22: Spent entire 4 hr. session debugging and fixing up some bad code from the many changes I made from the last session. Worked out most of the bugs from that, such as some logic, improper indentations, improper module/class/instance references, etc.
     # 04/22/22 - 05/04/22: Finished and polished the progression text and input text sections in game.py and the associated logic. Completely debugged the system, and cleaned up and changed things around in the code for draw_window_the_draw(). Input happens in real time, backspace works, and display is reset each time a value is processed. Continued to debug logic in progression.py.
     # 05/05/22 - 05/09/22: Started, finished, debugged, and tested the card movement speed issue, card click event handling, input (backspacking, clearing the rects after input, etc.), reworked much of the logic in progression.py, and continued to clean up comments and outdated code as I go along.
-    # 05/10/22 - ...
     # 06/01/22 - 06/19/22: Took a long break. Did not code at all during this time.
     # 06/20/22: Worked on implementing code for the case wherein the width of the progression text is wider than the screen display. Mostly finished. Need to finish and debug that. A couple other minor changes.
+    # 06/21/22 - 06/28/22: Added pre_sort_play_cards for per-sorted play cards to have a visual location before they are sorted; debugged and improved that feature. Ran many game tests to find bugs and record them; debugged some of these (various minor bugs). Altered locations of progression text and input text boxes. Debugged and improved customappendlist to work properly with new logic conditions. Other minor misc. changes.
+    # 06/29/22 - 07/05/22: Debugged the text box locations since I changed the size of the text and made some other visual changes. Began debugging the 13 bugs I uncovered and documented in last session; debugged wild_card_handler() issue wherein game was not recognizing card click choice; turns out that there was a deeper logic bug that needed to be fix, so I reworked that function and cleaned it up. Also changed the Red 3 meld and Red 3 meld text box location to be in the bottom right corner of each player's side. Also removed its y-coordinate offset; this required altering visual_red_3_meld_update() to place the cards in the new proper location. Next, worked on first pass of debugging the progression_text_obj & progression_text_obj_2 to fit properly on the screen, erase the pre-existing rect whenever necessary, and blit the objects. 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # NOTES
     #     pygame.Rect

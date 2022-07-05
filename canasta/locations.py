@@ -16,22 +16,26 @@ class Locations():
         self.visible_right = 1919
         # Below Line - [959.5, 504.5] to be exact. HAS TO BE ROUNDED OR WILL CAUSE A B U G!!
         self.visible_center = [round(self.visible_right / 2, 0), round(self.visible_bottom / 2, 0)]
-        self.top_left_visible_from_center = [51, 71]
+        self.top_left_visible_from_center = [50, 70]
         self.card_width_height = [100, 140]
         self.deck_loc = [self.visible_center[0] - (self.card_width_height[0] / 2) - 10 , self.visible_top + 120]
         self.discard_pile_loc = [self.deck_loc[0] + self.card_width_height[0] + 20, self.deck_loc[1]]
-        self.p1_hand_start_loc = [64, 330]
-        self.p2_hand_start_loc = [self.visible_center[0] + 64, self.p1_hand_start_loc[1]]
-        self.p1_play_cards_start_loc = [10, 540]
-        self.p2_play_cards_start_loc = [self.visible_center[0] + 10, self.p1_play_cards_start_loc[1]]
-        self.p1_play_cards_start_pre_sort_loc = [630, 540]
-        self.p2_play_cards_start_pre_sort_loc = [self.visible_center[0] + 630, 540]
-        self.p1_melds_start_loc = [10, 830]
-        self.p2_melds_start_loc = [self.visible_center[0] + 10, self.p1_melds_start_loc[1]]
+        self.p1_hand_start_loc = [40, 330]
+        self.p2_hand_start_loc = [self.visible_center[0] + 40, self.p1_hand_start_loc[1]]
+        self.p1_play_cards_start_loc = [60, 540]
+        self.p2_play_cards_start_loc = [self.visible_center[0] + 60, self.p1_play_cards_start_loc[1]]
+        self.p1_pre_sort_play_cards_start_loc = [630, 330]
+        self.p2_pre_sort_play_cards_start_loc = [self.visible_center[0] + 630, 330]
+        self.p1_melds_start_loc = [60, 830]
+        self.p2_melds_start_loc = [self.visible_center[0] + 60, self.p1_melds_start_loc[1]]
+        self.p1_red_3_meld_start_loc = [self.visible_center[0] - (self.card_width_height[0] + 20), self.p1_melds_start_loc[1]]
+        self.p2_red_3_meld_start_loc = [self.visible_right - (self.card_width_height[0] + 20), self.p2_melds_start_loc[1]]
         self.card_group_name_dict = {'deck': deck.MasterDeck.deck,
                                     'discard_pile': deck.MasterDeck.discard_pile,
                                     'P1.hand': player.P1.hand,
                                     'P2.hand': player.P2.hand,
+                                    'P1.pre_sort_play_cards': player.P1.pre_sort_play_cards,
+                                    'P2.pre_sort_play_cards': player.P2.pre_sort_play_cards,
                                     'P1.play_cards': player.P1.play_cards,
                                     'P2.play_cards': player.P2.play_cards,
                                     'P1.melds': player.P1.melds,
@@ -41,22 +45,26 @@ class Locations():
         # Below Line - For whatever reason, this dictionary has to be called in customappendlist.CustomAppendList.append to be updated, or else the locations are not calculated property.
         self.card_group_loc_dict = {'deck': self.deck_loc, 'discard_pile': self.discard_pile_loc, 'P1.hand': self.p1_hand_next_loc, 'P2.hand': self.p2_hand_next_loc, 'P1.play_cards': self.p1_play_cards_start_loc, 'P2.play_cards': self.p2_play_cards_start_loc, 'P1.melds': self.p1_melds_start_loc, 'P2.melds': self.p2_melds_start_loc}
         # Below Line - The number used in self.text_name_loc_dict to adjust how far above a card group the text display is situated.
-        self.y_reduce_num = 93
+        self.y_reduce_num = 100
         # Below Dict - The text location dictionary which defines the visual locations for all of the various text displays. Accessed by game.Game.
         self.text_name_loc_dict = {'Deck': [self.deck_loc[0], self.deck_loc[1] - self.y_reduce_num],
                                   'Discard Pile': [self.discard_pile_loc[0], self.discard_pile_loc[1] - self.y_reduce_num],
-                                  'p1_hand_text_loc': [self.p1_hand_start_loc[0] + 12, self.p1_hand_start_loc[1] - self.y_reduce_num],
-                                  'p2_hand_text_loc': [self.p2_hand_start_loc[0] + 12, self.p2_hand_start_loc[1] - self.y_reduce_num],
-                                  'p1_play_cards_text_loc': [self.p1_play_cards_start_loc[0] + 20, self.p1_play_cards_start_loc[1] - self.y_reduce_num],
-                                  'p2_play_cards_text_loc': [self.p2_play_cards_start_loc[0] + 20, self.p2_play_cards_start_loc[1] - self.y_reduce_num],
-                                  'p1_melds_text_loc': [self.p1_melds_start_loc[0], self.p1_melds_start_loc[1] - self.y_reduce_num],
-                                  'p2_melds_text_loc': [self.p2_melds_start_loc[0], self.p2_melds_start_loc[1] - self.y_reduce_num],
-                                  'p1_red_3_meld_text_loc': [-100, 0],
-                                  'p2_red_3_meld_text_loc': [-100, 0],
+                                  'p1_hand_text_loc': [self.p1_hand_start_loc[0] - 24, self.p1_hand_start_loc[1] - self.y_reduce_num],
+                                  'p2_hand_text_loc': [self.p2_hand_start_loc[0] - 24, self.p2_hand_start_loc[1] - self.y_reduce_num],
+                                  'p1_pre_sort_play_cards_text_loc': [self.p1_pre_sort_play_cards_start_loc[0] - 46, self.p1_pre_sort_play_cards_start_loc[1] - self.y_reduce_num],
+                                  'p2_pre_sort_play_cards_text_loc': [self.p2_pre_sort_play_cards_start_loc[0] - 46, self.p2_pre_sort_play_cards_start_loc[1] - self.y_reduce_num],
+                                  'p1_play_cards_text_loc': [self.p1_play_cards_start_loc[0] - 46, self.p1_play_cards_start_loc[1] - self.y_reduce_num],
+                                  'p2_play_cards_text_loc': [self.p2_play_cards_start_loc[0] - 46, self.p2_play_cards_start_loc[1] - self.y_reduce_num],
+                                  'p1_melds_text_loc': [self.p1_melds_start_loc[0] - 46, self.p1_melds_start_loc[1] - self.y_reduce_num],
+                                  'p2_melds_text_loc': [self.p2_melds_start_loc[0] - 46, self.p2_melds_start_loc[1] - self.y_reduce_num],
+                                  # Below Section - Currently not being used so I set them visually off-screen.
+                                  'p1_red_3_meld_text_loc': [self.visible_center[0] - 100, self.p1_melds_start_loc[1] - self.y_reduce_num],
+                                  'p2_red_3_meld_text_loc': [self.visible_right - 100, self.p2_melds_start_loc[1] - self.y_reduce_num],
+                                  # -------------------------------------
                                   # Below Section - Make it so that whenever a value is set for this (through progression.py) make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
                                   'p1_player_name_text_loc': [15, 10],
                                   'p2_player_name_text_loc': [self.visible_right - 15, 10],
-                                  'progression_text_loc': [self.visible_center[0], self.visible_top + 20]}
+                                  'progression_text_loc': [self.visible_center[0], self.visible_bottom - 150]}
         # -------------------------------------
     # Below Function - Dynamically assigns player.P1's hand location.
     @property
@@ -80,29 +88,29 @@ class Locations():
     # -------------------------------------
     # Below Function - Calculated property; for visually placing pre-sorted play cards for P1.
     @property
-    def p1_play_cards_pre_sort_next_loc(self):
-        print(f'p1 - {len(player.P1.pre_sort_play_cards)}')
+    def p1_pre_sort_play_cards_next_loc(self):
+        # print(f'p1 - {len(player.P1.pre_sort_play_cards)}')
         if len(player.P1.pre_sort_play_cards) == 0:
-            return self.p1_play_cards_start_pre_sort_loc
+            return self.p1_pre_sort_play_cards_start_loc
         else:
             x_val_increase = len(player.P1.pre_sort_play_cards) * 20
-            p1_play_cards_pre_sort_next_loc = [self.p1_play_cards_start_pre_sort_loc[0] + x_val_increase, self.p1_play_cards_start_pre_sort_loc[1]]
-            return p1_play_cards_pre_sort_next_loc
+            p1_pre_sort_play_cards_next_loc = [self.p1_pre_sort_play_cards_start_loc[0] + x_val_increase, self.p1_pre_sort_play_cards_start_loc[1]]
+            return p1_pre_sort_play_cards_next_loc
     # -------------------------------------
     # Below Function - Calculated property; for visually placing pre-sorted play cards for P2.
     @property
-    def p2_play_cards_pre_sort_next_loc(self):
-        print(f'p2 - {len(player.P2.pre_sort_play_cards)}')
+    def p2_pre_sort_play_cards_next_loc(self):
+        # print(f'p2 - {len(player.P2.pre_sort_play_cards)}')
         if len(player.P2.pre_sort_play_cards) == 0:
-            return self.p2_play_cards_start_pre_sort_loc
+            return self.p2_pre_sort_play_cards_start_loc
         else:
             x_val_increase = len(player.P2.pre_sort_play_cards) * 20
-            p2_play_cards_pre_sort_next_loc = [self.p2_play_cards_start_pre_sort_loc[0] + x_val_increase, self.p2_play_cards_start_pre_sort_loc[1]]
-            return p2_play_cards_pre_sort_next_loc
+            p2_pre_sort_play_cards_next_loc = [self.p2_pre_sort_play_cards_start_loc[0] + x_val_increase, self.p2_pre_sort_play_cards_start_loc[1]]
+            return p2_pre_sort_play_cards_next_loc
     # -------------------------------------
     # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location. Also takes the the_draw_2 parameter for whenever the cards need to be placed face-down during the draw card selection segment.
     def card_movement(self, loc, current_card, the_draw_2 = False):
-        # print("card_movement")
+        print("card_movement")
         # Below Section - For testing. Trying to find the cause of inconsistent card movement times.
         # prior_time = time.time()
         # iter_num = 0
@@ -236,13 +244,13 @@ class Locations():
             self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
             current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
     # -------------------------------------
-    # Below Function - Detects where cards should be placed within a meld, and detects and visually updates the proper visual locations associated with this. Called by visual_meld_update(). Calls canasta_find_face_up_card() at the end of the function. Created this function because it is used in two places: for melds AND cards. Detects the length of the melds and determines proper visual placement.
+    # Below Function - Detects where cards should be placed within a meld, and detects and visually updates the proper visual locations associated with this. Called by visual_meld_update(). Created this function because it is used in two places: for melds AND cards. Detects the length of the melds and determines proper visual placement.
     def card_num_canasta_detect(self, card_group_name, card, meld, meld_num, card_num):
         # print("card_num_canasta_detect")
         # -------------------------------------
         # Below Section - Assigns variables associated with the meld's & cards' location.
-        y_val_increase = card_num * 18
         x_val_increase = meld_num * (self.card_width_height[0] + 10)
+        y_val_increase = card_num * 18
         meld_group_loc = self.card_group_loc_dict[card_group_name]
         meld_loc = [meld_group_loc[0] + x_val_increase, meld_group_loc[1]]
         # -------------------------------------
@@ -313,9 +321,9 @@ class Locations():
             # Below Section - If you are adding cards to play_cards; before they are sorted in valid_play_check_and_sort.
             else:
                 if 'P1' in card_group_name:
-                    self.card_movement(self.p1_play_cards_pre_sort_next_loc, item)
+                    self.card_movement(self.p1_pre_sort_play_cards_next_loc, item)
                 else:
-                    self.card_movement(self.p2_play_cards_pre_sort_next_loc, item)
+                    self.card_movement(self.p2_pre_sort_play_cards_next_loc, item)
     # -------------------------------------
     # Below Function - Called by func_dict via key 'red_3_meld' whenever a card is appended to player.P1.red_3_meld. Calls card_movement() function to visually and digitally move card to player.P1.red_3_meld.
     def visual_red_3_meld_update(self, card_group_name, current_card):
@@ -323,16 +331,15 @@ class Locations():
         # -------------------------------------
         # Below Section - Determines the player based on the card_group_name and assigns the associated player's (x, y) starting coordinates.
         cur_player = player.P1
-        x_start_loc = self.p1_melds_start_loc[0]
-        y_start_loc = self.p1_melds_start_loc[1]
+        x_start_loc = self.p1_red_3_meld_start_loc[0]
+        y_start_loc = self.p1_red_3_meld_start_loc[1]
         if 'P2' in card_group_name:
             cur_player = player.P2
-            x_start_loc = self.p2_melds_start_loc[0]
-            y_start_loc = self.p2_melds_start_loc[1]
+            x_start_loc = self.p2_red_3_meld_start_loc[0]
+            y_start_loc = self.p2_red_3_meld_start_loc[1]
         # -------------------------------------
-        x_val_increase = len(cur_player.melds) * (self.card_width_height[0] + 10)
         y_val_increase = len(cur_player.red_3_meld) * 18
-        red_3_meld_next_loc = [x_start_loc + x_val_increase, y_start_loc - 40 + y_val_increase]
+        red_3_meld_next_loc = [x_start_loc, y_start_loc + y_val_increase]
         self.card_movement(red_3_meld_next_loc, current_card)
         current_card.display_layer = len(cur_player.red_3_meld) + 1
     # -------------------------------------

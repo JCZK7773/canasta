@@ -15,7 +15,7 @@ import game
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Logger setup. # ****
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s" # ****
-logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta\\Canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
+logging.basicConfig(filename = "J:\\Programming\\Projects\\Canasta\\canasta_log.log", level = logging.DEBUG, format = LOG_FORMAT, filemode = 'a') # ****
 logger = logging.getLogger() # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by main.main(). Handles name creation. # ****
@@ -281,10 +281,10 @@ def draw_discard_pile_attempt(current_player, stock_depleted = False): # ****
     draw_discard_pile_attempt_check_hand_match(current_player) # ****
     # Below Section - Since the player was unable to draw the discard pile after attempting all of the possible methods, they must instead draw from the stock; calls stock_draw(current_player), unless the stock is depleted, in which case the player is given the opportunity to make a play via play_2(). In the latter case, player.special_case_cant_draw is changed to = True. If both players have went through this process, meaning both players' .special_case_cant_draw == True, then round_reset() is called as the round is functionally over since nobody can draw a card and both players have had the opportunity to make a final play.
     game.game.progression_text = ("It looks as if you were unable to draw the discard pile after attempting all of the possible methods.")
-    game.game.xs_display(1)
+    game.game.xs_display(3)
     if stock_depleted == False:
         game.game.progression_text = ("You will draw from the stock instead.")
-        game.game.xs_display(1)
+        game.game.xs_display(2)
         stock_draw(current_player)
     else:
         current_player.special_case_cant_draw = True
@@ -325,7 +325,7 @@ def draw_discard_pile_attempt_check_meld_match(current_player, stock_depleted = 
         # -------------------------------------
     if len(current_player.melds) > 0:
         game.game.progression_text = (f"You were unable to draw the discard pile using a matching meld.") # ****
-        game.game.xs_display(1)
+        game.game.xs_display(2)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by draw_discard_pile_attempt(). Checks the player's hand to see if they have a qualifying set of matching cards for the purpose of drawing the discard pile. # ****
 def draw_discard_pile_attempt_check_hand_match(current_player): # ****
@@ -341,7 +341,7 @@ def draw_discard_pile_attempt_check_hand_match(current_player): # ****
     # -------------------------------------
     if len(current_player.matched_card_list) == 0: # ****
         game.game.progression_text = ("Sorry, but you did not have any matches to the face up discard.")
-        game.game.xs_display(1)
+        game.game.xs_display(2)
         return None
     # -------------------------------------
     # Below Section - Copies the current_player.matched_card_list so as to create a fixed, static rank value, as the variable player_matched_card_list_copy. Next the player_matched_card_list_copy is appended to current_player.melds, and finally appends the face_up_discard to that meld, popping the cards from their original locations. Also gives an informative prompt and returns None so as not to continue on errantly to remainder of function code. # ****
@@ -468,7 +468,7 @@ def play_2(current_player, rerouted = False): # ****
         while game.game.multiple_choice_active == True:
             game.game.draw_window_main()
         for current_card in game.game.clicked_card_list:
-            # print("APPENDED PRE SORT PLAY CARDS")
+            print('progression.py > play_2() > for current_card in game.game.clicked_card_list: > card moved*************************')
             current_player.pre_sort_play_cards.append(current_player.hand.pop(current_player.hand.index(current_card)))
         game.game.choose_multiple_cards = False
         valid_play_check_and_sort(current_player) # ****
@@ -542,7 +542,7 @@ def valid_play_check_and_sort(current_player): # ****
                             item.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card))) # ****
         # -------------------------------------
     # -------------------------------------
-    # Below Section - Handles temp_melds that are too small or that require a wild card to be able to meet the 3 card minimum requirement. If the melds consist of only 1 card, they are appended to bad_len_temp_melds_list for later output and removal from current_player.play_cards back into current_player.hand, and the melds that require a wild card (consisting of 2 cards) are put in len_2_temp_melds_list, given that there is at least one card in play_cards_wild_cards so that the player can later choose which meld he would like to add the wild card(s) to. If there is nothing in play_cards_wild_cards, those melds are also added to bad_len_temp_melds_list for later removal back into the current_player.hand. # ****
+    # Below Section - Handles temp_melds that consist of 1 or 2 cards. If the meld consists of only 1 card, it is transferred to bad_len_temp_melds_list (to be subsequently transferred back into the current_player.hand). For melds with 2 cards; if there are any play_cards_wild_cards, they are transferred to len_2_temp_melds_list, where they are subsequently offered the opportunity to add a wild card to them to meet the 3 card meld requirement. If not, they are transferred to bad_len_temp_melds_list.
     for temp_meld in current_player.play_cards[:]: # ****
         if type(temp_meld) != card.Card:
             if len(temp_meld) < 2: # ****
@@ -553,8 +553,16 @@ def valid_play_check_and_sort(current_player): # ****
                 else: # ****
                     current_player.len_2_temp_melds_list.append(current_player.play_cards.pop(current_player.play_cards.index(temp_meld))) # ****
         else:
-            # Below Line - Quite sure I added this for debugging purposes only.
+            # Below Line - For debugging purposes only.
             logger.debug(f"{temp_meld} is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.")
+    # -------------------------------------
+    # Below  Section - Handles the informative output for melds of bad length & removal of said melds back into the current_player.hand. # ****
+    if len(bad_len_temp_melds_list) > 0: # ****
+        game.game.progression_text = (f"{current_player.name}, you have some attemped melds that do not pass the rule requirements: these attempted meld have only 1 card in them or have 2 cards with no available wild card to be added to it. You cannot create a meld without at least 3 natural cards of the same rank, or 2 natural cards of the same rank without a wild card to add to it to reach the 3 card minimum meld requirement. The attempted meld(s) will be placed back in your hand.") # ****
+        game.game.xs_display(3)
+        for bad_len_meld in bad_len_temp_melds_list[:]: # ****
+            for current_card in bad_len_meld[:]: # ****
+                current_player.hand.append(bad_len_meld.pop(bad_len_meld.index(current_card))) # ****
     # -------------------------------------
     # Below Section - For adding available played wild cards to melds consisting of 2 cards (len_2_temp_melds_list) so that they will meet the 3 card minimum requirement. # ****
     while len(current_player.len_2_temp_melds_list) > 0: # ****
@@ -577,10 +585,10 @@ def valid_play_check_and_sort(current_player): # ****
                         game.game.draw_window_main()
                     for meld in current_player.len_2_temp_melds_list:
                         if game.game.clicked_card in meld:
-                            len_2_temp_meld_choice_index = current_player.play_cards.index(meld)
+                            len_2_temp_meld_choice_index = current_player.len_2_temp_melds_list.index(meld)
                 else:
                     game.game.progression_text = f'Okay, you will add the {current_player.play_cards_wild_cards[0]} to the attempted meld.'
-                    game.game.xs_display(1)
+                    game.game.xs_display(3)
                     len_2_temp_meld_choice_index = 0
                 if len(current_player.play_cards_wild_cards) > 1:
                     for current_card in current_player.play_cards_wild_cards:
@@ -598,26 +606,24 @@ def valid_play_check_and_sort(current_player): # ****
                 current_player.len_2_temp_melds_list[len_2_temp_meld_choice_index].append(current_player.play_cards_wild_cards.pop(wild_card_choice_index)) # ****
                 current_player.play_cards.append(current_player.len_2_temp_melds_list.pop(len_2_temp_meld_choice_index)) # ****
         # -------------------------------------
-            # Below Section - If the player chooses not to use the available wild card(s); places the len_2_temp_melds_list melds into bad_len_temp_melds_list, leaving the wild cards in play cards to be handled by wild_card_handler(). # ****
+            # Below Section - If the player chooses not to use the available wild card(s); places the len_2_temp_melds_list melds back into current_player.hand, but leaves the wild cards in play cards to be handled by wild_card_handler(). # ****
             else: # ****
                 game.game.progression_text = ("Okay, the meld(s) will be put back into your hand.") # ****
-                game.game.xs_display(1)
+                game.game.xs_display(2)
                 for temp_meld in current_player.len_2_temp_melds_list[:]: # ****
-                    bad_len_temp_melds_list.append(current_player.len_2_temp_melds_list.pop(current_player.len_2_temp_melds_list.index(temp_meld))) # ****
+                    for current_card in temp_meld[:]:
+                        current_player.hand.append(temp_meld.pop(-1)) # ****
+                current_player.len_2_temp_melds_list.clear()
             # -------------------------------------
-        # Below Section - If player does not have any wild cards left to use for appending to the short melds. Appends the melds to bad_len_temp_melds_list for placement back into the current_player.hand # ****
+        # Below Section - If player does not have any wild cards left to use for appending to the melds with only 2 cards. Appends the melds to current_player.hand. Finally, clears len_2_temp_melds_list. # ****
         elif len(current_player.play_cards_wild_cards) == 0: # ****
+            game.game.progression_text = ("You have attempted to create meld(s) with less than 3 cards, but since you do not have a wild card to add to it to meet the 3 card minimum meld requirement, your meld(s) will be placed back into your hand.") # ****
+            game.game.xs_display(2)
             for temp_meld in current_player.len_2_temp_melds_list[:]: # ****
-                bad_len_temp_melds_list.append(current_player.len_2_temp_melds_list.pop(current_player.len_2_temp_melds_list.index(temp_meld))) # ****
+                for current_card in temp_meld[:]:
+                    current_player.hand.append(temp_meld.pop(-1)) # ****
+            current_player.len_2_temp_melds_list.clear()
         # -------------------------------------
-    # Below  Section - Handles the informative output for melds of bad length & removal of said melds back into the current_player.hand. # ****
-    if len(bad_len_temp_melds_list) > 0: # ****
-        game.game.progression_text = (f"{current_player.name}, you have some attemped melds that do not pass the rule requirements. You cannot create a new meld without at least 2 natural cards of the same rank, or without a wild card to add to it to reach the 3 card minimum meld requirement. The attempted meld(s) will be removed and placed back in your hand.") # ****
-        game.game.xs_display(3)
-        for bad_len_meld in bad_len_temp_melds_list[:]: # ****
-            for current_card in bad_len_meld[:]: # ****
-                current_player.hand.append(bad_len_meld.pop(bad_len_meld.index(current_card))) # ****
-    # -------------------------------------
     # Below Section - Checks to see if current_player.play_cards_wild_cards is populated, and if so, calls wild_card_handler to distribute them. # ****
     if len(current_player.play_cards_wild_cards) > 0: # ****
         wild_card_handler(current_player) # ****
@@ -667,7 +673,7 @@ def valid_play_check_and_sort(current_player): # ****
     # Below Section - Transfers the played cards to current_player.melds (granted there were successfully played cards), and directs the player to either went_out_check() or discard() depending on the amount of cards in the player's hand. If no cards were played, prints an informative message, and reroutes the player to make a new play attempt via play_2(). # ****
     if len(current_player.play_cards) > 0: # ****
         game.game.progression_text = (f"{current_player.name}, you successfully created the meld(s) below!") # ****
-        game.game.xs_display(1)
+        game.game.xs_display(2)
         # -------------------------------------
     for temp_meld in current_player.play_cards[:]: # ****
         current_player.melds.append(current_player.play_cards.pop(current_player.play_cards.index(temp_meld))) # ****
@@ -732,40 +738,40 @@ def wild_card_handler(current_player): # ****
                     current_player.play_cards.append(current_card)
                 if current_player.round_score < current_player.meld_requirement: # ****
                     game.game.progression_text = (f"{current_player.name}, since you only have the Wild Card Canasta in your available melds and extra wild cards left over, they will be placed back into your hand as there is currently no other place to put them.") # ****
-                    game.game.xs_display(1)
+                    game.game.xs_display(3)
                     for wild_card in current_player.play_cards_wild_cards[:]: # ****
                         current_player.hand.append(current_player.play_cards_wild_cards.pop(-1)) # ****
                     return None # ****
             # ------------------------------------- ****
-    # Below Section - Runs if the player has less than 7 wild cards in current_player.play_cards_wild_cards OR if they have/had 7 or more wild cards but chose not to create a wild card canasta/had leftover wild cards after creating a wild card canasta with them, and if the player has at least 1 meld in current_player.play_cards or current_player.melds that does not contain the max amount of wild cards; iterates through each wild card in current_player.play_cards_wild_cards and prompts the player to choose a destination for each card. # ****
+    # Below Section - Runs if the player has less than 7 wild cards in current_player.play_cards_wild_cards OR if they have/had 7 or more wild cards but chose not to create a wild card canasta/had leftover wild cards after creating a wild card canasta with them, and if the player has at least 1 meld in current_player.non_maxed_out_melds; iterates through each wild card in current_player.play_cards_wild_cards and prompts the player to choose a destination for each card. # ****
     if len(current_player.play_cards) > 0 or len(current_player.melds) > 0: # ****
         for wild_card in current_player.play_cards_wild_cards[:]: # ****
             if len(current_player.non_maxed_out_melds) > 0: # ****
-                if len(current_player.play_cards) + len(current_player.melds) > 1:
-                    meld_choice_index = wild_card_meld_choice_prompt(current_player, wild_card) # ****
+                if len(current_player.non_maxed_out_melds) > 1:
+                    meld_choice = wild_card_meld_choice_prompt(current_player, wild_card) # ****
                 else:
-                    meld_choice_index = 0
+                    meld_choice = current_player.non_maxed_out_melds[0]
     # -------------------------------------
                 # Below Section - If player chooses not to use the wild card, it is popped from play_cards_wild_cards and appended back into the player's hand. # ****
-                if meld_choice_index == game.game.multiple_choice_text_1: # ****
+                if meld_choice == game.game.multiple_choice_text_1: # ****
                     game.game.progression_text = ("Okay, the wild card will be placed back into your hand.") # ****
-                    game.game.xs_display(1)
+                    game.game.xs_display(2)
                     current_player.hand.append(current_player.play_cards_wild_cards.pop(current_player.play_cards_wild_cards.index(wild_card))) # ****
                 # -------------------------------------
                 # Below Section - If player chooses to place the wild card into a meld; determines which meld group (current_player.play_cards or current_player.melds) they chose, and appends the wild card to that meld, popping it from play_cards_wild_cards. # ****
-                elif current_player.non_maxed_out_melds[meld_choice_index] in current_player.play_cards: # ****
-                    game.game.progression_text = (f"{current_player.name}, you successfully added the {current_player.play_cards_wild_cards[current_player.play_cards_wild_cards.index(wild_card)]} to your meld.") # ****
-                    current_player.play_cards[current_player.play_cards.index(current_player.non_maxed_out_melds[meld_choice_index])].append(current_player.play_cards_wild_cards.pop(current_player.play_cards_wild_cards.index(wild_card))) # ****
-                    game.game.xs_display(1)
-                elif current_player.non_maxed_out_melds[meld_choice_index] in current_player.melds: # ****
-                    game.game.progression_text = (f"{current_player.name}, you successfully added the {current_player.play_cards_wild_cards[current_player.play_cards_wild_cards.index(wild_card)]} to your meld.") # ****
-                    current_player.melds[current_player.melds.index(current_player.non_maxed_out_melds[meld_choice_index])].append(current_player.play_cards_wild_cards.pop(current_player.play_cards_wild_cards.index(wild_card))) # ****
-                    game.game.xs_display(1)
+                elif meld_choice in current_player.play_cards: # ****
+                    game.game.progression_text = (f"{current_player.name}, you successfully added the {wild_card} to your meld.") # ****
+                    current_player.play_cards[current_player.play_cards.index(meld_choice)].append(current_player.play_cards_wild_cards.pop(current_player.play_cards_wild_cards.index(wild_card))) # ****
+                    game.game.xs_display(2)
+                elif meld_choice in current_player.melds: # ****
+                    game.game.progression_text = (f"{current_player.name}, you successfully added the {wild_card} to your meld.") # ****
+                    current_player.melds[current_player.melds.index(meld_choice)].append(current_player.play_cards_wild_cards.pop(current_player.play_cards_wild_cards.index(wild_card))) # ****
+                    game.game.xs_display(2)
                 # -------------------------------------
             # Below Section - For the case whenever the player has nowhere to place the wild card. Places all of the remaining wild cards back into the player's hand after an informative message. # ****
             else: # ****
                 game.game.progression_text = (f"{current_player.name}, it looks as if every meld in your play cards and/or in your melds have the maximum amount of wild cards possible. Therefore the remaining wild cards in play will be placed back into your hand.") # ****
-                game.game.xs_display(1)
+                game.game.xs_display(3)
                 for wild_card in current_player.play_cards_wild_cards[:]: # ****
                     current_player.hand.append(current_player.play_cards_wild_cards.pop(-1)) # ****
                 return None # ****
@@ -781,7 +787,13 @@ def wild_card_handler(current_player): # ****
 def wild_card_meld_choice_prompt(current_player, wild_card): # ****
     print('wild_card_meld_choice_prompt')
     logger.debug("wild_card_meld_choice_prompt")
-    game.game.progression_text = (f"{current_player.name}, which meld from your play cards or your melds would you like to add the {current_player.play_cards_wild_cards[current_player.play_cards_wild_cards.index(wild_card)]} to? Click any meld to choose it.") # ****
+    # -------------------------------------
+    # Below Section - Iterates through the current_player.non_maxed_out_melds and adds each card to the game.game.clickable_card_list.
+    for meld in current_player.non_maxed_out_melds:
+        for current_card in meld:
+            game.game.clickable_card_list.append(current_card)
+    # ------------------------------------- # ****
+    game.game.progression_text = (f"{current_player.name}, which meld from your play cards or your melds would you like to add the {wild_card} to? Click any meld to choose it.") # ****
     game.game.multiple_choice_text_1 = 'I would not like to use this wild card, and would rather have it be replaced back into my hand.'
     game.game.click_card_active = True
     game.game.multiple_choice_active = True
@@ -789,19 +801,12 @@ def wild_card_meld_choice_prompt(current_player, wild_card): # ****
         game.game.draw_window_main()
     if game.game.clicked_card == None:
         print('wild_card_meld_choice_prompt - game.game.clicked_card == None')
-        meld_choice_index = game.game.multiple_choice_text_1
+        meld_choice = game.game.multiple_choice_text_1
     else:
-        if len(current_player.play_cards) > 0:
-            for meld in current_player.play_cards:
-                if game.game.clicked_card in meld:
-                    print('wild_card_meld_choice_prompt - game.game.clicked_card in play_cards')
-                    meld_choice_index = game.game.clicked_card
-        if len(current_player.melds) > 0:
-            for meld in current_player.melds:
-                if game.game.clicked_card in meld:
-                    print('wild_card_meld_choice_prompt - game.game.clicked_card in melds')
-                    meld_choice_index = game.game.clicked_card
-    return meld_choice_index # ****
+        for meld in current_player.non_maxed_out_melds:
+            if game.game.clicked_card in meld:
+                meld_choice = meld
+    return meld_choice # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by play_2(), valid_play_check_and_sort(), went_out_check() functions. For discarding; prompts the player to choose a card from their hand to be placed into the discard pile. # ****
 def discard(current_player): # ****
@@ -920,7 +925,7 @@ def went_out_check_replacement_card(current_player, second_run = False): # ****
                         # Below Line - Appends the chosen card to the current_player.hand, popping from current_player.meld. # ****
                         current_player.hand.append(current_player.melds[clicked_card_meld_index].pop(clicked_card_index)) # ****
                         game.game.progression_text = (f"You removed the {game.game.clicked_card} from it's meld back into your hand.") # ****
-                        game.game.xs_display(1)
+                        game.game.xs_display(2)
                     else: # ****
                         # Below Section - Checks to see if the player has any melds with more than 3 cards in them, since they chose to disband a meld of 3 or less cards. If they do have one of these melds, presents the player with an informative message and asks for verification of their choice. # ****
                         melds_len_over_3 = False # ****
@@ -936,14 +941,14 @@ def went_out_check_replacement_card(current_player, second_run = False): # ****
                                 game.game.draw_window_main()
                             if game.game.selected_choice == 'Yes': # ****
                                 game.game.progression_text = ("Okay, the meld will be disbanded and placed back into your hand.") # ****
-                                game.game.xs_display(1)
+                                game.game.xs_display(2)
                                 for current_card in current_player.melds[clicked_card_meld_index][:]: # ****
                                     current_player.hand.append(current_player.melds[clicked_card_meld_index].pop(-1)) # ****
                                 # Below Line - Pops the emptied meld from current_player.melds.
                                 current_player.melds.pop(current_player.melds.index(clicked_card_meld_index))
                         else:
                             game.game.progression_text = 'Since this meld consists of 3 cards, the entire meld will be disbanded.'
-                            game.game.xs_display(1)
+                            game.game.xs_display(2)
                             for current_card in current_player.melds[clicked_card_meld_index][:]: # ****
                                 current_player.hand.append(current_player.melds[clicked_card_meld_index].pop(-1)) # ****
                                 # Below Line - Pops the emptied meld from current_player.melds.
@@ -976,13 +981,13 @@ def round_reset(): # ****
     game.game.xs_display(3)
     if player.P1.finished_rounds_scores[-1] > player.P2.finished_rounds_scores[-1]:
         game.game.progression_text = (f"{player.P1.name} was the winner of the round!")
-        game.game.xs_display(1)
+        game.game.xs_display(3)
     elif player.P1.finished_rounds_scores[-1] == player.P2.finished_rounds_scores[-1]:
         game.game.progression_text = (f"Both players had the same score! The round was a tie!")
-        game.game.xs_display(1)
+        game.game.xs_display(3)
     elif player.P2.finished_rounds_scores[-1] > player.P1.finished_rounds_scores[-1]:
         game.game.progression_text = (f"{player.P2.name} was the winner of the round!")
-        game.game.xs_display(1)
+        game.game.xs_display(3)
     # --------------------------------------
     deck.MasterDeck.discard_pile.clear()
     deck.MasterDeck.deck.clear()
