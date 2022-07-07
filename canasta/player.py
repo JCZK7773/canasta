@@ -33,15 +33,67 @@ class Player(): # ****
     @name.setter
     def name(self, val):
         if self.name == 'Player 1':
-            game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.dark_blue_color)
+            game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.background_color)
             game.game.p1_player_name_text_obj_rect = game.game.p1_player_name_text_obj.get_rect()
             game.game.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
             game.game.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_hand_text_obj = game.game.font.render((f'{val}\'s Hand'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_hand_text_obj_rect = game.game.p1_hand_text_obj.get_rect()
+            game.game.p1_hand_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_hand_text_loc'][0]
+            game.game.p1_hand_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_hand_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_pre_sort_play_cards_text_obj = game.game.font.render((f'{val}\'s Pre-Sorted Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_pre_sort_play_cards_text_obj_rect = game.game.p1_pre_sort_play_cards_text_obj.get_rect()
+            game.game.p1_pre_sort_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_pre_sort_play_cards_text_loc'][0]
+            game.game.p1_pre_sort_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_pre_sort_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_play_cards_text_obj = game.game.font.render((f'{val}\'s Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_play_cards_text_obj_rect = game.game.p1_play_cards_text_obj.get_rect()
+            game.game.p1_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc'][0]
+            game.game.p1_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_melds_text_obj = game.game.font.render((f'{val}\'s Melds'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_melds_text_obj_rect = game.game.p1_melds_text_obj.get_rect()
+            game.game.p1_melds_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_melds_text_loc'][0]
+            game.game.p1_melds_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_melds_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_red_3_meld_text_obj = game.game.font.render((f'{val}\'s Red 3 Meld'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_red_3_meld_text_obj_rect = game.game.p1_red_3_meld_text_obj.get_rect()
+            game.game.p1_red_3_meld_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc'][0]
+            game.game.p1_red_3_meld_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc'][1]
+            # -------------------------------------
         else:
-            game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.dark_blue_color)
+            game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.background_color)
             game.game.p2_player_name_text_obj_rect = game.game.p2_player_name_text_obj.get_rect()
             game.game.p2_player_name_text_obj_rect.right = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
             game.game.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_hand_text_obj = game.game.font.render((f'{val}\'s Hand'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_hand_text_obj_rect = game.game.p2_hand_text_obj.get_rect()
+            game.game.p2_hand_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_hand_text_loc'][0]
+            game.game.p2_hand_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_hand_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_pre_sort_play_cards_text_obj = game.game.font.render((f'{val}\'s Pre-Sorted Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_pre_sort_play_cards_text_obj_rect = game.game.p2_pre_sort_play_cards_text_obj.get_rect()
+            game.game.p2_pre_sort_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_pre_sort_play_cards_text_loc'][0]
+            game.game.p2_pre_sort_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_pre_sort_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_play_cards_text_obj = game.game.font.render((f'{val}\'s Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_play_cards_text_obj_rect = game.game.p2_play_cards_text_obj.get_rect()
+            game.game.p2_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc'][0]
+            game.game.p2_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_melds_text_obj = game.game.font.render((f'{val}\'s Melds'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_melds_text_obj_rect = game.game.p2_melds_text_obj.get_rect()
+            game.game.p2_melds_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_melds_text_loc'][0]
+            game.game.p2_melds_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_melds_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_red_3_meld_text_obj = game.game.font.render((f'{val}\'s Red 3 Meld'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_red_3_meld_text_obj_rect = game.game.p2_red_3_meld_text_obj.get_rect()
+            game.game.p2_red_3_meld_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc'][0]
+            game.game.p2_red_3_meld_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc'][1]
+            # -------------------------------------
         # -------------------------------------
         self._name = val
     # -------------------------------------

@@ -69,18 +69,6 @@ class Game():
         # Below Line - Type: bool. The internal use variable for the calculated property self.choose_multiple_cards; used when the player has to choose multiple cards instead of just one. Allows the player to keep adding cards to the self.clicked_card_list as long as it is active (True).
         self._choose_multiple_cards = False
         # -------------------------------------
-        # Below Section - Type: str. The text associated with all of the different, unchanging player names and card groups.
-        self.p1_hand_text = (f'{player.P1.name}\'s Hand')
-        self.p2_hand_text = (f'{player.P2.name}\'s Hand')
-        self.p1_pre_sort_play_cards_text = (f'{player.P1.name}\'s Pre-Sorted Play Cards')
-        self.p2_pre_sort_play_cards_text = (f'{player.P2.name}\'s Pre-Sorted Play Cards')
-        self.p1_play_cards_text = (f'{player.P1.name}\'s Play Cards')
-        self.p2_play_cards_text = (f'{player.P2.name}\'s Play Cards')
-        self.p1_melds_text = (f'{player.P1.name}\'s Melds')
-        self.p2_melds_text = (f'{player.P2.name}\'s Melds')
-        self.p1_red_3_meld_text = (f'{player.P1.name}\'s Red 3 Meld')
-        self.p2_red_3_meld_text = (f'{player.P2.name}\'s Red 3 Meld')
-        # -------------------------------------
         # Below Section - Placeholders to avoid error. Assigned through progression_text.
         # Below Line - Type: str. Internal value; external use value is self.progression text calculated property which assigns the self.progression_text_obj & self.progression_text_obj_rect automatically. The actual text the game outputs in the main loop, assigned through various locations in progression.py.
         self._progression_text = ('What is your name?!?')
@@ -123,71 +111,71 @@ class Game():
         # Below Line - Placeholder. Accessed inside of self.multiple_choice_text_2 calculated property; the previous self.multiple_choice_text_2_obj_rect to be compared against the new one to determine whether or not the screen needs to be cleared for proper visual display in the case that the new rect is smaller than the old one.
         self.prior_multiple_choice_text_2_obj_rect = None
         # -------------------------------------
-        self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.dark_blue_color)
+        self.deck_text_obj = self.font.render('Deck', True, (255, 255, 255), self.background_color)
         self.deck_text_obj_rect = self.deck_text_obj.get_rect()
         self.deck_text_obj_rect.center = locations.Locate.text_name_loc_dict['Deck']
         # -------------------------------------
-        self.discard_pile_text_obj = self.font.render('Discard Pile', True, (255, 255, 255), self.dark_blue_color)
+        self.discard_pile_text_obj = self.font.render('Discard Pile', True, (255, 255, 255), self.background_color)
         self.discard_pile_text_obj_rect = self.discard_pile_text_obj.get_rect()
         self.discard_pile_text_obj_rect.center = locations.Locate.text_name_loc_dict['Discard Pile']
         # -------------------------------------
-        self.p1_hand_text_obj = self.font.render(self.p1_hand_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p1_hand_text_obj = self.font.render((f'{player.P1.name}\'s Hand'), True, (255, 255, 255), self.background_color)
         self.p1_hand_text_obj_rect = self.p1_hand_text_obj.get_rect()
         self.p1_hand_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_hand_text_loc'][0]
         self.p1_hand_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_hand_text_loc'][1]
         # -------------------------------------
-        self.p2_hand_text_obj = self.font.render(self.p2_hand_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p2_hand_text_obj = self.font.render((f'{player.P2.name}\'s Hand'), True, (255, 255, 255), self.background_color)
         self.p2_hand_text_obj_rect = self.p2_hand_text_obj.get_rect()
         self.p2_hand_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_hand_text_loc'][0]
         self.p2_hand_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_hand_text_loc'][1]
         # -------------------------------------
-        self.p1_pre_sort_play_cards_text_obj = self.font.render(self.p1_pre_sort_play_cards_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p1_pre_sort_play_cards_text_obj = self.font.render((f'{player.P1.name}\'s Pre-Sorted Play Cards'), True, (255, 255, 255), self.background_color)
         self.p1_pre_sort_play_cards_text_obj_rect = self.p1_pre_sort_play_cards_text_obj.get_rect()
         self.p1_pre_sort_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_pre_sort_play_cards_text_loc'][0]
         self.p1_pre_sort_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_pre_sort_play_cards_text_loc'][1]
         # -------------------------------------
-        self.p2_pre_sort_play_cards_text_obj = self.font.render(self.p2_pre_sort_play_cards_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p2_pre_sort_play_cards_text_obj = self.font.render((f'{player.P2.name}\'s Pre-Sorted Play Cards'), True, (255, 255, 255), self.background_color)
         self.p2_pre_sort_play_cards_text_obj_rect = self.p2_pre_sort_play_cards_text_obj.get_rect()
         self.p2_pre_sort_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_pre_sort_play_cards_text_loc'][0]
         self.p2_pre_sort_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_pre_sort_play_cards_text_loc'][1]
         # -------------------------------------
-        self.p1_play_cards_text_obj = self.font.render(self.p1_play_cards_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p1_play_cards_text_obj = self.font.render((f'{player.P1.name}\'s Play Cards'), True, (255, 255, 255), self.background_color)
         self.p1_play_cards_text_obj_rect = self.p1_play_cards_text_obj.get_rect()
         self.p1_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc'][0]
         self.p1_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc'][1]
         # -------------------------------------
-        self.p2_play_cards_text_obj = self.font.render(self.p2_play_cards_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p2_play_cards_text_obj = self.font.render((f'{player.P2.name}\'s Play Cards'), True, (255, 255, 255), self.background_color)
         self.p2_play_cards_text_obj_rect = self.p2_play_cards_text_obj.get_rect()
         self.p2_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc'][0]
         self.p2_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc'][1]
         # -------------------------------------
-        self.p1_melds_text_obj = self.font.render(self.p1_melds_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p1_melds_text_obj = self.font.render((f'{player.P1.name}\'s Melds'), True, (255, 255, 255), self.background_color)
         self.p1_melds_text_obj_rect = self.p1_melds_text_obj.get_rect()
         self.p1_melds_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_melds_text_loc'][0]
         self.p1_melds_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_melds_text_loc'][1]
         # -------------------------------------
-        self.p2_melds_text_obj = self.font.render(self.p2_melds_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p2_melds_text_obj = self.font.render((f'{player.P2.name}\'s Melds'), True, (255, 255, 255), self.background_color)
         self.p2_melds_text_obj_rect = self.p2_melds_text_obj.get_rect()
         self.p2_melds_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_melds_text_loc'][0]
         self.p2_melds_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_melds_text_loc'][1]
         # -------------------------------------
-        self.p1_red_3_meld_text_obj = self.font.render(self.p1_red_3_meld_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p1_red_3_meld_text_obj = self.font.render((f'{player.P1.name}\'s Red 3 Meld'), True, (255, 255, 255), self.background_color)
         self.p1_red_3_meld_text_obj_rect = self.p1_red_3_meld_text_obj.get_rect()
         self.p1_red_3_meld_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc'][0]
         self.p1_red_3_meld_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc'][1]
         # -------------------------------------
-        self.p2_red_3_meld_text_obj = self.font.render(self.p2_red_3_meld_text, True, (255, 255, 255), self.dark_blue_color)
+        self.p2_red_3_meld_text_obj = self.font.render((f'{player.P2.name}\'s Red 3 Meld'), True, (255, 255, 255), self.background_color)
         self.p2_red_3_meld_text_obj_rect = self.p2_red_3_meld_text_obj.get_rect()
         self.p2_red_3_meld_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc'][0]
         self.p2_red_3_meld_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc'][1]
         # -------------------------------------
-        self.p1_player_name_text_obj = self.font.render(player.P1.name, True, (255, 255, 255), self.dark_blue_color)
+        self.p1_player_name_text_obj = self.font.render(player.P1.name, True, (255, 255, 255), self.background_color)
         self.p1_player_name_text_obj_rect = self.p1_player_name_text_obj.get_rect()
         self.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
         self.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
         # -------------------------------------
         # Below Section - Placeholder / initial settings for below values. Values are changed and assigned through player.P2.name calculated property.
-        self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.dark_blue_color)
+        self.p2_player_name_text_obj = self.font.render(player.P2.name, True, (255, 255, 255), self.background_color)
         self.p2_player_name_text_obj_rect = self.p2_player_name_text_obj.get_rect()
         self.p2_player_name_text_obj_rect.right = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
         self.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
@@ -195,17 +183,17 @@ class Game():
         ###### Below Line - This is currently not being used.
         # self.top_center_title = [locations.Locate.visible_center[0] - (round(self.deck_text_obj_rect[2] / 2)), locations.Locate.visible_top + 20]
         # -------------------------------------
-        # Below Dictionary - Where is this being used???
-        self.object_card_group_dict = {self.deck_text_obj: deck.MasterDeck.deck,
-                              self.discard_pile_text_obj: deck.MasterDeck.discard_pile,
-                              self.p1_hand_text_obj: player.P1.hand,
-                              self.p2_hand_text_obj: player.P2.hand,
-                              self.p1_play_cards_text_obj: player.P1.play_cards,
-                              self.p2_play_cards_text_obj: player.P2.play_cards,
-                              self.p1_melds_text_obj: player.P1.melds,
-                              self.p2_melds_text_obj: player.P2.melds,
-                              self.p1_red_3_meld_text_obj: player.P1.red_3_meld,
-                              self.p2_red_3_meld_text_obj: player.P2.red_3_meld}
+        ###### Below Dictionary - This is NOT being used anywhere.
+        # self.object_card_group_dict = {self.deck_text_obj: deck.MasterDeck.deck,
+        #                       self.discard_pile_text_obj: deck.MasterDeck.discard_pile,
+        #                       self.p1_hand_text_obj: player.P1.hand,
+        #                       self.p2_hand_text_obj: player.P2.hand,
+        #                       self.p1_play_cards_text_obj: player.P1.play_cards,
+        #                       self.p2_play_cards_text_obj: player.P2.play_cards,
+        #                       self.p1_melds_text_obj: player.P1.melds,
+        #                       self.p2_melds_text_obj: player.P2.melds,
+        #                       self.p1_red_3_meld_text_obj: player.P1.red_3_meld,
+        #                       self.p2_red_3_meld_text_obj: player.P2.red_3_meld}
         # -------------------------------------
     # Below Section - Calculated property; whenever a value is set for this, make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
     @property
@@ -437,7 +425,8 @@ class Game():
             for obj in text_obj_dict_keys_list[0:12]:
                 if obj != None:
                     if len(self.text_obj_dict[obj]) != 0:
-                        self.create_border_rect(self.text_obj_dict[obj])
+                        ###### Below Line - Disabled this because I'm testing using the old background_color for all of the card group & name text boxes.
+                        # self.create_border_rect(self.text_obj_dict[obj])
                         self.screen_surface.blit(obj, self.text_obj_dict[obj])
             # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
             pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
@@ -454,7 +443,8 @@ class Game():
         # -------------------------------------
         # Below Section - Handles the rendering of the player names.
         for obj in text_obj_dict_keys_list[12:14]:
-            self.create_border_rect(self.text_obj_dict[obj])
+            ###### Below Line - Disabled this because I'm testing using the old background_color for all of the card group & name text boxes.
+            # self.create_border_rect(self.text_obj_dict[obj])
             self.screen_surface.blit(obj, self.text_obj_dict[obj])
         # -------------------------------------
         # Below Section - Handles the rendering of the progression_text_obj/rect.

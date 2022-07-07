@@ -1,6 +1,7 @@
 # D E B U G
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Current bugs.
+    # Current Bug - Bug Number = None - When I played 2x 2-card attempted melds and 2x wild cards along with them, after I was given the choice to place them in the len 2 melds, which I did, making the 2x melds consist of 3 cards each, but it errantly output the message - 'You have attempted to create meld(s) with less than 3 cards' - and then errantly output the message - 'Sorry, but the value of your play cards (0)...'. :|
     # Current Bug - Bug Number = None - The play_cards are not being resituated after cards are popped from them, as is done for all of the other card groups.
     # Current Bug - Bug Number = None - The card group name display boxes should only display whenever there are cards in the card group associated with each text box.
     # Current Bug - Bug Number = None - In the case that both players have the same draw card, the player names stay what the players gave them previously, but the game prompts the players to give them new names. It should just keep those names, I believe.
