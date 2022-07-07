@@ -17,7 +17,7 @@ class Player(): # ****
         self.red_3_meld = [] # ****
         self.black_3_meld = [] # ****
         self.melds = [] # ****
-        self.len_2_temp_melds_list = [] # ****
+        self.len_2_temp_melds_ref_list = [] # ****
         self.matched_card_list = []
         self.going_out = None # ****
         self.went_out_concealed = False # ****

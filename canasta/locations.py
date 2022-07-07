@@ -58,8 +58,8 @@ class Locations():
                                   'p1_melds_text_loc': [self.p1_melds_start_loc[0] - 46, self.p1_melds_start_loc[1] - self.y_reduce_num],
                                   'p2_melds_text_loc': [self.p2_melds_start_loc[0] - 46, self.p2_melds_start_loc[1] - self.y_reduce_num],
                                   # Below Section - Currently not being used so I set them visually off-screen.
-                                  'p1_red_3_meld_text_loc': [self.visible_center[0] - 100, self.p1_melds_start_loc[1] - self.y_reduce_num],
-                                  'p2_red_3_meld_text_loc': [self.visible_right - 100, self.p2_melds_start_loc[1] - self.y_reduce_num],
+                                  'p1_red_3_meld_text_loc': [self.p1_red_3_meld_start_loc[0] - 100, self.p1_red_3_meld_start_loc[1] - self.y_reduce_num],
+                                  'p2_red_3_meld_text_loc': [self.p2_red_3_meld_start_loc[0] - 100, self.p2_red_3_meld_start_loc[1] - self.y_reduce_num],
                                   # -------------------------------------
                                   # Below Section - Make it so that whenever a value is set for this (through progression.py) make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
                                   'p1_player_name_text_loc': [15, 10],

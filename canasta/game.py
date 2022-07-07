@@ -221,18 +221,24 @@ class Game():
         self._progression_text = val
         self.progression_text_obj = self.font.render(val, True, (255, 255, 255), self.dark_blue_color)
         self.progression_text_obj_rect = self.progression_text_obj.get_rect()
-        ###### BELOW SECTION - NOT FINISHED OR DEBUGGED: NEED TO MAKE IT SO THAT BOTH OF THE TEXT OBJS GET BLITTED AND THAT IN THE CASE THAT OBJ_2 WAS PREVIOUSLY BLITTED THAT THE 'ERASE' SECTION IS RUN IN THAT INSTANCE AS WELL AS ALL OF THE OTHERS. ALSO NEED TO FINISH LOGIC CONCERNING WHETHER OR NOT WHEN IN THIS CASE 'OBJ' SHOULD BE CHANGE D TO NONE, THEN CREATE 'OBJ_1' & 'OBJ_2', HAVING THE BLIT SECTION CHECK WHETHER OR NOT 'OBJ_1' & 'OBJ_2' ARE NONE, JUST AS IT CHECKS FOR ALL OF THE OTHER RENDERS...
         # Below Section - Whenever the progression_text_obj_rect.width exceeds the screen display width; doubles the height of the rect for 2 rows of text display, divides the val into 2 halves, and creates a .render() object for each of them.
         if self.progression_text_obj_rect[2] > 1300:
+            original_rect_height = self.progression_text_obj_rect[3]
             self.progression_text_obj_rect[3] = self.progression_text_obj_rect[3] * 2
             val_split = val.split(' ')
             val_half_1_end = round(len(val_split) / 2)
             val_half_1 = val_split[0:val_half_1_end]
-            val_half_2 = val_split[val_half_1_end + 1:]
+            val_half_2 = val_split[val_half_1_end:]
             val_half_1_joined = ' '.join(val_half_1)
             val_half_2_joined = ' '.join(val_half_2)
             self.progression_text_obj = self.font.render(val_half_1_joined, True, (255, 255, 255), self.dark_blue_color)
             self.progression_text_obj_2 = self.font.render(val_half_2_joined, True, (255, 255, 255), self.dark_blue_color)
+            self.temp_progression_text_obj_rect = self.progression_text_obj.get_rect()
+            self.temp_progression_text_obj_2_rect = self.progression_text_obj_2.get_rect()
+            if self.temp_progression_text_obj_rect[2] > self.temp_progression_text_obj_2_rect[2]:
+                self.progression_text_obj_rect[2] = self.temp_progression_text_obj_rect[2]
+            else:
+                self.progression_text_obj_rect[2] = self.temp_progression_text_obj_2_rect[2]
         else:
             self.progression_text_obj_2 = None
         self.progression_text_obj_rect.center = locations.Locate.text_name_loc_dict['progression_text_loc']

@@ -16,6 +16,7 @@ class CustomAppendList(list):
     def meld_num(self):
         if self in player.Player.meld_group_dict[self.card_group_name]:
             list_index = player.Player.meld_group_dict[self.card_group_name].index(self)
+            print(f'list_index = {list_index}')
             return list_index
     # -------------------------------------
     # Below Function - Customized version of the built-in append method. Handles items differently based on certain qualifications, and also stores and passes certain required information about the self (list) to the various location movement functions for 'automation'.
@@ -47,7 +48,7 @@ class CustomAppendList(list):
         else:
             locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item)
         # -------------------------------------
-        # Below Section - For whenever a card/meld is popped from another CustomAppendList list; calls the locations.Locate card group update function to visually 'resituate' the prior_card_group via the prior_card_group_name.
+        # Below Section - Resituate section. For whenever a card/meld is popped from another CustomAppendList list; calls the locations.Locate card group update function to visually 'resituate' the prior_card_group via the prior_card_group_name.
         if type(item) == CustomAppendList:
             if item[0].prior_card_group_name != None:
                 ###### Below Line - May not need this line as all CustomAppendList instances should be melds in the meld_group_dict.
@@ -79,7 +80,7 @@ class CustomAppendList(list):
                 # Below Line - If the self(meld) is in the meld_group.
                 if self in player.Player.meld_group_dict[self.card_group_name]:
                     self[item].prior_meld_num = self.meld_num
-                # Below Line - If the card is coming from the self(meld_group) directly (not from within a meld in the meld_group) as in the case whenever a card is moved from the player.play_cards into the temp_meld before the temp_meld is reappended back into the play_cards group. If we did not have this else clause, whenever it would move the card it would errantly assign the index of the card in the card group as the meld_num, when it in fact did not come from a 'meld' in that sense.
+                # Below Line - If the card is coming from the self(meld_group) directly (not from within a meld in the meld_group) as in the case whenever a card is moved from the player.play_cards into the temp_meld (pre_sort_play_cards?) before the temp_meld is reappended back into the play_cards group. If we did not have this else clause, whenever it would move the card it would errantly assign the index of the card in the card group as the meld_num, when it in fact did not come from a 'meld' in that sense.
                 else:
                     self[item].prior_meld_num = None
         elif type(self[item]) == CustomAppendList:
