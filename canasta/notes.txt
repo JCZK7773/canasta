@@ -1,4 +1,7 @@
 # NOTES
+
+    # pre_sort_play_cards > play_cards 
+
     #     pygame.Rect
     # pygame object for storing rectangular coordinates
     # Rect(left, top, width, height) -> Rect

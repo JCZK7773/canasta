@@ -50,6 +50,8 @@ def setup():
     player.P2.red_3_meld = customappendlist.CustomAppendList('P2.red_3_meld') # ****
     player.P1.melds = customappendlist.CustomAppendList('P1.melds') # ***
     player.P2.melds = customappendlist.CustomAppendList('P2.melds') # ***
+    player.P1.matched_card_list = customappendlist.CustomAppendList('P1.melds')
+    player.P2.matched_card_list = customappendlist.CustomAppendList('P2.melds')
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by module when opened, if __name__ == "__main__". The main pygame loop. Handles FPS and calls draw_window() for screen updating.
 def main():

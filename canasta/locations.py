@@ -110,7 +110,7 @@ class Locations():
     # -------------------------------------
     # Below Function - Dynamically moves a single passed in card from it's current location to the desired location (loc) one unit at a time, using a formula (ratio) to move the card in a straight line. Calls player.P2 at the end of the function, which visually updates the card's on-screen location. Also takes the the_draw_2 parameter for whenever the cards need to be placed face-down during the draw card selection segment.
     def card_movement(self, loc, current_card, the_draw_2 = False):
-        print("card_movement")
+        # print("card_movement")
         # Below Section - For testing. Trying to find the cause of inconsistent card movement times.
         # prior_time = time.time()
         # iter_num = 0
@@ -236,10 +236,11 @@ class Locations():
             temp_loc = self.card_group_name_dict[card_group_name][:]
             self.card_group_name_dict[card_group_name].clear()
             for x_card in temp_loc:
-                # Below Line - Unsure if proper fix!! For the case in which resituation is happening and the card is about to be passed to the append function. If prior_card_group_name is not set to None, then it will recursively call the prior_card_group_name resituation function AGAIN, when in fact it should only run that once.
+                # Below Line - Unsure if proper fix!! For the case in which resituation is happening and the card is about to be passed to the append function. If prior_card_group_name is not set to None, then it will recursively call the prior_card_group_name resituation function AGAIN, when in fact it should only run that once. This is fine and should not cause any problems because whenever the cards will be popped from the location they will be assigned new prior_card_group_names.
                 x_card.prior_card_group_name = None
                 self.card_group_name_dict[card_group_name].append(x_card)
         # -------------------------------------
+        # Below Section - For the deck & discard pile OR the hand whenever cards are being added to it, either from somewhere else or when resituating the hand during the 2nd call of this function when it is re-appending/re-placing the cards.
         else:
             self.card_movement(self.card_group_loc_dict[card_group_name], current_card)
             current_card.display_layer = len(self.card_group_name_dict[card_group_name]) + 1
@@ -303,7 +304,7 @@ class Locations():
         # -------------------------------------
         # Below line - If you are adding from a completed meld.
         if type(item) == customappendlist.CustomAppendList:
-            print("visual_meld_update > customappendlist.CustomAppendList")
+            print(f"visual_meld_update > customappendlist.CustomAppendList - item = {item}")
             # Below Section - Sets card_num to 0, which will be increased by 1 for each card iteration and begins iteration through the meld.
             card_num = 0
             for cur_card in item:

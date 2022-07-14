@@ -5,6 +5,8 @@ import math
 import locations
 import player
 import deck
+import customappendlist
+import card
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Game():
     def __init__(self):
@@ -182,18 +184,6 @@ class Game():
         # -------------------------------------
         ###### Below Line - This is currently not being used.
         # self.top_center_title = [locations.Locate.visible_center[0] - (round(self.deck_text_obj_rect[2] / 2)), locations.Locate.visible_top + 20]
-        # -------------------------------------
-        ###### Below Dictionary - This is NOT being used anywhere.
-        # self.object_card_group_dict = {self.deck_text_obj: deck.MasterDeck.deck,
-        #                       self.discard_pile_text_obj: deck.MasterDeck.discard_pile,
-        #                       self.p1_hand_text_obj: player.P1.hand,
-        #                       self.p2_hand_text_obj: player.P2.hand,
-        #                       self.p1_play_cards_text_obj: player.P1.play_cards,
-        #                       self.p2_play_cards_text_obj: player.P2.play_cards,
-        #                       self.p1_melds_text_obj: player.P1.melds,
-        #                       self.p2_melds_text_obj: player.P2.melds,
-        #                       self.p1_red_3_meld_text_obj: player.P1.red_3_meld,
-        #                       self.p2_red_3_meld_text_obj: player.P2.red_3_meld}
         # -------------------------------------
     # Below Section - Calculated property; whenever a value is set for this, make it calculate and assign the rect and it's center based on the size of the rect so that it will always properly display on the screen.
     @property
@@ -398,6 +388,20 @@ class Game():
         # Below Line - Calls the event handler which handles all events as if through a while loop.
         self.event_handler()
         # -------------------------------------
+        # Below Dictionary - Key = text objects, Value = associated card group. Used to check if the associated card group is populated to determine if text objects should be rendered.
+        self.object_card_group_dict = {self.deck_text_obj: deck.MasterDeck.deck,
+                              self.discard_pile_text_obj: deck.MasterDeck.discard_pile,
+                              self.p1_hand_text_obj: player.P1.hand,
+                              self.p2_hand_text_obj: player.P2.hand,
+                              self.p1_pre_sort_play_cards_text_obj: self.p1_pre_sort_play_cards_text_obj_rect,
+                              self.p2_pre_sort_play_cards_text_obj: self.p2_pre_sort_play_cards_text_obj_rect,
+                              self.p1_play_cards_text_obj: player.P1.play_cards,
+                              self.p2_play_cards_text_obj: player.P2.play_cards,
+                              self.p1_melds_text_obj: player.P1.melds,
+                              self.p2_melds_text_obj: player.P2.melds,
+                              self.p1_red_3_meld_text_obj: player.P1.red_3_meld,
+                              self.p2_red_3_meld_text_obj: player.P2.red_3_meld}
+        # -------------------------------------
         self.text_obj_dict = {self.deck_text_obj: self.deck_text_obj_rect,
                               self.discard_pile_text_obj: self.discard_pile_text_obj_rect,
                               self.p1_hand_text_obj: self.p1_hand_text_obj_rect,
@@ -424,10 +428,23 @@ class Game():
             # Below Section - Handles the rendering of the card group info text and the associated surfaces.
             for obj in text_obj_dict_keys_list[0:12]:
                 if obj != None:
+                    # Below Line - Quite sure this is for the instances in which certain text values are set to '', meaning that they are 'reset'. Ensures that in these cases a value-less text box and border are not created.
                     if len(self.text_obj_dict[obj]) != 0:
-                        ###### Below Line - Disabled this because I'm testing using the old background_color for all of the card group & name text boxes.
-                        # self.create_border_rect(self.text_obj_dict[obj])
-                        self.screen_surface.blit(obj, self.text_obj_dict[obj])
+                        # Below Line - Checks to ensure the object is not a rect (which has a greater len than 0, causing them to be displayed errantly) and that the associated card group is not empty; I only want the card group text boxes to display whenever the card groups are not empty.
+                        if type(self.object_card_group_dict[obj]) == customappendlist.CustomAppendList and (len(self.object_card_group_dict[obj])) != 0:
+                            if type(self.object_card_group_dict[obj][0]) == card.Card:
+                                # Below Line - Disabled this because I'm testing using the old background_color for all of the card group & name text boxes.
+                                # self.create_border_rect(self.text_obj_dict[obj])
+                                self.screen_surface.blit(obj, self.text_obj_dict[obj])
+                            # Below Section - If the type of the object is a meld instead of a card; assigns a bool to True, and iterates through the meld group to check the lens of the melds, and if any len is > 0, bool is changed to False, which causes the obj to be blitted.
+                            else:
+                                meld_group_is_empty = True
+                                for meld in self.object_card_group_dict[obj]:
+                                    if (len(meld)) > 0:
+                                        meld_group_is_empty = False
+                                if meld_group_is_empty == False:
+                                    self.screen_surface.blit(obj, self.text_obj_dict[obj])
+                            # -------------------------------------
             # Below Line - Draws the dividing line on the middle of the screen. Note: This has to go below self.card_group.update() & self.card_rects = self.card_group.draw(self.screen_surface) or it will not display on the screen surface.
             pygame.draw.line(self.screen_surface, self.black_color, [locations.Locate.visible_center[0] - 1, locations.Locate.visible_top], [locations.Locate.visible_center[0] - 1, locations.Locate.visible_bottom], 2)
         # -------------------------------------
@@ -443,7 +460,7 @@ class Game():
         # -------------------------------------
         # Below Section - Handles the rendering of the player names.
         for obj in text_obj_dict_keys_list[12:14]:
-            ###### Below Line - Disabled this because I'm testing using the old background_color for all of the card group & name text boxes.
+            # Below Line - Disabled this because I'm testing using the old background_color for all of the card group & name text boxes.
             # self.create_border_rect(self.text_obj_dict[obj])
             self.screen_surface.blit(obj, self.text_obj_dict[obj])
         # -------------------------------------

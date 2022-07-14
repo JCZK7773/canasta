@@ -16,7 +16,6 @@ class CustomAppendList(list):
     def meld_num(self):
         if self in player.Player.meld_group_dict[self.card_group_name]:
             list_index = player.Player.meld_group_dict[self.card_group_name].index(self)
-            print(f'list_index = {list_index}')
             return list_index
     # -------------------------------------
     # Below Function - Customized version of the built-in append method. Handles items differently based on certain qualifications, and also stores and passes certain required information about the self (list) to the various location movement functions for 'automation'.
@@ -30,8 +29,12 @@ class CustomAppendList(list):
         # -------------------------------------
         # Below Section - Figures out which locations movement function needs to be called, and determines the correct parameters to be passed to the function for proper card movements.
         if self.card_group_name in player.Player.meld_group_dict.keys():
+            # Below Line - Assigns the item's card_group_name to the self's card_group_name so that they are properly updated as they are moved.
+            item.card_group_name = self.card_group_name
             if type(item) == CustomAppendList:
                 # print("append > CustomAppendList")
+                for current_card in item:
+                    item.card_group_name = self.card_group_name
                 locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item, len(self) - 1)
             elif type(item) == card.Card: # If it is a Card (For instances such as when a card is being added to a preexisting meld).
                 # print("append > card.Card")
@@ -39,7 +42,7 @@ class CustomAppendList(list):
                 if self in player.Player.meld_group_dict[self.card_group_name]:
                     # print('append > card.Card > self in player.Player.meld_group_dict[self.card_group_name]')
                     locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item, self.meld_num, len(self) - 1)
-                # Below Section - For whenever cards are being added to Pre_sort_play_cards during an initial play before valid_play_check_and_sort() sorts them.
+                # Below Section - For whenever cards are being added to pre_sort_play_cards during an initial play before valid_play_check_and_sort() sorts them.
                 else:
                     # print('append > card.Card > else')
                     locations.Locate.func_dict[(self.card_group_name)](self.card_group_name, item)
@@ -50,15 +53,17 @@ class CustomAppendList(list):
         # -------------------------------------
         # Below Section - Resituate section. For whenever a card/meld is popped from another CustomAppendList list; calls the locations.Locate card group update function to visually 'resituate' the prior_card_group via the prior_card_group_name.
         if type(item) == CustomAppendList:
-            if item[0].prior_card_group_name != None:
-                ###### Below Line - May not need this line as all CustomAppendList instances should be melds in the meld_group_dict.
-                if item[0].prior_card_group_name in player.Player.meld_group_dict:
-                    # Below Line - Added this if clause for the case in which a temp_meld is being appended into the play_cards card group, in which case there is no meld_num and no need to re-situate because in this case there are no melds.
-                    if item[0].prior_meld_num != None:
-                        meld_num = item.prior_meld_num
-                        for meld in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num:]:
-                            locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, meld, meld_num)
-                            meld_num += 1
+            # Below Line - Added specifically for the case whenever a temp_meld from valid_play_check_and_sort() is transferred from pre_sort_play_cards to play_cards. These are empty melds and we don't want the code to execute a resituation call because technically there is nothing to resituate as this append is not associated with a pop.
+            if len(item) > 0:
+                if item[0].prior_card_group_name != None:
+                    ###### Below Line - May not need this line as all CustomAppendList instances should be melds in the meld_group_dict.
+                    if item[0].prior_card_group_name in player.Player.meld_group_dict:
+                        # Below Line - Added this if clause for the case in which a temp_meld is being appended into the play_cards card group, in which case there is no meld_num and no need to re-situate because in this case there are no melds.
+                        if item[0].prior_meld_num != None:
+                            meld_num = item.prior_meld_num
+                            for meld in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num:]:
+                                locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, meld, meld_num)
+                                meld_num += 1
         elif type(item) == card.Card:
             if item.prior_card_group_name != None:
                 # Below Section - For resituation. If the item is a Card and is in meld_group_dict; resituates the meld card by card for proper visual display.
@@ -68,6 +73,10 @@ class CustomAppendList(list):
                         for current_card in player.Player.meld_group_dict[item.prior_card_group_name][item.prior_meld_num]:
                             locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name, current_card, item.prior_meld_num, card_num)
                             card_num += 1
+                    # Below Section - Specifically for the case in which the pre_sort_play_cards need to be resituated; the cards that have just been popped from pre_sort_play_cards are being appended to a temp_meld (play_cards).
+                    else:
+                        locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name)
+                # Below Section - Specifically for the case in which the prior_group_name is 'hand'; whenever the player's hand is to be resituated.
                 elif 'hand' in item.prior_card_group_name:
                     locations.Locate.func_dict[(item.prior_card_group_name)](item.prior_card_group_name)
     # -------------------------------------
@@ -80,11 +89,13 @@ class CustomAppendList(list):
                 # Below Line - If the self(meld) is in the meld_group.
                 if self in player.Player.meld_group_dict[self.card_group_name]:
                     self[item].prior_meld_num = self.meld_num
-                # Below Line - If the card is coming from the self(meld_group) directly (not from within a meld in the meld_group) as in the case whenever a card is moved from the player.play_cards into the temp_meld (pre_sort_play_cards?) before the temp_meld is reappended back into the play_cards group. If we did not have this else clause, whenever it would move the card it would errantly assign the index of the card in the card group as the meld_num, when it in fact did not come from a 'meld' in that sense.
+                # Below Line - If the card is coming from the self(meld_group) directly (not from within a meld in the meld_group) as in the case whenever a card is moved from the player.pre_sort_play_cards into the temp_meld before the temp_meld is reappended back into the play_cards group. If we did not have this else clause, whenever it would move the card it would errantly assign the index of the card in the card group as the meld_num, when it in fact did not come from a 'meld' in that sense.
                 else:
                     self[item].prior_meld_num = None
         elif type(self[item]) == CustomAppendList:
-            self[item][0].prior_card_group_name = self.card_group_name
-            if self.card_group_name in player.Player.meld_group_dict:
-                self[item][0].prior_meld_num = self.meld_num
+            # Below Line - For the case in which an empty meld, such as a temp_meld in valid_play_check_and_sort() is being popped off after being emptied. It wouldn't have any cards inside of it therefore it would not be able to be assigned anything.
+            if len(self[item]) > 0:
+                self[item][0].prior_card_group_name = self.card_group_name
+                if self.card_group_name in player.Player.meld_group_dict:
+                    self[item][0].prior_meld_num = self.meld_num
         return super(CustomAppendList, self).pop(item)
