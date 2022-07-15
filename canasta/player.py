@@ -15,7 +15,7 @@ class Player(): # ****
         self.final_played_cards = 0
         self.last_set_played_cards = [] # ****
         self.red_3_meld = [] # ****
-        self.black_3_meld = [] # ****
+        self.black_3_meld_ref = [] # ****
         self.melds = [] # ****
         self.len_2_temp_melds_ref_list = [] # ****
         self.matched_card_list = []

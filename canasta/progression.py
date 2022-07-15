@@ -513,10 +513,10 @@ def valid_play_check_and_sort(current_player): # ****
         # -------------------------------------
         # Below Extended Section - Handles all cards that were not found in a preexisting meld. Handles black_3s, wild cards, new melds, and cards that match the rank of new melds so that they can all be properly sorted and later validated. # ****
         if card_found_in_meld == False: # ****
-            # Below Section - Checks if card is a Black 3 and whether the player meets the card count requirements to be able to play a Black 3 meld. If not, appends it to play_cards_removed_black_3s, which is used to print out all of these instances later on to inform the player, and removes it from current_player.play_cards, placing it back into current_player.hand. If so, appends the Black 3s into current_player.black_3_meld. # ****
+            # Below Section - Checks if card is a Black 3 and whether the player meets the card count requirements to be able to play a Black 3 meld. If not, appends it to play_cards_removed_black_3s, which is used to print out all of these instances later on to inform the player, and removes it from current_player.play_cards, placing it back into current_player.hand. If so, appends the Black 3s into current_player.black_3_meld_ref. # ****
             if (current_card.rank, current_card.suit) in deck.Deck().black_3s: # ****
                 if len(current_player.hand) <= 1: # ****
-                    current_player.black_3_meld.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card))) # ****
+                    current_player.black_3_meld_ref.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card))) # ****
                 else: # ****
                     play_cards_removed_black_3s.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card))) # ****
             # -------------------------------------
@@ -630,16 +630,16 @@ def valid_play_check_and_sort(current_player): # ****
     if len(current_player.play_cards_wild_cards) > 0: # ****
         wild_card_handler(current_player) # ****
     # -------------------------------------
-    # Below Section - If the player had 1 or 0 cards left in his hand for this play, then Black 3s were segregated into current_player.black_3_meld until their played cards were sorted and validated (this point). If they have a Canasta at this point, then the black_3_meld will be appended to their list of play cards, and current_player.black_3_meld will be .clear()ed. If not, the cards in the black_3_meld will be placed back into their hand. # ****
-    if len(current_player.black_3_meld) >= 3:
+    # Below Section - If the player had 1 or 0 cards left in his hand for this play, then Black 3s were segregated into current_player.black_3_meld_ref until their played cards were sorted and validated (this point). If they have a Canasta at this point, then the black_3_meld_ref will be appended to their list of play cards, and current_player.black_3_meld_ref will be .clear()ed. If not, the cards in the black_3_meld_ref will be placed back into their hand. # ****
+    if len(current_player.black_3_meld_ref) >= 3:
         if current_player.has_canasta == True:
-            current_player.play_cards.append(current_player.black_3_meld[:]) # ****
-            current_player.black_3_meld.clear() # ****
-    elif len(current_player.black_3_meld) > 0:
+            current_player.play_cards.append(current_player.black_3_meld_ref[:]) # ****
+            current_player.black_3_meld_ref.clear() # ****
+    elif len(current_player.black_3_meld_ref) > 0:
         game.game.progression_text = (f"Sorry, {current_player.name}, but your attempted Black 3 meld (made possible because you played them with 1 or 0 cards left in your hand) did not succeed because you must have at least 1 Canasta to be eligible for this play. Therefore, your Black 3(s) will be placed back into your hand.")
         game.game.xs_display(3)
-        for current_card in current_player.black_3_meld[:]:
-            current_player.hand.append(current_player.black_3_meld.pop(-1))
+        for current_card in current_player.black_3_meld_ref[:]:
+            current_player.hand.append(current_player.black_3_meld_ref.pop(-1))
     # -------------------------------------
     # Below Section - Checks to see if there are any Black 3s that were removed from the play cards, and if so, informs the player of their removal. # ****
     if len(play_cards_removed_black_3s) > 0:  # ****
@@ -972,7 +972,7 @@ def round_reset(): # ****
         current_player.final_played_cards = 0
         current_player.last_set_played_cards.clear() # ****
         current_player.red_3_meld.clear() # ****
-        current_player.black_3_meld.clear() # ****
+        current_player.black_3_meld_ref.clear() # ****
         current_player.melds.clear() # ****
         current_player.len_2_temp_melds_ref_list.clear() # ****
         current_player.matched_card_list.clear() # ****
