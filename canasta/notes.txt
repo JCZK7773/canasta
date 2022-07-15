@@ -1,6 +1,6 @@
 # NOTES
 
-    # pre_sort_play_cards > play_cards 
+    # wild_card_handler: 754-839
 
     #     pygame.Rect
     # pygame object for storing rectangular coordinates

@@ -289,8 +289,9 @@ class Game():
     @choose_multiple_cards.setter
     def choose_multiple_cards(self, val):
         self._choose_multiple_cards = val
-        if val == False:
+        if val == True:
             self.clicked_card_list.clear()
+        elif val == False:
             self.clickable_card_list.clear()
     # -------------------------------------
     # Below Function - Creates a border rect for better looking text display areas. Takes in a rect and creates the border from it's dimensions.
@@ -353,6 +354,8 @@ class Game():
                         # Below Section - For the case in which the player is choosing multiple cards and is finalizing their selections; changes self.click_card_active to False (as it remains active while self.multiple_choice_active == True).
                         if self.click_card_active == True:
                             self.click_card_active = False
+                        if self.choose_multiple_cards == True:
+                            self.choose_multiple_cards = False
             # -------------------------------------
             if event.type == pygame.KEYDOWN:
                 if self.text_input_active == True:

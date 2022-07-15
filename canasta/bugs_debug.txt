@@ -2,8 +2,9 @@ D E B U G
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Current bugs.
     # Unsolved
-        # When pre_sort_play_cards are being resituated, cards are overlapping other cards, which means that some cards have been popped from pre_sort_play_cards, but have not been appended to another CustomAppendList yet, or 'replaced' back into pre_sort_play_cards properly, which causes p1&p2_pre_sort_play_cards_next_loc to errantly calculate that the card group len is an inaccurate number. 
         # The play_cards are not being resituated after cards are popped from them, as is done for all of the other card groups.
+        # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand succeeded but the discard pile never became empty with the same face up discard remaining in place, and the proposed meld, although the game said it was successfully added to the list of melds, never appeared in the meld group visually.
+            # Note - Face-up discard was actually in the player's hand, visually, after the attempt.
         # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand allows you to choose wild cards and create a valid meld, but it doesn't work. Whenever you pick up the discard piile it doesn't seem to work.
         # DUPLICATE - Bug # 02 - Have to add in code for whenever drawing discard pile; whenever you have other regular cards that would make up a 3+ card meld and make you reach meld requirement it would allow you to pick up the discard pile instead of only checking for available wild cards.
         # DUPLICATE - Bug # 02 - When picking up the discard pile successfully via using 2 cards from the player's hand to create a meld (having already had a meld and met the meld requirement on a previous turn), it looks as if the cards from the discard pile were appended to the player's hand but it doesn't look like they were popped from the discard pile. The discard pile should be empty at this point but it definitely is not.
@@ -11,6 +12,8 @@ D E B U G
         # Whenever prompted with the output: 'j, which meld from your play cards or your melds would you like to add the Joker to? Click any meld to choose it.', it does not allow me to choose a wild card.
             # Note: Is this fixed?? I haven't encountered this bug in quite some time....
     # Solved (Or should be!)
+        # When pre_sort_play_cards are being resituated, cards are overlapping other cards, which means that some cards have been popped from pre_sort_play_cards, but have not been appended to another CustomAppendList yet, or 'replaced' back into pre_sort_play_cards properly, which causes p1&p2_pre_sort_play_cards_next_loc to errantly calculate that the card group len is an inaccurate number.
+            # Note - Should be fixed - Changed all of the instances where the cards in pre_sort_play_cards were being popped out of the list to go into reference lists so that they were instead only appended to the reference list and popped/appended via pre_sort_play_cards which ensures that the card group len is always accurate and makes for slightly cleaner operation.
         # The pre_sort_play_cards are not being resituated after cards are popped from them, as is done for all of the other card groups.
         # The 'Type error: cannot pickle 'pygame.Surface' object' traceback seems to happen whenever I make 2 consecutive play attempts (one turn for P1 (play some cards), one turn for P2, another turn for P1 (attempt to play some cards)).
             # Note: Should be fixed - the issue seemed directly connected to the copy module, specifically the copy.deepcopy method. Fixed by instead using a simpler form of a list replica via list[:].
