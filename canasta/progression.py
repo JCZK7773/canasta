@@ -747,28 +747,19 @@ def wild_card_handler(current_player): # ****
                 game.game.progression_text = (f"{current_player.name}, choose 7 wild cards that you want to use for your Wild Card Canasta.") # ****
                 game.game.click_card_active = True
                 game.game.choose_multiple_cards = True
-                game.game.multiple_choice_active = True
-                game.game.multiple_choice_text_1 = 'Done Selecting'
                 for current_card in current_player.play_cards_wild_cards_ref:
                     game.game.clickable_card_list.append(current_card)
-                clicked_7_cards = False
-                while clicked_7_cards == False:
-                    while game.game.multiple_choice_active == True:
-                        game.game.draw_window_main()
-                    if len(game.game.clicked_card_list) == 7:
-                        clicked_7_cards = True
-                    else:
-                        game.game.progression_text = (f"Sorry, but you chose less than 7 wild cards. You must play an entire 7 card Canasta when playing a Wild Card Canasta.") # ****
-                        game.game.xs_display(2)
+                while len(game.game.clicked_card_list) < 7:
+                    game.game.draw_window_main()
+                game.game.choose_multiple_cards = False
+                if current_player == player.P1:
+                    temp_meld = customappendlist.CustomAppendList('P1.play_cards')
+                else:
+                    temp_meld = customappendlist.CustomAppendList('P2.play_cards')
+                current_player.play_cards.append(temp_meld)
                 for current_card in game.game.clicked_card_list:
-                    current_player.play_cards.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card)))
+                    temp_meld.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card)))
                     current_player.play_cards_wild_cards_ref.pop(current_player.play_cards_wild_cards_ref.index(current_card))
-                if current_player.round_score < current_player.meld_requirement: # ****
-                    game.game.progression_text = (f"{current_player.name}, since you only have the Wild Card Canasta in your available melds and extra wild cards left over, they will be placed back into your hand as there is currently no other place to put them.") # ****
-                    game.game.xs_display(3)
-                    for wild_card in current_player.play_cards_wild_cards_ref: # ****
-                        current_player.hand.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(wild_card))) # ****
-                    current_player.play_cards_wild_cards_ref.clear()
                     return None # ****
             # ------------------------------------- ****
     # Below Section - Runs if the player has less than 7 wild cards in current_player.play_cards_wild_cards_ref OR if they have/had 7 or more wild cards but chose not to create a wild card canasta/had leftover wild cards after creating a wild card canasta with them, and if the player has at least 1 meld in current_player.non_maxed_out_melds; iterates through each wild card in current_player.play_cards_wild_cards_ref and prompts the player to choose a destination for each card. # ****

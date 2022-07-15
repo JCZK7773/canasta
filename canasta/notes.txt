@@ -1,7 +1,5 @@
 # NOTES
 
-    # wild_card_handler: 754-839
-
     #     pygame.Rect
     # pygame object for storing rectangular coordinates
     # Rect(left, top, width, height) -> Rect
