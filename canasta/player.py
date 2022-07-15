@@ -1,17 +1,23 @@
+import pygame
+import game
+import locations
+import deck
+# -------------------------------------
 class Player(): # ****
     def __init__(self, name): # ****
-        self.name = name # ****
+        self._name = name # ****
         self.draw_card = None
         self.hand = [] # ****
+        self.pre_sort_play_cards = []
         self.play_cards = [] # ****
         self.play_cards_wild_cards = [] # ****
         self.initial_played_cards = [] # ****
         self.final_played_cards = 0
         self.last_set_played_cards = [] # ****
         self.red_3_meld = [] # ****
-        self.black_3_meld = [] # ****
+        self.black_3_meld_ref = [] # ****
         self.melds = [] # ****
-        self.len_2_temp_melds_list = [] # ****
+        self.len_2_temp_melds_ref_list = [] # ****
         self.matched_card_list = []
         self.going_out = None # ****
         self.went_out_concealed = False # ****
@@ -20,9 +26,80 @@ class Player(): # ****
         self.special_case_cant_draw = False
         self.meld_group_dict = {} # Assigned in customappendlist for proper referencing/updating.
     # -------------------------------------
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, val):
+        if self.name == 'Player 1':
+            game.game.p1_player_name_text_obj = game.game.font.render(f"Player 1: {val}", True, (255, 255, 255), game.game.background_color)
+            game.game.p1_player_name_text_obj_rect = game.game.p1_player_name_text_obj.get_rect()
+            game.game.p1_player_name_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][0]
+            game.game.p1_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_player_name_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_hand_text_obj = game.game.font.render((f'{val}\'s Hand'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_hand_text_obj_rect = game.game.p1_hand_text_obj.get_rect()
+            game.game.p1_hand_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_hand_text_loc'][0]
+            game.game.p1_hand_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_hand_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_pre_sort_play_cards_text_obj = game.game.font.render((f'{val}\'s Pre-Sorted Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_pre_sort_play_cards_text_obj_rect = game.game.p1_pre_sort_play_cards_text_obj.get_rect()
+            game.game.p1_pre_sort_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_pre_sort_play_cards_text_loc'][0]
+            game.game.p1_pre_sort_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_pre_sort_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_play_cards_text_obj = game.game.font.render((f'{val}\'s Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_play_cards_text_obj_rect = game.game.p1_play_cards_text_obj.get_rect()
+            game.game.p1_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc'][0]
+            game.game.p1_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_melds_text_obj = game.game.font.render((f'{val}\'s Melds'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_melds_text_obj_rect = game.game.p1_melds_text_obj.get_rect()
+            game.game.p1_melds_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_melds_text_loc'][0]
+            game.game.p1_melds_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_melds_text_loc'][1]
+            # -------------------------------------
+            game.game.p1_red_3_meld_text_obj = game.game.font.render((f'{val}\'s Red 3 Meld'), True, (255, 255, 255), game.game.background_color)
+            game.game.p1_red_3_meld_text_obj_rect = game.game.p1_red_3_meld_text_obj.get_rect()
+            game.game.p1_red_3_meld_text_obj_rect.left = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc'][0]
+            game.game.p1_red_3_meld_text_obj_rect.top = locations.Locate.text_name_loc_dict['p1_red_3_meld_text_loc'][1]
+            # -------------------------------------
+        else:
+            game.game.p2_player_name_text_obj = game.game.font.render(f"Player 2: {val}", True, (255, 255, 255), game.game.background_color)
+            game.game.p2_player_name_text_obj_rect = game.game.p2_player_name_text_obj.get_rect()
+            game.game.p2_player_name_text_obj_rect.right = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][0]
+            game.game.p2_player_name_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_player_name_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_hand_text_obj = game.game.font.render((f'{val}\'s Hand'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_hand_text_obj_rect = game.game.p2_hand_text_obj.get_rect()
+            game.game.p2_hand_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_hand_text_loc'][0]
+            game.game.p2_hand_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_hand_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_pre_sort_play_cards_text_obj = game.game.font.render((f'{val}\'s Pre-Sorted Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_pre_sort_play_cards_text_obj_rect = game.game.p2_pre_sort_play_cards_text_obj.get_rect()
+            game.game.p2_pre_sort_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_pre_sort_play_cards_text_loc'][0]
+            game.game.p2_pre_sort_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_pre_sort_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_play_cards_text_obj = game.game.font.render((f'{val}\'s Play Cards'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_play_cards_text_obj_rect = game.game.p2_play_cards_text_obj.get_rect()
+            game.game.p2_play_cards_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc'][0]
+            game.game.p2_play_cards_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_play_cards_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_melds_text_obj = game.game.font.render((f'{val}\'s Melds'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_melds_text_obj_rect = game.game.p2_melds_text_obj.get_rect()
+            game.game.p2_melds_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_melds_text_loc'][0]
+            game.game.p2_melds_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_melds_text_loc'][1]
+            # -------------------------------------
+            game.game.p2_red_3_meld_text_obj = game.game.font.render((f'{val}\'s Red 3 Meld'), True, (255, 255, 255), game.game.background_color)
+            game.game.p2_red_3_meld_text_obj_rect = game.game.p2_red_3_meld_text_obj.get_rect()
+            game.game.p2_red_3_meld_text_obj_rect.left = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc'][0]
+            game.game.p2_red_3_meld_text_obj_rect.top = locations.Locate.text_name_loc_dict['p2_red_3_meld_text_loc'][1]
+            # -------------------------------------
+        # -------------------------------------
+        self._name = val
+    # -------------------------------------
     @property # ****
     def draw_card_val(self): # ****
-        return MasterDeck.draw_ranks.get(self.draw_card.rank) # ****
+        return deck.MasterDeck.draw_ranks.get(self.draw_card.rank) # ****
     # ------------------------------------------
     @property # ****
     def meld_requirement(self): # ****
@@ -45,7 +122,7 @@ class Player(): # ****
     def hand_wild_cards_reference_list(self): # ****
         hand_wild_cards = [] # ****
         for card in self.hand: # ****
-            if (card.rank, card.suit) in Deck().wild_cards: # ****
+            if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
                 hand_wild_cards.append(card) # ****
         return hand_wild_cards # ****
     # -------------------------------------
@@ -55,14 +132,13 @@ class Player(): # ****
         # -------------------------------------
         for meld_group in [self.play_cards, self.melds]: # ****
             for item in meld_group: # ****
-                if type(item) == list: # ****
-                    wild_card_count = 0 # ****
-                    for card in item: # ****
-                        if (card.rank, card.suit) in Deck().wild_cards: # ****
-                            wild_card_count += 1 # ****
-                    if 7 <= wild_card_count or wild_card_count < 3: # ****
-                        non_maxed_out_melds.append(item) # ****
-                        # -------------------------------------
+                wild_card_count = 0 # ****
+                for card in item: # ****
+                    if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
+                        wild_card_count += 1 # ****
+                if 7 <= wild_card_count or wild_card_count < 3: # ****
+                    non_maxed_out_melds.append(item) # ****
+                # -------------------------------------
         return non_maxed_out_melds # ****
     # -------------------------------------
     @property # ****
@@ -81,22 +157,21 @@ class Player(): # ****
             if len(meld_group) > 0: # ****
                 for item in meld_group: # ****
                     wild_card_canasta_check_count = 0 # ****
-                    if type(item) == list: # ****
-                        for card in item: # ****
+                    for card in item: # ****
+                    # -------------------------------------
+                        if (card.rank, card.suit) in deck.Deck().wild_cards: # ****
+                            wild_card_canasta_check_count += 1 # ****
                         # -------------------------------------
-                            if (card.rank, card.suit) in Deck().wild_cards: # ****
-                                wild_card_canasta_check_count += 1 # ****
-                            # -------------------------------------
-                            round_score += Deck().ranks.get(card.rank) # ****
-                        # -------------------------------------
-                        if len(item) >= 7: # ****
-                            if wild_card_canasta_check_count == 7: # ****
-                                round_score += 1000 # ****
-                            elif wild_card_canasta_check_count == 0: # ****
-                                round_score += 500 # ****
-                            elif wild_card_canasta_check_count > 0: # ****
-                                round_score += 300 # ****
-                        # -------------------------------------
+                        round_score += deck.Deck().ranks.get(card.rank) # ****
+                    # -------------------------------------
+                    if len(item) >= 7: # ****
+                        if wild_card_canasta_check_count == 7: # ****
+                            round_score += 1000 # ****
+                        elif wild_card_canasta_check_count == 0: # ****
+                            round_score += 500 # ****
+                        elif wild_card_canasta_check_count > 0: # ****
+                            round_score += 300 # ****
+                    # -------------------------------------
         if self.going_out == True: # ****
             round_score += 100 # ****
             if self.went_out_concealed == True: # ****
@@ -117,7 +192,7 @@ class Player(): # ****
                     # -------------------------------------
             if len(self.hand) > 0: # ****
                 for card in self.hand: # ****
-                    round_score -= Deck().ranks.get(card.rank) # ****
+                    round_score -= deck.Deck().ranks.get(card.rank) # ****
                     # -------------------------------------
         return round_score # ****
     # -------------------------------------
