@@ -46,6 +46,8 @@ class Game():
     # -------------------------------------
         # Below Line - The 'active' variable for whether or not the event handler should process a clicked card.
         self.click_card_active = False
+        # Below Line - Type: bool. The internal use variable for the calculated property self.choose_multiple_cards; used when the player has to choose multiple cards instead of just one. Allows the player to keep adding cards to the self.clicked_card_list as long as it is active (True).
+        self._choose_multiple_cards = False
         # Below Line - The list group for cards that will be eligible for clicking in the event of choose_card_active being activated. Only these cards will be iterated through to check their positions against the click event position.
         self.clickable_card_list = []
         # Below Line - Type: Card. The currently clicked card.
@@ -68,8 +70,6 @@ class Game():
         self.error_input_active = False
         # Below Line - Type: bool. The multiple choice active variable. This is altered in progression.py in various locations whenever a player is being prompted with a multiple choice question. When active (True), the game searches for the newly created text rects so that they will be rendered on the screen, and the rects are up for being clicked on and detected in the self.event_handler(). Once a choice is made, the choice is assigned to self.chosen.mc, and this bool is changed back to False via the event_handler().
         self.multiple_choice_active = False
-        # Below Line - Type: bool. The internal use variable for the calculated property self.choose_multiple_cards; used when the player has to choose multiple cards instead of just one. Allows the player to keep adding cards to the self.clicked_card_list as long as it is active (True).
-        self._choose_multiple_cards = False
         # -------------------------------------
         # Below Section - Placeholders to avoid error. Assigned through progression_text.
         # Below Line - Type: str. Internal value; external use value is self.progression text calculated property which assigns the self.progression_text_obj & self.progression_text_obj_rect automatically. The actual text the game outputs in the main loop, assigned through various locations in progression.py.
@@ -289,9 +289,11 @@ class Game():
     @choose_multiple_cards.setter
     def choose_multiple_cards(self, val):
         self._choose_multiple_cards = val
-        if val == False:
+        if val == True:
             self.clicked_card_list.clear()
+        elif val == False:
             self.clickable_card_list.clear()
+            self.click_card_active = False
     # -------------------------------------
     # Below Function - Creates a border rect for better looking text display areas. Takes in a rect and creates the border from it's dimensions.
     def create_border_rect(self, rect):
@@ -353,6 +355,8 @@ class Game():
                         # Below Section - For the case in which the player is choosing multiple cards and is finalizing their selections; changes self.click_card_active to False (as it remains active while self.multiple_choice_active == True).
                         if self.click_card_active == True:
                             self.click_card_active = False
+                        if self.choose_multiple_cards == True:
+                            self.choose_multiple_cards = False
             # -------------------------------------
             if event.type == pygame.KEYDOWN:
                 if self.text_input_active == True:

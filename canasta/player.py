@@ -10,14 +10,14 @@ class Player(): # ****
         self.hand = [] # ****
         self.pre_sort_play_cards = []
         self.play_cards = [] # ****
-        self.play_cards_wild_cards = [] # ****
+        self.play_cards_wild_cards_ref = [] # ****
         self.initial_played_cards = [] # ****
         self.final_played_cards = 0
         self.last_set_played_cards = [] # ****
         self.red_3_meld = [] # ****
         self.black_3_meld_ref = [] # ****
         self.melds = [] # ****
-        self.len_2_temp_melds_ref_list = [] # ****
+        self.len_2_temp_melds_ref = [] # ****
         self.matched_card_list = []
         self.going_out = None # ****
         self.went_out_concealed = False # ****
