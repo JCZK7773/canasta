@@ -245,6 +245,9 @@ def draw_discard_pile_attempt(current_player, stock_depleted = False): # ****
     print('draw_discard_pile_attempt')
     logger.debug("\ndraw_discard_pile_attempt\n") # ****
     # -------------------------------------
+    ###### Below Line - Added for testing purposes only.
+    print(f'deck.MasterDeck.face_up_discard = {deck.MasterDeck.face_up_discard}')
+    ###### -------------------------------------
     # Below Section - Checks to see if the player can draw the discard pile in the case that the stock_depleted parameter is True. If so, attempts to draw the discard pile. If there is a matching meld, successfully draws the discard pile. If not, the round ends, per the rules. # ****
     if stock_depleted == True: # ****
         if len(deck.MasterDeck.discard_pile) == 0: # ****
@@ -300,6 +303,10 @@ def draw_discard_pile_attempt(current_player, stock_depleted = False): # ****
 def draw_discard_pile_attempt_check_meld_match(current_player, stock_depleted = False): # ****
     print('draw_discard_pile_attempt_check_meld_match')
     logger.debug("draw_discard_pile_attempt_check_meld_match")
+    # -------------------------------------
+    ###### Below Line - Added for testing purposes only.
+    print(f'deck.MasterDeck.face_up_discard = {deck.MasterDeck.face_up_discard}')
+    ###### -------------------------------------
     for meld in current_player.melds: # ****
         if deck.MasterDeck.face_up_discard.rank == meld[0].rank: # ****
             meld.append(deck.MasterDeck.discard_pile.pop(-1)) # ****
@@ -331,6 +338,9 @@ def draw_discard_pile_attempt_check_hand_match(current_player): # ****
     print('draw_discard_pile_attempt_check_hand_match')
     logger.debug("draw_discard_pile_attempt_check_hand_match\n") # ****
     # -------------------------------------
+    ###### Below Line - Added for testing purposes only.
+    print(f'deck.MasterDeck.face_up_discard = {deck.MasterDeck.face_up_discard}')
+    ###### -------------------------------------
     # Below Line - Clears player.matched_card_list so that whenever it has been previously appended to or modified, it is reset back to an empty list upon the start of this function so as to not mix up cards from previous play attempts.
     current_player.matched_card_list.clear()
     # Below Section - Checks each card in current_player.hand[:] to see if there is a match to the face_up_discard. If so, appends that card to current_player.matched_card_list and pops it from current_player.hand.
@@ -499,6 +509,9 @@ def valid_play_check_and_sort(current_player): # ****
                 current_player.hand.append(current_player.pre_sort_play_cards.pop(-1)) # ****
             current_player.pre_sort_play_cards.clear() # ****
             return play_2(current_player, True) # ****
+        # Below Section - For testing purposes only to rid the game of the bug wherein 2 or 1 card plays do not seem to trigger the above if statement.
+        else:
+            print(f'current_player.pre_sort_play_cards = {current_player.pre_sort_play_cards}')
     # -------------------------------------
     # Below Extended Section - Sorts all of the individual play cards, putting them either in matching melds, or creating temp_melds and putting those back into play_cards to be further sorted. Also places all played wild cards into play_cards_wild_cards_ref and removes any played Black 3s unless special requirements are met. # ****
     for current_card in current_player.pre_sort_play_cards[:]: # ****
@@ -546,12 +559,12 @@ def valid_play_check_and_sort(current_player): # ****
     for temp_meld in current_player.play_cards: # ****
         if type(temp_meld) != card.Card:
             if len(temp_meld) < 2: # ****
-                bad_len_temp_melds_list_ref.append(temp_meld) # ****
+                bad_len_temp_melds_list_ref.append(temp_meld[:]) # ****
             elif len(temp_meld) == 2: # ****
                 if len(current_player.play_cards_wild_cards_ref) < 1: # ****
-                    bad_len_temp_melds_list_ref.append(temp_meld) # ****
+                    bad_len_temp_melds_list_ref.append(temp_meld[:]) # ****
                 else: # ****
-                    current_player.len_2_temp_melds_ref.append(temp_meld) # ****
+                    current_player.len_2_temp_melds_ref.append(temp_meld[:]) # ****
         else:
             # Below Line - For debugging purposes only.
             logger.debug(f"{temp_meld} is in the list of play_cards after all sorting, which means somewhere the code is wrong. Only melds should be here, no single cards: melds of one card should exist, but not single cards outside of a meld. If this is showing, a Card type is the object being handled.")
@@ -563,9 +576,10 @@ def valid_play_check_and_sort(current_player): # ****
         for bad_len_meld in bad_len_temp_melds_list_ref: # ****
             play_card_meld_index = current_player.play_cards.index(bad_len_meld)
             for current_card in bad_len_meld: # ****
-                ###### Below Line - Can't I just do .pop(-1) since this is an exact replica of the meld from bad_len_temp_melds_list_ref?
                 current_player.hand.append(current_player.play_cards[play_card_meld_index].pop(-1)) # ****
             current_player.play_cards.pop(play_card_meld_index)
+        print(f'current_player.play_cards = {current_player.play_cards}')
+        print(f'bad_len_temp_melds_list_ref = {bad_len_temp_melds_list_ref}')
         bad_len_temp_melds_list_ref.clear()
     # -------------------------------------
     # Below Section - For adding available played wild cards to melds consisting of 2 cards (len_2_temp_melds_ref) so that they will meet the 3 card minimum requirement. # ****
@@ -587,7 +601,7 @@ def valid_play_check_and_sort(current_player): # ****
                     game.game.click_card_active = True
                     while game.game.click_card_active == True:
                         game.game.draw_window_main()
-                    for meld in current_player.len_2_temp_melds_ref:
+                    for meld in current_player.len_2_temp_melds_ref[:]:
                         if game.game.clicked_card in meld:
                             len_2_temp_meld_choice_index = current_player.play_cards.index(meld)
                             current_player.len_2_temp_melds_ref.pop(current_player.len_2_temp_melds_ref.index(meld))
@@ -602,10 +616,9 @@ def valid_play_check_and_sort(current_player): # ****
                     while game.game.click_card_active == True:
                         game.game.draw_window_main()
                     wild_card_choice_index = current_player.pre_sort_play_cards.index(game.game.clicked_card)
-                    wild_card_choice = current_player.pre_sort_play_cards[wild_card_choice_index]
                 else:
                     wild_card_choice_index = 0
-                    wild_card_choice = current_player.pre_sort_play_cards[wild_card_choice_index]
+                wild_card_choice = current_player.pre_sort_play_cards[wild_card_choice_index]
                 game.game.progression_text = (f"You successfully added the {wild_card_choice} to your meld.") # ****
                 current_player.play_cards[len_2_temp_meld_choice_index].append(current_player.pre_sort_play_cards.pop(wild_card_choice_index)) # ****
                 current_player.play_cards_wild_cards_ref.pop(current_player.play_cards_wild_cards_ref.index(wild_card_choice))
@@ -644,13 +657,13 @@ def valid_play_check_and_sort(current_player): # ****
             else:
                 temp_meld = customappendlist.CustomAppendList('P2.play_cards')
             current_player.play_cards.append(temp_meld)
-            for current_card in current_player.black_3_meld_ref:
+            for current_card in current_player.black_3_meld_ref[:]:
                 temp_meld.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card)))
             current_player.black_3_meld_ref.clear() # ****
     elif len(current_player.black_3_meld_ref) > 0:
         game.game.progression_text = (f"Sorry, {current_player.name}, but your attempted Black 3 meld (made possible because you played them with 1 or 0 cards left in your hand) did not succeed because you must have at least 1 Canasta to be eligible for this play. Therefore, your Black 3(s) will be placed back into your hand.")
         game.game.xs_display(3)
-        for current_card in current_player.black_3_meld_ref:
+        for current_card in current_player.black_3_meld_ref[:]:
             current_player.hand.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card)))
         current_player.black_3_meld_ref.clear()
     # -------------------------------------
@@ -658,7 +671,7 @@ def valid_play_check_and_sort(current_player): # ****
     if len(play_cards_removed_black_3s_ref) > 0:  # ****
         game.game.progression_text = (f"Sorry, {current_player.name}, but you cannot play Black 3s unless you are going out during this play and have a preexisiting Canasta. The Black 3s will be placed back into your hand.") # ****
         game.game.xs_display(2)
-        for current_card in play_cards_removed_black_3s_ref: # ****
+        for current_card in play_cards_removed_black_3s_ref[:]: # ****
             current_player.hand.append(current_player.pre_sort_play_cards.pop(current_player.pre_sort_play_cards.index(current_card))) # ****
         play_cards_removed_black_3s_ref.clear()
     # -------------------------------------
@@ -692,7 +705,7 @@ def valid_play_check_and_sort(current_player): # ****
         game.game.xs_display(2)
         # -------------------------------------
     for temp_meld in current_player.play_cards[:]: # ****
-        print(f'temp_meld in current_player.play_cards[:] = {temp_meld}')
+        # print(f'temp_meld in current_player.play_cards[:] = {temp_meld}')
         current_player.melds.append(current_player.play_cards.pop(current_player.play_cards.index(temp_meld))) # ****
         # -------------------------------------
     # Below Section - Creates 2 variables, total_melds_len & total_initial_played_cards_len, with values of 0, then gets the sum of all meld lens in current_player.melds & current_player.initial_played_cards, then compares them to one another to determine if any cards were successfully played during the current play.
@@ -708,6 +721,7 @@ def valid_play_check_and_sort(current_player): # ****
         play_2(current_player) # ****
     else: # ****
         logger.debug("total_initial_played_cards_len != total_melds_len\n") # ****
+        # Below Line - Determines whether or not went_out_concealed == True or False; if 1, = False, and if 0, = True.
         current_player.final_played_cards = 1
     # -------------------------------------
         if len(current_player.hand) <= 1: # ****
@@ -892,18 +906,18 @@ def went_out_check(current_player, going_out_from_discard_draw = False): # ****
                 if len(current_player.melds[meld_index]) > len(current_player.initial_played_cards[meld_index]): # ****
                     meld_len_difference = len(current_player.melds[meld_index]) - len(current_player.initial_played_cards[meld_index]) # ****
                     for current_card in current_player.melds[meld_index][-meld_len_difference:]: # ****
-                        current_player.last_set_played_cards.append([current_card, current_player.melds[meld_index]]) # ****
+                        current_player.last_set_played_cards_ref.append([current_card, current_player.melds[meld_index][:]]) # ****
             # Below Line - For melds that were created during current play. # ****
             else: # ****
                 for current_card in current_player.melds[meld_index]: # ****
-                    current_player.last_set_played_cards.append([current_card, current_player.melds[meld_index]]) # ****
+                    current_player.last_set_played_cards_ref.append([current_card, current_player.melds[meld_index][:]]) # ****
         # -------------------------------------
-        # Below Section - Creates a variable prior_hand_len to reference the len(current_player.hand) before running went_out_check_replacement_card() so that it can be determined whether or not the function needs to be run twice instead of once for the instance in which only one card was removed from a meld, as opposed to multiple cards being removed from a meld due to entire meld disbandment, resulting in the 2 card replacement requirement having already been met with a single function call. Finally, clears current_player.last_set_played_cards so that the next time this is called it does not have the previous set of played cards included. # ****
+        # Below Section - Creates a variable prior_hand_len to reference the len(current_player.hand) before running went_out_check_replacement_card() so that it can be determined whether or not the function needs to be run twice instead of once for the instance in which only one card was removed from a meld, as opposed to multiple cards being removed from a meld due to entire meld disbandment, resulting in the 2 card replacement requirement having already been met with a single function call. Finally, clears current_player.last_set_played_cards_ref so that the next time this is called it does not have the previous set of played cards included. # ****
         prior_hand_len = (len(current_player.hand))
         went_out_check_replacement_card(current_player) # ****
         if len(current_player.hand) < 2:
             went_out_check_replacement_card(current_player, True) # ****
-        current_player.last_set_played_cards.clear()
+        current_player.last_set_played_cards_ref.clear()
         # -------------------------------------
         # Below Section - Checks to ensure that after alteration of existing melds the player still reaches their meld requirement. If not, gives the player an informative message, replaces all of the cards in their melds back into their hand, and reroutes them back to a new play attempt. If so, directs the player to discard. # ****
         if current_player.round_score < current_player.meld_requirement: # ****
@@ -927,56 +941,63 @@ def went_out_check_replacement_card(current_player, second_run = False): # ****
     print('went_out_check_replacement_card')
     logger.debug("went_out_check_replacement_card")
     if second_run == False:
-        game.game.progression_text = f'{current_player.name}, it looks as if you are trying to go out without having a Canasta, which is required. Because of this you cannot go out and will have to draw back 2 of your play cards (required: 1 card in the hand, 1 for a discard). Please choose the first card you wish to take back into your hand from the highlighted cards. NOTE: In the case that a card is taken from a meld with only 3 cards, the entire meld will be disbanded and all of the meld will be replaced back into your hand. Also, if after replacing the 2 cards back into your hand you no longer meet the meld requirement, the play will be invalid and you will have to try again.'
+        game.game.progression_text = f'{current_player.name}, it looks as if you are trying to go out without a Canasta, which is required. Because of this you can\'t go out and will have to take back 2 of your play cards (required: 1 card in the hand, 1 for a discard). Please choose the first card you wish to take back into your hand from the highlighted cards. NOTE: In the case that a card is taken from a meld with only 3 cards, the entire meld will be disbanded and all of the meld will be replaced back into your hand. Also, if after replacing the 2 cards back into your hand you no longer meet the meld requirement, the play will be invalid and you will have to try again.'
         game.game.xs_display(3)
     else:
-        game.game.progression_text = f'{current_player.name}, choose the 2nd card to be placed back in your hand (to be used either as a discard or to be kept in the hand) from among the highlighted cards.'
+        game.game.progression_text = f'{current_player.name}, choose the 2nd card to be placed back into your hand (to be used as either a discard or to be kept in the hand) from among the highlighted cards.'
         game.game.xs_display(2)
-    for current_card in current_player.last_set_played_cards:
-        current_card.highlighted = True
-    game.game.click_card_active = True
-    clicked_highlighted_card = False
-    while clicked_highlighted_card == False:
+    for card_and_meld in current_player.last_set_played_cards_ref:
+        card_and_meld[0].highlighted = True
+        game.game.clickable_card_list.append(card_and_meld[0])
+    choose_different_card = False
+    while True:
+        if choose_different_card == True:
+            game.game.progression_text = f'{current_player.name}, please choose a different card to take back.'
+        game.game.click_card_active = True
         while game.game.click_card_active == True:
             game.game.draw_window_main()
-        if game.game.clicked_card in current_player.last_set_played_cards:
-            clicked_highlighted_card = True
-            for meld in current_player.melds:
-                if game.game.clicked_card in meld:
-                    clicked_card_meld_index = meld.meld_num
-                    clicked_card_index = meld.index(game.game.clicked_card)
-                    if len(meld) > 3:
-                        # Below Line - Appends the chosen card to the current_player.hand, popping from current_player.meld. # ****
-                        current_player.hand.append(current_player.melds[clicked_card_meld_index].pop(clicked_card_index)) # ****
-                        game.game.progression_text = (f"You removed the {game.game.clicked_card} from it's meld back into your hand.") # ****
-                        game.game.xs_display(2)
-                    else: # ****
-                        # Below Section - Checks to see if the player has any melds with more than 3 cards in them, since they chose to disband a meld of 3 or less cards. If they do have one of these melds, presents the player with an informative message and asks for verification of their choice. # ****
-                        melds_len_over_3 = False # ****
-                        for card_and_meld in current_player.last_set_played_cards: # ****
-                            if len(card_and_meld[1]) > 3: # ****
-                                melds_len_over_3 = True # ****
-                        if melds_len_over_3 == True: # ****
-                            game.game.progression_text = ("This meld has 3 cards, which means the entire meld would have to be disbanded if you were to remove this card. It looks like you have a meld in your list of choices that has more than 3 cards, which means it would not have to be completely disbanded. Are you sure that you want to disband this meld instead?") # ****
-                            game.game.multiple_choice_text_1 = 'Yes'
-                            game.game.multiple_choice_text_1 = 'No'
-                            game.game.multiple_choice_active = True
-                            while game.game.multiple_choice_active == True:
-                                game.game.draw_window_main()
-                            if game.game.selected_choice == 'Yes': # ****
-                                game.game.progression_text = ("Okay, the meld will be disbanded and placed back into your hand.") # ****
-                                game.game.xs_display(2)
-                                for current_card in current_player.melds[clicked_card_meld_index][:]: # ****
-                                    current_player.hand.append(current_player.melds[clicked_card_meld_index].pop(-1)) # ****
-                                # Below Line - Pops the emptied meld from current_player.melds.
-                                current_player.melds.pop(current_player.melds.index(clicked_card_meld_index))
-                        else:
-                            game.game.progression_text = 'Since this meld consists of 3 cards, the entire meld will be disbanded.'
-                            game.game.xs_display(2)
-                            for current_card in current_player.melds[clicked_card_meld_index][:]: # ****
-                                current_player.hand.append(current_player.melds[clicked_card_meld_index].pop(-1)) # ****
-                                # Below Line - Pops the emptied meld from current_player.melds.
-                                current_player.melds.pop(current_player.melds.index(clicked_card_meld_index))
+        for card_and_meld in current_player.last_set_played_cards_ref:
+            if game.game.clicked_card in card_and_meld[1]:
+                clicked_meld = card_and_meld[1]
+        meld_index = current_player.melds.index(clicked_meld)
+        clicked_card_index = current_player.melds[meld_index].index(game.game.clicked_card)
+        if len(clicked_meld) > 3:
+            # Below Line - Appends the chosen card to the current_player.hand, popping from current_player.meld. # ****
+            current_player.hand.append(current_player.melds[meld_index].pop(clicked_card_index)) # ****
+            game.game.progression_text = (f"You removed the {game.game.clicked_card} from it's meld back into your hand.") # ****
+            game.game.xs_display(2)
+        else: # ****
+            # Below Section - Checks to see if the player has any melds with more than 3 cards in them, since they chose a meld of 3 or less cards. If they do have one of these melds, presents the player with an informative message and asks for verification of their choice. # ****
+            melds_len_over_3 = False # ****
+            for card_and_meld in current_player.last_set_played_cards_ref: # ****
+                if len(card_and_meld[1]) > 3: # ****
+                    melds_len_over_3 = True # ****
+            if melds_len_over_3 == True: # ****
+                game.game.progression_text = ("This meld has 3 cards, which means the entire meld would have to be disbanded if you were to remove this card. It looks like you have a meld in your list of choices that has more than 3 cards, which means it would not have to be completely disbanded. Are you sure that you want to disband this meld instead?") # ****
+                game.game.multiple_choice_text_1 = 'Yes'
+                game.game.multiple_choice_text_2 = 'No'
+                game.game.multiple_choice_active = True
+                while game.game.multiple_choice_active == True:
+                    game.game.draw_window_main()
+                if game.game.selected_choice == 'Yes': # ****
+                    game.game.progression_text = ("Okay, the meld will be disbanded and placed back into your hand.") # ****
+                    game.game.xs_display(2)
+                    for current_card in current_player.melds[meld_index][:]: # ****
+                        current_player.hand.append(current_player.melds[meld_index].pop(-1)) # ****
+                    # Below Line - Pops the emptied meld from current_player.melds.
+                    current_player.melds.pop(meld_index)
+                    break
+                # Below Line - If the player chooses 'No'; runs back through the while loop instead of breaking out of it, allowing them to choose another card.
+                else:
+                    choose_different_card = True
+            else:
+                game.game.progression_text = 'Since this meld consists of 3 cards, the entire meld will be disbanded.'
+                game.game.xs_display(2)
+                for current_card in current_player.melds[meld_index][:]: # ****
+                    current_player.hand.append(current_player.melds[meld_index].pop(-1)) # ****
+                    # Below Line - Pops the emptied meld from current_player.melds.
+                current_player.melds.pop(meld_index)
+                break
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by draw_discard_pile_attempt(), draw_discard_pile_attempt_check_meld_match(), went_out_check() functions. Resets all settable attributes and values back to default/starting conditions to start a new round. Also displays an informative output showing the players' scores, and who won the round. # ****
 def round_reset(): # ****
@@ -991,7 +1012,7 @@ def round_reset(): # ****
         current_player.play_cards_wild_cards_ref.clear() # ****
         current_player.initial_played_cards.clear() # ****
         current_player.final_played_cards = 0
-        current_player.last_set_played_cards.clear() # ****
+        current_player.last_set_played_cards_ref.clear() # ****
         current_player.red_3_meld.clear() # ****
         current_player.black_3_meld_ref.clear() # ****
         current_player.melds.clear() # ****

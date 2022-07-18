@@ -2,7 +2,18 @@ D E B U G
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Current bugs.
     # Unsolved
-        # After making all of the changes to valid_play_check_and_sort(), wild_card_handler(), and wild_card_meld_choice_prompt(), when playing some play cards, one of the play cards never visually left the play cards visual location despite all of them being appended back to the hand.
+        # Played only 2 cards, but game did not immediately return the 'len(pre_sort_play_cards) < 3:' clause. This may have something to do with the other bug concerning the discard pile, perhaps.
+            # Note: Added in else clause for the if clause to print out the pre_sort_play_cards in that case.
+        # Played a 9 when I already had a preexisting meld with 3 9s in it, but the game output after the play said 'Sorry, but it looks like you were unable to successfully play any of your attempted play cards' despite the 9 successfully being added to the meld.
+            # Note: This occurred again.
+            # Note: Occurred again after adding a 2 to a preexisting meld, and this time it rerouted me to make another play.
+            # Note: Same exact instance as above happened again.
+        # DUPLICATE - Bug # 02 - Successfully drew the discard pile whenever the face_up_discard was a 7 while having 2 7s in my hand and some previously existing melds (already met the meld requirement), but all 3 7s seemed to just disappear; they are not located visually anywhere on the screen.
+            Note: Correction; the face_up_discard 7 remained as the face_up_discard, unless somehow it was removed and then appended right back to its location.
+            Note: Despite discarding future discards, the 7 still remains visually as the face_up_discard; it's layer seems to be higher than the others.
+            Note: Added in a face_up_discard print out for all of the various locations in which it is checked to help try and solve the problem.
+            Note: Despite the visual face_up_discard being the 7, whenever I discarded an 8 and then picked up the discard pile using 2 8s from the other players hand, it successfully took the 8s (which means they must have actually been the face up discards) therefore the visual issue is definitely caused by faulty .layer assignment. In this case it also does not display the meld of 8s. Also, the 7 is still visually the face_up_discard.
+            Note: It turns out the disappered meld created from the discard pile is technically in the list of melds, as whenever I created a new meld it visually placed them in the next spot, leaving a visually blank spot where that meld technically is located.
         # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand succeeded but the discard pile never became empty with the same face up discard remaining in place, and the proposed meld, although the game said it was successfully added to the list of melds, never appeared in the meld group visually.
             # Note - Face-up discard was actually in the player's hand, visually, after the attempt.
         # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand allows you to choose wild cards and create a valid meld, but it doesn't work. Whenever you pick up the discard piile it doesn't seem to work.
@@ -12,6 +23,10 @@ D E B U G
         # Whenever prompted with the output: 'j, which meld from your play cards or your melds would you like to add the Joker to? Click any meld to choose it.', it does not allow me to choose a wild card.
             # Note: Is this fixed?? I haven't encountered this bug in quite some time....
     # Solved (Or should be!)
+        # After making all of the changes to valid_play_check_and_sort(), wild_card_handler(), and wild_card_meld_choice_prompt(), when playing some play cards, one of the play cards never visually left the play cards visual location despite all of them being appended back to the hand.
+            # Note: Should be fixed - The issue was popping from one list which was directly referenced by another list which we were iterating through; popping from the original affected the reference and caused iteration skipping.
+        # Bug # 03 - Whenever attemping to go out, but not having a canasta, game crashed with traceback error as 'AttributeError: 'list' object has no attribute 'highlighted''.
+            # Note: Should be fixed - Went through the entire went_out_check_replacement_card() function letter by letter and line by line, revising it because it was not up to date with the latest changes to the code.
         # The play_cards are not being resituated after cards are popped from them, as is done for all of the other card groups.
             # Note - Should be fixed. Went through the entire valid_play_check_and_sort() functions and also wild_card_handler() and wild_card_meld_choice_prompt() and other misc. places to change the code so that all of the reference lists are simply that; references to the actual location of the cards in play_cards so that there should never be internal inconsistencies concerning which cards are technically or visually in the card group; they will always be both. independent of the references.
         # When pre_sort_play_cards are being resituated, cards are overlapping other cards, which means that some cards have been popped from pre_sort_play_cards, but have not been appended to another CustomAppendList yet, or 'replaced' back into pre_sort_play_cards properly, which causes p1&p2_pre_sort_play_cards_next_loc to errantly calculate that the card group len is an inaccurate number.
@@ -34,195 +49,18 @@ D E B U G
         # Whenever there are so many play_cards attempted melds that they visually take up all of the available visual meld slots, the remaining wild cards in the list of play cards visually overlay the meld groups. I need to code in a limit for valid x-coordinates for the play_cards melds and make the cards in pre_sort_play_cards have their visual locations calculated based on the visual locations of the melds in play_cards so that they never visually overlap. Might hvae to make it so the limit-exceeding cards get displayed on the next row (below or above).
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Error traceback code goes here in this section; for debugging.
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Bug # 03
+
+        File "J:\Programming\Projects\Canasta\canasta\progression.py", line 229, in stock_draw
+        play_2(current_player) # ****
+        File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
+        valid_play_check_and_sort(current_player) # ****
+        File "J:\Programming\Projects\Canasta\canasta\progression.py", line 718, in valid_play_check_and_sort
+        went_out_check(current_player) # ****
+        File "J:\Programming\Projects\Canasta\canasta\progression.py", line 907, in went_out_check
+        went_out_check_replacement_card(current_player) # ****
+        File "J:\Programming\Projects\Canasta\canasta\progression.py", line 940, in went_out_check_replacement_card
+        current_card.highlighted = True
+        AttributeError: 'list' object has no attribute 'highlighted'
 # -------------------------------------
-    #     Traceback (most recent call last):
-    #   File ".\main.py", line 65, in <module>
-    #     main()
-    #   File ".\main.py", line 62, in main
-    #     progression.the_draw_1()
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 48, in the_draw_1
-    #     return the_draw_2()
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 86, in the_draw_2
-    #     the_draw_3()
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 120, in the_draw_3
-    #     return the_deal(player.P2, player.P1) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 168, in the_deal
-    #     return play_1(player1) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 216, in play_1
-    #     stock_draw(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 693, in valid_play_check_and_sort
-    #     discard(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 825, in discard
-    #     play_1(player.P1) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 216, in play_1
-    #     stock_draw(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 693, in valid_play_check_and_sort
-    #     discard(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 823, in discard
-    #     play_1(player.P2) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 216, in play_1
-    #     stock_draw(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 489, in valid_play_check_and_sort
-    #     current_player.initial_played_cards = copy.deepcopy(current_player.melds) # ****
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 287, in _reconstruct
-    #     item = deepcopy(item, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 287, in _reconstruct
-    #     item = deepcopy(item, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 270, in _reconstruct
-    #     state = deepcopy(state, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 270, in _reconstruct
-    #     state = deepcopy(state, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 270, in _reconstruct
-    #     state = deepcopy(state, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 161, in deepcopy
-    #     rv = reductor(4)
-    # TypeError: cannot pickle 'pygame.Surface' object
-# -------------------------------------
-    # Traceback (most recent call last):
-    #   File ".\main.py", line 65, in <module>
-    #     main()
-    #   File ".\main.py", line 62, in main
-    #     progression.the_draw_1()
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 48, in the_draw_1
-    #     return the_draw_2()
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 86, in the_draw_2
-    #     the_draw_3()
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 111, in the_draw_3
-    #     return the_deal(player.P1, player.P2) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 168, in the_deal
-    #     return play_1(player1) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 216, in play_1
-    #     stock_draw(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 661, in valid_play_check_and_sort
-    #     return play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 661, in valid_play_check_and_sort
-    #     return play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 476, in play_2
-    #     discard(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 823, in discard
-    #     play_1(player.P2) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 216, in play_1
-    #     stock_draw(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 693, in valid_play_check_and_sort
-    #     discard(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 825, in discard
-    #     play_1(player.P1) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 218, in play_1
-    #     draw_discard_pile_attempt(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 261, in draw_discard_pile_attempt
-    #     return stock_draw(current_player)
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 661, in valid_play_check_and_sort
-    #     return play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 476, in play_2
-    #     discard(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 823, in discard
-    #     play_1(player.P2) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 218, in play_1
-    #     draw_discard_pile_attempt(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 288, in draw_discard_pile_attempt
-    #     stock_draw(current_player)
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 230, in stock_draw
-    #     play_2(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 474, in play_2
-    #     valid_play_check_and_sort(current_player) # ****
-    #   File "J:\Programming\Projects\Canasta\canasta\progression.py", line 489, in valid_play_check_and_sort
-    #     current_player.initial_played_cards = copy.deepcopy(current_player.melds) # ****
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 287, in _reconstruct
-    #     item = deepcopy(item, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 287, in _reconstruct
-    #     item = deepcopy(item, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 270, in _reconstruct
-    #     state = deepcopy(state, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 270, in _reconstruct
-    #     state = deepcopy(state, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 172, in deepcopy
-    #     y = _reconstruct(x, memo, *rv)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 270, in _reconstruct
-    #     state = deepcopy(state, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 146, in deepcopy
-    #     y = copier(x, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 230, in _deepcopy_dict
-    #     y[deepcopy(key, memo)] = deepcopy(value, memo)
-    #   File "C:\Users\JMT3E\anaconda3\lib\copy.py", line 161, in deepcopy
-    #     rv = reductor(4)
-    # TypeError: cannot pickle 'pygame.Surface' object

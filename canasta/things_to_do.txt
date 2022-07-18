@@ -1,4 +1,5 @@
-# THINGS TO DO
+# THINGS TO
+    # Go through all for loops to ensure that I am using [:] where necessary to avoid errors. Note that even when referencing one list and popping from another list, if the lists share the same item that is being popped, the first list in the for loop being iterated through is affected by the pop and will cause the iterator to lose one iteration per popped item, causing massive issues. 
     # Work with bugs in bugs_debug.py & update the state of the bugs.
     # Add in else clause for card group name renderings so that whenever there is no cards in the card group it will 'erase' the preexisting / leftover text so that it doesn't get 'smeared' whenever cards pass over it before it is rendered again.
     # Make it so that card group text boxes are only visible whenever the associated card group is not empty.
