@@ -13,7 +13,7 @@ class Player(): # ****
         self.play_cards_wild_cards_ref = [] # ****
         self.initial_played_cards = [] # ****
         self.final_played_cards = 0
-        self.last_set_played_cards = [] # ****
+        self.last_set_played_cards_ref = [] # ****
         self.red_3_meld = [] # ****
         self.black_3_meld_ref = [] # ****
         self.melds = [] # ****
