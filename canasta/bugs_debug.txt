@@ -2,27 +2,29 @@ D E B U G
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Current bugs.
     # Unsolved
-        # Played only 2 cards, but game did not immediately return the 'len(pre_sort_play_cards) < 3:' clause. This may have something to do with the other bug concerning the discard pile, perhaps.
-            # Note: Added in else clause for the if clause to print out the pre_sort_play_cards in that case.
-        # Played a 9 when I already had a preexisting meld with 3 9s in it, but the game output after the play said 'Sorry, but it looks like you were unable to successfully play any of your attempted play cards' despite the 9 successfully being added to the meld.
-            # Note: This occurred again.
-            # Note: Occurred again after adding a 2 to a preexisting meld, and this time it rerouted me to make another play.
-            # Note: Same exact instance as above happened again.
-        # DUPLICATE - Bug # 02 - Successfully drew the discard pile whenever the face_up_discard was a 7 while having 2 7s in my hand and some previously existing melds (already met the meld requirement), but all 3 7s seemed to just disappear; they are not located visually anywhere on the screen.
-            Note: Correction; the face_up_discard 7 remained as the face_up_discard, unless somehow it was removed and then appended right back to its location.
-            Note: Despite discarding future discards, the 7 still remains visually as the face_up_discard; it's layer seems to be higher than the others.
-            Note: Added in a face_up_discard print out for all of the various locations in which it is checked to help try and solve the problem.
-            Note: Despite the visual face_up_discard being the 7, whenever I discarded an 8 and then picked up the discard pile using 2 8s from the other players hand, it successfully took the 8s (which means they must have actually been the face up discards) therefore the visual issue is definitely caused by faulty .layer assignment. In this case it also does not display the meld of 8s. Also, the 7 is still visually the face_up_discard.
-            Note: It turns out the disappered meld created from the discard pile is technically in the list of melds, as whenever I created a new meld it visually placed them in the next spot, leaving a visually blank spot where that meld technically is located.
-        # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand succeeded but the discard pile never became empty with the same face up discard remaining in place, and the proposed meld, although the game said it was successfully added to the list of melds, never appeared in the meld group visually.
-            # Note - Face-up discard was actually in the player's hand, visually, after the attempt.
-        # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand allows you to choose wild cards and create a valid meld, but it doesn't work. Whenever you pick up the discard piile it doesn't seem to work.
-        # DUPLICATE - Bug # 02 - Have to add in code for whenever drawing discard pile; whenever you have other regular cards that would make up a 3+ card meld and make you reach meld requirement it would allow you to pick up the discard pile instead of only checking for available wild cards.
-        # DUPLICATE - Bug # 02 - When picking up the discard pile successfully via using 2 cards from the player's hand to create a meld (having already had a meld and met the meld requirement on a previous turn), it looks as if the cards from the discard pile were appended to the player's hand but it doesn't look like they were popped from the discard pile. The discard pile should be empty at this point but it definitely is not.
+        # Bug # 04 - Have to add in code for whenever drawing discard pile; whenever you have other regular cards that would make up a 3+ card meld and make you reach meld requirement it would allow you to pick up the discard pile instead of only checking for available wild cards.
         # Whenever I played a 2 card meld with 2 Joker wild cards, after I chose 'Yes' to using a wild card to make it a 3 card meld, the output displayed 'Okay, you will use the Joker', and THEN asked me to choose which of the 2 Jokers I would like to use. It shouldn't have said the first input because it shouldn't determine which wild card I am going to use.
+            # Note: Did I fix this already?
         # Whenever prompted with the output: 'j, which meld from your play cards or your melds would you like to add the Joker to? Click any meld to choose it.', it does not allow me to choose a wild card.
             # Note: Is this fixed?? I haven't encountered this bug in quite some time....
     # Solved (Or should be!)
+        # Bug # 02 - Successfully drew the discard pile whenever the face_up_discard was a 7 while having 2 7s in my hand and some previously existing melds (already met the meld requirement), but all 3 7s seemed to just disappear; they are not located visually anywhere on the screen.
+          # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand succeeded but the discard pile never became empty with the same face up discard remaining in place, and the proposed meld, although the game said it was successfully added to the list of melds, never appeared in the meld group visually.
+          # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand allows you to choose wild cards and create a valid meld, but it doesn't work. Whenever you pick up the discard piile it doesn't seem to work.
+          # DUPLICATE - Bug # 02 - When picking up the discard pile successfully via using 2 cards from the player's hand to create a meld (having already had a meld and met the meld requirement on a previous turn), it looks as if the cards from the discard pile were appended to the player's hand but it doesn't look like they were popped from the discard pile. The discard pile should be empty at this point but it definitely is not.
+            # Note: Should be fixed - The cards being appended to the discard pile meld were coming from a copy of the cards, instead of a direct transfer from the hand to the meld. Changed it so they are popped and appended directly.
+            # Note: Correction; the face_up_discard 7 remained as the face_up_discard, unless somehow it was removed and then appended right back to its location.
+            # Note: Despite discarding future discards, the 7 still remains visually as the face_up_discard; it's layer seems to be higher than the others.
+            # Note: Added in a face_up_discard print out for all of the various locations in which it is checked to help try and solve the problem.
+            # Note: Despite the visual face_up_discard being the 7, whenever I discarded an 8 and then picked up the discard pile using 2 8s from the other players hand, it successfully took the 8s (which means they must have actually been the face up discards) therefore the visual issue is definitely caused by faulty .layer assignment. In this case it also does not display the meld of 8s. Also, the 7 is still visually the face_up_discard.
+            # Note: It turns out the disappered meld created from the discard pile is technically in the list of melds, as whenever I created a new meld it visually placed them in the next spot, leaving a visually blank spot where that meld technically is located.
+            # Note - Face-up discard was actually in the player's hand, visually, after the attempt.
+        # Bug # 05 - Showing a 3 as the clicked card for the wild_card I visually clicked to be joined to my attempted meld. Traceback error referenced line 624.
+            # Note: Should be fixed - The line that popped the wild_card from play_cards_wild_cards_ref was executed after the line that popped the wild_card from pre_sort_play_cards, causing the former to access an incorrect index. Swapped the two lines to fix issue.
+        # Played a 9 when I already had a preexisting meld with 3 9s in it, but the game output after the play said 'Sorry, but it looks like you were unable to successfully play any of your attempted play cards' despite the 9 successfully being added to the meld.
+            # Note: Verified as fixed - I was using a direct slice reference to a list of lists, when instead I needed to do a deep copy of the list of lists. To fix I used a for loop to iterate through the list of lists, appending each sliced inner list to the new list copy.
+        # Played only 2 cards, but game did not immediately return the 'len(pre_sort_play_cards) < 3:' clause. This may have something to do with the other bug concerning the discard pile, perhaps.
+            Note: Should be fixed - Was not actually a bug originally; the if clause only triggered if the player had not yet met the meld_requirement.
         # After making all of the changes to valid_play_check_and_sort(), wild_card_handler(), and wild_card_meld_choice_prompt(), when playing some play cards, one of the play cards never visually left the play cards visual location despite all of them being appended back to the hand.
             # Note: Should be fixed - The issue was popping from one list which was directly referenced by another list which we were iterating through; popping from the original affected the reference and caused iteration skipping.
         # Bug # 03 - Whenever attemping to go out, but not having a canasta, game crashed with traceback error as 'AttributeError: 'list' object has no attribute 'highlighted''.
@@ -64,3 +66,9 @@ D E B U G
         current_card.highlighted = True
         AttributeError: 'list' object has no attribute 'highlighted'
 # -------------------------------------
+    # Bug # 05
+
+        valid_play_check_and_sort(current_player) # ****
+        File "J:\Programming\Projects\Canasta\canasta\progression.py", line 624, in valid_play_check_and_sort
+        current_player.play_cards_wild_cards_ref.pop(current_player.play_cards_wild_cards_ref.index(wild_card_choice))
+        ValueError: 3 is not in list

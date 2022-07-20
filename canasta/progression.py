@@ -1,4 +1,5 @@
-import sys # ****
+
+mport sys # ****
 import random # ****
 import os
 import time
@@ -229,7 +230,7 @@ def stock_draw(current_player, from_draw_discard_pile_attempt_no_canasta_fail = 
         play_2(current_player) # ****
     else: # ****
         if from_draw_discard_pile_attempt_no_canasta_fail == False:
-            game.game.progression_text = ("There are no cards left in the stock pile. If you have a meld that matches the rank of the face up discard, you are required to draw the discard pile's face up discard (or the entire discard pile), per the rules. This rule will continue until no player has a matching meld for the face up discard; at that point the round will end.") # ****
+            game.game.progression_text = ("There are no cards left in the stock pile. If you have a meld that matches the rank of the face up discard, you are required to draw the discard pile's face up discard (or the entire discard pile), per the rules. This will continue until no player has a matching meld for the face up discard; at that point the round will end.") # ****
             game.game.xs_display(3)
             draw_discard_pile_attempt(current_player, True) # ****
         else:
@@ -245,24 +246,21 @@ def draw_discard_pile_attempt(current_player, stock_depleted = False): # ****
     print('draw_discard_pile_attempt')
     logger.debug("\ndraw_discard_pile_attempt\n") # ****
     # -------------------------------------
-    ###### Below Line - Added for testing purposes only.
-    print(f'deck.MasterDeck.face_up_discard = {deck.MasterDeck.face_up_discard}')
-    ###### -------------------------------------
     # Below Section - Checks to see if the player can draw the discard pile in the case that the stock_depleted parameter is True. If so, attempts to draw the discard pile. If there is a matching meld, successfully draws the discard pile. If not, the round ends, per the rules. # ****
     if stock_depleted == True: # ****
         if len(deck.MasterDeck.discard_pile) == 0: # ****
-            game.game.progression_text = ("It looks as if the discard pile is depleted as well. Per the rules, this means the round is ended since there is no means by which you can draw another card.") # ****
+            game.game.progression_text = ("It looks as if the discard pile is depleted as well. This means the round is ended since there is no means by which you can draw another card.") # ****
             game.game.xs_display(3)
             return round_reset() # ****
     # -------------------------------------
     # Below Section - In the case that a player attempts to draw the discard pile whenever the face up discard is a Wild Card or a Black 3. Outputs an informative prompt and returns stock_draw(), unless the stock_depleted == True, in which case round_reset() is called because there is no means by which anybody can draw a card.
     if (deck.MasterDeck.face_up_discard.rank, deck.MasterDeck.face_up_discard.suit) in deck.MasterDeck.wild_cards or (deck.MasterDeck.face_up_discard.rank, deck.MasterDeck.face_up_discard.suit) in deck.MasterDeck.black_3s:
         if stock_depleted == False:
-            game.game.progression_text = ("Sorry, but you cannot draw the discard pile whenever the face up discard is a Wild Card or a Black 3. You will instead have to draw from the Stock.")
+            game.game.progression_text = ("You cannot draw the discard pile whenever the face up discard is a Wild Card or a Black 3. You have to draw from the Stock.")
             game.game.xs_display(3)
             return stock_draw(current_player)
         else:
-            game.game.progression_text = ("It looks as if the stock is depleted and the discard pile is topically frozen, which means nobody has a means by which to draw a card. Therefore the round is over!")
+            game.game.progression_text = ("The stock is depleted and the discard pile is topically frozen, which means nobody has a means by which to draw a card. Therefore the round is over!")
             game.game.xs_display(3)
             return round_reset()
     # -------------------------------------
@@ -276,7 +274,7 @@ def draw_discard_pile_attempt(current_player, stock_depleted = False): # ****
             draw_discard_pile_attempt_check_meld_match(current_player) # ****
     elif deck.MasterDeck.discard_pile_is_frozen == True: # ****
         logger.debug("discard_pile_is_frozen == True\n") # ****
-        game.game.progression_text = ("It looks as if the discard pile is frozen, which means that you cannot pick up the pile using a preexisting meld. You instead have to have matches to the face up discard in your hand, or one match and a Wild Card (in certain circumstances).")
+        game.game.progression_text = ("The discard pile is frozen, so you cannot pick up the pile using a preexisting meld. You have to have 2 matches to the face up discard in your hand, or one match and a Wild Card.")
         game.game.xs_display(3)
     # -------------------------------------
     # Below Line - For when the discard_pile_is_frozen is either True or False, and if draw_discard_pile_attempt_check_meld_match did not succeed. Checks the player's hand to see if they have matching cards in their hand (for when they have no melds that match the top discard) as an alternative means to pick up the discard pile. If so, draws the discard pile and creates a meld from the face up discard, and returns True, If not... # ****
@@ -291,7 +289,7 @@ def draw_discard_pile_attempt(current_player, stock_depleted = False): # ****
     else:
         current_player.special_case_cant_draw = True
         if player.P1.special_case_cant_draw == True and player.P2.special_case_cant_draw == True:
-            game.game.progression_text = ("Since both players have had a final opportunity to draw a card and both have been unsuccessful, and since both players have had a final opportunity to play their remaining plays, and since the round is functionally gridlocked, the round is over!")
+            game.game.progression_text = ("Since both players had a final opportunity to draw a card and both have been unsuccessful, and since both players have had a final opportunity to play their remaining plays, and since the round is functionally gridlocked, the round is over!")
             game.game.xs_display(3)
             round_reset()
         else:
@@ -304,9 +302,6 @@ def draw_discard_pile_attempt_check_meld_match(current_player, stock_depleted = 
     print('draw_discard_pile_attempt_check_meld_match')
     logger.debug("draw_discard_pile_attempt_check_meld_match")
     # -------------------------------------
-    ###### Below Line - Added for testing purposes only.
-    print(f'deck.MasterDeck.face_up_discard = {deck.MasterDeck.face_up_discard}')
-    ###### -------------------------------------
     for meld in current_player.melds: # ****
         if deck.MasterDeck.face_up_discard.rank == meld[0].rank: # ****
             meld.append(deck.MasterDeck.discard_pile.pop(-1)) # ****
@@ -338,37 +333,32 @@ def draw_discard_pile_attempt_check_hand_match(current_player): # ****
     print('draw_discard_pile_attempt_check_hand_match')
     logger.debug("draw_discard_pile_attempt_check_hand_match\n") # ****
     # -------------------------------------
-    ###### Below Line - Added for testing purposes only.
-    print(f'deck.MasterDeck.face_up_discard = {deck.MasterDeck.face_up_discard}')
-    ###### -------------------------------------
-    # Below Line - Clears player.matched_card_list so that whenever it has been previously appended to or modified, it is reset back to an empty list upon the start of this function so as to not mix up cards from previous play attempts.
-    current_player.matched_card_list.clear()
-    # Below Section - Checks each card in current_player.hand[:] to see if there is a match to the face_up_discard. If so, appends that card to current_player.matched_card_list and pops it from current_player.hand.
-    for card in current_player.hand[:]: # ****
+    # Below Line - Clears player.matched_card_ref_list so that whenever it has been previously appended to or modified, it is reset back to an empty list upon the start of this function so as to not mix up cards from previous play attempts.
+    current_player.matched_card_ref_list.clear()
+    # Below Section - Checks each card in current_player.hand to see if there is a match to the face_up_discard. If so, appends that card to current_player.matched_card_ref_list.
+    for card in current_player.hand: # ****
         if card.rank == deck.MasterDeck.face_up_discard.rank: # ****
-            current_player.matched_card_list.append(current_player.hand.pop(current_player.hand.index(card))) # ****
+            current_player.matched_card_ref_list.append(card) # ****
     # -------------------------------------
-    if len(current_player.matched_card_list) == 0: # ****
+    if len(current_player.matched_card_ref_list) == 0: # ****
         game.game.progression_text = ("Sorry, but you did not have any matches to the face up discard.")
         game.game.xs_display(2)
         return None
     # -------------------------------------
-    # Below Section - Copies the current_player.matched_card_list so as to create a fixed, static rank value, as the variable player_matched_card_list_copy. Next the player_matched_card_list_copy is appended to current_player.melds, and finally appends the face_up_discard to that meld, popping the cards from their original locations. Also gives an informative prompt and returns None so as not to continue on errantly to remainder of function code. # ****
+    # Below Section - A temp_meld is created for the current_player.melds, then appended to the meld group. Next, each card from matched_card_ref_list is appended to current_player.melds[-1], popping each card from the current_player.hand, and finally appends the face_up_discard to that meld, popping it from the discard_pile.. Also gives an informative prompt and returns None so as not to continue on errantly to remainder of function code. # ****
     else:
-        player_matched_card_list_copy = current_player.matched_card_list[:]
-        current_player.melds.append(player_matched_card_list_copy) # ****
+        if current_player == player.P1:
+            temp_meld = customappendlist.CustomAppendList('P1.melds')
+        else:
+            temp_meld = customappendlist.CustomAppendList('P2.melds')
+        current_player.melds.append(temp_meld)
+        for current_card in current_player.matched_card_ref_list:
+            current_player.melds[-1].append(current_player.hand.pop(current_player.hand.index(current_card))) # ****
         current_player.melds[-1].append(deck.MasterDeck.discard_pile.pop(-1)) # ****
         # Below Section - If the player has 2 natural matches for the face up discard, (plus the face_up_discard in current_player.melds[-1]). Checks that the player has met meld requirement. If so, draws discard pile successfully. If not, attempts to use additional wild cards within the hand to reach the meld requirement via draw_discard_pile_wild_card_prompt. # ****
         if len(current_player.melds[-1]) >= 3: # ****
             if current_player.round_score >= current_player.meld_requirement: # ****
-                if len(current_player.hand) < 1:
-                    if current_player.has_canasta == True:
-                        went_out_check(current_player, going_out_from_discard_draw = True)
-                    else:
-                        game.game.progression_text = ("It looks as if you are attempting to go out, but do not have a Canasta, which is against the rules. This means the drawing of the discard pile attempt must be cancelled. All of the cards that would have been used in the meld, along with the face up discard, will be replaced to their proper locations. You will instead have to draw from the stock.")
-                        game.game.xs_display(3)
-                        replace_discard_pile_temp_meld(current_player)
-                game.game.progression_text = ("You successfully created a valid meld from the face up discard and met the meld requirements!\n")
+                game.game.progression_text = ("You successfully created a valid meld from the face up discard!\n")
                 game.game.xs_display(3)
                 return draw_discard_pile(current_player) # ****
             else: # ****
@@ -377,21 +367,16 @@ def draw_discard_pile_attempt_check_hand_match(current_player): # ****
         # Below Section - If the meld consists of only 1 natural card from the hand and the face up discard; if the discard_pile_is_frozen == True, reroutes the player to replace_discard_pile_temp_meld (which redirects to stock_draw()). If discard_pile_is_frozen == False, checks to see if the player has any wild cards to help them reach the meld length requirement. If so, attempts this via draw_discard_pile_wild_card_prompt(). Otherwise, redirects to replace_discard_pile_temp_meld(). # ****
         elif len(current_player.melds[-1]) == 2: # ****
             if deck.MasterDeck.discard_pile_is_frozen == True: # ****
-                game.game.progression_text = (f"Sorry, {current_player.name}, but you don't have 2 natural cards of the face up discard's rank in your hand, which is required to pick up the discard pile when it is frozen, which it currently is. Therefore you will have to withdraw from the stock pile.") # ****
+                game.game.progression_text = (f"Sorry, {current_player.name}, but you don't have 2 natural cards of the face up discard's rank in your hand, which is required to pick up the discard pile when it is frozen, which it currently is. You will have to withdraw from the stock pile.") # ****
                 game.game.xs_display(3)
                 replace_discard_pile_temp_meld(current_player)
             elif deck.MasterDeck.discard_pile_is_frozen == False: # ****
                 if len(current_player.hand_wild_cards_reference_list) > 0: # ****
                     draw_discard_pile_wild_card_prompt(current_player) # ****
                 else: # ****
-                    game.game.progression_text = ("Sorry, but you only had 1 natural card to match the face up discard's rank, with no wild cards to use to help reach the 3 card minimum for a valid meld. Therefore your meld and the face up discard will be placed back into the hand and discard pile respectively and you will instead have to draw from the stock.") # ****
+                    game.game.progression_text = ("Sorry, but you only had 1 natural card to match the face up discard's rank, with no wild cards to use to help reach the 3 card minimum for a valid meld. Your meld and the face up discard will be placed back into the hand and discard pile respectively. You will have to draw from the stock.") # ****
                     game.game.xs_display(4)
                     replace_discard_pile_temp_meld(current_player)
-        # -------------------------------------
-        # Below Section - If the player did not have any matching cards to the face up discard in their hand; redirects player to stock_draw. # ****
-        else: # ****
-            game.game.progression_text = ("You did not have enough matches to the face up discard in your hand to draw the discard pile using cards in your hand.") # ****
-            game.game.xs_display(2)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by draw_discard_pile_wild_card_prompt(), draw_discard_pile_attempt_check_meld_match(), draw_discard_pile_attempt_check_hand_match() functions. Pops and appends each card from the discard pile to the player's hand. # ****
 def draw_discard_pile(current_player): # ****
@@ -430,7 +415,7 @@ def draw_discard_pile_wild_card_prompt(current_player):
         if game.game.selected_choice == 'Yes': # ****
             draw_discard_pile_attempt_temp_meld_wild_card_addition(current_player) # ****
             if current_player.round_score >= current_player.meld_requirement: # ****
-                game.game.progression_text = ("You successfully created a valid meld from the face up discard and met the meld requirements!") # ****
+                game.game.progression_text = ("You successfully created a valid meld from the face up discard!") # ****
                 game.game.xs_display(2)
                 return draw_discard_pile(current_player) # ****
         else: # ****
@@ -446,11 +431,12 @@ def draw_discard_pile_wild_card_prompt(current_player):
 def replace_discard_pile_temp_meld(current_player): # ****
     print('replace_discard_pile_temp_meld')
     logger.debug("replace_discard_pile_temp_meld")
+    deck.MasterDeck.prior_face_up_discard
     deck.MasterDeck.discard_pile.append(current_player.melds[-1].pop(-1)) # ****
-    for matched_card in current_player.matched_card_list[:]: # ****
+    for matched_card in current_player.matched_card_ref_list[:]: # ****
         current_player.hand.append(current_player.melds[-1].pop(-1)) # ****
     current_player.melds.pop(-1) # ****
-    current_player.matched_card_list.clear()
+    current_player.matched_card_ref_list.clear()
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by draw_discard_pile_attempt_check_meld_match(), stock_draw(), draw_discard_pile(), and valid_play_check_and_sort() functions. Prompts the player to choose between either playing a set of cards or discarding instead. If player chooses to play cards, then the player is prompted to choose a set of cards to play and is then  # ****
 def play_2(current_player, rerouted = False): # ****
@@ -496,23 +482,22 @@ def valid_play_check_and_sort(current_player): # ****
     # -------------------------------------
     # Below Section - Clears current_player.initial_played_cards and iterates through current_player.melds, appending each existing meld to initial_played_cards so that initial_played_cards == current_player.melds at this point in time. For the purpose of comparing current_player.initial_played_cards against current_player.melds later on to see if any cards/melds were successfully added to current_player.melds throughout the play after sorting and validation. # ****
     current_player.initial_played_cards.clear()
-    current_player.initial_played_cards = current_player.melds[:] # ****
+    for meld in current_player.melds:
+        current_player.initial_played_cards.append(meld[:])
     # -------------------------------------
-    # Below Section - Checks to see if the player has NOT met the initial meld requirements. If so, valid plays are different than if they had met the requirement, thus puts different restrictions on what a valid play is. # ****
-    if current_player.round_score < current_player.meld_requirement: # ****
-        logger.debug("current_player.round_score < current_player.meld_requirement\n") # ****
-        # -------------------------------------
-        if len(current_player.pre_sort_play_cards) < 3: # ****
-            game.game.progression_text = (f"Sorry, {current_player.name}, but you must play at least 3 cards for a new meld. Please select a new set of cards to play, or you can choose to discard if you like.") # ****
-            game.game.xs_display(3)
-            for current_card in current_player.pre_sort_play_cards[:]: # ****
-                current_player.hand.append(current_player.pre_sort_play_cards.pop(-1)) # ****
-            current_player.pre_sort_play_cards.clear() # ****
-            return play_2(current_player, True) # ****
-        # Below Section - For testing purposes only to rid the game of the bug wherein 2 or 1 card plays do not seem to trigger the above if statement.
-        else:
-            print(f'current_player.pre_sort_play_cards = {current_player.pre_sort_play_cards}')
-    # -------------------------------------
+
+    ###### Below Section - I don't even need this section at all. Checks to see if the player has NOT met the initial meld requirements. If so, valid plays are different than if they had met the requirement, thus puts different restrictions on what a valid play is. # ****
+    # if current_player.round_score < current_player.meld_requirement: # ****
+    #     logger.debug("current_player.round_score < current_player.meld_requirement\n") # ****
+    #     # -------------------------------------
+    #     if len(current_player.pre_sort_play_cards) < 3: # ****
+    #         game.game.progression_text = (f"Sorry, {current_player.name}, but you must play at least 3 cards for a new meld. Please select a new set of cards to play, or you can choose to discard if you like.") # ****
+    #         game.game.xs_display(3)
+    #         for current_card in current_player.pre_sort_play_cards[:]: # ****
+    #             current_player.hand.append(current_player.pre_sort_play_cards.pop(-1)) # ****
+    #         current_player.pre_sort_play_cards.clear() # ****
+    #         return play_2(current_player, True) # ****
+    ###### -------------------------------------
     # Below Extended Section - Sorts all of the individual play cards, putting them either in matching melds, or creating temp_melds and putting those back into play_cards to be further sorted. Also places all played wild cards into play_cards_wild_cards_ref and removes any played Black 3s unless special requirements are met. # ****
     for current_card in current_player.pre_sort_play_cards[:]: # ****
         # Below Section - Checks to see if the player already has existing melds. If so, checks to see if card rank is already in a preexisting meld. If so, pops the card from current_player.play_cards and appends it to the meld. # ****
@@ -620,8 +605,8 @@ def valid_play_check_and_sort(current_player): # ****
                     wild_card_choice_index = 0
                 wild_card_choice = current_player.pre_sort_play_cards[wild_card_choice_index]
                 game.game.progression_text = (f"You successfully added the {wild_card_choice} to your meld.") # ****
-                current_player.play_cards[len_2_temp_meld_choice_index].append(current_player.pre_sort_play_cards.pop(wild_card_choice_index)) # ****
                 current_player.play_cards_wild_cards_ref.pop(current_player.play_cards_wild_cards_ref.index(wild_card_choice))
+                current_player.play_cards[len_2_temp_meld_choice_index].append(current_player.pre_sort_play_cards.pop(wild_card_choice_index)) # ****
         # -------------------------------------
             # Below Section - If the player chooses not to use the available wild card(s); places the len_2_temp_melds_ref melds back into current_player.hand, but leaves the wild cards in play cards to be handled by wild_card_handler(). # ****
             else: # ****
@@ -716,7 +701,9 @@ def valid_play_check_and_sort(current_player): # ****
     for meld in current_player.initial_played_cards:
         total_initial_played_cards_len += len(meld)
     if total_initial_played_cards_len == total_melds_len: # ****
-        game.game.progression_text = ("It looks as if you were unable to succeed in playing any of your attempted play cards. Therefore you will have to choose another set of play cards, or opt to discard instead if you have no valid plays to make.") # ****
+        print(f'current_player.melds = {current_player.melds}')
+        print(f'current_player.initial_played_cards = {current_player.initial_played_cards}')
+        game.game.progression_text = ("You were unable to make a valid play. You will have to choose another set of play cards, or opt to discard.") # ****
         game.game.xs_display(2)
         play_2(current_player) # ****
     else: # ****
@@ -868,7 +855,7 @@ def discard(current_player): # ****
             play_1(player.P1) # ****
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Function - Called by valid_play_check_and_sort(), discard() functions. Checks to see if player is eligible to go out, and whether or not they went out during their last turn. If they are not trying to go out, redirects to beginning of the player turn loop via play_1() function. If so, ends round via round_reset(). # ****
-def went_out_check(current_player, going_out_from_discard_draw = False): # ****
+def went_out_check(current_player): # ****
     print('went_out_check')
     logger.debug("went out check\n") # ****
     # -------------------------------------
@@ -1017,7 +1004,7 @@ def round_reset(): # ****
         current_player.black_3_meld_ref.clear() # ****
         current_player.melds.clear() # ****
         current_player.len_2_temp_melds_ref.clear() # ****
-        current_player.matched_card_list.clear() # ****
+        current_player.matched_card_ref_list.clear() # ****
         current_player.going_out = None # ****
         current_player.went_out_concealed = False # ****
         current_player.total_score_over_5000 = False

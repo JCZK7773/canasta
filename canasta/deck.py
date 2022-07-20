@@ -14,6 +14,7 @@ class Deck(): # ****
         self.red_3s = [('3', 'Diamond'), ('3', 'Heart')] # ****
         self.black_3s = [('3', 'Club'), ('3', 'Spade')] # ****
         self.wild_cards = [('2', 'Diamond'), ('2', 'Heart'), ('2', 'Spade'), ('2', 'Club'), ('Joker', 'Joker')] # ****
+        self.prior_face_up_discard = None
     # -------------------------------------
     @property # ****
     def face_up_discard(self): # ****
