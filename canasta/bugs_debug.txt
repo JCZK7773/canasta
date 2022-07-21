@@ -2,12 +2,14 @@ D E B U G
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Below Section - Current bugs.
     # Unsolved
-        # Bug # 04 - Have to add in code for whenever drawing discard pile; whenever you have other regular cards that would make up a 3+ card meld and make you reach meld requirement it would allow you to pick up the discard pile instead of only checking for available wild cards.
+        # Bug # 05 - Occurred again! Not fixed!!!
         # Whenever I played a 2 card meld with 2 Joker wild cards, after I chose 'Yes' to using a wild card to make it a 3 card meld, the output displayed 'Okay, you will use the Joker', and THEN asked me to choose which of the 2 Jokers I would like to use. It shouldn't have said the first input because it shouldn't determine which wild card I am going to use.
-            # Note: Did I fix this already?
+            # Note: Did I fix this already? ...???
         # Whenever prompted with the output: 'j, which meld from your play cards or your melds would you like to add the Joker to? Click any meld to choose it.', it does not allow me to choose a wild card.
             # Note: Is this fixed?? I haven't encountered this bug in quite some time....
     # Solved (Or should be!)
+        # Bug # 04 - Have to add in code for whenever drawing discard pile; whenever you have other regular cards that would make up a 3+ card meld and make you reach meld requirement it would allow you to pick up the discard pile instead of only checking for available wild cards.
+            # Note: Should be fixed - Coded in various clauses and parameters, editing many related functions, to ensure that the player can do everything the rules allow in the above instance.
         # Bug # 02 - Successfully drew the discard pile whenever the face_up_discard was a 7 while having 2 7s in my hand and some previously existing melds (already met the meld requirement), but all 3 7s seemed to just disappear; they are not located visually anywhere on the screen.
           # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand succeeded but the discard pile never became empty with the same face up discard remaining in place, and the proposed meld, although the game said it was successfully added to the list of melds, never appeared in the meld group visually.
           # DUPLICATE - Bug # 02 - Drawing the discard pile using cards from the hand allows you to choose wild cards and create a valid meld, but it doesn't work. Whenever you pick up the discard piile it doesn't seem to work.
